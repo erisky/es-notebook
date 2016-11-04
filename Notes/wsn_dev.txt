@@ -1,0 +1,37 @@
+##Topic: WSN/IOT Protocol and systme development notes.
+##Date:  2016-06
+##Field: IOT, Battery, Protocol
+
+
+Protocol Develpoment:
+- Always consider the worst case in environment
+- Synchronization protocol worth notes:
+  > time slot unit must be divided by the minimal slow clock. ex: 32K crystal
+  > watchdog  must be used because EDs don't talk.
+  > The keypoint is how to bring as much information in beacon packets
+  > unicast/multicast/broadcast should be considered.
+  > Confiurable network parameters
+    Round interval/beacon slots/beacon slot length(ex. 200ms bcn slot and 100ms data slot)  
+    latency/max nodes/power consumption expectation
+  > smart queuing on the backend side should be considered. 
+    ex. priority-based queue and flow control
+  > multi-path does exist and dead corner is possible
+  > different devices have different tx power.
+    shouldn't consider you are able to recv implies you are able to send.
+    --> if not able to join implies not able to find the beacon.
+    A learning procedure should be implemented ex. close loop detection
+    or dynamic tx power.
+  > Sniffer is a MUST tool for protocol analyse tool
+  > Link monitoring is the most important thing, consider it in the very early stage!!
+    -> ex. AP/RT reboot should indicates 
+  > uplink must be also reliable esp when it's management purpose. 
+  > timestamp is a requirement
+  
+- Battery Powered system:
+  > power budget control system
+  > should have mechanism that when some devices lost beacon frequently, it should
+    pause agressive retry on rejoin/tx/resend etc.
+  
+>> Good to have
+  
+  

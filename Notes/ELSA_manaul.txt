@@ -1,0 +1,44 @@
+1. Introduction to ELSA System
+   General description of ELSA
+   - AP / RT/ ED
+   blah blah
+2. Application Architecture
+   -- Image Creator
+   -- PP / Layout description
+   -- Customized part if any
+3. Preparing the Installation
+   - PC requirement
+   - location of ethernet plug, power plug...
+   
+4. System Installation
+   --> TBD
+
+5. Function Description ( Admin's point of view)
+   - System Inspection 
+     - dash board for overall status    
+     -> AP state
+     -> RT state
+     -> Device --> refer to device mangement
+     Job Inspection -> refer to datapush
+   - Device(tag) Management    
+    -> ED online/offline explanation
+    -> Battery Notification Setting
+    -> Other information RSSI/version     
+    -> Add/Remove Tags (Import&delete)
+    -> Query/ Reboot
+   - Association of Tags and Products
+    -> BC page
+    -> SARA or Manual
+    -> Assiciation Export/import
+    -> Barcode page display    
+   - ESL update and Job Control
+    - Image / Production association based push
+    - Job Log/Status explanation
+    - retry mechanism
+    - Daily Refresh
+   - Profile/Layout arranagement
+   - System Dianostic:
+     - DVH
+     - Daily Email
+     - Firmware upgrade
+     

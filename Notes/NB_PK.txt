@@ -1,0 +1,20 @@
+
+            Lenovo  ideapad 13.3"        |       Lenovo IdeaPad 710s          AUSS                         |         ASUS UX501VW-0052A6700HQ
+CPU:        Intel Core i7-6500U          |      Intel Core I7-6500U          Intel Core i5-6200U           |         Intel Core i7-6700HQ    
+RAM:        8GB 1600                     |     8GB LPDDR3-1866MHz            4G DDR3L 160                  |         8G+8G DDR4 
+HD:         SSD 256                          256GB PCIe SSD                  SSD256                        |         SSD 256                         
+LCD:        FHD IPS 1920x1080             FHD(1920x1080)IPS                                                 |         15.6"IPS QFHD 3840x2160 
+video card:                                  Intel® HD Graphics 520          Nvidia GT 940M 2G獨顯         |         Nvidia GTX 960M 4G獨顯 
+USB 3.0     2                                2                                3                             |         3  
+USB 2.0     1                                0                                0
+RJ-45       1 1000Mbps                       X                                ??
+wireless    11n AC                           11ac                              
+USB Type C                                                                                                  |         1
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+Intel Core i5-6200U @ 2.30GHz	3,934                                         
+Intel Core i5-3230M @ 2.60GHz	3,912                                         
+Intel Core i7-6500U @ 2.50GHz	4,325                                         
+Intel Core i7-6700HQ @ 2.60GHz	8,010                                         

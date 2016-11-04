@@ -1,0 +1,27 @@
+
+Source Repo:
+http://172.16.23.188/svn/Tools/branches/dev
+
+Local:
+E:\eric\vshare\newSvn\imgc
+
+
+- 
+
+
+
+Module used:
+    - aes: encryption
+    - dmtx: data matix encoder
+    - fribidi:
+    - fw: file watcher
+    - gif/libjpeg/png: graphic format 
+    - qrencode
+    - hb - hartBuffer: text shaping library
+    
+Imgc utilizes libm2cutils
+   - embedded lua
+   - JPEG
+   - QRCode
+   - lzo
+   - 

@@ -1,0 +1,95 @@
+##Topic: Raspbeery Pi Study Note
+##Date:  2016-06
+##Field: Raspbeery, Pi, Linux
+
+- Installation:
+
+NOOB - OS installer (New Out of Box Software)
+https://github.com/raspberrypi/noobs
+
+
+整合 USB com port
+# 
+# demesg | grep tty
+# run following command to see logs from UART
+stty -F /dev/ttyUSB0 raw
+stty -F /dev/ttyUSB0 460800
+stty -F /dev/ttyUSB0 -echo
+cat /dev/ttyUSB0
+
+CPU: bcm2835 compatible
+** checke dmesg for all details
+
+
+Enable PI's UART 
+# sudo vi /boot/config.txt
+
+check http://elinux.org/RPi_Low-level_peripherals to verify which pin is P1
+
+
+** Connect UART @ TXD0/GPIO14 and RXD0/GPIO15 **
+serial setting:　115200/8/n/1
+
+The message shall show  
+"""
+Welcome to the rescue system
+recovery login: [    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 4.4.11-v7+ (dc4@dc4-XPS13-9333) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g846                                   
+....
+"""
+
+> Turn off X-server for saving memory:
+
+# sudo raspi-config
+# Boot option --> Desktop autologin
+
+""console utilization""
+%Cpu(s):  0.1 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:    947748 total,    88812 used,   858936 free,     9500 buffers
+KiB Swap:   102396 total,        0 used,   102396 free.    43548 cached Mem
+"""
+
+
+""Desktop autologin utilization""
+%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:    947748 total,   196172 used,   751576 free,    14720 buffers
+KiB Swap:   102396 total,        0 used,   102396 free.   127160 cached Mem
+"""
+
+
+
+# use console mode, need to mount the sd manually
+sudo mount -t ext4 /dev/mmcblk0p10  /mnt/data1/
+
+|---------------------------------------------|
+|# to Check linux io remap:                   |
+|cat /proc/iomem  | grep gpio                 |
+|                                             |
+|3f200000-3f2000b3 : /soc/gpio@7e200000       |
+|---------------------------------------------|
+
+
++-----------------------+
+| Daemon Compilation    |
++-----------------------+
+# for using armvl, remove the compilatiom option
+# -mfloat-abi=softfp
+
+
+
++-----------------------+
+| Samba installation    |
++-----------------------+
+[Server]
+ sudo apt-get update
+ sudo apt-get install samba samba-common-bin
+
+[Client]
+
+
+
+
+

@@ -1,0 +1,51 @@
+##Topic: Iot technologies survey and sutduy
+##Date:  2016-08
+##Field: IOT, Protocol, Zigbee, BLE, Wi-sun
+
+
+list of techonologies
+
+BLE
+Zigbee
+ZWave
+Wireless-MBus
+Thread
+802.15.4
+Wi-Sun
+wireless smart utility network (Wi-SUN) 
+ :: lack of real application deployment example
+ :: Can't find spec
+ 
+
+
+MQTT
+CoAP
+XMPP
+DDS
+AMQP
+
+IoTivity
+RESTful HTTP
+
+LPWAN:
+LoRa
+SigFox
+Nob-IOT
+
+RFC 4838 DTN
+RFC 7228
+ - Constrained Nodes
+ - Constrained Networks
+ - constrained-node networks
+   > LLN "Low-Power and Lossy Network (LLN)" RFC7102
+   
+   
+IOT Releated RFCs
+CoAP, RFC 7252
+Transmission of IPv6 Packets over IEEE 802.15.4 Networks, 4944  
+
+RFC 7668   
+RFC 7428
+--------------------
+Routing would be the most important stuff in the iot evnironment
+

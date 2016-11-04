@@ -1,0 +1,28 @@
+Install pip
+
+
+# 1
+Get wheel from: http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+pip install lxml-3.6.4-cp27-cp27m-win32.whl
+
+# 2
+pip install python-docx
+python-docx-0.8.6
+
+# 3
+pip install pypng
+
+
+# need to cooperate with legacy result files"
+E:\eric\Tools\M2C\20150724_MacChk_Debug\Print_File
+
+example format:
+test =  """1051004_132526,06 22 31 06 31 08,06 22 31 06 31 08,PASS,Case 4"""
+tes.split(",")[0].split("_")[0][:-4]
+tes.split(",")[0].split("_")[0][-4:-2]
+tes.split(",")[0].split("_")[0][-2:]
+
+renaming the .py to .pyw ==> will not show the output console !!! USEFUL!!!
+
+#filename 
+1051004_132549_1.54-ED_Red_915M_Case 4.csv

@@ -1,0 +1,36 @@
+1. 
+The biggest problem:
+Do we understand the market and the product itself?
+battery/environment/user scenario/how to make profit.
+Positioning of this business.
+
+
+2. operation
+duty/person in charge is ambigious
+
+2. PD/DCC
+Sorry I have to put this first since I am RD guy.
+1. The whole flow
+   RMA/PPR
+
+
+2. BD/Marketing
+- do we have the whole plan for business?
+- how about customer services
+- what's the key value of our product?
+- any market survey result?
+
+3. RD/SD
+Ability to Resarch ==> positive
+more like to be system desgin 
+when starting desgin, the requriement/spec is the most important stuff.
+based on the 'technology' that is not proven, so it's risky....
+reason to keep people stay? 
+We are not able to find the top guys.
+The roadmap is not defined, the target is changing all the time.
+>>> Sub GHZ is using license band... 
+    it's duty cycle limited, actuaaly not suitable for large data trasnmission
+
+ 
+
+

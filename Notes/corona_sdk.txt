@@ -1,0 +1,18 @@
+Corona SDK
+
+Lua - script base language
+
+程式內購買ＯＫ, google play 不能付錢？
+
+Include 
+4 stores -
+    apple/google/amazon/noob
+    一套code走4個平台
+缺點：
+　　有bug需要原廠解決。
+
+Adobe 的人出來開的公司。
+HTML5 Support... Open GL/Open AL
+story board
+display object -> all kinds of operations
+table view
