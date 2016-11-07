@@ -1,3 +1,0 @@
-##Topic: BeagleBone Notes
-##Date:  2016-06
-##Field: BeagleBone, linux, BBB

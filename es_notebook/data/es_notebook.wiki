@@ -3,3 +3,6 @@
 
 
 	* WikiSettings
+
+
+不能調整顏色!!! 失敗!!! Back to Notepad++
