@@ -1,0 +1,9 @@
+##Topic: Cygwin Debug Tips
+##Date:  2016-06
+##Field: gdb, core dump, cygwin, debug
+
+
+在cygwin 下面啟動 coredump
+export CYGWIN=error_start=C:\\cygwin\\bin\\dumper.exe
+
+

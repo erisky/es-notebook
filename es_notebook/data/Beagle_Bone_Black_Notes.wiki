@@ -1,0 +1,60 @@
+﻿++ Beagle_Bone_Black_Notes
+##Topic: BeagleBone Notes
+##Date:  2016-06
+##Field: BeagleBone, linux, BBB
+
+
+URL:
+1. http://beagleboard.org/Getting%20Started#update
+
+- plugin usb to beaglebone
+2. download 64-bit driver installer
+
+3. install it
+
+--> unable to connect with ethernet !? 
+
+
+
+
+Update board with latest software
+
+> Win32DiskImager-0.9.5-install.exe
+
+
+> download debian image from 
+http://beagleboard.org/latest-images
+@ E:\eric\vshare\BeagleBlack\bone-debian-7.4-2014-04-14-2gb.img.xz
+
+
+-- Hardware Files --
+>> http://elinux.org/Beagleboard:BeagleBoneBlack#Hardware_Files
+
+
+Related links:
+
+http://www.elinux.org/Beagleboard:BeagleBoneBlack
+
+
+Software Sources
+
+Bootloader: http://www.denx.de/wiki/U-Boot/SourceCode (git://git.denx.de/u-boot.git)
+Kernel: http://github.com/beagleboard/kernel/tree/3.8
+       :https://github.com/beagleboard/linux
+Root file system: http://github.com/beagleboard/meta-beagleboard
+
+
+Linux Driver Template
+https://github.com/makelinux/ldt/
+
+
+tty control:
+
+cat /dev/ttyO0
+or 
+echo test1234 > /dev/ttyGS0
+
+Initial 
+/etc/init.d/README
+/etc/rc3.d
+
