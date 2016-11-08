@@ -1,0 +1,54 @@
+##Topic: BeagleBone Notes
+##Date:  2016-06
+##Field: BeagleBone, linux, BBB
+
+
+
+
+=== 基本操作 ====
+1. 出廠已經預載入EMMC: linux+rootfilesys 
+2. 連接ＵＳＢ供電可透過rndis access BBB：　http://192.168.7.2/Support/bone101/
+3. ssh 直接登入　192.168.7.2 , user root, 免密碼
+4. 大約還有 1.9G 空間
+Filesystem                                              Size  Used Avail Use% Mounted on
+rootfs                                                  3.4G  1.4G  1.9G  42% /
+udev                                                     10M     0   10M   0% /dev
+tmpfs                                                   100M  612K   99M   1% /run
+/dev/disk/by-uuid/d0694d28-c133-4bda-b752-ff685e2c2ede  3.4G  1.4G  1.9G  42% /
+tmpfs                                                   249M     0  249M   0% /dev/shm
+tmpfs                                                   249M     0  249M   0% /sys/fs/cgroup
+tmpfs                                                   5.0M     0  5.0M   0% /run/lock
+tmpfs                                                   100M     0  100M   0% /run/user
+/dev/mmcblk0p1                                           96M   72M   25M  75% /boot/uboot
+
+root@beaglebone:~# uname -a
+Linux beaglebone 3.8.13-bone47 #1 SMP Fri Apr 11 01:36:09 UTC 2014 armv7l GNU/Linux
+
+### Python is old !!!
+root@beaglebone:~# python --version
+Python 2.7.3
+
+
+=== Image 更新 ====
+*** E:\eric\vshare\BeagleBlack\2016 ***
+
+1. download image from http://beagleboard.org/latest-images  --> bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img.xz
+2. download Flash writing tool from https://sourceforge.net/projects/win32diskimager/files/latest/download --> Win32DiskImager-0.9.5-install.exe
+3. Decompress the zip file 
+4. Insert Micro-SD for writing images
+5. execute Win32DiskImager and select image and sd disk(G:) for writing
+
+
+http://elinux.org/Beagleboard:BeagleBoneBlack_Debian#Flashing_eMMC
+
+
+
+=== Cross-compile or compile on BBB? ====
+
+
+中文也OK
+
+- 啟動 BBB -
+USB + Rndis...
+or boot from SD card
+- 相關文件 -
