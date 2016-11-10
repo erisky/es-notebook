@@ -38,15 +38,71 @@ Python 2.7.3
 4. Insert Micro-SD for writing images
 5. execute Win32DiskImager and select image and sd disk(G:) for writing
 
-
+BBB寫入：
 http://elinux.org/Beagleboard:BeagleBoneBlack_Debian#Flashing_eMMC
+第一次用ＳＤ開機後修改 /boot/uEnv.txt:
+OR 
+直接執行：
+/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh 
+燒完後四顆　LED會全亮
+
+=== Storage issue ====
+1. 用mircro SD當暫存開發
+2. 用來安裝的micro SD因為被換成ext4所以變成部會自動掛載
+
+>>  mkdir /mnt/microSD
+>>  mount -t ext4 /dev/mmcblk1p1 /mnt/microSD/
+>>  mkdir  /mnt/microSD/svn
+>>　svn co http://172.16.23.188/svn/Tools/branches/daemon_release/elsa2 
+
+### work dir /mnt/microSD/svn/daemon_2.0/elsa2/daemon
+
+=== Compile ===
+
+re-compile libraries:
+libpltspack.a
+libnanomsg.a
+libjansson.a
+libevent.a
+
+
 
 
 
 === Cross-compile or compile on BBB? ====
+[U-Boot]
+refer to: http://beagleboard.org/linux
+Get U-boot from http://www.denx.de/wiki/U-Boot/SourceCode
+
+#  make am335x_evm_defconfig
+[PMIC]
+  CC      spl/drivers/power/pmic/pmic_tps65217.o
+  CC      spl/drivers/power/pmic/pmic_tps65910.o
+
+releted file: u-boot-spl.map
+Linker:
+    "spl/u-boot-spl.lds"
+Code Entry:
+ arch/arm/cpu/armv7/start.S
+
+安裝 u-boot的方法:
+https://eewiki.net/display/linuxonarm/BeagleBone+Black#BeagleBoneBlack-Bootloader:U-Boot
+1. 找一張空的sdcard
+2. compile u-boot 取得 MLO和 u-boot.img檔放到一台BBB上 (booted from MMC)
+3. 在BBB插入sdcard --> mmcblk1
+4. 在BBB上執行command把uboot寫入sdcard
+
+# export DISK=/dev/mmcblk1
+# sudo dd if=/dev/zero of=${DISK} bs=1M count=10
+# sudo dd if=./u-boot/MLO of=${DISK} count=1 seek=1 bs=128k
+# sudo dd if=./u-boot/u-boot.img of=${DISK} count=2 seek=1 bs=384k 
+ 
 
 
-中文也OK
+ 
+ 
+ 
+ 
 
 - 啟動 BBB -
 USB + Rndis...
