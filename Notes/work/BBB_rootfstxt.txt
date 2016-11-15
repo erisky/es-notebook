@@ -1,0 +1,73 @@
+##Topic: BeagleBone root-fs Notes
+##Date:  2016-11
+##Field: BeagleBone, TPS65217, rootfs, customization
+
+
+Install Tool to cutomize rootfile system later 
+
+$  sudo apt-get install util-linux 
+$  sudo apt-get install kpartx 
+$  sudo apt-get install util-linux kpartx dosfstools e2fsprogs gddrescue qemu-utils
+
+To create empty imgage
+
+$ dd if=/dev/zero of=bbb.img bs=1M count=500
+$ qemu-img create bbb.img 500M
+& sudo sfdisk --in-order --Linux --unit M bbb.img << EOF
+1,48,0xE,*
+,,,-
+EOF
+
+# create virtual block devices for the two partitions inside our image. 
+$ sudo kpartx -av bbb.img
+
+# check the mapper of the block devices
+$ ls -al /dev/mapper/*
+crw------- 1 root root  10, 236 11月 11 11:37 /dev/mapper/control
+brw-rw---- 1 root disk 252,   0 11月 15 09:54 /dev/mapper/loop0p1
+brw-rw---- 1 root disk 252,   1 11月 15 09:54 /dev/mapper/loop0p2
+
+# Create filesystem and mount to the specific folders
+
+$ sudo mkfs.vfat -F 16 /dev/mapper/loop0p1 -n boot
+$ man kpartx 
+$ mkdir -p tmpmnt/boot
+$ mkdir -p tmpmnt/rootfs
+$ sudo mount /dev/mapper/loop0p1 tmpmnt/boot/
+$ sudo mount /dev/mapper/loop0p2 tmpmnt/rootfs/
+
+-----------------------------------------------------------------------------
+
+# mount the file from starndard release
+$ kpartx -av bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img
+$ sudo mount /dev/mapper/loop1p1 tmpmnt/BBB_original
+
+---> this is big....
+
+---------------------------------------------------------------------------
+| cdebootstrap | -> to be study
+----------------
+
+wget -c https://rcn-ee.com/rootfs/eewiki/minfs/ubuntu-16.04.1-minimal-armhf-2016-09-17.tar.xz
+
+$ sudo mkdir /media/rootfs
+$ sudo tar xfvp ./*-*-*-armhf-*/armhf-rootfs-*.tar -C /media/rootfs/
+$ pwd
+/home/eric/BBB/tmpmnt/minimal/debian-8.6-minimal-armhf-2016-09-17
+
+Extrat the root-file system to the folder
+$ sudo tar xfvp ./armhf-rootfs-debian-jessie.tar  -C /home/eric/BBB/tmpmnt/rootfs
+
+To support chroot in different architecture(armhf)
+$ sudo apt-get install qemu-user-static debootstrap binfmt-support
+$ cp /usr/bin/qemu-arm-static  rootfs/usr/bin/
+
+##  List all installed packages
+##  & Remove installed packages
+$ apt list --installed
+$ apt-get remove 
+
+
+
+
+

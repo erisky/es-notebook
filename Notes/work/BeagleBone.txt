@@ -77,7 +77,7 @@ Get U-boot from http://www.denx.de/wiki/U-Boot/SourceCode
 #  make am335x_evm_defconfig
 [PMIC]
   CC      spl/drivers/power/pmic/pmic_tps65217.o
-  CC      spl/drivers/power/pmic/pmic_tps65910.o
+//  CC      spl/drivers/power/pmic/pmic_tps65910.o
 
 releted file: u-boot-spl.map
 Linker:
@@ -95,16 +95,12 @@ https://eewiki.net/display/linuxonarm/BeagleBone+Black#BeagleBoneBlack-Bootloade
 # export DISK=/dev/mmcblk1
 # sudo dd if=/dev/zero of=${DISK} bs=1M count=10
 # sudo dd if=./u-boot/MLO of=${DISK} count=1 seek=1 bs=128k
-# sudo dd if=./u-boot/u-boot.img of=${DISK} count=2 seek=1 bs=384k 
+# sudo dd if=./u-boot.img of=${DISK} count=2 seek=1 bs=384k 
  
 
 
+ [U-boot][PMIC]
+ func: am33xx_spl_board_init
  
  
  
- 
-
-- 啟動 BBB -
-USB + Rndis...
-or boot from SD card
-- 相關文件 -
