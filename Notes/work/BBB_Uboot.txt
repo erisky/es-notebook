@@ -30,3 +30,24 @@ insert SD and flash the bootloader:
 # sudo dd if=MLO of=${DISK} count=1 seek=1 bs=128k
 # sudo dd if=u-boot.img of=${DISK} count=2 seek=1 bs=384k 
 
+
+referebce: AM335x TRM
+26.1.7.5 MMC / SD Cards
+26.1.7.5.5 
+
+$ hexdump -C /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img | less
+
+[0x00000000] ...   Bootstrap    -- not used
+[0x000001B8] ...   MBR          -- Including at least 4 partition entry
+[0x00020000] ...   MLO(SPL)     -- with (AM335X Boot from MMC - raw mode (Configuration Header found)
+                                -- AM335x TRM 26.1.7.5.5.1
+[0x00040000] ...   None         -- All zero
+[0x00060000] ...   None         -- U-boot (rootfs is smaller than 
+
+
+Question: U-boot directly mount rootfs and boot the kernel from /boot/ ?
+        Check the "boot" command precedure  --> should be YES
+
+
+
+
