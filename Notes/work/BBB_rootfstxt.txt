@@ -140,4 +140,56 @@ unit: sectors
 --> Conclussion, newer version of imgs using raw mode for booting uboot...
 
 
+[dtb]
+http://elinux.org/BeagleBoardDebian
+
+##########################################################################################################################
+[Create My Ownn RootFS]
+### 1. # Get Minimal from https://rcn-ee.com/rootfs/eewiki/minfs/ubuntu-16.04.1-minimal-armhf-2016-09-17.tar.xz and extract
+   We are going to use this as a base
+### 2. # create BBB.img and use qemu-img/spfdisk/kpartx/mount to create partition and mount.. see above
+### 3. # copy /boot/ form BBB_origianl/boot to rootfs
+
+
+sudo sfdisk --in-order --Linux --unit M bbb.img << EOF
+1,,0x83,*
+EOF
+
+
+$ dd if=/dev/zero of=bbb.img bs=1M count=2048
+$ sudo kpartx -av bbb.img
+$ sudo mkfs.ext4 /dev/mapper/loop0p1
+$ sudo mount /dev/mapper/loop0p1 tmpmnt/rootfs/
+$ sudo tar xfvp ./armhf-rootfs-debian-jessie.tar  -C /home/eric/BBB/tmpmnt/rootfs
+~/BBB/tmpmnt$ sudo cp -rf backup/boot/ rootfs/
+
+### 4. # burn uboot from original uboot image for /opt/backup 
+
+$ export DISK=/dev/
+uboot_prebuild/uboot$  sudo dd if=MLO of=${DISK} count=1 seek=1 bs=128k
+uboot_prebuild/uboot$  sudo dd if=u-boot.img of=${DISK} count=2 seek=1 bs=384k 
+
+~/BBB/tmpmnt$ sudo umount /dev/mapper/loop0p1 
+sudo kpartx -dv bbb.img
+
+..... 燒上去後甚麼都不能做 .... hmmm...
+
+# List all instllaed with sort size
+dpkg-query -W --showformat='${Installed-Size;10}\t${Package}\n' | sort -k1,1
+
+--------------------- 使用刪去法 -----------------------------
+apt-get remove opencv*
+apt-get remove ruby*
+apt-get remove chromium-browser
+
+>> Around 450 M Space available
+
+
+
+
+
+
+
+
+
 

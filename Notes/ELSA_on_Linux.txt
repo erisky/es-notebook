@@ -1,0 +1,69 @@
+
+"setuptools", "18.8.1"
+"django", "1.8.7"
+"Crypto", "2.6"
+
+"psutil", "4.3.0"
+"psycopg2", "2.5.3"
+
+"chardet", "2.3.0"
+"wx", "3.0.2.0"
+
+"sqlite3", "3.8.11.1" => just download the latest from here
+
+"autobahn", "0.11.0"
+
+#########part of autobahn, will be downloaded automatically by PIP ##########
+"twisted", "15.5.0"
+"pycparser", "2.14"
+"requests", "2.9.1"
+"cffi", "1.5.2"
+"idna", "2.0"
+"attr", "15.2.0"
+"pyasn1", "0.1.9"
+"pyasn1_modules", "0.0.8"
+"ipaddress", "1.0.16"
+
+"enum", "1, 1, 2"
+"six", "1.10.0"
+"zope.interface", "4.1.3"
+"txaio", "2.2.1"
+"cryptography", "1.2.3"
+"OpenSSL", "0.15.1"
+
+"service_identity", "16.0.0"
+
+#########end part of autobahn ##########
+
+If you can find the PIP of the files above, just go to
+http://172.16.23.188/svn/web_elsa/tags/2.1/web_depedencies
+
+Get the files there and install one by one
+
+"django_dumpdb", "0.6" => Used attached file for Django_dumpdb, it customized
+
+After done installation, copy source file from 
+http://172.16.23.188/svn/web_elsa/tags/2.1
+
+Prepare ap.txt and dmn_sys.cfg (for easier step copy from your existing envi of AP.txt and dmn_sys.cfg)
+
+Due to gui.pyw has not prepared for linux yet (monitor PID, etc), so need to run manually
+
+open command line and type:
+       cd ESL
+       ./manage.py runserver 0.0.0.0:88 --noreload --insecure
+
+Open command line and type:
+       ./daemon dmn_sys.cfg
+
+Open command line and type:
+            	Cd ESL
+./manage.py esl
+
+Open command line and type:
+            	Cd ESL
+./manage.py get_daemon_id
+
+Open command line and type (this is for websocket server, can be turn off if it heavy, need to merge into one server later on):
+            	Cd ESL
+ ./manage.py message_broker
