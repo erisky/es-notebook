@@ -51,3 +51,33 @@ Question: U-boot directly mount rootfs and boot the kernel from /boot/ ?
 
 
 
+
+CROSS_COMPILE U-boot
+origin	https://github.com/u-boot/u-boot (fetch)
+BUILD IT!!!
+XXXX $ git clone https://github.com/u-boot/u-boot XXXX
+
+git clone git://git.denx.de/u-boot.git
+make 
+
+!!!!!!!!!!!!!!!!!!!!!!!!
+[http://wiki.beyondlogic.org/index.php?title=BeagleBoneBlack_Upgrading_uBoot]
+
+$ sudo apt-get install gcc-arm-linux-gnueabihf
+
+$ wget ftp://ftp.denx.de/pub/u-boot/u-boot-2016.11.tar.bz2
+$ cd u-boot-2016.11/
+$ wget https://rcn-ee.com/repos/git/u-boot-patches/v2016.11/0001-am335x_evm-uEnv.txt-bootz-n-fixes.patch
+$ patch -p1 < 0001-am335x_evm-uEnv.txt-bootz-n-fixes.patch 
+$ make CROSS_COMPILE=arm-linux-gnueabihf- distclean
+$ make CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_config
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
+$ scp MLO root@192.168.7.2:~/
+$ scp u-boot.img  root@192.168.7.2:~/
+$ export DISK=/dev/mmcblk1
+$ sudo dd if=MLO of=${DISK} count=1 seek=1 bs=128k
+$ sudo dd if=u-boot.img of=${DISK} count=2 seek=1 bs=384k 
+
+finally...
+
+

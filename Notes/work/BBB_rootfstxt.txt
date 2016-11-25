@@ -174,7 +174,7 @@ sudo kpartx -dv bbb.img
 
 ..... 燒上去後甚麼都不能做 .... hmmm...
 
-# List all instllaed with sort size
+# List all installaed with sort size
 dpkg-query -W --showformat='${Installed-Size;10}\t${Package}\n' | sort -k1,1
 
 --------------------- 使用刪去法 -----------------------------
@@ -183,7 +183,8 @@ apt-get remove ruby*
 apt-get remove chromium-browser
 
 >> Around 450 M Space available
-
+>> cloud9 ...
+http://192.168.7.2:3000/ide.html
 
 
 

@@ -102,5 +102,7 @@ https://eewiki.net/display/linuxonarm/BeagleBone+Black#BeagleBoneBlack-Bootloade
  [U-boot][PMIC]
  func: am33xx_spl_board_init
  
+ This rocks...
+ http://192.168.7.2:3000/ide.html
  
  
