@@ -1,0 +1,19 @@
+
+
+regular express:
+
+\d ==> digits   -> [0-9]
+\s --> whitespaces  -> [\t\n\r\f\v]
+\w --> word charaters -> [a-zA-Z0-9]
+
+\D --> not \d
+\S --> not \s
+\W --> not \w
+\A: beginning of the string (^)
+\Z: end of a string ($)
+
+
+
+\b: empty string between \w bwteern \W --> string boundary
+ex:  r'\b(TheString)\b'
+
