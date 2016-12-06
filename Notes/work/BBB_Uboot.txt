@@ -1,6 +1,6 @@
 ##Topic: BeagleBone u-boot Notes
 ##Date:  2016-11
-##Field: BeagleBone, PMIC, TPS65217, SPL, u-boot
+##Field: BeagleBone,0x PMIC,0x TPS65217,0x SPL,0x u-boot
 
 
 u-boot support 2 stage boot especially for TI Omap seriers
@@ -8,8 +8,17 @@ so there will be 2 images
 MLO (u-boot-spl.lds/map)
 u-boot.img (u-boot.lds/map)
 
-start.s -> _main -> board_init_r -> common/spl/xxx spl_board_init
 
+[Boot procedure]
+start.s -> 
+arch/arm/lib/crt0.s  -> _main
+spl/spl.c -> board_init_r
+arch/arm/cpu/armv7/omap-common/boot-common.c->spl_board_init
+board/ti/am335x/board.c -> am33xx_spl_board_init
+
+
+ 
+ 
 SPL runs in SRAM
 PLL & DDR setting need to be done in SPL
 
@@ -17,7 +26,7 @@ PLL & DDR setting need to be done in SPL
 
 modify board/ti/am335x/board.c
 add 
-    		if (tps65217_voltage_update(TPS65217_DEFDCDC1,
+    		if (tps65217_voltage_update(TPS65217_DEFDCDC1,0x
     					    0x10)) {
     			puts("tps65217_voltage_update failure\n");
     			return;

@@ -1,0 +1,52 @@
+You can start to add your tags here and you have three ways for doing that
+加入標籤，使用以下方式加入標籤:
+By scanning the QR code
+掃描二維條碼
+Click here to scan QR code / type MAC address
+按此開始掃描二維條碼 或直接輸入MAC 位址
+If you quit your installation now, all tags you just registered will be exported into csv file that you can import it later.
+若現在停止，所有註冊的標籤列表將匯出至csv檔案，稍後可再度匯入。
+ELSA 1.0 will wake-up your tags in the next step.
+ESLA 1.0 會在下個步驟中喚醒您的標籤。
+If you only register small amount of tags (below 10), you can disable the wake-up.
+如果只有少量標籤(如少於10), 您可關閉喚醒以手動方式喚醒標籤。
+This will make your processing time faster.
+這會加速處理速度。
+Proceed without wake-up
+關閉喚醒並繼續
+
+Check this box if you want to register tags by scanning QR code, 
+勾選此使用掃描二維條碼方式註冊標籤。
+or you want to register tag only without product assigned to it. 
+或者只輸入MAC位址方式註冊(不帶產品碼)
+You still can assign the product later after installation is finish.
+您可在完成安裝後再將產品與標籤聯結。
+Quit Installation
+離開安裝
+
+Enable
+啟用
+Disable
+停用
+Couldn't register
+無法註冊
+Tag’s MAC or QR code
+標籤的MAC 或 二維條碼
+
+Up to date
+最新
+Do RFU
+執行韌體更新
+Enable auto firmware upgrade
+啟動自動韌體更新
+Force auto firmware upgrade (one time)
+強制執行韌體更新(一次性)
+
+Firmware upgrade hour
+更新時間(小時)
+Current status of firmware upgrade
+目前韌體更新狀態
+Devices firmware info
+裝置韌體資訊
+Firmware Upgrade
+韌體更新
