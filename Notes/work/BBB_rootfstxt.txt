@@ -219,4 +219,29 @@ serial:
 # run the following command from Beagle bone,0x then the imgcCreator built for x86_64 could be run    
 sudo apt-get install qemu-user-static debootstrap binfmt-support    
     
+[Dump EEPROM]:/sys/bus/i2c/devices/0-0050/eeprom 
+ hexdump -C /sys/bus/i2c/devices/0-0050/eeprom  
+   
+[eth0 MAC Address] 
+hexdump -C /proc/device-tree/ocp/ethernet@4a100000/slave@4a100200/mac-address
+00000000  6c ec eb 92 1c 62                                 |l....b|
+
+[usb0 MAC Address]
+hexdump -C /proc/device-tree/ocp/ethernet@4a100000/slave@4a100300/mac-address
+00000000  6c ec eb 92 1c 64                                 |l....d|
+   
+    
+[Ethernet MAC Address]
+check u-boot: board/ti/am335x/board.c  :board_late_init
+from control Address:  
+        0x44E10630 ~  0x44E1063c   (AM35XXX TRM: 9.3.25, page:
+
+    
+
+
+
+
+
+   
+    
     

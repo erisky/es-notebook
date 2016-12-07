@@ -83,6 +83,7 @@ $ make CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_config
 $ make CROSS_COMPILE=arm-linux-gnueabihf-
 $ scp MLO root@192.168.7.2:~/
 $ scp u-boot.img  root@192.168.7.2:~/
+--- On target ---
 $ export DISK=/dev/mmcblk1
 $ sudo dd if=MLO of=${DISK} count=1 seek=1 bs=128k
 $ sudo dd if=u-boot.img of=${DISK} count=2 seek=1 bs=384k 
