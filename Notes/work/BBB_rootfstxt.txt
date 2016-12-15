@@ -203,7 +203,7 @@ http://192.168.7.2:3000/ide.html
 if usb0=enable  ->   autoconfigure_usb0.sh
 
 $ lsmod 
-libcomposite --
+libcomposite --\\\\\\\\\\\\\\\
 
 g_multi  <--- usb_f_mass_storage,0x u_ether,0x libcomposite
 
