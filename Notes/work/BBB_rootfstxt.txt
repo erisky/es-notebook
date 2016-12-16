@@ -1,6 +1,6 @@
 ##Topic: BeagleBone root-fs Notes
 ##Date:  2016-11
-##Field: BeagleBone, TPS65217, rootfs, customization
+##Field: BeagleBone,0x TPS65217,0x rootfs,0x customization
 
 
 Install Tool to cutomize rootfile system later 
@@ -14,8 +14,8 @@ To create empty imgage
 $ dd if=/dev/zero of=bbb.img bs=1M count=500
 $ qemu-img create bbb.img 500M
 & sudo sfdisk --in-order --Linux --unit M bbb.img << EOF
-1,48,0xE,*
-,,,-
+1,0x48,0x0xE,0x*
+,0x,0x,0x-
 EOF
 
 # create virtual block devices for the two partitions inside our image. 
@@ -23,9 +23,9 @@ $ sudo kpartx -av bbb.img
 
 # check the mapper of the block devices
 $ ls -al /dev/mapper/*
-crw------- 1 root root  10, 236 11月 11 11:37 /dev/mapper/control
-brw-rw---- 1 root disk 252,   0 11月 15 09:54 /dev/mapper/loop0p1
-brw-rw---- 1 root disk 252,   1 11月 15 09:54 /dev/mapper/loop0p2
+crw------- 1 root root  10,0x 236 11月 11 11:37 /dev/mapper/control
+brw-rw---- 1 root disk 252,0x   0 11月 15 09:54 /dev/mapper/loop0p1
+brw-rw---- 1 root disk 252,0x   1 11月 15 09:54 /dev/mapper/loop0p2
 
 # Create filesystem and mount to the specific folders
 
@@ -85,10 +85,10 @@ eric@eric-VirtualBox:~/BBB/tmpmnt/test$ sfdisk -d  /media/sf_vshare/BeagleBlack/
 # partition table of /media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img
 unit: sectors
 
-/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img1 : start=     2048, size=   196608, Id= e, bootable
-/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img2 : start=   198656, size=  3282944, Id=83
-/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img3 : start=        0, size=        0, Id= 0
-/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img4 : start=        0, size=        0, Id= 0
+/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img1 : start=     2048,0x size=   196608,0x Id= e,0x bootable
+/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img2 : start=   198656,0x size=  3282944,0x Id=83
+/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img3 : start=        0,0x size=        0,0x Id= 0
+/media/sf_vshare/BeagleBlack/bone-debian-7.4-2014-04-22-2gb.img4 : start=        0,0x size=        0,0x Id= 0
 
 ## simliar example bbg.img
 $ sfdisk  -l bbb.img 
@@ -99,10 +99,10 @@ $ sfdisk  -l bbb.img
  bbb.img3          0       -       0          0    0  Empty
  bbb.img4          0       -       0          0    0  Empty
 
-../../bbb.img1 : start=     2048, size=    98304, Id= e, bootable
-../../bbb.img2 : start=   100352, size=   923648, Id=83
-../../bbb.img3 : start=        0, size=        0, Id= 0
-../../bbb.img4 : start=        0, size=        0, Id= 0
+../../bbb.img1 : start=     2048,0x size=    98304,0x Id= e,0x bootable
+../../bbb.img2 : start=   100352,0x size=   923648,0x Id=83
+../../bbb.img3 : start=        0,0x size=        0,0x Id= 0
+../../bbb.img4 : start=        0,0x size=        0,0x Id= 0
 
 /////////////////////////////////////////////////////////////////////////////////////////////// 
 BUT....
@@ -110,19 +110,19 @@ BUT....
 新版的 : 
 1. no vfat for boot
 2. partion table start from 2048 (*512) = 1M
- ==> if the partion table is like that, how to burn u-boot?
+ ==> if the partion table is like that,0x how to burn u-boot?
 
 $ sfdisk -l /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img
-Disk /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img: 433 cylinders, 255 heads, 63 sectors/track
+Disk /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img: 433 cylinders,0x 255 heads,0x 63 sectors/track
 Warning: The partition table looks like it was made
   for C/H/S=*/112/62 (instead of 433/255/63).
 For this listing I'll assume that geometry.
-Units = cylinders of 3555328 bytes, blocks of 1024 bytes, counting from 0
+Units = cylinders of 3555328 bytes,0x blocks of 1024 bytes,0x counting from 0
 
    Device Boot Start     End   #cyls    #blocks   Id  System
 /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img1   *      0+   1002-   1003-   3480576   83  Linux
-		start: (c,h,s) expected (0,33,3) found (0,32,33)
-		end: (c,h,s) expected (1002,85,42) found (433,111,62)
+		start: (c,0xh,0xs) expected (0,0x33,0x3) found (0,0x32,0x33)
+		end: (c,0xh,0xs) expected (1002,0x85,0x42) found (433,0x111,0x62)
 /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img2          0       -       0          0    0  Empty
 /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img3          0       -       0          0    0  Empty
 /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img4          0       -       0          0    0  Empty
@@ -131,13 +131,13 @@ $ sfdisk -d /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-201
 # partition table of /media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img
 unit: sectors
 
-/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img1 : start=     2048, size=  6961152, Id=83, bootable
-/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img2 : start=        0, size=        0, Id= 0
-/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img3 : start=        0, size=        0, Id= 0
-/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img4 : start=        0, size=        0, Id= 0
+/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img1 : start=     2048,0x size=  6961152,0x Id=83,0x bootable
+/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img2 : start=        0,0x size=        0,0x Id= 0
+/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img3 : start=        0,0x size=        0,0x Id= 0
+/media/sf_vshare/BeagleBlack/2016/bone-debian-8.4-lxqt-4gb-armhf-2016-05-13-4gb.img4 : start=        0,0x size=        0,0x Id= 0
 
 
---> Conclussion, newer version of imgs using raw mode for booting uboot...
+--> Conclussion,0x newer version of imgs using raw mode for booting uboot...
 
 
 [dtb]
@@ -152,7 +152,7 @@ http://elinux.org/BeagleBoardDebian
 
 
 sudo sfdisk --in-order --Linux --unit M bbb.img << EOF
-1,,0x83,*
+1,0x,0x0x83,0x*
 EOF
 
 
@@ -174,8 +174,8 @@ sudo kpartx -dv bbb.img
 
 ..... 燒上去後甚麼都不能做 .... hmmm...
 
-# List all instllaed with sort size
-dpkg-query -W --showformat='${Installed-Size;10}\t${Package}\n' | sort -k1,1
+# List all installaed with sort size
+dpkg-query -W --showformat='${Installed-Size;10}\t${Package}\n' | sort -k1,0x1
 
 --------------------- 使用刪去法 -----------------------------
 apt-get remove opencv*
@@ -183,13 +183,65 @@ apt-get remove ruby*
 apt-get remove chromium-browser
 
 >> Around 450 M Space available
+>> cloud9 ...
+http://192.168.7.2:3000/ide.html
+
+
+
+# systemctl set-default -f multi-user.target
+
+
+--------------------- startup process -----------------------------
+開機流程:
+/etc/systemd/system/multi-user.target.wants/generic-board-startup.service
+                |
+                |
+                |
+                V
+/opt/scripts/boot/generic-startup.sh
+/opt/scripts/boot/am335x_evm.sh
+if usb0=enable  ->   autoconfigure_usb0.sh
+
+$ lsmod 
+libcomposite --\\\\\\\\\\\\\\\
+
+g_multi  <--- usb_f_mass_storage,0x u_ether,0x libcomposite
+
+
+mass_storage:
+    
+usb0:
+    $(dirname $0)/autoconfigure_usb0.sh
+serial:
+    systemctl start serial-getty@ttyGS0.service || true
+
+
+# run the following command from Beagle bone,0x then the imgcCreator built for x86_64 could be run    
+sudo apt-get install qemu-user-static debootstrap binfmt-support    
+    
+[Dump EEPROM]:/sys/bus/i2c/devices/0-0050/eeprom 
+ hexdump -C /sys/bus/i2c/devices/0-0050/eeprom  
+   
+[eth0 MAC Address] 
+hexdump -C /proc/device-tree/ocp/ethernet@4a100000/slave@4a100200/mac-address
+00000000  6c ec eb 92 1c 62                                 |l....b|
+
+[usb0 MAC Address]
+hexdump -C /proc/device-tree/ocp/ethernet@4a100000/slave@4a100300/mac-address
+00000000  6c ec eb 92 1c 64                                 |l....d|
+   
+    
+[Ethernet MAC Address]
+check u-boot: board/ti/am335x/board.c  :board_late_init
+from control Address:  
+        0x44E10630 ~  0x44E1063c   (AM35XXX TRM: 9.3.25, page:
+
+    
 
 
 
 
 
-
-
-
-
-
+   
+    
+    

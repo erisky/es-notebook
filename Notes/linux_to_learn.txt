@@ -1,0 +1,49 @@
+
+systemd
+D-Bus
+
+[[[systemd]]]
+
+1. systemctl commands
+
+$ systemctl status
+$ systemctl
+$ systemctl list-units
+$ systemctl --failed
+$ systemctl list-unit-files
+
+--- Start/Stop an unit(.service/.mount/.device/.socket)
+$ systemctl start unit
+$ systemctl stop unit
+$ systemctl restart unit
+$ systemctl reload unit
+
+disable:
+$ systemctl disable lightdm.service
+"""/etc/systemd/system/display-manager.service."""
+
+$ sudo systemctl disable bonescript-autorun.servic
+Removed symlink /etc/systemd/system/multi-user.target.wants/bonescript-autorun.service
+
+---- Powr Management ----
+$ systemctl reboot
+$ systemctl poweroff
+$ systemctl suspend
+$ systemctl hibernate
+$ systemctl hybrid-sleep
+
+-- change default target --
+systemctl set-default multi-user.target
+
+
+---- Beagle Service ----
+systemctl disable cloud9.service
+systemctl disable gateone.service
+systemctl disable bonescript.service
+systemctl disable bonescript.socket
+systemctl disable bonescript-autorun.service
+systemctl disable avahi-daemon.service
+systemctl disable gdm.service
+systemctl disable mpd.service
+ 
+

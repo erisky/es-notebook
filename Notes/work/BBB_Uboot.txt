@@ -1,6 +1,6 @@
 ##Topic: BeagleBone u-boot Notes
 ##Date:  2016-11
-##Field: BeagleBone, PMIC, TPS65217, SPL, u-boot
+##Field: BeagleBone,0x PMIC,0x TPS65217,0x SPL,0x u-boot
 
 
 u-boot support 2 stage boot especially for TI Omap seriers
@@ -8,16 +8,55 @@ so there will be 2 images
 MLO (u-boot-spl.lds/map)
 u-boot.img (u-boot.lds/map)
 
-start.s -> _main -> board_init_r -> common/spl/xxx spl_board_init
 
-SPL runs in SRAM
+***** [Boot procedure] *****
+start.s -> 
+arch/arm/lib/crt0.s  -> _main
+spl/spl.c -> board_init_r
+arch/arm/cpu/armv7/omap-common/boot-common.c->spl_board_init
+
+
+|----> , ------>, |->
+[SPL]
+reset(start.s) ------>  _main (arch/arm/lib/crt0.s) 
+                            |-> board_init_r (spl/spl.c)
+                                |-> spl_board_init (omap-common/boot-common.c)
+                                    |-> preloader_console_init();   ;==> Display console "U-Boot SPL"
+                                    |-> arch_misc_init (am33xx/board.c) :==> USB stuff
+                                    |-> am33xx_spl_board_init (board/ti/am335x/board.c) ==> [am33xx_spl_board_init]
+                                       
+                                            
+[am33xx_spl_board_init]                                            
+    |-> read_eeprom :==> load the EEPROM Data to global Memory  ===> $$$ Add reset to 
+        |-> ti_i2c_eeprom_am_get (common/board_detect.c) 
+    |-> am335x_get_efuse_mpu_max_freq(cdev)  ===> Set freq from the control register
+    |-> $$$ Set dpll_mpu_opp100.m = MPUPLL_M_1000
+        This is not reasonable ---> why if overwrites the detected max freq.... (we might have 800)
+    |-> Limit the USB input currrent (1800mA for 1G, 1300mA for others)
+    |-> DCDC3 set to (1.125v)
+    |-> DCDC2 set to (1.275v for 800) or (1.325v for 1000)
+                                            
+                                            
+                                            
+[U-boot]
+ 
+board_init_r (common/board_r.c)  --(init_sequence_r)-|->  
+                                                     |-> board_init (am335x\board.c)
+                                                     |->
+                                                     |-> board_late_init
+                                                     |->
+                                                     |->
+ 
+ 
+ 
+ SPL runs in SRAM
 PLL & DDR setting need to be done in SPL
 
 ==== Change the DDR power from the PMIC ====
 
 modify board/ti/am335x/board.c
 add 
-    		if (tps65217_voltage_update(TPS65217_DEFDCDC1,
+    		if (tps65217_voltage_update(TPS65217_DEFDCDC1,0x
     					    0x10)) {
     			puts("tps65217_voltage_update failure\n");
     			return;
@@ -49,5 +88,36 @@ Question: U-boot directly mount rootfs and boot the kernel from /boot/ ?
         Check the "boot" command precedure  --> should be YES
 
 
+
+
+
+CROSS_COMPILE U-boot
+origin	https://github.com/u-boot/u-boot (fetch)
+BUILD IT!!!
+XXXX $ git clone https://github.com/u-boot/u-boot XXXX
+ 
+git clone git://git.denx.de/u-boot.git
+make 
+
+!!!!!!!!!!!!!!!!!!!!!!!!
+[http://wiki.beyondlogic.org/index.php?title=BeagleBoneBlack_Upgrading_uBoot]
+
+$ sudo apt-get install gcc-arm-linux-gnueabihf
+
+$ wget ftp://ftp.denx.de/pub/u-boot/u-boot-2016.11.tar.bz2
+$ cd u-boot-2016.11/
+$ wget https://rcn-ee.com/repos/git/u-boot-patches/v2016.11/0001-am335x_evm-uEnv.txt-bootz-n-fixes.patch
+$ patch -p1 < 0001-am335x_evm-uEnv.txt-bootz-n-fixes.patch 
+$ make CROSS_COMPILE=arm-linux-gnueabihf- distclean
+$ make CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_config
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
+$ scp MLO root@192.168.7.2:~/
+$ scp u-boot.img  root@192.168.7.2:~/
+--- On target ---
+$ export DISK=/dev/mmcblk1
+$ sudo dd if=MLO of=${DISK} count=1 seek=1 bs=128k
+$ sudo dd if=u-boot.img of=${DISK} count=2 seek=1 bs=384k 
+
+finally...
 
 
