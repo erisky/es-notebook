@@ -1,0 +1,37 @@
+##Topic: BeagleBone Kernel Build/Modify Notes
+##Date:  2016-12
+##Field: BeagleBone, linux, kernel
+
+
+$ git clone git://github.com/beagleboard/linux.git
+$ git tag -l 
+:==> List all the tags ..
+
+$ git checkout 4.4.9-ti-rt-r25 -b local_branch_name
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig 
+
+!!! install gcc-arm-linux-gnueabihf is too old?
+$ sudo apt-get install gcc-arm-linux-gnueabihf
+Edit .config to disable CONFIG_CC_STACKPROTECTOR_STRONG
+
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4
+
+
+
+---- Setup git server ----
+
+https://git-scm.com/book/it/v2/Git-on-the-Server-Setting-Up-the-Server
+
+
+
+---- Setup account for git ----
+ ssh-keygen -t rsa -b 4096 -C "eric.chen@m2comm-semi.com" 
+
+ Copy the key to git server..
+ !!! $ scp .ssh/id_rsa.pub git@172.16.23.188:~/
+git config --global user.email eric.chen@m2comm-semi.com
+git config --global user.name  eric.chen
+git init
+git add .
+git commit . -m "initial git"
+git push origin master 
