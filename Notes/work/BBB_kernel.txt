@@ -17,10 +17,58 @@ Edit .config to disable CONFIG_CC_STACKPROTECTOR_STRONG
 $ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4
 
 
+### Install mkimage from U-boot
+$ sudo apt-get install libssl-dev
+$ make sandbox_defconfig tools-only
+$ sudo install tools/mkimage /usr/local/bin
+
+### Build the uImage
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage dtbs LOADADDR=0x80008000 -j4
+
 
 ---- Setup git server ----
 
 https://git-scm.com/book/it/v2/Git-on-the-Server-Setting-Up-the-Server
+
+
+------ Setup tftpd on Ubuntu ----
+http://wiki.beyondlogic.org/index.php?title=Setup_TFTP_Server
+sudo apt-get install tftpd
+### Edit /etc/xinet.d/tftpd as
+       and to start the installation process for some operating systems.
+service tftp
+{
+        socket_type             = dgram
+        protocol                = udp
+        wait                    = yes
+        user                    = root
+        server                  = /usr/sbin/in.tftpd
+        server_args             = -s /home/eric/BBB/u-boot/iAP/kernel/linux
+#       disable                 = yes
+        per_source              = 11
+        cps                     = 100 2
+}
+
+# setup softlinks
+$ ln -s arch/arm/boot/uImage .
+$ ln-s arch/arm/boot/dts/am335x-boneblack.dtb am335x-boneblack.dtb
+
+### Virtual Box:
+Add network interface with bridge mode
+
+### on U-boot 
+=> setenv ipaddr 172.16.20.222
+=> setenv serverip 172.16.20.35
+=> tftpboot 0x80F80000 am335x-boneblack.dtb
+=> tftpboot 0x80007FC0 uImage
+=> setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p1 ro rootfstype=ext4 rootwait
+=> bootm 0x80007FC0 - 0x80F80000
+
+### Build version:
+Linux beaglebone 4.4.9 #3 SMP PREEMPT RT Tue Dec 20 10:00:02 CST 2016 armv7l GNU/Linux
+
+### original version
+Linux beaglebone 4.4.9-ti-r25 #1 SMP Thu May 5 23:08:13 UTC 2016 armv7l GNU/Linux
 
 
 
@@ -35,3 +83,13 @@ git init
 git add .
 git commit . -m "initial git"
 git push origin master 
+
+
+
+
+
+
+
+
+
+

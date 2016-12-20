@@ -3,18 +3,20 @@
 ##Field: BeagleBone, linux, BBB
 
 
---------------------------------------------------------------------------------------------------------
-| PMIC         |  C -> D, difference : DCDC1 could down to 1.35V                        |               |
-| CPU          |  CPU Freq up to 800 MHZ on some boards  -> Uboot max freq limited      |               |
-|              |                                                                        |               |
-| DDR          |  Power / Size                                                          |               |
-| Flash(MMC)   |  Size                                                                  |               |
-| Ethernet     |  Giga Phy       |                                                      |               |
-| SDCard       |  No change                                                             |               |
-| EEPROM       |  Name = A335BNLT, rev = 00C0 for compatible,                           |               |
-| WIFI         |  With Wifi but without Bluetooh                                        |               |
-| USB          |  Disabled.                                                             |               |
-|              |                                                                        |               |
-| GPIO         |                                                                        |               |
-| UART         |                                                                        |               |
---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+| PMIC         |  C -> D, difference : DCDC1 could down to 1.35V                        |                           |
+|              |                                                                        |                             
+| CPU          |  CPU Freq up to 800 MHZ on some boards  -> Uboot max freq limited      | run time change speed:
+|              |                                                                        |
+|              |                                                                        |                           |
+| DDR          |  Power / Size                                                          |                           |
+| Flash(MMC)   |  Size                                                                  |                           |
+| Ethernet     |  Giga Phy       |                                                      |                           |
+| SDCard       |  No change                                                             |                           |
+| EEPROM       |  Name = A335BNLT, rev = 00C0 for compatible,                           |                           |
+| WIFI         |  With Wifi but without Bluetooh                                        |                           |
+| USB          |  Disabled.                                                             |                           |
+|              |                                                                        |                           |
+| GPIO         |                                                                        |                           |
+| UART         |                                                                        |                           |
+---------------------------------------------------------------------------------------------------------------------
