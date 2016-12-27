@@ -1,0 +1,31 @@
+##Topic: BeagleBone UART
+##Date:  2016-12
+##Field: UART/ DTBO/ 
+
+
+Edit /boot/uEnv.txt
+Add:
+cape_enable=bone_capemgr.enable_partno=BB-UART4
+
+After reboot:
+$ ls /dev/ttyO4
+
+
+## raw testing
+
+stty -F /dev/ttyO4 raw
+stty -F /dev/ttyO4 460800
+stty -F /dev/ttyO4 -echo
+
+# The following lines are optionnal
+#cat /dev/ttyO4
+
+
+
+### Using  Minicom
+$ sudo apt-get install minicom
+
+
+$ minicom -D /dev/ttyO4 -b 460800
+
+    

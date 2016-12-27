@@ -1,0 +1,5 @@
+git clone https://github.com/the-tcpdump-group/libpcap
+sudo apt-get install flex
+sudo apt-get install bison
+./configure
+make 
