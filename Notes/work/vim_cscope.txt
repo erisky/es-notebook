@@ -1,0 +1,11 @@
+##Topic: vim, cscope, ctags
+##Date:  2016-12
+##Field: linux, code trace, vim, cscope
+
+$ sudo apt-get install cscope
+$ mkdir -p ~/.vim/plugin
+$ cd ~/.vim/plugin
+$ wget http://cscope.sourceforge.net/cscope_maps.vim
+    
+$ cd PROJECT
+$ cscope -bR
