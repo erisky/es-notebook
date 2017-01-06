@@ -81,6 +81,10 @@ Add network interface with bridge mode
 => setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p1 ro rootfstype=ext4 rootwait
 => bootm 0x80007FC0 - 0x80F80000
 
+or 
+setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk1p1 ro rootfstype=ext4 rootwait
+
+
 ### Build version:
 Linux beaglebone 4.4.9 #3 SMP PREEMPT RT Tue Dec 20 10:00:02 CST 2016 armv7l GNU/Linux
 Linux beaglebone 4.4.30 #7 SMP PREEMPT RT Tue Dec 27 15:28:04 CST 2016 armv7l GNU/Linux

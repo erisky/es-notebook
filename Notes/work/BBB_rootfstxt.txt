@@ -267,9 +267,21 @@ $ svn co http://172.16.23.188/svn/system/branches/ELSA_2_0
 $ cd ELSA_2_0/tool/lib/ & make
 $ cp libpltspack_Linux_armv7l.a  /root/source/elsa2/daemon/libs/linux_armv7l/libpltspack.a
 $ cd /root/source/elsa2/daemon & make clean & make
+=======================
+Steps for 
+based on 8.6 kernel
+1. put the built uboot to /opt/backup/folder
+2. update u-boot in starting sector
+3. update .dtb file for eth and wirless
 
+Wifi:
+Must disable ether?? why? 
 
-
+$ connmanctl tether wifi off
+# Get connection service name 
+connmanctl service
+# manaual IP
+connmanctl config <service> --ipv4 manual <ip_addr> <netmask> <gateway> --
 
    
     

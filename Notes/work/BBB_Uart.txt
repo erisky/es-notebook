@@ -28,4 +28,24 @@ $ sudo apt-get install minicom
 
 $ minicom -D /dev/ttyO4 -b 460800
 
-    
+
+
+##Legcy script:
+---------------------------------------------------------------
+#!/bin/bash
+
+# gener the dtbo file
+dtc -O dtb -o enable-uart5-00A0.dtbo -b 0 -@ enable-uart5.dts
+# copy it to specific directory
+cp enable-uart5-00A0.dtbo /lib/firmware/
+
+echo enable-uart5 > /sys/devices/bone_capemgr.*/slots
+
+
+stty -F /dev/ttyO4 raw
+stty -F /dev/ttyO4 460800
+stty -F /dev/ttyO4 -echo
+
+# The following lines are optionnal
+#cat /dev/ttyO4
+-----------------------------------------------------------------

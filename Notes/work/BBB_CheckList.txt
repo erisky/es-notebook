@@ -20,3 +20,10 @@
 | GPIO         |                                                                        |                           |
 | UART         |                                                                        |                           |
 ---------------------------------------------------------------------------------------------------------------------
+
+
+Questions to be clarify:
+1. How u-boot inform kernel the "DTS" to load at boottime?
+
+2. How the wlan loaded in the boottime?
+--> boot script maybe.
