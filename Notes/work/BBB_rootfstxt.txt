@@ -64,7 +64,9 @@ $ cp /usr/bin/qemu-arm-static  rootfs/usr/bin/
 
 ##  List all installed packages
 ##  & Remove installed packages
-$ apt list --installed
+XXX$ apt list --installed
+# dpkg-query -l '*' | less
+# dpkg -l | grep '^.i' | less
 $ apt-get remove 
 
 # 為了讓chroot的rootfs 中可以使用apt-get
@@ -138,6 +140,18 @@ unit: sectors
 
 
 --> Conclussion,0x newer version of imgs using raw mode for booting uboot...
+
+
+[Resize SD card]
+http://elinux.org/Beagleboard:Expanding_File_System_Partition_On_A_microSD
+
+!!! Must boot from EMMC to alter SD card partition table
+fdisk /dev/mmcblk1
+
+
+
+
+
 
 
 [dtb]
@@ -238,9 +252,36 @@ from control Address:
 
     
 
+================
+1. Alter SD card to 7.2 G to get enough quata(fdisk and resize2fs )
+$ fdisk /dev/mmcblk1 (http://elinux.org/Beagleboard:Expanding_File_System_Partition_On_A_microSD)
 
+2. Get the tools
+$ apt-get update
+$ apt-get install subversion
 
+3. Get the source
+$ cd /root/source
+$ svn co http://172.16.23.188/svn/Tools/branches/daemon_release/elsa2
+$ svn co http://172.16.23.188/svn/system/branches/ELSA_2_0
+$ cd ELSA_2_0/tool/lib/ & make
+$ cp libpltspack_Linux_armv7l.a  /root/source/elsa2/daemon/libs/linux_armv7l/libpltspack.a
+$ cd /root/source/elsa2/daemon & make clean & make
+=======================
+Steps for 
+based on 8.6 kernel
+1. put the built uboot to /opt/backup/folder
+2. update u-boot in starting sector
+3. update .dtb file for eth and wirless
 
+Wifi:
+Must disable ether?? why? 
+
+$ connmanctl tether wifi off
+# Get connection service name 
+connmanctl service
+# manaual IP
+connmanctl config <service> --ipv4 manual <ip_addr> <netmask> <gateway> --
 
    
     

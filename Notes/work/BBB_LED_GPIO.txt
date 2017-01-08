@@ -1,0 +1,52 @@
+##Topic: BeagleBone LED, GPIO Control
+##Date:  2016-11
+##Field: BeagleBone, LED, GPIO
+
+#########################
+## exmaple gpio control [out]
+
+## p9:pin12 --> GPIO1_28 ==>  1*32+28 = 60
+$ echo 60 > /sys/class/gpio/export
+$ echo low > /sys/class/gpio/gpio60/direction
+## Output high
+$ echo 1 > /sys/class/gpio/gpio60/value
+## output low
+echo 1 > /sys/class/gpio/gpio60/value
+
+#####################################
+######### [GPIO] Input] #############
+# configure input mode
+$ echo in > /sys/class/gpio/gpio60/directio
+# 
+$ cat /sys/class/gpio/gpio60/value
+
+
+###########################
+#   LED ==> Indicatiing the existing USR LEDs
+###########################
+
+USER0 is the heartbeat indicator from the Linux kernel.
+USER1 turns on when the SD card is being accessed
+USER2 is an activity indicator. It turns on when the kernel is not in the idle loop.
+USER3 turns on when the onboard eMMC is being accessed.
+
+# We could make all LEDs acts as heartbeat
+$ echo heartbeat > /sys/class/leds/beaglebone\:green\:usr0/trigger
+$ echo heartbeat > /sys/class/leds/beaglebone\:green\:usr1/trigger
+$ echo heartbeat > /sys/class/leds/beaglebone\:green\:usr2/trigger
+$ echo heartbeat > /sys/class/leds/beaglebone\:green\:usr3/trigger
+
+of use the timer
+
+$ echo timer > /sys/class/leds/beaglebone\:green\:usr1/trigger
+$ echo 800 > /sys/class/leds/beaglebone\:green\:usr1/delay_off
+$ echo 200 > /sys/class/leds/beaglebone\:green\:usr1/delay_on
+
+
+
+---> USER0 ==> our usage
+$ echo none > /sys/class/leds/beaglebone\:green\:usr0/trigger
+# LED on/off
+
+$ echo 1 > /sys/class/leds/beaglebone\:green\:usr0/brightness
+$ echo 0 > /sys/class/leds/beaglebone\:green\:usr0/brightness

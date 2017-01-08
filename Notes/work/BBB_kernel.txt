@@ -8,14 +8,39 @@ $ git tag -l
 :==> List all the tags ..
 
 $ git checkout 4.4.9-ti-rt-r25 -b local_branch_name
-$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig 
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- bb.org_defconfig 
 
 !!! install gcc-arm-linux-gnueabihf is too old?
 $ sudo apt-get install gcc-arm-linux-gnueabihf
 Edit .config to disable CONFIG_CC_STACKPROTECTOR_STRONG
 
-$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4
+$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j4
+**
+real	46m31.768s
+user	58m37.980s
+sys	13m52.856s
+**
 
+
+
+### Install mkimage from U-boot
+$ sudo apt-get install libssl-dev
+$ make sandbox_defconfig tools-only
+$ sudo install tools/mkimage /usr/local/bin
+
+### Build the uImage
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- uImage dtbs LOADADDR=0x80008000 -j4
+**
+real	2m2.929s
+user	0m31.120s
+sys	0m11.120s
+**
+
+
+### Build the kernel
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- -j4 modules
+
+###
 
 
 ---- Setup git server ----
@@ -23,6 +48,86 @@ $ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4
 https://git-scm.com/book/it/v2/Git-on-the-Server-Setting-Up-the-Server
 
 
+------ Setup tftpd on Ubuntu ----
+http://wiki.beyondlogic.org/index.php?title=Setup_TFTP_Server
+sudo apt-get install tftpd
+### Edit /etc/xinet.d/tftpd as
+       and to start the installation process for some operating systems.
+service tftp
+{
+        socket_type             = dgram
+        protocol                = udp
+        wait                    = yes
+        user                    = root
+        server                  = /usr/sbin/in.tftpd
+        server_args             = -s /home/eric/BBB/u-boot/iAP/kernel/linux
+#       disable                 = yes
+        per_source              = 11
+        cps                     = 100 2
+}
+
+# setup softlinks
+$ ln -s arch/arm/boot/uImage .
+$ ln-s arch/arm/boot/dts/am335x-boneblack.dtb am335x-boneblack.dtb
+
+### Virtual Box:
+Add network interface with bridge mode
+
+### on U-boot #####
+=> setenv ipaddr 172.16.20.222
+=> setenv serverip 172.16.20.35
+=> tftpboot 0x80F80000 am335x-boneblack.dtb
+=> tftpboot 0x80007FC0 uImage
+=> setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p1 ro rootfstype=ext4 rootwait
+=> bootm 0x80007FC0 - 0x80F80000
+
+or 
+setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk1p1 ro rootfstype=ext4 rootwait
+
+
+### Build version:
+Linux beaglebone 4.4.9 #3 SMP PREEMPT RT Tue Dec 20 10:00:02 CST 2016 armv7l GNU/Linux
+Linux beaglebone 4.4.30 #7 SMP PREEMPT RT Tue Dec 27 15:28:04 CST 2016 armv7l GNU/Linux
+### original version
+Linux beaglebone 4.4.9-ti-r25 #1 SMP Thu May 5 23:08:13 UTC 2016 armv7l GNU/Linux
+
+
+try Micro SD setup:
+reference:
+https://eewiki.net/display/linuxonarm/BeagleBone+Black#BeagleBoneBlack-LinuxKernel
+
+
+
+
+
+
+
+------------ [Kernel Module] --------------
+$ mkdir ~/BBB/tmpmnt/rootfs/boot
+$ mkdir ~/BBB/tmpmnt/rootfs/boot/dtbs
+$ BBB_ROOTFS=~/BBB/tmpmnt/rootfs/
+$ mkdir ${BBB_ROOTFS}/boot/dtbs
+$ mkdir ${BBB_ROOTFS}/boot
+$ sudo cp -v ./zImage ${BBB_ROOTFS}/boot/vmlinuz-${kernel_version}
+$ sudo sh -c "echo 'uname_r=${kernel_version}'" >> ${BBB_ROOTFS}/uEnv.txt
+$ ls ${BBB_ROOTFS}
+$ rm ~/BBB/tmpmnt/rootfs/uEnv.txt 
+$ ls
+sudo mkdir -p $BBB_ROOTFS/boot/dtbs/${kernel_version}/
+
+
+
+
+
+
+
+
+
+
+
+====================
+GGG III TTT
+GIT GIT GIT
 
 ---- Setup account for git ----
  ssh-keygen -t rsa -b 4096 -C "eric.chen@m2comm-semi.com" 
@@ -35,3 +140,26 @@ git init
 git add .
 git commit . -m "initial git"
 git push origin master 
+
+---------- GitLab ------------
+follow the installation from web
+Edit /etc/gitlab/gitlab.rb  change 
+==>>>  external_url 'http://172.16.23.188:8060'
+
+Access from http://172.16.23.188:8060
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
