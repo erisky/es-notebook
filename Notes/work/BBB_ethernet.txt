@@ -1,0 +1,4 @@
+sudo apt-get install ethtool
+ethtool eth0
+ethtool -s eth0 autoneg off
+ethtool -s eth0 speed 100
