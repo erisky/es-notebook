@@ -79,6 +79,8 @@ Add network interface with bridge mode
 => tftpboot 0x80F80000 am335x-boneblack.dtb
 => tftpboot 0x80007FC0 uImage
 => setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p1 ro rootfstype=ext4 rootwait
+or
+=> setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p1 ro rootfstype=ext4 rootwait
 => bootm 0x80007FC0 - 0x80F80000
 
 or 
@@ -117,14 +119,6 @@ sudo mkdir -p $BBB_ROOTFS/boot/dtbs/${kernel_version}/
 
 
 
-
-
-
-
-
-
-
-
 ====================
 GGG III TTT
 GIT GIT GIT
@@ -150,7 +144,11 @@ Access from http://172.16.23.188:8060
 
 
 
+DTB overlays:
 
+https://github.com/RobertCNelson/dtb-rebuilder
+
+https://github.com/beagleboard/bb.org-overlays
 
 
 

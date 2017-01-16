@@ -62,3 +62,12 @@ Note 1: Version is different
      2: MAC is pre-written, ie WI-FI MAC
      3. Serial is different but should not be a problem.
 
+
+     
+#cpsw_0_mac=$(hexdump -v -e '1/1 "%02X" ":"' ${mac_address}| sed -e s/:$// )  
+
+hexdump -s 0x3c -n 6 -e '1/1 "%02X" ":"'  /sys/bus/i2c/devices/0-0050/eeprom | sed -e s/:$//
+hexdump -v -e '1/1 "%02X" ":"'   
+   
+   
+   

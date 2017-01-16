@@ -153,8 +153,19 @@ solution:
 
 Linux treat board as beagle bone black but update new dtb !!
 
+http://elinux.org/Device_Tree_Usage
+
+# "decompile dtb"
+dtc -I dtb -O dts -o a.dts am335x-boneblack.dtb
 
 
+am33xx.dtsi
+am335x-bone-common.dtsi
+
+
+
+Highlights
+1. 
 
 
 

@@ -283,6 +283,16 @@ connmanctl service
 # manaual IP
 connmanctl config <service> --ipv4 manual <ip_addr> <netmask> <gateway> --
 
+
+cd /INSTALL/
+tar zxvf ti_utils_pre.tar.gz
+cd ti-utils/libnl-2.0/
+make install
+ldconfig
+cd -
+mkdir /opt/iAP
+cp ./ti-utils/18xx-ti-utils/calibrator /opt/iAP/
+
    
     
     
