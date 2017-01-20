@@ -99,3 +99,7 @@ $ make install
 /opt/iAP/calibrator get nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin | awk '{print $5}'
 /opt/iAP/calibrator set nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin $MAC_IN_EEPROM
 /opt/iAP/calibrator set nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin 08:00:28:09:00:01
+
+# Ethernet mii definition
+include/uapi/linux/mii.h
+

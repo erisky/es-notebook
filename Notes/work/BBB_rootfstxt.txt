@@ -71,6 +71,7 @@ $ apt-get remove
 
 # 為了讓chroot的rootfs 中可以使用apt-get
 $ sudo cp /etc/resolv.conf  BBB_original/etc/
+$ cp /usr/bin/qemu-arm-static  rootfs/usr/bin/
 # chroot到rootfs中必須至少執行一次update
 $ apt-get update
 
@@ -293,6 +294,6 @@ cd -
 mkdir /opt/iAP
 cp ./ti-utils/18xx-ti-utils/calibrator /opt/iAP/
 
-   
+/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh    
     
     
