@@ -1,0 +1,49 @@
+
+
+|---------------|                   
+|    Cloud      |    
+|---------------|    
+|    react      |    
+|   Node.Js     |    
+| Azure IOT SDK |    
+|---------------|    
+                     
+                     
+ iAP
+Web - Python/Django/Javascript/postgreSQL   - Spec
+Daemon - Linux program/Sqlite3              - Spec/Desgin/Develop
+         Multi-thread/networking
+DPR LiB - "Data Packet Request" Interfacing library - Spec/Design/Develop
+PP - Customized interface/C++               - Maintain
+IMGC - Data compression/Image rendering  - C++ - Maintain
+Utilities - Demo/Debug/Field Application - QT - Maintian
+
+Uboot         - BSP                         - Port/Maintain
+Linux Kernel  - Borad specific DTB          - Port/Maintain
+RootFS        - Initial script/system integration - Bash/Linux utilities - Port/maintain
+
+
+Production Tool - VB - Maintain/Bug fixes
+
+Cortext M
+GW - Tunneling DPR, mgnt, resource balancing,  -FreeRtos, C, STM, IAR,  mainain 
+AP/RT/ED:
+     Network/DPR layer behavior                 - Spec/Desgin
+     MAC layer behavior                         - Spec/Desiog/Development
+     BSP & RF Driver                            - Development
+------------------------
+Protocol desgin             
+
+
+Maintain - ensure build ok and minor bug fixes.
+Design - Architecture/Protocol desgin
+Develop -
+Spec - Give function/product requirements
+Discuss
+Port - from open source
+
+
+                     
+ 
+                     
+                     

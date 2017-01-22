@@ -145,9 +145,30 @@ $ sudo dd if=u-boot.img of=${DISK} count=2 seek=1 bs=384k
 # copy to backup
 root@beaglebone:~# mkdir /mnt/sdcard
 root@beaglebone:~# mount -t ext4 /dev/mmcblk1p1 /mnt/sdcard/
+root@beaglebone:~# cp MLO /mnt/sdcard/opt/backup/uboot/
+root@beaglebone:~# cp u-boot.img /mnt/sdcard/opt/backup/uboot/
 
 
 finally...
+
+
+
+*** [How Uboot decides which dtb to use] ***
+> Comes from findfdt !!!
+in /include/configs/am335x_evm.h
+"findfdt="\
+        "echo board_name=[$board_name] ...; " \
+    ...
+    setenv fdtfile am335x-boneblack.dtb; setenv fdtbase am335x-boneblack
+    --> so the kernel find the am335x-boneblack.dtb from /boot
+
+check the parameter by printenv in u-boot console
+    
+--------------------------------------------------------------------------------
+
+
+
+
 
 
 ??Q: 
@@ -175,5 +196,17 @@ debug: [bootz 0x82000000 0x88080000:530ece 0x88000000] ...
    Using Device Tree in place at 88000000, end 88012274
 
 
+[I2C][EEPROM]  --- read and write eeprom
+# Read from I2c EEPROM
+ i2c read 50 0.2 60 80900000
+md 80900000 20
+
+=> mm.l 8090003c
+8090003c: 88776655 ? 00280008       | -> TI Valid mac
+80900040: 00004433 ? 00001122       |
 
 
+=> i2c write 8090003c 50 3c.2 4
+=> i2c write 80900040 50 40.2 4
+=> i2c read 50 0.2 60 80900080
+=> md 80900080 20

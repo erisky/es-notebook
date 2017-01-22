@@ -1,10 +1,15 @@
 
 systemd
 D-Bus
+avahi
+libc
 
 [[[systemd]]]
 
-1. systemctl commands
+---- systemd settings files ----
+$ ls /lib/systemd/system/
+
+---- systemctl commands -----
 
 $ systemctl status
 $ systemctl
@@ -12,18 +17,46 @@ $ systemctl list-units
 $ systemctl --failed
 $ systemctl list-unit-files
 
+--- Check status of a service
+example:
+$ systemctl status cloud9.socket
+$ systemctl status apache2.service
+
+
+Loaded: loaded (/lib/systemd/system/cloud9.socket; enabled)
+   Active: inactive (dead) since Wed 2017-01-18 06:03:51 UTC; 38s ago
+
+
 --- Start/Stop an unit(.service/.mount/.device/.socket)
 $ systemctl start unit
 $ systemctl stop unit
 $ systemctl restart unit
 $ systemctl reload unit
 
-disable:
+example:
+     systemctl stop cloud9.socket
+     systemctl stop apache2.service  //*80port & 3000 port不是apache是node帶起來的
+     systemctl mask apache2.service //強制mask, 避免因為dependency關係又被帶起
+     
+----- 開機時  disable   
+ex:
 $ systemctl disable lightdm.service
 """/etc/systemd/system/display-manager.service."""
 
 $ sudo systemctl disable bonescript-autorun.servic
 Removed symlink /etc/systemd/system/multi-user.target.wants/bonescript-autorun.service
+
+----- 開機模式 Startup mode ----
+$ systemctl get-default  
+graphical.target
+# 改成文字模式
+systemctl set-default multi-user.target
+
+# run time 修改
+systemctl isolate multi-user.target
+systemctl isolate graphical.target
+
+
 
 ---- Powr Management ----
 $ systemctl reboot
@@ -36,6 +69,51 @@ $ systemctl hybrid-sleep
 systemctl set-default multi-user.target
 
 
+
+------ Unit dependency 相依性 -----
+systemctl list-dependencies
+'a dump solution for ssh display'
+systemctl list-dependencies |sed -e s/\<E2\>\<94\>\<80\>/''/g
+
+systemctl list-dependencies --reverse
+
+systemctl list-dependencies --reverse  multi-user.target | sed -e s/\<E2\>\<94\>\<80\>/''/g
+multi-user.target
+♂ L graphical.target
+ ==>  graphical.target uses multi-user.target
+
+ systemctl list-dependencies graphical.target
+ 
+ 
+ 
+--- Create mytest service ---
+1. add mytestd.service in /lib/systemd/system
+2. Edit file content:
+#########################################################
+[Unit]
+Description=iAP Test Systemd
+ConditionPathExists=|/root
+
+[Service]
+Type=simple
+WorkingDirectory=/root
+#EnvironmentFile=/root
+ExecStart=/test-systemd/testd -test
+SyslogIdentifier=mytestd
+
+
+[Install]
+WantedBy=multi-user.target
+#########################################################
+3.  systemctl list-unit-files | grep mytestd
+ 
+## enable it at bootup
+$ systemctl enable mytestd.service
+/etc/systemd/system/multi-user.target.wants/mytestd.service to /lib/systemd/system/mytestd.service.
+
+
+
+
 ---- Beagle Service ----
 systemctl disable cloud9.service
 systemctl disable gateone.service
@@ -46,4 +124,18 @@ systemctl disable avahi-daemon.service
 systemctl disable gdm.service
 systemctl disable mpd.service
  
+ systemctl disable pulseaudio.service
 
+
+ 
+ 
+ 
+ 
+# Study the C lib API ..
+>> https://www.gnu.org/software/libc/manual/html_mono/libc.html#Syslog
+ 
+ 
+ 
+ 
+ 
+ 

@@ -71,6 +71,7 @@ $ apt-get remove
 
 # 為了讓chroot的rootfs 中可以使用apt-get
 $ sudo cp /etc/resolv.conf  BBB_original/etc/
+$ cp /usr/bin/qemu-arm-static  rootfs/usr/bin/
 # chroot到rootfs中必須至少執行一次update
 $ apt-get update
 
@@ -283,6 +284,16 @@ connmanctl service
 # manaual IP
 connmanctl config <service> --ipv4 manual <ip_addr> <netmask> <gateway> --
 
-   
+
+cd /INSTALL/
+tar zxvf ti_utils_pre.tar.gz
+cd ti-utils/libnl-2.0/
+make install
+ldconfig
+cd -
+mkdir /opt/iAP
+cp ./ti-utils/18xx-ti-utils/calibrator /opt/iAP/
+
+/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh    
     
     

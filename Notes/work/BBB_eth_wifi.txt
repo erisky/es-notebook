@@ -1,0 +1,105 @@
+sudo apt-get install ethtool
+ethtool eth0
+ethtool -s eth0 autoneg off
+ethtool -s eth0 speed 100
+
+
+# run the following command from Beagle bone,0x then the imgcCreator built for x86_64 could be run    
+sudo apt-get install qemu-user-static debootstrap binfmt-support    
+    
+[Dump EEPROM]:/sys/bus/i2c/devices/0-0050/eeprom 
+ hexdump -C /sys/bus/i2c/devices/0-0050/eeprom  
+   
+[eth0 MAC Address] 
+hexdump -C /proc/device-tree/ocp/ethernet@4a100000/slave@4a100200/mac-address
+00000000  6c ec eb 92 1c 62                                 |l....b|
+
+[usb0 MAC Address]
+hexdump -C /proc/device-tree/ocp/ethernet@4a100000/slave@4a100300/mac-address
+00000000  6c ec eb 92 1c 64                                 |l....d|
+   
+    
+[Ethernet MAC Address]
+check u-boot: board/ti/am335x/board.c  :board_late_init
+from control Address:  
+        0x44E10630 ~  0x44E1063c   (AM35XXX TRM: 9.3.25, page:uname_r=4.4.30-ti-r64
+cape_enable=bone_capemgr.enable_partno=bone_capemgr.enable_partno=BB-UART1,BB-UART2
+
+
+eth0      Link encap:Ethernet  HWaddr 04:a3:16:b5:28:9a
+
+wlan0     Link encap:Ethernet  HWaddr 2c:f7:f1:06:02:ac
+
+
+
+--- WITH running generic-startup.sh
+
+eth0      Link encap:Ethernet  HWaddr 80:30:dc:80:b7:e0
+          UP BROADCAST MULTICAST DYNAMIC  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+          Interrupt:174
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:640 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:640 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1
+          RX bytes:49920 (48.7 KiB)  TX bytes:49920 (48.7 KiB)
+
+usb0      Link encap:Ethernet  HWaddr 80:30:dc:80:b7:e2
+          inet addr:192.168.7.2  Bcast:192.168.7.3  Mask:255.255.255.252
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+wlan0     Link encap:Ethernet  HWaddr de:ad:be:ef:00:00
+          UP BROADCAST MULTICAST DYNAMIC  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          
+          
+          
+Ti WIFI MAC:
+http://processors.wiki.ti.com/index.php/WL18xx_Writing_MAC_address
+
+# on target (BBB)
+
+git://git.ti.com/wilink8-wlan/18xx-ti-utils.git
+
+wget http://www.infradead.org/~tgr/libnl/files/libnl-2.0.tar.gz
+# Compile and install libnl
+$ tar zxvf libnl-2.0.tar.gz
+$ cd libnl-2.0/
+$ ls
+$ ./configure
+$ make
+$ make install
+  
+  520  cd 18xx-ti-utils/
+  521  vi Makefile
+  522  make
+  523  ./calibrator
+  524  ld.so
+  525  ld
+  526  ldconfig
+  527  ./calibrator
+  528  history
+
+# ./calibrator set nvs_mac <nvs file> [<mac addr xx:xx:xx:xx:xx:xx>]
+  
+./calibrator set nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin 
+/opt/iAP/calibrator get nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin | awk '{print $5}'
+/opt/iAP/calibrator set nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin $MAC_IN_EEPROM
+/opt/iAP/calibrator set nvs_mac /lib/firmware/ti-connectivity/wl1271-nvs.bin 08:00:28:09:00:01
+
+# Ethernet mii definition
+include/uapi/linux/mii.h
+
