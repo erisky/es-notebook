@@ -1,0 +1,13 @@
+Linux command Quick Reference
+
+[grep]
+Match with none "#" started lines 
+ > grep ^[a-zA-Z] /boot/uEnv.txt
+[sed]
+[awk]
+[dd]
+> overwrite the sectors in block device
+sudo dd if=${PREBUILD_DIR}/uboot/MLO of=${LOOPDEV} count=1 seek=1 bs=128k
+
+
+我是誰
