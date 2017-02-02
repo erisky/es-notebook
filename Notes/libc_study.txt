@@ -1,0 +1,14 @@
+fseek
+  int fseek (FILE *stream, long int offset, int whence) 
+    SEEK_SET, SEEK_CUR, or SEEK_END for whence
+fseeko
+  fseeko (FILE *stream, off_t offset, int whence) 
+    the 'off_t' version of fseek
+	
+	
+9 Searching and Sorting
+10 Pattern Matching
+17 Low-Level Terminal Interface
+18 Syslog
+22 Resource Usage And Limitation
+27 Inter-Process Communication	

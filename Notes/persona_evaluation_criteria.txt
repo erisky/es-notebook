@@ -1,24 +1,24 @@
-##Topic: Employee evaluation criteria
+﻿##Topic: Employee evaluation criteria
 ##Date:  2016-06
 ##Field: Management, Manager, KPI
 
-1. Boss interrupt�θ߰ݮɪ�����B�󳡪�������
-    >�@�Y�ɡA�M�~�A�����n�I�C
-2. ��q�w��Milestone�ɵ{���S���ϩR�P
-    >  ���n���ɭԥ[�Z���ӬO�L�i�p�D
-3.�@�����޳N��O���ɻP�i�{
-    >  Code review/design review/�޳N��󲣥X
-�@�@>  RTOS/Plts 2.0 desgin/Cloud/license mangement etc
-4. Mantis Bug or QA report Bug���B�z
-�@�@>  �O�_�n���B�z�A�Y�ɦ^���A���ķ��q�C
-5. �P���x/�󳡪����������q�Ӣ�
-�@�@>  �󳡪��䴩�@-->�@�קK�󳡪����o��
-�@�@>  �z�ʦ��ĻP�M��
-    >  �קK�t������    
-6. �Ӿ�d�����۵o��
-�@�@>  �`�|���{�ɤu�@�A�O�_��D�ʩӾ�
-�@�@>  �O���O��D�ʴ��X�Q�k�ӧ�i�n��B�y�{�B�u�㵥
-7. ��󳡪��P���������X�@���Y
-�@�@> �@�ۦP�u�@�ʽ誺�ण�[���ɸg��P�޳N
-�@�@>   �藍�P���O�_�@�N�h�F�ѥH�Q�t�ξ�X�P����
-*  �P���������@(���u���T�H)
+1. Boss interrupt或詢問時的應對、跨部門的應對
+    >　即時，專業，切中要點。
+2. 對訂定的Milestone時程有沒有使命感
+    >  必要的時候加班應該是無可厚非
+3.　本身技術能力提升與展現
+    >  Code review/design review/技術文件產出
+　　>  RTOS/Plts 2.0 desgin/Cloud/license mangement etc
+4. Mantis Bug or QA report Bug的處理
+　　>  是否積極處理，即時回應，有效溝通。
+5. 與長官/跨部門之間的溝通ＥＱ
+　　>  跨部門支援　-->　避免跨部門抱怨發生
+　　>  理性有效與和諧
+    >  避免負面情緒    
+6. 承擔責任的自發性
+　　>  總會有臨時工作，是否能主動承擔
+　　>  是不是能主動提出想法來改進軟體、流程、工具等
+7. 對於部門同仁彼此的合作關係
+　　> 　相同工作性質的能不吝分享經驗與技術
+　　>   對不同領域是否願意多了解以利系統整合與偵錯
+*  同仁間互評　(最優異三人)
