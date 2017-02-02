@@ -13,6 +13,12 @@ $ echo 1 > /sys/class/gpio/gpio60/value
 ## output low
 echo 1 > /sys/class/gpio/gpio60/value
 
+# phy reset
+echo 68 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio68/direction
+echo 0 > /sys/class/gpio/gpio68/value
+echo 1 > /sys/class/gpio/gpio68/value
+
 #####################################
 ######### [GPIO] Input] #############
 # configure input mode

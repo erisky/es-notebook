@@ -95,12 +95,10 @@ Description=iAP Test Systemd
 ConditionPathExists=|/root
 
 [Service]
-Type=simple
-WorkingDirectory=/root
-#EnvironmentFile=/root
 ExecStart=/test-systemd/testd -test
 SyslogIdentifier=mytestd
-
+Restart=always
+RestartSec=2
 
 [Install]
 WantedBy=multi-user.target
