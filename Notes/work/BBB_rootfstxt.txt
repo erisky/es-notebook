@@ -70,8 +70,8 @@ XXX$ apt list --installed
 $ apt-get remove 
 
 # 為了讓chroot的rootfs 中可以使用apt-get
-$ sudo cp /etc/resolv.conf  BBB_original/etc/
-$ cp /usr/bin/qemu-arm-static  rootfs/usr/bin/
+$ sudo cp /etc/resolv.conf  iap_rootfs/etc/
+$ cp /usr/bin/qemu-arm-static  iap_rootfs/usr/bin/
 # chroot到rootfs中必須至少執行一次update
 $ apt-get update
 

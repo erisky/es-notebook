@@ -67,8 +67,15 @@ reset(start.s) ------>
         |-> board_init_r (common/board_r.c) 
             |-> (init_sequence_r)-|->  
                 |-> board_init (am335x\board.c)
-                |->
-                |-> board_late_init
+                    |-> " Reset Source: blah..blah ...."
+                    |-> $$$ PHY Reset goes here 
+                |-> initr_serial
+                    |-> serial_initialize
+                |-> initr_mmc ==>  "MMC:   " 
+                |-> initr_env
+                    |-> set_default_env ===> "Using default environment"
+                |-> 
+                |-> board_late_init  ==> "Board: BeagleBone Black"
                 |->
                 |->
  

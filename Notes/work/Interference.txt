@@ -1,0 +1,19 @@
+Meeting Minutes
+
+Interference couter-measure brainstorm
+Summary
+1. 持續性的干擾資料收集
+   > 在AP/RT上利用 特定比例的時間(ex. 1/10 duty cycle)做channel sniffering 並送回後台
+     作為自動換channel 或手動換channel之依據。
+2. ED必須有適當的fallback機制 -> 自主性的switch channel
+   > 必須考慮可能switch channel 可能因為干擾導致無法讓ED
+     能順地switch成功，ED必須有fallback機制可以自主尋找已switch之channel.
+   > 必須考慮因素: User可能關閉AP和Re-scan 虛耗用較多Budget。
+   > 此機制trigger點不宜過度sensitive.
+3. Budget 機制修改
+   > ED 應該只有安裝初期會遇到干擾問題而需要做switch channel機制。
+   > ED 應透過Battery level機制與Budget做關聯。
+   > 目前機制使用加法應改用減法機制
+   > 應該有特殊budget空間讓ED 可以讓ED做 2.動作時不收限制。
+
+   
