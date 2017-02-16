@@ -1,0 +1,7 @@
+
+To Study:
+
+
+Gitflow、Redmine、Jenkins
+
+Seleium/Appium/Robot/STAF/JMeter/Grinder
