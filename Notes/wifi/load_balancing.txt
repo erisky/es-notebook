@@ -1,1 +1,73 @@
 #init
+
+Band Steering
+
+Load Balancing		
+	Single AP -- Band Steering	
+	Multiple AP - Steering & Adaptive Path Selection	
+	L2 Roaming	
+	Roaming 	802.11(k)(v)(r),  (old fast roaming - PMKsa cache, DKC)
+----------------------------------------------------------------------------
+
+Band Steering (Single)
+ - 與association流程有相關，AP透過STA送來的probe request知道STA 是否具有5G
+   的能力而決定讓STA使用5GHZ而不使用2.4G
+ - AP除了看STA 能力外，也會看STA 是否具備夠佳的訊號強度(RSSI)來決定是否只回
+   probe reesponse (2.4 only)
+   
+> Pre-association 
+  在scan時就決定
+  前提是STA必須使用active scan
+  - (Q) 可根據overload condition/RSSI 來做 2.4 -> % or 5 -> 2.4的移動
+(Q) page. 662
+--- (Q)　有支援進階的steering (802.11v based?)  
+  - 802.2.11v BTM transition reason: (p93)
+    (1) 過度掉包 或是 太差的連線狀態
+	(2) delay時間過長 ( for realtime apps?)
+	(3) QoS cap無法滿足(TSPEC)
+    (4) ?? First association to ESS (the association initiated by an Association 
+		Request message instead of a Reassociation Request message)
+	(5)	Load balancing -->　STA會知道？？
+	
+		
+ --> 2011 (802.11v) 之後應該正名為　BTM capable devices
+    (Q) WIFI SON includes BTM and as (Q) mentioned, this might be the most 
+	    important function of WIFI SON changes. (802.11v)
+	
+Type of Steering:
+	pre-association
+	idle post-association
+	　決定方法?
+	    > 1. 比較RSSI from probe request in 
+		> 2. serving channel rssi (！？）
+	  移動方法：
+		> 1. add blacklist to VAP then dissocaite the STA
+		> 2. 802.11v BTM:
+		     AP inform STA to move the a new BSS with a prioritized list.
+		因為怕STA行為不一致，(Q)AP對於assoicate有帶的STA仍然會１，２都做
+	active post-association
+		> generally it's better for STA to does its own decision
+		
+	Interference Avoidance Steering
+	 --> 由ＡＰ偵測類似hidden node的問題
+	 'through mahine learning 分析　RSSI和downlink rate(MCS)　決定是否有干擾存在
+	2 means to clear a 'polluted' BSS:
+	--- BTM Compliance ---
+	> configurable parameters in 802.11v
+	--- Steering Saftey and hysteresis
+	> fall back mechanism are given, ex backoff, giveup
+	
+
+linux tree:	
+/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-wifi-10.4-g8ba3c6d-dirty-unified-profile	
+
+	
+~/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/qca-hostap-10.4-supplicant-macsec/qca-hostap-g8ba3c6d-dirty/src	
+	
+ two kinds of scanning techniques: passive and active
+probe request
+
+
+
+
+

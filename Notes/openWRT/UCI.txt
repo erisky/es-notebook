@@ -1,0 +1,15 @@
+
+UCI: Unified Configuration Interface
+
+> Centralized control of configurations.
+> Location of configuration file:
+	- etc/config/
+> LuCI ?? web interface of UCI editting?
+
+
+> edit and restart service
+	/etc/config/network 
+	ipaddr 192.168.1.1 -> 192.168.2.1
+	/etc/init.d/network restart
+	==> takes up to 40~60 seconds to adapt configurations
+	
