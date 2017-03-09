@@ -69,5 +69,25 @@ probe request
 
 
 
+code trace:
+~/work/spf30/qualcomm_sdk/qsdk/qca/src
+~/work/spf30/qualcomm_sdk/qsdk
 
+stadb.c:
+stadbHandleAssoc
+
+mdListenTableRegister (qca-mcs-lbd/core/module.c)
+ mdListenTableRegister(mdModuleID_WlanIF, wlanif_event_disassoc, stadbHandleAssoc);
+
+ event source tracking...
+ wlanif/wlanifBSteerEvents.c:
+wlanifBSteerEventsMsgRx (wlanifBSteerEvents.c) 
+wlanifBSteerEventsBufRdCB (wlanifBSteerEvents.c)
+wlanifBSteerEventsRegister --> bind netlink socket event here
+bufrdCreate  -> evloopReadReadyCreate / evloopReadRegister
+
+evloopRun (./libhyficommon/evloop.c)
+evloopOnce (lbMain.c) 為什麼不直接call evloopRun 不一樣嘛!?
+in lbdRun *******
+****************************
 

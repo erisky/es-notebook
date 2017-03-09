@@ -1,0 +1,90 @@
+11n: 2002~2009 spec
+
+100 mbps MAC layer
+
+2007 draft 2
+when 11n is developed, already has 2.4Gz & 5Ghz
+   -> frequency agnostic
+   802.11ng / 802.11na/ dual band 802.11na/
+   
+ 1. MIMO
+ 2. double the channel width -> double the data rate
+    -> coexistence of 20MHZ and 40MHZ become concern
+    -> 2.4 G has bluetooth and other -> 40 MHZ is disable by default in 2.4 G
+ 3. beanforming
+    concentrating enery in one direction could help on SNR & transmission speed
+	
+LLC(MAC) enhancemnt
+ -> MAC had only 50 % efficiency
+ -> IFS become overhead   	SIFS 10 us = 14 bytes 802.11b
+									   > 1k bytes 802.11n
+Frame Aggregation
+    could improve the efficiency from 50% to 75 %
+	
+802.11n radio card have higher power consumption....
+	-> tbc -> extended original power saving modes?
+
+802.11n has 300 different data rates .... oops..0
+802.11n 的產品都是部分部分support標準．．．鮮少一次到位?
+
+[Part1. PHY] - go through it quickly to have rough idea..
+	MIMO MIMO MIMO
+highway比喻
+	1. 加速
+	2. 增加lanes  ===> MIMO
+
+MIMO: all antennas are active simultanenously
+	Ideal case: each antenna transmit its own data streeam independently...
+	
+802.11 a/b/g 使用多天線是基於antenna diversity -對抗multipath interference
+MIMO是使用所有可用的path. + Transmit beanforming
+	
+<Spatial Stream>
+MIMO 利用multipath 並且讓不同天線的data stream不會相互干擾
+"""
+RF designers typically spend quite some time thinking about antenna placement in order to minimize the correlation so that overall system
+throughput can be improved.
+"""
+Coded OFDM
+802.11n support upto 4 spatial streams
+spectral efficiency
+802.11g 	2.7			54/20 = 2.7
+802.11n     6.5			20*6.5 = 130 ...? not 150?
+
+
+SISO: 1xFFT & 1 AMP in transmit chain
+802.11n needs mutiple radio chains
+802.11n架構會造成power-hungry : FFTx4 & AMP x4
+
+3x3 device-> 3 radio chains including 3 spatial radio changs and 3 spatial streams
+3x3:2 -> 3 spatial radio with 2 stream --> speed max x2
+
+STBC: Space time Block Coding -> 2 radio chains transmit a single spatial stream...
+      offset path loss .. 用transmission speed交換資料正確性
+MRC: Maximal Radio Combining:combine the information recv at each ant by  taking the strongest component of recv sig from each ant
+	 MRC啟用的AP 對上 2x2的STA 可藉由額外的天線增加正確性進而導致傳輸距離增加或相同距離下傳輸速率提高
+	 
+802.11n 
+	> add 4  data subcarrier compared to 11a/g, 52 --> 56    [TBC]
+		pilot subcarrier operation changes... [TBC]
+	
+	> support wider 40 MHZ channel
+	  Figure 3-2 不懂 求解
+	  
+Modulation and Code Set:
+	BPSK, QPSK, 16-QAM, 64-QAM
+Coding:
+	Error Correcting code
+	LDPC is higher performance than convolutional code
+		code rate same as convolutional code is optioanl.  ---> 猜測是高速時enc/dec 速度較快
+		
+GI: Short GI: 400ns  (3.2 + 0.8) --> (3.2 + 0.4) us, 10% improvement
+
+
+[PLCP Framing]
+- Non-HT mode   -- backward compatible
+- HT mixed mode (HT-MM) -- PLCP header compatible with 802.11a/g, body not decoded by 802.11a/g devices.
+- HT Greenfield (HT-GF) -- shorter PLCP header and used in only 802.11n devices so called 'pure mode'
+
+
+
