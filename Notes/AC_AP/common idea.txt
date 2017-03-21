@@ -1,0 +1,22 @@
+RADIUS Server
+Remote RADIUS server interaction via RADIUS proxy
+Roaming support through RADIUS proxy
+Online Credit Card payments
+Mobile Phone account charging
+SMS-OTP (One-Time-Passwords)
+Vouchers and Scratch Card
+E-Vouchers
+802.1x ( MD-5, EAP-TLS, EAP-SIM, etc.)
+Automatic MAC/Cookie-address login
+Software based clients for automatic end-user access from various vendors and service providers (e.g. WISPr compatible clients, iPass, Boingo and Vodafone)
+PMS (Property Management System) interaction for hotel room billing
+
+roaming between operator for revenue.
+different wifi zone with same login mechanism and allow roaming, and different 
+
+captive portal
+mobile phone account binding when registration.
+account traceability.
+ip/mac map logging, per time etc...
+
+captive portals, analytics, user engagement and monetization to your local sites.

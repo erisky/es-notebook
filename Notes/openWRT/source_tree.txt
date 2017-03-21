@@ -1,0 +1,185 @@
+├── dl
+├── build.sh 					==> # one key compile shell script
+├── gen_fw_version_file.sh4		==>\# generate FW version information.
+├── mkproduct					==> #
+├── qualcomm_code/
+	├── patch
+	└── qca-networking-2016-spf-3-0_qca_oem-955ec7a11971513bb1d1a62143a4cdeedb4508fb.tar.gz
+├── qualcomm_sdk
+│   
+└── skysoft/							# skysoft code package.
+	├── base
+	│   ├── create_new_one.sh
+	│   ├── find_broken_symbol_link_and_empty_directory.sh
+	│   ├── hardware					# code for hardware
+	│	│	├── ap5400w-d50
+	│	│	├── common
+	│	│	├── common_IPQ4019
+	│	│	├── common_IPQ8064
+	│	│	├── create_new_hardware.sh  # script for creating links to common code for specified hardware.
+	│	│	├── evb-ipq4019
+	│	│	├── evb-ipq8064
+	│	│	├── rt4230w-d156-rev1		# for rt4230w d156 rev1 (Single WAN port revision)
+	│	│	├── rt4230w-d156-rev2       # for rt4230w d156 rev2 (Dual WAN port revision)
+	│	│	├── rt4230w-d187-rev1       # for rt4230w d187 rev1 (ES4: Single WAN port revision)
+	│	│	├── rt4230w-d187-rev2       # for rt4230w d187 rev2 (ES5: Dual WAN port revision)
+	│	│	├── rt4230w-d187-rev5
+	│	│	└── rtl0030w-d50
+	│	│
+	│   ├── IMPORTANT_READ_ME
+	│   └── software
+	│		├── askey					# code for ASKEY
+	│		├── charter					# code for CHARTER
+	│		├── common					# common code for specified software.
+	│		├── common_IPQ4019
+	│		├── common_IPQ8064
+	│		├── common_pu9_IPQ4019
+	│		├── common_webpage
+	│		├── create_new_software.sh 	# script for creating links to common code for specified software.
+	│		├── fujitsu
+	│		├── original				# Original QSDK
+	│		├── pu9
+	│		└── pu9-fuji
+	│
+	├── build
+	│   ├── ipq4019
+	│   └── ipq8064
+	└── product								# products configuration(for building).
+		├── askey_sw_for_rt4230w-d156
+		├── askey_sw_for_rtl0060vw
+		├── charter_sw_for_rt4230w-d187
+		├── original_sw_for_evb-ipq4019
+		├── original_sw_for_evb-ipq8064
+		├── original_sw_for_rt4230w-d156
+		├── original_sw_for_rt4230w-d187
+		├── original_sw_for_rtl0060vw
+		├── pu9-fuji_sw_for_ap5400w-d50
+		├── pu9-fuji_sw_for_rt4230w-d187
+		├── pu9-fuji_sw_for_rtl0030w-d50
+		└── pu9_sw_for_rt4230w-d187
+
+2.2. Get QSDK from codeaurora.org into 'rt4230w-d187_qsdk_YYYYMMDD/qualcomm_sdk'.
+   Notes:
+   1. Do not change directory structure.
+   2. The release is base on SPF3.0 QSDK CS package.
+   3. qualcomm_sdk directory should get from internet:
+    # cd rt4230w-d187_qsdk_YYYYMMDD/qualcomm_sdk
+    # repo init -u git://codeaurora.org/quic/qsdk/releases/manifest/qstak -b release -m caf_AU_LINUX_QSDK_RELEASE_COLLARD_CC_CS_TARGET_ALL.3.0.198.093.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
+    # repo sync
+
+	
+2.3. Environment:
+  1. Compile Server: Ubuntu 16.04 LTS 64bits
+  2. Install essential tools:
+  	$ sudo apt-get install -y gcc g++ binutils patch bzip2 flex make gettext pkg-config unzip zlib1g-dev libc6-dev subversion libncurses5-dev gawk sharutils curl libxml-parser-perl ocaml-nox ocaml-nox ocaml ocaml-findlib libpcre3-dev binutils-gold python-yaml libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5-dev lib32z1-dev u-boot-tools device-tree-compiler libnl-3-dev libnl-3-dev:i386 zlib1g-dev g++-multilib libz-dev bison autoconf sphinxsearch libtool
+	$ sudo apt-get install libssl-dev
+
+xxxxxxxx Run mkproduct instead of the following steps xxxxxxxx
+  3. Create /home/public/spf_3.0_qsdk_dl for download packages.
+    $ sudo mkdir -p /home/public/spf_3.0_qsdk_dl
+  4. Change default shell to bash.
+    $ sudo ln -fs /bin/bash /bin/sh
+2.4. Prepare and Compile:
+   # cd rt4230w-d187_qsdk_YYYYMMDD
+   # ./build.sh charter rt4230w-d187 dwpls
+   
+   Check rt4230w-d187_qsdk_YYYYMMDD/output for the images:
+    - CHARTER_RT4230W-D187_DWP_Vxxx_firmware_sysupgrade.bin             # Web GUI upgrade binary file.
+    - CHARTER_RT4230W-D187_DWP_Vxxx_uboot_firmware_sysupgrade.bin       # Web GUI upgrade binary file(inlcude u-boot).
+    - CHARTER_RT4230W-D187_DWP_Vxxx_nand_single.img                     # tftp upgrade image.	
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+http://192.168.1.1:8086/index.html 
+Default Username / password:
+root
+MmvGB^RY3#
+
+
+-------------------------------------------------------------------------------------------------	
+3. Firmware Upgrade.
+3.1 Use tftp to upgrade on u-boot console:
+3.1.1 Setup tftp server(tftp32 is a good choice for Windows PC)
+3.1.2 Connect Askey HW to You PC with ethernet cable.
+3.1.3 Connect Askey HW to you PC with ttl-rs232 cable. and open terminal with serial 115200 8N1.
+3.1.4 Power on Askey HW, press any key when counter down.
+3.1.5 run following command to setup IP address for upgrade:
+ # setenv ipaddr 192.168.1.1
+ # setenv serverip 192.168.1.10 # The IP address of tftp server
+ # setenv imgaddr 0x42000000
+
+3.1.6 download and upgrade:
+ # tftpboot $imgaddr new.img # Your FW file name under tftp server root directory.
+ # setenv machid 177b # "177b" for RT4230W-D187 DWP and "177a" for RT4230W-D187 SWP 
+ # source $imgaddr:script
+ # reset
+
+3.2 Use WebGUI to upgrade:
+3.2.1 Access to Puma's Web GUI: Advanced -> Admin -> Firmware;
+3.2.2 Browse and Select sysupgrade.bin then apply upgrade.
+
+4. Password for console & telnet.
+  Login is enabled in this release. please use root/MmvGB^RY3# to login.
+
+5. Feature List
+  please check feature list for detail.
+
+6. Known Issues
+  please check Bug list for detail.
+------------------------------------------------------------------------------------------------------
+
+> Access Target's console 
+
+# enter target console in ubuntu
+sudo minicom -D  /dev/ttyUSB0
+
+------------------------------------------------------------------------------------------------
+make menuconfig in 
+/home/eric/work/spf30/qualcomm_sdk/qsdk
+
+worth noting packages:
+ak9-dbtool --- askey database tool
+dnsmasq		-- DNS and DHCP server
+firewall...... OpenWrt C Firewall
+
+HYD_WIFI_LOAD_BALANCING
+ qca/feeds/hyfi/qca-hyfi-networking/qca-hyd/Config.in
+
+ QCAHYD_MAKE_OPTS+=WHCWLBDIR=$(STAGING_DIR)/usr/include/whc-wlb
+QCAHYD_MAKE_OPTS+=HYD_MODULE_WLB=y
+
+"whc-wlb" ??
+/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi
+
+PACKAGE_qca-whc-lbd??
+
+Whole Home Coverage features  
+	-->     -*- qca-whc-lbd.................... Whole Home Coverage Load Balancing daemon 
+
+---- 找的到 Source不知道怎麼build ....	
+/home/eric/work/spf30/qualcomm_sdk/qsdk/qca/src/qca-whc-lbd ???
+
+
+
+
+QCA
+
+Enable The advanced functions
+
+Version:
+/etc/system_version.info
+
+
+make[5]: Leaving directory '/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/perl/perl-5.20.2'
+make[4]: Leaving directory '/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/perl/perl-5.20.2'
+Makefile:158: recipe for target '/ .built' failed
+make[3]: *** [/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/perl/perl-5.20.2/.built] Error 2
+make[3]: Leaving directory '/home/eric/work/spf30/qualcomm_sdk/qsdk/qca/feeds/packages/lang/perl'
+package/Makefile:191: recipe for target 'package/feeds/packages/perl/compile' failed
+make[2]: *** [package/feeds/packages/perl/compile] Error 2
+make[2]: Leaving directory '/home/eric/work/spf30/qualcomm_sdk/qsdk'
+package/Makefile:188: recipe for target '/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/stamp/.package_compile' failed
+make[1]: *** [/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/stamp/.package_compile] Error 2
+make[1]: Leaving directory '/home/eric/work/spf30/qualcomm_sdk/qsdk'
+/home/eric/work/spf30/qualcomm_sdk/qsdk/include/toplevel.mk:184: recipe for target 'world' failed
+

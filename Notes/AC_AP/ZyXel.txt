@@ -1,0 +1,32 @@
+1. Managed AP mode or /standalone AP
+2. ZMesh
+3. 
+
+AP Planning, deployment, monitoring, maintainance
+
+Mgnt/auth/guess access all in one.
+
+DHCP option
+DNS
+IETF CAPWAP
+
+Monitoring/maintainace of health
+
+AD, LDAP, Radius Server
+captive portal server
+dhcp server
+
+Managed AP number  MAX--> 24 !!!
+
+Dynamic channel selection
+
+
+QoS
+ DiffServ
+ WMM
+ NAT/SNAT
+ 
+ Wireless QoS
+ WMM
+ 
+Zones

@@ -1,0 +1,43 @@
+assoication flow with open
+802.1x authentication flow
+preshardkey 4-way handshaking
+What is PMK
+roaming with PMKSa
+roaming 
+
+
+how to test...
+
+
+whatis Fast Transition 
+802.11x
+--------------------------------------
+Terms:
+[PMKSA] - pairwise master key security association
+>  The  context  resulting  from  a  successful  IEEE 802.1X authentication exchange 
+   between the peer and Authentication Server (AS) or from a preshared key (PSK).
+   => 802.1x/SAE/PSK/PMK Cached
+[FTAA] - FT authentication algorithm 
+[SME] -	Stattion management Entity
+[PMK-R0] - pairwise master key R0 0
+> The key at the first level of the fast basic service set (BSS) transition
+[PMK-R1] - pairwise master key R1
+>  A key at the second level of the fast basic service set (BSS) transition (FT) key hierarchy.
+
+[S0KH-ID] - pairwise master key (PMK) S0 key holder identifier
+>  An identifier that names the holder of the PMK-R0 in the Supplicant
+[SAE]
+[AS] - Authentication Server
+[PMKID] - identifies the security association
+[MDE] - Mobility Domain Element
+
+key words:
+dot11FastBSSTransitionActivated 
+
+角色：
+STA 					<------------>    	AP
+Supplicant									Authenticator
+FTO0/FT Orgininator					
+							    |			R0KH/R1KH
+								|
+								|

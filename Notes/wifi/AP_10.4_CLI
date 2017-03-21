@@ -1,0 +1,83 @@
+
+channel:
+iwconfig ath0 channel
+essid:
+
+iwconfig ath0 essid AP555_TEST
+ 
+iwconfig ath0 txpower 29 -- > max 29 dBm
+
+iwpriv ioctl to phy
+$ 
+
+## 
+$ iwpriv ath0 ampdu 1
+$ iwpriv ath0 get_ampdu 
+ --> Packet number per AMPDU
+$ iwpriv ath0 maxampdu 
+ --> Packet max length per AMPDU
+2^(13+Max AMPDU Length) - 1   ==> 8K ~ 64K
+
+
+# Add to ACL control list (primary)
+root@rt4230w:~# iwpriv ath0 addmac 00:03:7f:00:00:01
+root@rt4230w:~# iwpriv ath0 addmac 00:03:7f:00:00:02
+root@rt4230w:~# iwpriv ath0 getmac
+ath0      getmac:00:03:7F:00:00:01
+                 00:03:7F:00:00:02
+
+# Allow assoc only mac in list
+root@rt4230w:~# iwpriv ath0 maccmd 1
+# Disallow MAC in list
+root@rt4230w:~# iwpriv ath0 maccmd 2
+acl_notify :ｈｏｗ　ｔｏ　ｎｏｔｉｆｙ？
+
+1.3.4 Beacon Configuration Parameters
+root@rt4230w:~# iwpriv ath0 get_bintval
+ath0      get_bintval:100 
+
+#force beacon performance channel switch to channel 3 in 5 beacon interval.
+$ iwpriv ath0 doth_chanswitch 3 5
+
+# hide ssid or not
+iwpriv ath0 get_hide_ssid
+
+# operation mode
+root@rt4230w:~# iwpriv ath0 get_mode
+ath0      get_mode:11ACVHT80
+
+# automatic channel enable
+root@rt4230w:~# iwpriv ath0 get_cwmenable
+ath0      get_cwmenable:1
+
+ani_enable?
+
+DTIM: for multicast only ?
+#iwpriv ath0 dtim_period 5
+#iwpriv ath0 get_dtim_period
+wifi0 get_dtim_period:1
+
+short gi:
+#iwpriv ath0 shortgi 1
+#iwpriv ath0 get_shortgi
+ath0 get_shortgi:1
+
+[DCS disabled]
+root@rt4230w:~# iwpriv wifi0 get_dcs_enable
+wifi0     get_dcs_enable:0  
+
+[green_AP off]
+root@rt4230w:~# iwpriv ath0 get_ant_ps_on
+ath0      get_ant_ps_on:0
+-------------------------------------------------
+> [hotspot 2.0] ??
+> root@rt4230w:~# iwpriv ath0 get_qbssload
+> ath0      get_qbssload:0
+> root@rt4230w:~# iwpriv ath0 get_proxyarp
+> ath0      get_proxyarp:0
+> root@rt4230w:~# iwpriv ath0 get_l2tif
+> ath0      get_l2tif:0  
+> root@rt4230w:~# iwpriv ath0 g_dgaf_disable
+> ath0      g_dgaf_disable:0
+
+
