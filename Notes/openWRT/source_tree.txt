@@ -1,3 +1,12 @@
+
+http://192.168.1.1:8086/index.html 
+Default Username / password:
+root
+MmvGB^RY3#
+
+
+
+
 ├── dl
 ├── build.sh 					==> # one key compile shell script
 ├── gen_fw_version_file.sh4		==>\# generate FW version information.
@@ -89,11 +98,6 @@ xxxxxxxx Run mkproduct instead of the following steps xxxxxxxx
     - CHARTER_RT4230W-D187_DWP_Vxxx_nand_single.img                     # tftp upgrade image.	
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-
-http://192.168.1.1:8086/index.html 
-Default Username / password:
-root
-MmvGB^RY3#
 
 
 -------------------------------------------------------------------------------------------------	

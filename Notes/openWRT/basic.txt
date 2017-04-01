@@ -1,0 +1,59 @@
+
+Some specific stuff in openWrt 
+
+refer to: https://wiki.openwrt.org/doc/techref/ubox
+
+1. UCI: 
+2. libubox:
+    a general purpose library which provides things like an 
+        event loop, 
+        binary blob message formatting and handling, 
+        the Linux linked list implementation, 
+        and some JSON helpers. 
+        The functions in libubox are used to write the other software in LuCI2
+3. ubus:
+     an RPC daemon similar to D-Bus but with a much friendlier C API
+
+[Kind of event driven or subscriber/notifier architecture for internal modules]
+
+
+
+LuCI : Lua based Web control interface.
+LuCI2: New Web Management access system data through "ubus"
+
+root@rt4230w:~# ubus -v list network.interface.lan
+'network.interface.lan' @f5db6d76
+        "up":{}
+        "down":{}
+        "status":{}
+        "prepare":{}
+        "dump":{}
+        "add_device":{"name":"String","link-ext":"Boolean"}
+        "remove_device":{"name":"String","link-ext":"Boolean"}
+        "notify_proto":{}
+        "remove":{}
+        "set_data":{}
+
+root@rt4230w:~# ubus call network.interface.wan status
+{
+        "up": false,
+        "pending": false,
+        "available": true,
+        "autostart": true,
+        "dynamic": false,
+        "proto": "dhcp",
+        "device": "eth3",
+        "data": {
+
+        }
+}
+
+ubus listen exmaple:
+root@rt4230w:~# ubus listen
+!! plug ethernet @ wan
+{ "network.interface": {"action":"ifup","interface":"wan6"} }
+{ "network.interface": {"action":"ifup","interface":"commwan"} }
+[ 8759.309373] eth3: 1000 Mbps Full Duplex
+
+
+

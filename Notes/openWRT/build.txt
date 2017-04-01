@@ -14,21 +14,9 @@ https://wiki.openwrt.org/doc/devel/packages
 
 
 cd qualcomm_sdk/qsdk/
- ls
- make package/dbtool/clean
- make package/busybox/clean
- make package/busybox/compile V=s
- ls
- vi .config
- ls
- vi package/tipv6/Makefile 
- ls
- vi package/network/utils/iperf/Makefile 
- ls dl/
- vi package/network/utils/iperf/Makefile 
- cd package/network/utils/iperf
- ls
- ls patches/
- ls
- vi Makefile 
- history
+make package/dbtool/clean
+make package/busybox/clean
+make package/busybox/compile V=s
+
+
+

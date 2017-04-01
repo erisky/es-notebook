@@ -1,0 +1,159 @@
+[rebuild from spf40]
+
+repo init -u git://codeaurora.org/quic/qsdk/releases/manifest/qstak -b release -m caf_AU_LINUX_QSDK_RELEASE_DANDELION_TARGET_ALL.0.1.453.297.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
+
+repo sync
+
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-qca-wifi-10.4-0.1.453.297/* qsdk/
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-qca-wlan-10.4-0.1.453.297/* qsdk/
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-ieee1905-security-0.1.453.297/* qsdk/
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/QSDK-Base/qca-lib-0.1.453.297/* qsdk
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/QSDK-Base/qca-mcs-apps-0.1.453.297/* qsdk
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/QSDK-Base/qsdk-qca-nss-0.1.453.297/* qsdk
+tar xjvf NHSS.QSDK.4.0/apss_proc/out/proprietary/BLUETOPIA/qca-bluetopia-0.1.453.297.tar.bz2 -C qsdk
+cp -rf WLAN.BL.3.4/cnss_proc/bin/hw.1/* qsdk/dl
+cp -rf WLAN.BL.3.4/cnss_proc/bin/hw.2/* qsdk/dl
+cp -rf WLAN.BL.3.4/cnss_proc/src/components/* qsdk/dl
+cp -rf CNSS.PS.2.4/* qsdk/dl/
+
+-
+premium:
+cp NHSS.QSDK.4.0/apss_proc/out/proprietary/RBIN-NSS-RETAIL/* qsdk/dl
+
+
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Hyfi/hyfi-ipq-0.1.453.297-template/* qsdk
+
+skipped streamBoost WAPid,WiGig,
+
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-whc-0.1.453.297/* qsdk
+cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-whcpy-0.1.453.297/* qsdk
+
+echo "CONFIG_TOOLCHAINOPTS=y" >> .config
+echo '# CONFIG_GCC_USE_VERSION_4_8_LINARO is not set' >> .config
+echo "CONFIG_GCC_USE_VERSION_5=y" >> .config
+echo 'CONFIG_GCC_VERSION="5.2.0"' >> .config
+echo "CONFIG_GCC_VERSION_5=y" >> .config
+
+
+sed -i -e '/wigig-firmware/d' .config
+sed -i -e '/kmod-wil6210/d' .config
+sed -i -e "/CONFIG_PACKAGE_qca-wifi-fw-hw5-10.4-asic/d" .config
+
+======= Patch the rt4230w hardware ======
+cp -apfL ~/work/spf30/skysoft/base/hardware/rt4230w-d187-rev2/* ~/work/spf40/qca-networking-2016-spf-4-0_qca_oem.git/
+
+
+
+revert file: 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+./qsdk/target/linux/ipq806x/image/Makefile   --> Makefile revert...
+./qsdk/scripts/mkits.sh
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+dts 
+
+
+
+
+============== Build the image =============================
+
+sudo apt-get install uboot-mkimage  -->  u-boot-tools?
+
+cp meta-scripts/ipq806x_standard/* IPQ8064.ILQ.4.0/common/build/ipq/
+cp meta-scripts/build_its.sh IPQ8064.ILQ.4.0/common/build/
+mkdir -p NHSS.QSDK.4.0/apss_proc/out/meta-scripts
+cp qsdk/qca/src/u-boot/tools/pack.py NHSS.QSDK.4.0/apss_proc/out/meta-scripts/
+sed -i 's#</linux_root_path>#/</linux_root_path>#' IPQ8064.ILQ.4.0/contents.xml
+sed -i 's#</windows_root_path>#\\</windows_root_path>#' IPQ8064.ILQ.4.0/contents.xml
+
+cp qsdk/bin/ipq806x/openwrt* IPQ8064.ILQ.4.0/common/build/ipq
+cd IPQ8064.ILQ.4.0/common/build
+
+sed '/debug/d' -i update_common_info.py
+sed '/gcc/d' -i update_common_info.py
+sed '/rmtree/d' -i update_common_info.py
+sed '/ubinize/d' -i update_common_info.py
+sed 's/ipq_p/ipq/g' -i update_common_info.py
+python update_common_info.py
+
+
+macid=163c
+[AP161]
+
+the rt4230w need to change DTB/DTBI for hardware definitions
+
+setenv ipaddr 192.168.1.1 
+setenv serverip 192.168.1.199
+setenv imgaddr 0x42000000
+tftpboot $imgaddr nand-ipq806x-single.img
+=============================================================================
+ipq
+
+AP.DK07.1-C1
+
+
+>>>> U-boot Commands <<<<
+
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-spf40.img && imgaddr=0x84000000 && source $imgaddr:script
+
+
+
+
+[lbd]:
+
+
+[repacd]:
+
+initial script:
+~/work/spf30/qualcomm_sdk/qsdk/qca/feeds/whc/qca-whc-repacd/files/repacd.init
+Runtime:
+~/work/spf30/qualcomm_sdk/qsdk/qca/src/qca-whc-repacd/src/repacd-run.sh
+
+
+[hyd]
+init:
+~/work/spf30/qualcomm_sdk/qsdk/qca/feeds/hyfi/qca-hyfi-networking/qca-hyd/files/hyd.init
+
+>>> whc-wlb <<  ???
+
+
+
+[lbd]:
+~/work/spf30/qualcomm_sdk/qsdk/qca/src/qca-whc-lbd:
+>>
+./libs/diaglog/diaglog.c
+./libs/bandmon/bandmonCmn.c
+./libs/bandmon/bandmonBSA.c
+./libs/wlanif/wlanifPrivate.c
+./libs/wlanif/wlanif.c
+./libs/wlanif/wlanifBSteerControlBSA.c
+./libs/wlanif/wlanifUtils.c
+./libs/wlanif/wlanifBSteerEvents.c
+./libs/wlanif/wlanifLinkEventsBSA.c
+./libs/wlanif/wlanifBSteerControlCmn.c
+./libs/wlanif/wlanifLinkEventsCmn.c
+./libs/stadb/stadbEntry.c
+./libs/stadb/stadb.c
+./libs/stadb/stadbHashTable.c
+./libs/estimator/estimatorRCPIToPhyRate.c
+./libs/estimator/estimatorCmn.c
+./libs/estimator/estimatorInterferenceDetectionCurve.c
+./libs/estimator/estimatorPollutionAccumulator.c
+./libs/estimator/estimatorSNRToPhyRateTable.c
+./libs/estimator/estimatorBSA.c
+./libs/estimator/estimatorCircularBuffer.c
+./libs/stamon/stamonBSA.c
+./libs/stamon/stamonCmn.c
+./libs/steerexec/steerexecImplCmn.c
+./libs/steerexec/steerexecImplBSA.c
+./libs/steerexec/steerexec.c
+./libs/steeralg/steeralgBSA.c
+./libs/steeralg/steeralgCmn.c
+./core/profile.c
+./core/config.c
+./core/lb_common.c
+./core/module.c
+./src/lbdMain.c
+
+
+

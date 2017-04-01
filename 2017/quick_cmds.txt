@@ -1,0 +1,11 @@
+# mount samba
+sudo mount -t cifs -o username=d900,password=d900123 //10.194.20.21/d900-samba /mnt/nas/
+
+sudo apt-get install cifs-utils
+  231  sudo mount -t cifs -o user=eric9_chen //809996-n1/eric_d /mnt/disk_D/
+
+
+Use the GUI version !!
+this folder is read/writable .... why ..
+/run/user/1000/gvfs/smb-share:server=809996-n1,share=eric_d/share$ 
+

@@ -69,6 +69,31 @@ probe request
 
 
 
+
+
+
+*** BUILD LOG ***
+* ~/work/spf30/qualcomm_sdk/qsdk$ make package/qca-whc-lbd/compile V=s *
+****
+
+rm-openwrt-linux-uclibcgnueabi-gcc -L/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/install/lib -shared -o liblbcmnlibs.so -Wl,-whole-archive -lwlanif -lsteerexec -lstadb -lbandmon -lsteeralg -lstamon -lestimator -ldiaglog -llbcmn -Wl,-no-whole-archive
+cp -a -f liblbcmnlibs.so /home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/install/lib
+make[4]: Leaving directory '/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/shared'
+make[4]: Entering directory '/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/src'
+arm-openwrt-linux-uclibcgnueabi-gcc    -L/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/install/lib -L/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/lib -I . -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/hyficommon -I
+/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/install/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include -I
+/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/include/sys -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/os/linux/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/lmac/ath_dev -I /include
+-I /home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/src -MMD -g -ffunction-sections -fdata-sections -DLBD_DBG_MENU -DLBD_SUPPORT_VHT160 -D_BYTE_ORDER=_BIG_ENDIAN -O2 -Wall -Werror -Os -pipe -march=armv7-a -mtune=cortex-a7 -fno-caller-saves -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -mfloat-abi=soft -c lbdMain.c
+arm-openwrt-linux-uclibcgnueabi-gcc  -L/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/install/lib -L/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/lib -I . -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/hyficommon -I
+/home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/install/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include -I
+/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/include/sys -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/os/linux/include -I /home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/include/lmac/ath_dev -I /include
+-I /home/eric/work/spf30/qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/qca-whc-lbd-ge819c1e/src -MMD -g -ffunction-sections -fdata-sections -DLBD_DBG_MENU -DLBD_SUPPORT_VHT160 -D_BYTE_ORDER=_BIG_ENDIAN -O2 -Wall -Werror -Os -pipe -march=armv7-a -mtune=cortex-a7 -fno-caller-saves -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -mfloat-abi=soft -Wl,--gc-sections
+-L/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/usr/lib -L/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/lib -L/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_uClibc-1.0.14_eabi/usr/lib -L/home/eric/work/spf30/qualcomm_sdk/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_uClibc-1.0.14_eabi/lib -o lbd lbdMain.o -Xlinker --start-group -lhyficommon -lpthread -llbcmnlibs -llbdcore -lwlanif_bsa -lsteerexec_bsa -lbandmon_bsa -lstamon_bsa -lsteeralg_bsa -lestimator_bsa -Xlinker --end-group
+
+
+
+
+
 code trace:
 ~/work/spf30/qualcomm_sdk/qsdk/qca/src
 ~/work/spf30/qualcomm_sdk/qsdk
