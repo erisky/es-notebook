@@ -1,0 +1,449 @@
+Programming guide 10.4 80_T8053_1
+
+ch1/ch2. driver source --> later
+ch3: WLAN AP Driver Operations
+ 3.4.1.5 VAP create: SIOC80211IFCREATE.
+ 			mapped to ath
+
+ 			SIOC80211IFDESTROY -- > delete VAP
+
+ 3.4.2.1 Trasmit flow
+
+ 3.4.2.4 Interrupt Path
+
+ ath_handle_intr()
+
+ ch3 --> read later if source study is reqires
+
+RPS - Receive Packet Steering
+RFS - Receive Floww Stteering
+RSS - Receive Side scaling
+
+ch4. Build options:
+    --- A huge table
+
+ 4.2 !!! HighlLight !!!
+
+  wifiN --> LMAC --> Radio
+  athN --> UMAC --> protocol
+
+ 4.2.2
+
+  iwconfig
+
+  iwpriv
+
+
+
+
+
+WIFI SON enable  (CAP)
+
+uci set network.lan.ipaddr=192.168.1.3
+uci set network.Guest=interface
+uci set network.Guest.type='bridge'
+uci set network.Guest.proto='static'
+uci set network.Guest.netmask='255.255.255.0'
+uci set network.Guest.ipaddr='192.168.2.1'
+uci commit network
+
+uci set dhcp.Guest=dhcp
+uci set dhcp.Guest.interface='Guest'
+uci set dhcp.Guest.start='100'
+uci set dhcp.Guest.limit='150'
+uci set dhcp.Guest.leasetime='12h'
+uci set dhcp.Guest.dhcpv6='server'
+uci set dhcp.Guest.ra='server'
+uci commit dhcp
+
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+uci set repacd.repacd.Enable=1
+uci set mcsd.config.Enable=0
+uci set repacd.repacd.TrafficSeparationEnabled=1
+uci set repacd.repacd.NetworkGuest=Guest
+uci commit
+/etc/init.d/repacd restart
+
+
+----------------- RE -----------------
+uci set network.lan.ipaddr=192.168.1.8;
+uci set network.lan.gateway=192.168.1.3;
+uci delete network.wan;
+uci set network.Guest=interface
+uci set network.Guest.type='bridge'
+uci set network.Guest.proto='static'
+uci set network.Guest.netmask='255.255.255.0'
+uci set network.Guest.ipaddr='192.168.2.2'
+uci commit network
+uci set dhcp.Guest=dhcp
+uci set dhcp.Guest.interface='Guest'
+uci set dhcp.Guest.start='100'
+uci set dhcp.Guest.limit='150'
+uci set dhcp.Guest.leasetime='12h'
+uci set dhcp.Guest.dhcpv6='server'
+uci set dhcp.Guest.ra='server'
+uci commit dhcp
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+uci set repacd.repacd.TrafficSeparationEnabled=1
+uci set repacd.repacd.NetworkGuest=Guest
+uci set repacd.repacd.Enable=1
+uci commit repacd
+uci set wsplcd.config.DeepClone='0'
+uci commit wsplcd
+/etc/init.d/repacd start
+
+
+env -i ACTION="pressed" BUTTON="wps" /sbin/hotplug-call button
+
+
+
+
+
+(CAP) before:
+
+ 1199 root      2012 S    hostapd -g /var/run/hostapd/global -B -P /var/run/hostapd-global.pid
+ 1202 root      3828 S    wpa_supplicant -g /var/run/wpa_supplicantglobal -B -P /var/run/wpa_supplicant-global.pid
+ 1306 root      1004 S    /usr/sbin/dropbear -F -P /var/run/dropbear.1.pid -p 22 -K 300
+ 1387 root      1296 S    /usr/sbin/telnetd -F -l /bin/login.sh
+ 1446 root      1560 S    /usr/sbin/uhttpd -f -h /www -r OpenWrt -x /cgi-bin -u /ubus -t 60 -T 30 -k 20 -A 1 -n 3 -N 100 -R -p 0.0.
+ 1665 root      2748 S    /usr/sbin/smbd -F
+ 1666 root      2824 S    /usr/sbin/nmbd -F
+ 1679 root       732 S    xl2tpd -D -l -p /var/run/xl2tpd.pid
+ 1995 root       672 S    /sbin/rngd -r /dev/urandom -W 4000
+ 2018 root      1300 S    /usr/sbin/ntpd -n -S /usr/sbin/ntpd-hotplug -p 0.openwrt.pool.ntp.org -p 1.openwrt.pool.ntp.org -p 2.open
+10442 root      1376 S    /sbin/netifd
+10676 root         0 SW   [kworker/2:2]
+10677 root         0 SW   [kworker/2:3]
+10773 root         0 SW   [kworker/3:2]
+10901 root         0 SW<  [alloc_task_wque]
+11203 root         0 SW<  [alloc_task_wque]
+11284 root         0 SW   [kworker/1:2]
+11287 network   1840 S    /usr/sbin/zebra -d -f /var/etc/quagga/zebra.conf
+11295 root      1460 S    /usr/sbin/watchquagga -d -z -T 60 -r /usr/sbin/quagga.init watchrestart %s zebra
+11692 root      1048 S    /usr/sbin/mcsd -d -C /tmp/mcs.conf
+11779 nobody     880 S    /usr/sbin/dnsmasq -C /var/etc/dnsmasq.conf -k -x /var/run/dnsmasq/dnsmasq.pid
+
+
+after:
+
+
+ 1071 root      1412 S    /sbin/rpcd
+ 1199 root      2068 S    hostapd -g /var/run/hostapd/global -B -P /var/run/hostapd-global.pid
+ 1202 root      3828 S    wpa_supplicant -g /var/run/wpa_supplicantglobal -B -P /var/run/wpa_supplicant-global.pid
+ 1306 root      1004 S    /usr/sbin/dropbear -F -P /var/run/dropbear.1.pid -p 22 -K 300
+ 1387 root      1296 S    /usr/sbin/telnetd -F -l /bin/login.sh
+ 1446 root      1560 S    /usr/sbin/uhttpd -f -h /www -r OpenWrt -x /cgi-bin -u /ubus -t 60 -T 30 -k 20 -A 1 -n 3 -N 100 -R -p 0.0.
+ 1665 root      2748 S    /usr/sbin/smbd -F
+ 1666 root      2852 S    /usr/sbin/nmbd -F
+ 1679 root       732 S    xl2tpd -D -l -p /var/run/xl2tpd.pid
+ 1995 root       672 S    /sbin/rngd -r /dev/urandom -W 4000
+ 2018 root      1300 S    /usr/sbin/ntpd -n -S /usr/sbin/ntpd-hotplug -p 0.openwrt.pool.ntp.org -p 1.openwrt.pool.ntp.org -p 2.open
+10442 root      1436 S    /sbin/netifd
+10676 root         0 SW   [kworker/2:2]
+10677 root         0 SW   [kworker/2:3]
+10773 root         0 SW   [kworker/3:2]
+11284 root         0 SW   [kworker/1:2]
+11287 network   1848 S    /usr/sbin/zebra -d -f /var/etc/quagga/zebra.conf
+11295 root      1460 S    /usr/sbin/watchquagga -d -z -T 60 -r /usr/sbin/quagga.init watchrestart %s zebra
+12266 root         0 SW<  [alloc_task_wque]
+12405 root      1328 S    hostapd_cli -i ath0 -P /var/run/hostapd_cli-ath0.pid -a /lib/wifi/wps-hostapd-update-uci -p /var/run/host
+12864 root      1328 S    hostapd_cli -i ath1 -P /var/run/hostapd_cli-ath1.pid -a /lib/wifi/wps-hostapd-update-uci -p /var/run/host
+13020 nobody     880 S    /usr/sbin/dnsmasq -C /var/etc/dnsmasq.conf -k -x /var/run/dnsmasq/dnsmasq.pid
+13158 root         0 SW<  [alloc_task_wque]
+13163 root         0 SW   [kworker/1:3]
+13528 root      1328 S    hostapd_cli -i ath21 -P /var/run/hostapd_cli-ath21.pid -a /lib/wifi/wps-hostapd-update-uci -p /var/run/ho
+13976 root      1620 S    /usr/sbin/wsplcd -c /tmp/wsplcd-lan.conf
+14601 root         0 SW   [kworker/0:2]
+15408 root      2928 S    /usr/sbin/hyd -d -C /tmp/hyd-lan.conf -P 7777
+15412 root      1300 R    ps w
+
+
+
+---- Lis STA on the APs --- 
+wlanconfig ath01 list sta (CAP)
+
+---- RE connects to CAP with 11N
+root@OpenWrt:/# wlanconfig ath01 list sta
+ADDR               AID CHAN TXRATE RXRATE RSSI MINRSSI MAXRSSI IDLE  TXSEQ  RXSEQ  CAPS        ACAPS     ERP    STATE MAXRATE(DOT11) HTCAPS ASSOCTIME    IEs   MODE                   PSMODE
+be:ee:b4:e9:89:06    1    1 144M    173M   55      51      60    0      0   65535  EPSs         0          f              0            AWPM 14:51:42     RSN WME IEEE80211_MODE_11NG_HT20   0 
+
+---- STA connects to CAP with 11ac..
+root@OpenWrt:/# wlanconfig ath23 list sta
+ADDR               AID CHAN TXRATE RXRATE RSSI MINRSSI MAXRSSI IDLE  TXSEQ  RXSEQ  CAPS        ACAPS     ERP    STATE MAXRATE(DOT11) HTCAPS ASSOCTIME    IEs   MODE                   PSMODE
+f0:03:8c:07:64:57    1  136  72M     72M   44      40      55    0      0   65535    Es         0          b              0             APM 00:13:38     WME IEEE80211_MODE_11NA_HT20   0 
+
+root@OpenWrt:/# iwconfig ath23
+ath23     IEEE 802.11ac  ESSID:"whc-E99616-guest"  
+          Mode:Master  Frequency:5.68 GHz  Access Point: C2:EE:B4:E9:96:1C   
+          Bit Rate:1.7333 Gb/s   Tx-Power=24 dBm   
+          RTS thr:off   Fragment thr:off
+          Encryption key:off
+          Power Management:off
+          Link Quality=94/94  Signal level=-97 dBm  Noise level=-95 dBm
+          Rx invalid nwid:2641  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+
+
+
+
+--- All repacd uci ---
+
+repacd.repacd=config
+repacd.repacd.ManagedNetwork='lan'
+repacd.repacd.DeviceType='RE'
+repacd.repacd.GatewayConnectedMode='AP'
+repacd.repacd.ConfigREMode='auto'
+repacd.repacd.DefaultREMode='qwrap'
+repacd.repacd.BlockDFSChannels='0'
+repacd.repacd.EnableSteering='1'
+repacd.repacd.EnableSON='1'
+repacd.repacd.ManageMCSD='1'
+repacd.repacd.LinkCheckDelay='2'
+repacd.repacd.NetworkGuestBackhaulInterface='2.4G'
+repacd.repacd.EnableEthernetMonitoring='0'
+repacd.repacd.Enable='1'
+repacd.repacd.TrafficSeparationEnabled='1'
+repacd.repacd.NetworkGuest='Guest'
+repacd.repacd.NetworkBackhaul='backhaul'
+repacd.repacd.Role='CAP'
+repacd.repacd.TrafficSeparationActive='1'
+repacd.WiFiLink=WiFiLink
+repacd.WiFiLink.MinAssocCheckAutoMode='5'
+repacd.WiFiLink.MinAssocCheckPostWPS='5'
+repacd.WiFiLink.MinAssocCheckPostBSSIDConfig='5'
+repacd.WiFiLink.WPSTimeout='180'
+repacd.WiFiLink.AssociationTimeout='300'
+repacd.WiFiLink.RSSINumMeasurements='5'
+repacd.WiFiLink.RSSIThresholdFar='-75'
+repacd.WiFiLink.RSSIThresholdNear='-60'
+repacd.WiFiLink.RSSIThresholdMin='-75'
+repacd.WiFiLink.RSSIThresholdPrefer2GBackhaul='-100'
+repacd.WiFiLink.2GBackhaulSwitchDownTime='10'
+repacd.WiFiLink.MaxMeasuringStateAttempts='3'
+repacd.WiFiLink.DaisyChain='0'
+repacd.WiFiLink.RateNumMeasurements='30'
+repacd.WiFiLink.RateThresholdMin5GInPercent='40'
+repacd.WiFiLink.RateThresholdMax5GInPercent='70'
+repacd.WiFiLink.RateThresholdPrefer2GBackhaulInPercent='5'
+repacd.WiFiLink.5GBackhaulBadlinkTimeout='60'
+repacd.WiFiLink.BSSIDAssociationTimeout='90'
+repacd.WiFiLink.RateScalingFactor='70'
+repacd.WiFiLink.5GBackhaulEvalTimeShort='1800'
+repacd.WiFiLink.5GBackhaulEvalTimeLong='7200'
+repacd.WiFiLink.2GBackhaulEvalTime='1800'
+repacd.WiFiLink.2GIndependentChannelSelectionEnable='0'
+repacd.WiFiLink.2GIndependentChannelSelectionRssiLevel='-70'
+repacd.WiFiLink.2GIndependentChannelSelectionTotalRssiCounter='10'
+repacd.WiFiLink.2GIndependentChannelSelectionRssiDebug='0'
+repacd.WiFiLink.2GIndependentChannelSelectionStartRssiCheckTime='60'
+repacd.WiFiLink.ManageVAPInd='0'
+repacd.Reset=LEDState
+repacd.Reset.Name_1='led_0'
+repacd.Reset.Trigger_1='none'
+repacd.Reset.Brightness_1='0'
+repacd.Reset.Name_2='led_1'
+repacd.Reset.Trigger_2='none'
+repacd.Reset.Brightness_2='0'
+repacd.NotAssociated=LEDState
+repacd.NotAssociated.Name_1='led_0'
+repacd.NotAssociated.Trigger_1='timer'
+repacd.NotAssociated.Brightness_1='1'
+repacd.NotAssociated.DelayOn_1='500'
+repacd.NotAssociated.DelayOff_1='500'
+repacd.NotAssociated.Name_2='led_1'
+repacd.NotAssociated.Trigger_2='none'
+repacd.NotAssociated.Brightness_2='0'
+repacd.AutoConfigInProgress=LEDState
+repacd.AutoConfigInProgress.Name_1='led_0'
+repacd.AutoConfigInProgress.Trigger_1='timer'
+repacd.AutoConfigInProgress.Brightness_1='1'
+repacd.AutoConfigInProgress.DelayOn_1='250'
+repacd.AutoConfigInProgress.DelayOff_1='250'
+repacd.AutoConfigInProgress.Name_2='led_1'
+repacd.AutoConfigInProgress.Trigger_2='none'
+repacd.AutoConfigInProgress.Brightness_2='0'
+repacd.Measuring=LEDState
+repacd.Measuring.Name_1='led_0'
+repacd.Measuring.Trigger_1='timer'
+repacd.Measuring.Brightness_1='1'
+repacd.Measuring.DelayOn_1='250'
+repacd.Measuring.DelayOff_1='250'
+repacd.Measuring.Name_2='led_1'
+repacd.Measuring.Trigger_2='timer'
+repacd.Measuring.Brightness_2='1'
+repacd.Measuring.DelayOn_2='250'
+repacd.Measuring.DelayOff_2='250'
+repacd.WPSTimeout=LEDState
+repacd.WPSTimeout.Name_1='led_0'
+repacd.WPSTimeout.Trigger_1='timer'
+repacd.WPSTimeout.Brightness_1='1'
+repacd.WPSTimeout.DelayOn_1='2000'
+repacd.WPSTimeout.DelayOff_1='1000'
+repacd.WPSTimeout.Name_2='led_1'
+repacd.WPSTimeout.Trigger_2='none'
+repacd.WPSTimeout.Brightness_2='0'
+repacd.AssocTimeout=LEDState
+
+--- RE ---
+
+root@OpenWrt:/# uci show repacd 
+repacd.repacd=config
+repacd.repacd.ManagedNetwork='lan'
+repacd.repacd.DeviceType='RE'
+repacd.repacd.Role='NonCAP'
+repacd.repacd.GatewayConnectedMode='AP'
+repacd.repacd.ConfigREMode='auto'
+repacd.repacd.DefaultREMode='qwrap'
+repacd.repacd.BlockDFSChannels='0'
+repacd.repacd.EnableSteering='1'
+repacd.repacd.EnableSON='1'
+repacd.repacd.ManageMCSD='1'
+repacd.repacd.LinkCheckDelay='2'
+repacd.repacd.NetworkGuestBackhaulInterface='2.4G'
+repacd.repacd.EnableEthernetMonitoring='0'
+repacd.repacd.TrafficSeparationEnabled='1'
+repacd.repacd.NetworkGuest='Guest'
+repacd.repacd.Enable='1'
+repacd.repacd.NetworkBackhaul='backhaul'
+repacd.repacd.AssocDerivedREMode='son'
+repacd.repacd.StaReconfigured='1'
+repacd.repacd.TrafficSeparationActive='1'
+repacd.WiFiLink=WiFiLink
+repacd.WiFiLink.MinAssocCheckAutoMode='5'
+repacd.WiFiLink.MinAssocCheckPostWPS='5'
+repacd.WiFiLink.MinAssocCheckPostBSSIDConfig='5'
+repacd.WiFiLink.WPSTimeout='180'
+repacd.WiFiLink.AssociationTimeout='300'
+repacd.WiFiLink.RSSINumMeasurements='5'
+repacd.WiFiLink.RSSIThresholdFar='-75'
+repacd.WiFiLink.RSSIThresholdNear='-60'
+repacd.WiFiLink.RSSIThresholdMin='-75'
+repacd.WiFiLink.RSSIThresholdPrefer2GBackhaul='-100'
+repacd.WiFiLink.2GBackhaulSwitchDownTime='10'
+repacd.WiFiLink.MaxMeasuringStateAttempts='3'
+repacd.WiFiLink.DaisyChain='0'
+repacd.WiFiLink.RateNumMeasurements='30'
+repacd.WiFiLink.RateThresholdMin5GInPercent='40'
+repacd.WiFiLink.RateThresholdMax5GInPercent='70'
+repacd.WiFiLink.RateThresholdPrefer2GBackhaulInPercent='5'
+repacd.WiFiLink.5GBackhaulBadlinkTimeout='60'
+repacd.WiFiLink.BSSIDAssociationTimeout='90'
+repacd.WiFiLink.RateScalingFactor='70'
+repacd.WiFiLink.5GBackhaulEvalTimeShort='1800'
+repacd.WiFiLink.5GBackhaulEvalTimeLong='7200'
+repacd.WiFiLink.2GBackhaulEvalTime='1800'
+repacd.WiFiLink.2GIndependentChannelSelectionEnable='0'
+repacd.WiFiLink.2GIndependentChannelSelectionRssiLevel='-70'
+repacd.WiFiLink.2GIndependentChannelSelectionTotalRssiCounter='10'
+repacd.WiFiLink.2GIndependentChannelSelectionRssiDebug='0'
+repacd.WiFiLink.2GIndependentChannelSelectionStartRssiCheckTime='60'
+repacd.WiFiLink.ManageVAPInd='0'
+repacd.WiFiLink.BSSIDResolveState='resolving'
+repacd.WiFiLink.NoLinkDetected5G='0'
+repacd.WiFiLink.BSSIDUpdated='0'
+repacd.Reset=LEDState
+repacd.Reset.Name_1='led_0'
+repacd.Reset.Trigger_1='none'
+repacd.Reset.Brightness_1='0'
+repacd.Reset.Name_2='led_1'
+repacd.Reset.Trigger_2='none'
+repacd.Reset.Brightness_2='0'
+repacd.NotAssociated=LEDState
+repacd.NotAssociated.Name_1='led_0'
+repacd.NotAssociated.Trigger_1='timer'
+repacd.NotAssociated.Brightness_1='1'
+repacd.NotAssociated.DelayOn_1='500'
+repacd.NotAssociated.DelayOff_1='500'
+repacd.NotAssociated.Name_2='led_1'
+repacd.NotAssociated.Trigger_2='none'
+repacd.NotAssociated.Brightness_2='0'
+repacd.AutoConfigInProgress=LEDState
+repacd.AutoConfigInProgress.Name_1='led_0'
+repacd.AutoConfigInProgress.Trigger_1='timer'
+repacd.AutoConfigInProgress.Brightness_1='1'
+repacd.AutoConfigInProgress.DelayOn_1='250'
+repacd.AutoConfigInProgress.DelayOff_1='250'
+repacd.AutoConfigInProgress.Name_2='led_1'
+repacd.AutoConfigInProgress.Trigger_2='none'
+repacd.AutoConfigInProgress.Brightness_2='0'
+repacd.Measuring=LEDState
+repacd.Measuring.Name_1='led_0'
+repacd.Measuring.Trigger_1='timer'
+repacd.Measuring.Brightness_1='1'
+repacd.Measuring.DelayOn_1='250'
+repacd.Measuring.DelayOff_1='250'
+repacd.Measuring.Name_2='led_1'
+repacd.Measuring.Trigger_2='timer'
+repacd.Measuring.Brightness_2='1'
+repacd.Measuring.DelayOn_2='250'
+repacd.Measuring.DelayOff_2='250'
+repacd.WPSTimeout=LEDState
+repacd.WPSTimeout.Name_1='led_0'
+repacd.WPSTimeout.Trigger_1='timer'
+repacd.WPSTimeout.Brightness_1='1'
+repacd.WPSTimeout.DelayOn_1='2000'
+repacd.WPSTimeout.DelayOff_1='1000'
+repacd.WPSTimeout.Name_2='led_1'
+repacd.WPSTimeout.Trigger_2='none'
+repacd.WPSTimeout.Brightness_2='0'
+repacd.AssocTimeout=LEDState
+repacd.AssocTimeout.Name_1='led_0'
+repacd.AssocTimeout.Trigger_1='timer'
+repacd.AssocTimeout.Brightness_1='1'
+repacd.AssocTimeout.DelayOn_1='5000'
+repacd.AssocTimeout.DelayOff_1='1000'
+repacd.AssocTimeout.Name_2='led_1'
+repacd.AssocTimeout.Trigger_2='none'
+repacd.AssocTimeout.Brightness_2='0'
+repacd.RE_MoveCloser=LEDState
+repacd.RE_MoveCloser.Name_1='led_0'
+repacd.RE_MoveCloser.Trigger_1='none'
+repacd.RE_MoveCloser.Brightness_1='1'
+repacd.RE_MoveCloser.Name_2='led_1'
+repacd.RE_MoveCloser.Trigger_2='none'
+repacd.RE_MoveCloser.Brightness_2='0'
+repacd.RE_MoveFarther=LEDState
+repacd.RE_MoveFarther.Name_1='led_0'
+repacd.RE_MoveFarther.Trigger_1='none'
+repacd.RE_MoveFarther.Brightness_1='0'
+repacd.RE_MoveFarther.Name_2='led_1'
+repacd.RE_MoveFarther.Trigger_2='none'
+repacd.RE_MoveFarther.Brightness_2='1'
+repacd.RE_LocationSuitable=LEDState
+repacd.RE_LocationSuitable.Name_1='led_0'
+repacd.RE_LocationSuitable.Trigger_1='none'
+repacd.RE_LocationSuitable.Brightness_1='1'
+repacd.RE_LocationSuitable.Name_2='led_1'
+repacd.RE_LocationSuitable.Trigger_2='none'
+repacd.RE_LocationSuitable.Brightness_2='1'
+repacd.InCAPMode=LEDState
+repacd.InCAPMode.Name_1='led_0'
+repacd.InCAPMode.Trigger_1='none'
+repacd.InCAPMode.Brightness_1='1'
+repacd.InCAPMode.Name_2='led_1'
+repacd.InCAPMode.Trigger_2='none'
+repacd.InCAPMode.Brightness_2='1'
+repacd.CL_LinkSufficient=LEDState
+repacd.CL_LinkSufficient.Name_1='led_0'
+repacd.CL_LinkSufficient.Trigger_1='none'
+repacd.CL_LinkSufficient.Brightness_1='1'
+repacd.CL_LinkSufficient.Name_2='led_1'
+repacd.CL_LinkSufficient.Trigger_2='none'
+repacd.CL_LinkSufficient.Brightness_2='0'
+repacd.CL_LinkInadequate=LEDState
+repacd.CL_LinkInadequate.Name_1='led_0'
+repacd.CL_LinkInadequate.Trigger_1='none'
+repacd.CL_LinkInadequate.Brightness_1='0'
+repacd.CL_LinkInadequate.Name_2='led_1'
+repacd.CL_LinkInadequate.Trigger_2='none'
+repacd.CL_LinkInadequate.Brightness_2='1'
+repacd.CL_ActingAsRE=LEDState
+repacd.CL_ActingAsRE.Name_1='led_0'
+repacd.CL_ActingAsRE.Trigger_1='none'
+repacd.CL_ActingAsRE.Brightness_1='1'
+repacd.CL_ActingAsRE.Name_2='led_1'
+repacd.CL_ActingAsRE.Trigger_2='none'
+repacd.CL_ActingAsRE.Brightness_2='1'

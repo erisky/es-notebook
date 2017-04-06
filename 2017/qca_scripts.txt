@@ -1,0 +1,438 @@
+
+========================= Reference ===============================
+# enable Wifi
+sed -i s/'option disabled 1'/'option disabled 0'/g /etc/config/wireless
+wifi start
+
+
+# enable repacd as 'RE'
+
+uci set dhcp.lan.ignore=1
+uci commit dhcp
+/etc/init.d/dnsmasq restart
+
+uci set network.lan.ifname='eth0 eth1'
+uci set network.lan.proto=static
+uci set network.lan.ipaddr=192.168.1.78
+uci set network.lan.gateway=192.168.1.2
+uci set network.lan.dns=192.168.1.2
+uci delete network.wan
+uci commit network
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+
+uci set repacd.repacd.DefaultREMode=extap
+uci set repacd.repacd.ConfigREMode=extap
+
+
+uci set repacd.repacd.Enable=1
+uci commit repacd
+/etc/init.d/repacd start
+
+ifconfig wifi0 down ; ifconfig wifi1 down ; ifconfig wifi2 down
+
+root@OpenWrt:/# uci set repacd.repacd.Enable=0
+root@OpenWrt:/# uci commit repacd
+root@OpenWrt:/# uci set wireless.@wifi-iface[0].ssid=EC_3RD_AP
+root@OpenWrt:/# uci set wireless.@wifi-iface[1].ssid=EC_3RD_AP
+root@OpenWrt:/# uci set wireless.@wifi-iface[2].ssid=EC_3RD_AP
+root@OpenWrt:/# uci set wireless.@wifi-iface[3].ssid=EC_3RD_AP
+root@OpenWrt:/# uci set wireless.@wifi-iface[4].ssid=EC_3RD_AP
+root@OpenWrt:/# uci set wireless.@wifi-iface[5].ssid=EC_3RD_AP
+root@OpenWrt:/# uci commit wireless
+root@OpenWrt:/# uci set wireless.@wifi-iface[0].key=12345678
+root@OpenWrt:/# uci set wireless.@wifi-iface[1].key=12345678
+root@OpenWrt:/# uci set wireless.@wifi-iface[2].key=12345678
+root@OpenWrt:/# uci set wireless.@wifi-iface[3].key=12345678
+root@OpenWrt:/# uci set wireless.@wifi-iface[4].key=12345678
+root@OpenWrt:/# uci set wireless.@wifi-iface[5].key=12345678
+
+
+
+
+[Settings]
+	
+root@OpenWrt:/etc/init.d# uci show wireless
+wireless.wifi0=wifi-device
+wireless.wifi0.type='qcawifi'
+wireless.wifi0.channel='auto'
+wireless.wifi0.macaddr='b4:ee:b4:e9:96:1d'
+wireless.wifi0.txpower='26'
+wireless.wifi0.htmode='HT20'
+wireless.wifi0.hwmode='11ng'
+wireless.wifi0.qwrap_dbdc_enable='0'
+wireless.wifi0.dbdc_enable='1'
+wireless.@wifi-iface[0]=wifi-iface
+wireless.@wifi-iface[0].device='wifi0'
+wireless.@wifi-iface[0].network='lan'
+wireless.@wifi-iface[0].mode='ap'
+wireless.@wifi-iface[0].backhaul_ap='1'
+wireless.@wifi-iface[0].wps_pbc='1'
+wireless.@wifi-iface[0].wps_pbc_enable='1'
+wireless.@wifi-iface[0].wps_pbc_start_time='0'
+wireless.@wifi-iface[0].wps_pbc_duration='120'
+wireless.@wifi-iface[0].encryption='psk2+ccmp'
+wireless.@wifi-iface[0].disabled='0'
+wireless.@wifi-iface[0].wds='0'
+wireless.@wifi-iface[0].qwrap_ap='0'
+wireless.@wifi-iface[0].blockdfschan='1'
+wireless.@wifi-iface[0].rrm='0'
+wireless.@wifi-iface[0].extap='1'
+wireless.@wifi-iface[0].root_distance='255'
+wireless.@wifi-iface[0].athnewind='0'
+wireless.@wifi-iface[0].ssid='EC_TEST_2G'
+wireless.@wifi-iface[0].key='12345678'
+wireless.wifi1=wifi-device
+wireless.wifi1.type='qcawifi'
+wireless.wifi1.channel='auto'
+wireless.wifi1.macaddr='00:34:56:78:a5:a5'
+wireless.wifi1.hwmode='11ac'
+wireless.wifi1.qwrap_enable='0'
+wireless.wifi1.dbdc_enable='1'
+wireless.wifi1.disabled='1'
+wireless.@wifi-iface[1]=wifi-iface
+wireless.@wifi-iface[1].device='wifi1'
+wireless.@wifi-iface[1].network='lan'
+wireless.@wifi-iface[1].mode='ap'
+wireless.@wifi-iface[1].backhaul_ap='1'
+wireless.@wifi-iface[1].wps_pbc='1'
+wireless.@wifi-iface[1].wps_pbc_enable='1'
+wireless.@wifi-iface[1].wps_pbc_start_time='0'
+wireless.@wifi-iface[1].wps_pbc_duration='120'
+wireless.@wifi-iface[1].encryption='psk2+ccmp'
+wireless.@wifi-iface[1].disabled='0'
+wireless.@wifi-iface[1].wds='0'
+wireless.@wifi-iface[1].qwrap_ap='0'
+wireless.@wifi-iface[1].blockdfschan='1'
+wireless.@wifi-iface[1].rrm='0'
+wireless.@wifi-iface[1].extap='1'
+wireless.@wifi-iface[1].root_distance='255'
+wireless.@wifi-iface[1].athnewind='0'
+wireless.@wifi-iface[1].ssid='EC_TEST_2G'
+wireless.@wifi-iface[1].key='12345678'
+wireless.wifi2=wifi-device
+wireless.wifi2.type='qcawifi'
+wireless.wifi2.channel='auto'
+wireless.wifi2.macaddr='b4:ee:b4:e9:96:1c'
+wireless.wifi2.hwmode='11ac'
+wireless.wifi2.qwrap_enable='0'
+wireless.wifi2.dbdc_enable='1'
+wireless.@wifi-iface[2]=wifi-iface
+wireless.@wifi-iface[2].device='wifi2'
+wireless.@wifi-iface[2].network='lan'
+wireless.@wifi-iface[2].mode='ap'
+wireless.@wifi-iface[2].backhaul_ap='1'
+wireless.@wifi-iface[2].wps_pbc='1'
+wireless.@wifi-iface[2].wps_pbc_enable='1'
+wireless.@wifi-iface[2].wps_pbc_start_time='0'
+wireless.@wifi-iface[2].wps_pbc_duration='120'
+wireless.@wifi-iface[2].encryption='psk2+ccmp'
+wireless.@wifi-iface[2].disabled='0'
+wireless.@wifi-iface[2].wds='0'
+wireless.@wifi-iface[2].qwrap_ap='0'
+wireless.@wifi-iface[2].blockdfschan='1'
+wireless.@wifi-iface[2].rrm='0'
+wireless.@wifi-iface[2].extap='1'
+wireless.@wifi-iface[2].root_distance='255'
+wireless.@wifi-iface[2].athnewind='0'
+wireless.@wifi-iface[2].ssid='EC_TEST_5G'
+wireless.@wifi-iface[2].key='12345678'
+wireless.qcawifi=qcawifi
+wireless.qcawifi.wps_pbc_extender_enhance='1'
+wireless.qcawifi.wps_pbc_overwrite_ap_settings_all='1'
+wireless.@wifi-iface[3]=wifi-iface
+wireless.@wifi-iface[3].device='wifi0'
+wireless.@wifi-iface[3].network='lan'
+wireless.@wifi-iface[3].wps_pbc='1'
+wireless.@wifi-iface[3].wps_pbc_enable='1'
+wireless.@wifi-iface[3].wps_pbc_start_time='0'
+wireless.@wifi-iface[3].wps_pbc_duration='120'
+wireless.@wifi-iface[3].encryption='psk2+ccmp'
+wireless.@wifi-iface[3].mode='sta'
+wireless.@wifi-iface[3].wds='0'
+wireless.@wifi-iface[3].extap='1'
+wireless.@wifi-iface[3].root_distance='255'
+wireless.@wifi-iface[3].athnewind='0'
+wireless.@wifi-iface[3].ssid='EC_3RD_AP'
+wireless.@wifi-iface[3].key='12345678'
+wireless.@wifi-iface[4]=wifi-iface
+wireless.@wifi-iface[4].device='wifi1'
+wireless.@wifi-iface[4].network='lan'
+wireless.@wifi-iface[4].wps_pbc='1'
+wireless.@wifi-iface[4].wps_pbc_enable='1'
+wireless.@wifi-iface[4].wps_pbc_start_time='0'
+wireless.@wifi-iface[4].wps_pbc_duration='120'
+wireless.@wifi-iface[4].encryption='psk2+ccmp'
+wireless.@wifi-iface[4].mode='sta'
+wireless.@wifi-iface[4].wds='0'
+wireless.@wifi-iface[4].extap='1'
+wireless.@wifi-iface[4].root_distance='255'
+wireless.@wifi-iface[4].athnewind='0'
+wireless.@wifi-iface[4].ssid='EC_3RD_AP'
+wireless.@wifi-iface[4].key='12345678'
+wireless.@wifi-iface[4].disabled='1'
+wireless.@wifi-iface[5]=wifi-iface
+wireless.@wifi-iface[5].device='wifi2'
+wireless.@wifi-iface[5].network='lan'
+wireless.@wifi-iface[5].wps_pbc='1'
+wireless.@wifi-iface[5].wps_pbc_enable='1'
+wireless.@wifi-iface[5].wps_pbc_start_time='0'
+wireless.@wifi-iface[5].wps_pbc_duration='120'
+wireless.@wifi-iface[5].encryption='psk2+ccmp'
+wireless.@wifi-iface[5].mode='sta'
+wireless.@wifi-iface[5].wds='0'
+wireless.@wifi-iface[5].extap='1'
+wireless.@wifi-iface[5].root_distance='255'
+wireless.@wifi-iface[5].athnewind='0'
+wireless.@wifi-iface[5].ssid='EC_3RD_AP'
+wireless.@wifi-iface[5].key='12345678'
+wireless.@wifi-iface[5].disabled='1'
+
+---- wireless config ---
+
+config wifi-device 'wifi0'
+        option type 'qcawifi'
+        option channel 'auto'
+        option macaddr 'b4:ee:b4:e9:96:1d'
+        option txpower '26'
+        option htmode 'HT20'
+        option hwmode '11ng'
+        option qwrap_dbdc_enable '0'
+        option dbdc_enable '1'
+
+config wifi-iface
+        option device 'wifi0'
+        option network 'lan'
+        option mode 'ap'
+        option backhaul_ap '1'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option disabled '0'
+        option wds '0'
+        option qwrap_ap '0'
+        option blockdfschan '1'
+        option rrm '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_TEST_2G'
+        option key '12345678'
+
+config wifi-device 'wifi1'
+        option type 'qcawifi'
+        option channel 'auto'
+        option macaddr '00:34:56:78:a5:a5'
+        option hwmode '11ac'
+        option qwrap_enable '0'
+        option dbdc_enable '1'
+        option disabled 1
+
+config wifi-iface
+        option device 'wifi1'
+        option network 'lan'
+        option mode 'ap'
+        option backhaul_ap '1'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option disabled '0'
+        option wds '0'
+        option qwrap_ap '0'
+        option blockdfschan '1'
+        option rrm '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_TEST_2G'
+        option key '12345678'
+
+config wifi-device 'wifi2'
+        option type 'qcawifi'
+        option channel 'auto'
+        option macaddr 'b4:ee:b4:e9:96:1c'
+        option hwmode '11ac'
+        option qwrap_enable '0'
+        option dbdc_enable '1'
+
+config wifi-iface
+        option device 'wifi2'
+        option network 'lan'
+        option mode 'ap'
+        option backhaul_ap '1'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option disabled '0'
+        option wds '0'
+        option qwrap_ap '0'
+        option blockdfschan '1'
+        option rrm '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_TEST_5G'
+        option key '12345678'
+
+config qcawifi 'qcawifi'
+        option wps_pbc_extender_enhance '1'
+        option wps_pbc_overwrite_ap_settings_all '1'
+
+config wifi-iface
+        option device 'wifi0'
+        option network 'lan'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option mode 'sta'
+        option wds '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_3RD_AP'
+        option key '12345678'
+
+config wifi-iface
+        option device 'wifi1'
+        option network 'lan'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option mode 'sta'
+        option wds '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_3RD_AP'
+        option key '12345678'
+        option disabled '1'
+
+config wifi-iface
+        option device 'wifi2'
+        option network 'lan'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option mode 'sta'
+        option wds '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_3RD_AP'
+        option key '12345678'
+        option disabled '1'
+
+
+root@OpenWrt:/# brctl show
+br-lan          7fff.b4eeb4e99617       no              ath0
+                                                        ath01
+                                                        ath1
+                                                        ath2
+                                                        eth0
+                                                        eth1
+
+
+[ExtAP]
+=================== Environment =================================================
+
+										.............[NB] 192.168.1.88 <connect 5G>
+										.
+	[ZyXel]	...................... ...[DUT]----------------------------------- [PC]		
+ 	ZyXel							 QCA10.4						    	Ubuntu
+    192.168.1.2						192.168.1.78							192.168.1.199
+SSID= DUT2G STA's SSID = EC_3RD_AP
+KEY= The Same = 12345678
+
+									SSID=EC_TEST_2G
+									SSID=EC_TEST_5G
+
+=================== Script OK =================================================
+#sed -i s/'option disabled 1'/'option disabled 0'/g /etc/config/wireless
+
+# Disable wifi1
+uci set wireless.wifi0.disabled=0
+uci set wireless.wifi1.disabled=1
+uci set wireless.wifi2.disabled=0
+
+# Disable dhcp and uses static IP
+uci set dhcp.lan.ignore=1
+uci commit dhcp
+uci set network.lan.ifname='eth0 eth1'
+uci set network.lan.proto=static
+uci set network.lan.ipaddr=192.168.1.78
+uci set network.lan.gateway=192.168.1.2
+uci set network.lan.dns=192.168.1.2
+
+
+#uci set wireless.wifi0.disabled=
+
+
+#interface 0:
+uci set wireless.@wifi-iface[0].encryption='psk2+ccmp'
+uci set wireless.@wifi-iface[0].disabled='0'
+uci set wireless.@wifi-iface[0].wds='0'
+uci set wireless.@wifi-iface[0].qwrap_ap='0'
+uci set wireless.@wifi-iface[0].extap='1'
+uci set wireless.@wifi-iface[0].ssid='EC_TEST_2G'
+uci set wireless.@wifi-iface[0].key='12345678'
+
+uci set wireless.@wifi-iface[2].encryption='psk2+ccmp'
+uci set wireless.@wifi-iface[2].disabled='0'
+uci set wireless.@wifi-iface[2].wds='0'
+uci set wireless.@wifi-iface[2].qwrap_ap='0'
+uci set wireless.@wifi-iface[2].extap='1'
+uci set wireless.@wifi-iface[2].ssid='EC_TEST_5G'
+uci set wireless.@wifi-iface[2].key='12345678'
+
+
+
+
+# add interface ath01 in 'STA' mode for connecting
+uci set wireless.@wifi-iface[3]=wifi-iface
+uci set wireless.@wifi-iface[3].device='wifi0'
+uci set wireless.@wifi-iface[3].network='lan'
+uci set wireless.@wifi-iface[3].encryption='psk2+ccmp'
+uci set wireless.@wifi-iface[3].mode='sta'
+uci set wireless.@wifi-iface[3].wds='0'
+uci set wireless.@wifi-iface[3].extap='1'
+uci set wireless.@wifi-iface[3].root_distance='255'
+uci set wireless.@wifi-iface[3].athnewind='0'
+uci set wireless.@wifi-iface[3].ssid='EC_3RD_AP'
+uci set wireless.@wifi-iface[3].key='12345678'
+
+
+echo "config wifi-iface
+        option device 'wifi0'
+        option network 'lan'
+        option wps_pbc '1'
+        option wps_pbc_enable '1'
+        option wps_pbc_start_time '0'
+        option wps_pbc_duration '120'
+        option encryption 'psk2+ccmp'
+        option mode 'sta'
+        option wds '0'
+        option extap '1'
+        option root_distance '255'
+        option athnewind '0'
+        option ssid 'EC_3RD_AP'
+        option key '12345678'" >> /etc/config/wireless
+
+
+
+uci delete network.wan
+uci commit network
+/etc/init.d/dnsmasq restart	
+/etc/init.d/network restart
