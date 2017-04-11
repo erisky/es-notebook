@@ -9,3 +9,23 @@ Use the GUI version !!
 this folder is read/writable .... why ..
 /run/user/1000/gvfs/smb-share:server=809996-n1,share=eric_d/share$ 
 
+
+
+---Open WRT ---
+
+# List ProxySTA
+wrapd -S -g /var/run/wrapdglobal -L
+
+# get mac address from hardware
+
+root@OpenWrt:/# cat /sys/class/net/wifi0/address 
+b4:ee:b4:e9:89:07
+root@OpenWrt:/# cat /sys/class/net/wifi1/address 
+00:34:56:78:1c:1c
+root@OpenWrt:/# cat /sys/class/net/wifi2/address 
+b4:ee:b4:e9:89:06
+root@OpenWrt:/# cat /sys/class/net/eth0/address 
+b4:ee:b4:e9:89:04
+root@OpenWrt:/# cat /sys/class/net/eth1/address 
+b4:ee:b4:e9:89:05
+ macaddr  $(cat /sys/class/net/${dev}/address)
