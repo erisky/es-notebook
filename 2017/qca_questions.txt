@@ -3,3 +3,18 @@
 What is "direct attach VAPs" ?
 
 dscp override feature?
+
+
+[Luci]
+
+source:
+Target: 
+/usr/lib/lua/luci
+or 
+./qsdk/qca/feeds/luci/modules/luci-base/luasrc/version.lua
+./qsdk/qca/feeds/luci/modules/luci-mod-admin-mini/luasrc/model/cbi/mini/wifi.lua
+./qsdk/qca/feeds/luci/modules/luci-mod-admin-full/luasrc/model/cbi/admin_network/wifi.lua
+
+
+iwpriv set_monrxfilter
+wlanconfig mon1 create wlandev wifi0 wlanmode mon
