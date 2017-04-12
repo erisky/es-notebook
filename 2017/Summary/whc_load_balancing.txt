@@ -1,0 +1,70 @@
+
+
+
+lbd.config.Enable='1'
+lbd.config.MatchingSSID='ssid_match'
+lbd.config.PHYBasedPrioritization='1'
+lbd.StaDB.MarkAdvClientAsDualBand='1'
+
+#Idle Steering Settings
+
+lbd.IdleSteer.RSSISteeringPoint_DG='6'
+lbd.IdleSteer.RSSISteeringPoint_UG='21'
+lbd.IdleSteer.NormalInactTimeout='11'
+lbd.IdleSteer.OverloadInactTimeout='11'
+lbd.IdleSteer.InactCheckInterval='2'
+
+#Active Steering Settings
+
+lbd.ActiveSteer.TxRateXingThreshold_UG='50001'
+lbd.ActiveSteer.RateRSSIXingThreshold_UG='29'
+lbd.ActiveSteer.TxRateXingThreshold_DG='6001'
+lbd.ActiveSteer.RateRSSIXingThreshold_DG='1'
+
+
+#Offloading Settings
+lbd.Offload.MUAvgPeriod='61'
+lbd.Offload.MUOverloadThreshold_W2='71'
+lbd.Offload.MUOverloadThreshold_W5='71'
+lbd.Offload.MUSafetyThreshold_W2='51'
+lbd.Offload.MUSafetyThreshold_W5='61'
+lbd.Offload.OffloadingMinRSSI='21'
+
+#AP Steering Settings
+lbd.APSteer.LowRSSIAPSteerThreshold_CAP='21'
+lbd.APSteer.LowRSSIAPSteerThreshold_RE='46'
+lbd.APSteer.APSteerToRootMinRSSIIncThreshold='6'
+lbd.APSteer.APSteerToLeafMinRSSIIncThreshold='11'
+lbd.APSteer.APSteerToPeerMinRSSIIncThreshold='11'
+lbd.APSteer.DownlinkRSSIThreshold_W5='-66'
+
+#Interference Avoidance Steering Settings
+lbd.IAS.Enable_W2='0'
+lbd.IAS.Enable_W5='0'
+lbd.IAS.MaxPollutionTime='1201'
+lbd.IAS.UseBestEffort='1'
+
+#Steering Executor Settings
+
+lbd.SteerExec.SteeringProhibitTime='301'
+lbd.SteerExec.BTMSteeringProhibitShortTime='31'
+
+#Basic Advanced
+lbd.config_Adv.AgeLimit='6'
+
+#Station Database Advanced
+
+lbd.StaDB_Adv.AgingSizeThreshold='101'
+lbd.StaDB_Adv.AgingFrequency='61'
+lbd.StaDB_Adv.OutOfNetworkMaxAge='301'
+lbd.StaDB_Adv.InNetworkMaxAge='2592001'
+lbd.StaDB_Adv.NumRemoteBSSes='5'
+lbd.StaDB_Adv.PopulateNonServingPHYInfo='0'
+
+....
+..
+
+Station Database Advanced
+
+lbd.DiagLog.EnableLog='1'
+lbd.DiagLog.LogServerIP='192.168.1.199'
