@@ -29,3 +29,5 @@ b4:ee:b4:e9:89:04
 root@OpenWrt:/# cat /sys/class/net/eth1/address 
 b4:ee:b4:e9:89:05
  macaddr  $(cat /sys/class/net/${dev}/address)
+
+ 

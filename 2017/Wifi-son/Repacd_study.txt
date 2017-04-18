@@ -1,0 +1,101 @@
+Repacd Start
+
+
+__repacd_update_mode
+
+repacd.init:
+restart_in_cap_mode() {
+--> has wan interface like eth1
+restart_in_noncap_mode() 
+--> has connection to GW through ethernet
+restart_in_re_mode() {
+--> has no WAN nor connection to wan(GW)
+
+
+
+												start_role  	
+{repacd-run.sh} /bin/sh /usr/sbin/repacd-run.sh NonCAP 		auto son star autoconf
+							         $0			  $1    	$2   $3  $4     $5
+							        start_role=$1 - NonCAP
+							        config_re_mode=$2
+							        current_re_mode=$3 son 
+							        current_re_submode=$4  star
+
+repacd debug"
+REPACD_DEBUG_OUTOUT=1 in repacd-run.sh
+
+Then uses logread
+	logread -l 30000 | grep repacd 
+
+'''
+logread -l 30000 | grep '''
+logread -l 30000 | grep repacd '''
+
+
+
+__repacd_wifimon_debug
+[debug]:
+	edit repacd-wifimon.sh
+	WIFIMON_DEBUG_COMMAND_FILE=/root/debug.filename/..
+	WIFIMON_DEBUG_OUTOUT=1
+
+Then uses logread
+	logread -l 3000 | grep wifimon 
+
+------- CAP -----
+Thu Apr 13 07:46:44 2017 user.emerg syslog: whc (repacd): starting WHC auto-configuration
+Thu Apr 13 07:46:44 2017 user.emerg syslog: whc (repacd): Managed network: lan
+Thu Apr 13 07:46:44 2017 user.emerg syslog: whc (repacd): Device type: RE
+Thu Apr 13 07:46:45 2017 user.emerg syslog: whc (repacd): Initialized lan VAPs
+Thu Apr 13 07:46:45 2017 user.emerg syslog: whc (repacd): Using SON mode for GW Connected AP
+Thu Apr 13 07:46:45 2017 user.emerg syslog: whc (repacd): No changes; not restarting network stack...
+-------------------
+------- RE -------
+Thu Apr 13 09:20:17 2017 user.debug repacd.wifimon: Auto mode stabilization (#1)
+Thu Apr 13 09:20:22 2017 user.debug repacd.wifimon: Auto config in progress - not assoc
+Thu Apr 13 09:20:26 2017 user.debug repacd.wifimon: Auto config in progress - not assoc
+Thu Apr 13 09:20:30 2017 user.debug repacd.wifimon: Auto config in progress - not assoc
+Thu Apr 13 09:20:31 2017 user.debug repacd.wifimon: Association timeout
+Thu Apr 13 09:20:31 2017 user.info repacd: Updating LED states to AssocTimeout
+-----
+
+
+
+
+
+'''
+Thu Apr 13 07:01:28 2017 user.debug repacd.wifimon: Auto mode stabilization (#2)
+Thu Apr 13 07:01:32 2017 user.debug repacd.wifimon: Auto mode stabilization (#3)
+Thu Apr 13 07:01:36 2017 user.debug repacd.wifimon: Auto mode stabilization (#4)
+Thu Apr 13 07:01:40 2017 user.debug repacd.wifimon: Auto mode stabilization (#5)
+Thu Apr 13 07:01:40 2017 user.debug repacd.wifimon: Pinging GW IP 192.168.1.1
+Thu Apr 13 07:01:40 2017 user.debug repacd.wifimon: RSSI sample #0 = -83 dBm
+Thu Apr 13 07:01:43 2017 user.debug repacd.wifimon: RSSI sample #1 = -84 dBm
+Thu Apr 13 07:01:46 2017 user.debug repacd.wifimon: RSSI sample #2 = -84 dBm
+Thu Apr 13 07:01:50 2017 user.debug repacd.wifimon: RSSI sample #3 = -84 dBm
+Thu Apr 13 07:01:53 2017 user.debug repacd.wifimon: RSSI sample #4 = -84 dBm
+Thu Apr 13 07:01:56 2017 user.debug repacd.wifimon: RSSI sample #5 = -83 dBm
+Thu Apr 13 07:01:56 2017 user.debug repacd.wifimon: Median RSSI = -84 dBm
+Thu Apr 13 07:01:56 2017 user.debug repacd.wifimon: Stopped ping to GW IP 192.168.1.1
+Thu Apr 13 07:10:40 2017 user.info repacd.wifimon: testing logger
+'''
+
+
+loop:
+1. check GW connectivity
+2. monitor Wireless:
+	repacd_wifimon_check
+	1) distance check !?
+	2) wps_pbc -> WPS check if wifi autoconf in progress?
+	3) delete bssid( !?)
+	** if WiFi link daisychain enabled? --> TBC
+
+repacd_wifimon_check
+
+
+
+
+
+__repacd_config_wps_pbc_enhc
+
+

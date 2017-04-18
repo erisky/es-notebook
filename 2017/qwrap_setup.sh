@@ -7,10 +7,10 @@ wrapd -P /var/run/wrapd-global.pid -g /var/run/wrapdglobal -H /var/run/hostapd/g
 #       wrapd -S -g /var/run/wrapd-wifiX -L
 wrapd -S -g /var/run/wrapd-wifi0 -L
 wrapd -S -g /var/run/wrapdglobal -L
-wrapd -S -g /var/run/wrapdglobal -A F0:03:8C:07:64:57
+wrapd -S -g /var/run/wrapdglobal -A F0:03:8C:07:64:57  (NB WIFI)
 
 
-wrapd -S -g /var/run/wrapdglobal -A 84:16:f9:06:f2:2f  
+wrapd -S -g /var/run/wrapdglobal -A 84:16:f9:06:f2:2f  (PC)
 
 # Disable wifi1
 uci set wireless.wifi0.disabled=0

@@ -1,0 +1,39 @@
+[ string1 = string2 ]        string1 and string2 are equal
+[ string1 != string2 ]       string1 and string2 are not equal
+[ string1 \< string2 ]       string1 is lexically less than string2(e.g. 'a' is less than 'b')
+[ string1 \> string2 ]       string1 is lexically greater than string2(e.g. 'b' is greater than 'a')
+[ -z string ]                string is zero (e.g. a empty string)
+[ -n string ]                string is nonzero (e.g. a VAR string)
+[ -e file ]                  file exists
+[ -f file ]                  file is a file
+[ -d file ]                  file is a directory
+[ -c file ]                  file is a character device
+[ -b file ]                  file is a block device
+[ -p file ]                  file is a named pipe
+[ -s file ]                  file is not empty
+[ -k file ]                  file's sticky bit is set
+[ -S file ]                  file is a socket
+[ -L file ]                  file is a symbolic link
+[ -r file ]                  file is readable by user
+[ -w file ]                  file is writeable by user
+[ -x file ]                  file is executeable by user
+[ -O file ]                  file is owner by user
+[ -G file ]                  file is group owned by a greoup 
+[ -u file ]                  file has its set user ID bit set
+[ -g file ]                  file has its group user ID bit set
+[ file1 -nt file2 ]          file1 is newer than file2
+[ file1 -ot file2 ]          file1 is older than file2
+[ file -ef file2 ]           file1 is another name for file2
+[ n1 -eq n2 ]                true if integer n1 = integer n2
+[ n1 -ne n2 ]                true if integer n1 <> n2 
+[ n1 -gt n2 ]                true if n1 > n2 
+[ n1 -ge n2 ]                true if n1 >= n2
+[ n1 -lt n2 ]                true if n1 < n2
+[ n1 -le n2 ]                true if n1 <= n2
+
+-a   --> AND
+-o   --> OR 
+
+# Add auto complete:
+complete  -W "$WORDS" note
+

@@ -1,0 +1,49 @@
+## WIFI-SON Configuration ##
+
+
+!!! Another reference for wifi-son @ PR's page 160 !!!
+!!! Traffice separation and guest netowrk
+
+# CAP #	
+
+
+uci set repacd.repacd.Enable=1
+uci commit repacd
+
+#uci set repacd.repacd.TrafficSeparationEnabled=1
+/etc/init.d/repacd start
+
+
+========================= # RE #=============================
+
+
+# Configure DHCP to not respond
+uci set dhcp.lan.ignore=1; uci commit dhcp; 
+
+
+
+#### Disable NAT - Dynamic IP address
+###uci set network.lan.ifname='eth0 eth1'; uci set network.lan.proto=dhcp; 
+###uci delete network.wan; uci commit network
+###/etc/init.d/network restart
+#disable mcsd.
+
+
+# Disable NAT - Static IP address (update the IP addresses as appropriate)
+uci set network.lan.ifname='eth0 eth1'; 
+uci set network.lan.proto=static; uci set network.lan.ipaddr=192.168.1.3;
+uci set network.lan.gateway=192.168.1.1; 
+uci set network.lan.dns=192.168.1.1;
+uci delete network.wan; uci commit network
+
+uci set mcsd.config.Enable=0
+
+uci commit network
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+uci set repacd.repacd.Enable=1
+uci commit repacd
+/etc/init.d/repacd start
+
+
