@@ -31,3 +31,7 @@ b4:ee:b4:e9:89:05
  macaddr  $(cat /sys/class/net/${dev}/address)
 
  
+# reset to default:
+
+rm -rf /overlay/*
+reboot

@@ -1,0 +1,11 @@
+
+[Git tag usage]
+
+git tag -l
+git tag -n
+git tag -d Label_0.0.1 
+git tag -am "Initial spf40 clean build version" label_v0.0.1
+git push --tags origin master 
+git pull --tags 
+git push --delete origin Label_0.0.1 
+

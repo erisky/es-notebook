@@ -97,7 +97,7 @@ AP.DK07.1-C1
 setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-spf40.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
-
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-git-build.img
 
 [lbd]:
 

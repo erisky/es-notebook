@@ -1,0 +1,9 @@
+
+1. When using default fallback Mode to QWRAP and 5G is down.
+   In this situation --> RE fall back to QWRAP mode but 2.4G sta could not be created!!!
+   ie. ath01 does not exist.
+   
+   workaround --> setup the 
+      repacd.repacd.DefaultREMode='extap'
+
+

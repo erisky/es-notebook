@@ -1,0 +1,69 @@
+MIMO 2x2 3x3
+
+TOS/DSCP
+
+802.11n 2.0 Wifi Alliance certified
+
+802.11e WMM
+WPS
+Auto-channel selection
+30-clietns per AP
+4-Mutluple SSID
+Radius
+bandwidth throttling and traffic prioritization
+MAC table of 256 entries? (30 clients?)
+
+RFC 5227. 
+support ARP announcement, a.k.a. Gratuitous ARP.  
+The AP SHALL maintain a ARP table with at least 256 entries.  ??
+
+The AP SHALL support IGMP version 2 as specified in IETF RFC 2236.  
+
+The AP SHALL support IGMP version 3 as specified in IETF RFC 3376.  
+
+The AP SHALL support IGMP Snooping as specified in IETF RFC 4541. 
+
+IGMP Request classificaition for IPTV and BE applications
+
+IGMP fast join and leave.  fast leave time SHALL be less than 50ms.  
+
+The AP SHALL Support Multiple STBs connected, each of the STB may run 
+multiple IPTV HD or SD streams....
+
+The AP SHALL comply with TR-069, TR-98, TR-181, TR-111 (Part 1) and any new 
+related remote management data model technical reports.  
+
+
+TR-069 related: (RM)
+
+TR-143 to enable RG to perform network throughput performance 
+
+
+IPv6:
+RFC2460. 
+support ICMPv6 as per RFC 4443
+Neighbor Discovery for IPv6 as per RFC 4861. 
+AP software SHALL support IPv6 Stateless Address AutoConfig (as host) as per RFC4862
+  > Duplicate Address Detection
+  > Pv6 RA Options for DNS configuration
+IPv6 Addressing Architecture as per RFC4291.
+
+
+Mesh:
+1> Band Steering (single and multiple)
+2> 4 HD
+3> Use single SSID
+4> Daisy-chain
+5> WPS
+6> Wifi Mesh Turn on/off Wirelessly
+LED behavior
+
+ls
+
+Mesh max client: 30
+
+
+
+
+
+
