@@ -1,0 +1,563 @@
+[   29.333059] NUM_DEV=1 FWMODE=0x2 FWSUBMODE=0x0 FWBR_BUF 0
+[   29.338482] ol_target_init() configure Target .
+[   29.342907] 
+[   29.342907]  Target Version is 1000000
+[   29.348013] 
+[   29.348013]  Flash Download Address  c0000 
+[   29.353664] ol_transfer_bin_file: flash data file defined
+[   29.359037] ol_transfer_bin_file[3637] Get Caldata for wifi2.
+[   29.364830] qdf_fs_read[54]: Fail to Open File /tmp/wifi2.caldataol_transfer_bin_file: flash cal data len 15488 doesn't equal to 12064
+[   29.376866] ol_ath_download_firmware: Download OTP, flash download ADDRESS 0xc0000
+[   29.384394] 
+[   29.384394]  Selecting  OTP binary for CHIP Version 0
+[   29.406412] ath_ol_pci 0000:01:00.0: Firmware loaded from user helper succesfully
+[   29.412905] ol_transfer_bin_file 3518: downloading file 0, Download data len 9024
+[   29.440053] Switching to Tx Mode-1 Threshold 280
+[   29.452690] 
+[   29.452690]  First OTP send param 10
+[   29.488539] [wifi1] FWLOG: [35176] WAL_DBGID_TX_AC_BUFFER_SET ( 0x3, 0x1e, 0x94c, 0x94c, 0x0 )
+[   29.496110] [wifi1] FWLOG: [35176] WAL_DBGID_TX_AC_BUFFER_SET ( 0x12, 0x1e, 0x94c, 0x94c, 0x0 )
+[   29.504788] [wifi1] FWLOG: [35176] WAL_DBGID_TX_AC_BUFFER_SET ( 0x45, 0x1e, 0x94c, 0x94c, 0x0 )
+[   29.513475] [wifi1] FWLOG: [35176] WAL_DBGID_TX_AC_BUFFER_SET ( 0x67, 0x1e, 0x94c, 0x94c, 0x0 )
+[   29.522152] [wifi1] FWLOG: [35326] UNKNOWN 22:55 ( 0x3a, 0xa10, 0x160, 0x10, 0x0 )
+[   31.666670] ol_ath_download_firmware :First OTP download and Execute is good address:0x0 return param 4660
+[   31.675311] ol_ath_download_firmware:##Board Id 0 , CHIP Id 0
+[   31.681124] ol_ath_download_firmware: BOARDDATA DOWNLOAD TO address 0xc0000
+[   31.783654] 
+[   31.783654]  wifi2: Selecting board data file name boarddata_2.bin
+[   31.790298] ol_transfer_bin_file: Board Data File download to address=0xc0000 file name=QCA9984/hw.1/boarddata_2.bin
+[   31.800976] ath_ol_pci 0000:01:00.0: Direct firmware load failed with error -2
+[   31.808050] ath_ol_pci 0000:01:00.0: Falling back to user helper
+[   31.837738] Switching to Tx Mode-1 Threshold 280
+[   31.902716] ath_ol_pci 0000:01:00.0: Firmware loaded from user helper succesfully
+[   31.909183] ol_transfer_bin_file: Failed to get QCA9984/hw.1/boarddata_2.bin
+[   31.916245] ol_ath_download_firmware : ol_transfer_bin_file failed. phase:1 
+[   31.923264]  ol_ath_attach error status -1
+[   31.927456] 
+[   31.927456] __ol_ath_attach() scn da4404c0 Detaching Codeswap
+[   31.934671] hif_pci_device_reset: Reset Devicehif_pci_disable_bus: Xhif_disable: X
+[   31.942983] ath_ol_pci: probe of 0000:01:00.0 failed with error -5
+[   31.959318]  pktlog_init: Initializing Pktlog for AR900B, pktlog_hdr_size = 16
+[   31.965621] +hif_update_pipe_callback pipeid 8
+[   31.969947] -hif_update_pipe_callback
+[   31.973661]  pktlog_init: Initializing Pktlog for AR900B, pktlog_hdr_size = 16
+[   31.980795] +hif_update_pipe_callback pipeid 8
+[   31.985259] -hif_update_pipe_callback
+[   31.998429] __sa_init_module 
+No Direct-Attach chipsets found.
+[   32.024024] Removing athdebug proc file
+[   32.026860] ath_dev: driver unloaded
+[   32.038446] ath_tx99: driver unloaded
+[   32.048948] ath_rate_atheros: driver unloaded
+[   32.060204] ath_hal: driver unloaded
+[   32.093010] nss is not enabled on this platform
+[   32.112567] nss is not enabled on this platform
+[   35.161776] __sa_exit_module 
+[   35.179609] Suspending Target - with disable_intr set :wifi1 (sc dbbe0000) scn=db4c04c0
+[   35.186782] waiting for target paused event from target :wifi1 (sc dbbe0000)
+[   35.193631] ath_sysfs_diag_fini: diag_fsattr 
+[   35.197972] osif_wrap_devt_detach:419 osif wrap dev table detached
+[   35.204164] osif_wrap_detach:472 osif wrap detached
+[   35.208980] ol_ath_thermal_mitigation_detach: ++
+[   35.213739] ol_ath_thermal_mitigation_detach: --
+[   35.272724] ath_lowi_if_netlink_delete Going to decrement current LOWI netlink ref count: 2
+[   35.280267] ol_if_dfs_teardown: called 
+[   35.284103] ol_if_dfs_clist_update: called, cmd=1, nollist=  (null), nentries=0
+[   35.291165] ol_ath_phyerr_detach: called
+[   35.295137] channel is not 2.4G return faile
+[   35.299413] ieee80211_bsteering_detach: Band steering terminated
+[   35.305417] ieee80211_ifdetach: ATF terminated
+[   35.312571] ce_h2t_tx_ce_cleanup 1039 Fastpath mode ON, Cleaning up HTT Tx CE
+[   35.318775] ol_tx_me_exit: Already Disabled !!!
+[   35.325242] Green-AP : Green-AP : Detached
+[   35.325242] 
+[   35.329785] Green-AP : Detached
+[   35.358376] Reset complete for wifi core id : 1
+[   35.361917] hif_disable: X
+[   35.364524] ol_if_spectral_detach
+[   35.367866] SPECTRAL : Module removed (spectral = da8fc000)
+[   35.373583] ol_ath_detach: remove global_ic[1]..gloabl_ic ptr:bf94d268
+[   35.379933] ol_ath_detach: Peer Count 531 
+[   35.384068] ath_ahb_remove
+[   35.386744] Suspending Target - with disable_intr set :wifi0 (sc dc8a0000) scn=dc1004c0
+[   35.394746] waiting for target paused event from target :wifi0 (sc dc8a0000)
+[   35.401719] ath_sysfs_diag_fini: diag_fsattr 
+[   35.406096] osif_wrap_devt_detach:419 osif wrap dev table detached
+[   35.412223] osif_wrap_detach:472 osif wrap detached
+[   35.417153] ol_ath_thermal_mitigation_detach: ++
+[   35.421731] ol_ath_thermal_mitigation_detach: --
+[   35.472765] ath_lowi_if_netlink_delete Going to decrement current LOWI netlink ref count: 1
+[   35.480308] ol_if_dfs_teardown: called 
+[   35.484153] ol_if_dfs_clist_update: called, cmd=1, nollist=  (null), nentries=0
+[   35.491210] ol_ath_phyerr_detach: called
+[   35.495189] ieee80211_bsteering_detach: Band steering terminated
+[   35.501115] acfg_detach Netlink socket released
+[   35.505628] ieee80211_ifdetach: ATF terminated
+[   35.513630] ce_h2t_tx_ce_cleanup 1039 Fastpath mode ON, Cleaning up HTT Tx CE
+[   35.519820] ol_tx_me_exit: Already Disabled !!!
+[   35.527795] Green-AP : Green-AP : Detached
+[   35.527795] 
+[   35.532338] Green-AP : Detached
+[   35.560842] Reset complete for wifi core id : 0
+[   35.564403] hif_disable: X
+[   35.566972] ol_if_spectral_detach
+[   35.570330] SPECTRAL : Module removed (spectral = db70c000)
+[   35.576067] ol_ath_detach: remove global_ic[0]..gloabl_ic ptr:bf94d268
+[   35.582397] ol_ath_detach: Peer Count 531 
+[   35.586535] ath_ahb_remove
+[   35.605932] ath_spectral: driver unloaded
+[   35.616677] ath_dfs: driver unloaded
+[   35.715529] ath_dfs: Version 2.0.0
+[   35.715529] Copyright (c) 2005-2006 Atheros Communications, Inc. All Rights Reserved
+[   35.736868] ath_spectral: Version 2.0.0
+[   35.736868] Copyright (c) 2005-2009 Atheros Communications, Inc. All Rights Reserved
+[   35.861124]  *********** IPQ4019  *************Wifi0 CPU frequency 250000000
+[   35.877205] hif_target_sync_ahb: Got FW signal, retries = 1hif_ahb_enable_bus: X - hif_type = 0xd, target_type = 0xbhif_config_ce: ce_init donehif_config_ce: X, ret = 0hif_set_hia: Ehif_pci_bus_configu4
+[   35.915781] hif_napi_event: received evnt: CONF cmd; v = 1 (state=0x1)hif_napi_event: setting configuration to ON
+__ol_ath_attach() Allocated scn dc0004c0
+[   35.929283] nss is not enabled on this platform
+[   35.933768] nss register id -1 offload mode enabled = 0 nss config 0 Target Type b 
+[   35.941417] __ol_ath_attach: dev name wifi0
+[   35.945576] ol_ath_attach interface_id 0
+[   35.949668] ol_target_init() BMI inited.
+[   35.953568] ol_target_init() BMI Get Target Info.
+[   35.958047] Chip id: 0xb, chip version: 0x1000000
+[   35.962751] 
+[   35.962751]  CE WAR Disabled
+[   35.967228] NUM_DEV=1 FWMODE=0x2 FWSUBMODE=0x0 FWBR_BUF 0
+[   35.972654] ol_target_init() configure Target .
+[   35.977063] 
+[   35.977063]  Target Version is 1000000
+[   35.982177] 
+[   35.982177]  Flash Download Address  c0000 
+[   35.987834] ol_transfer_bin_file: flash data file defined
+[   35.993214] ol_transfer_bin_file[3637] Get Caldata for wifi0.
+[   35.998977] qdf_fs_read[59], Open File /tmp/wifi0.caldata SUCCESS!!file system magic:16914836super blocksize:4096inode 3108file size:12064ol_transfer_bin_file: flash cal data len 59155 doesn't equal to4
+[   36.017360] ol_ath_download_firmware: Download OTP, flash download ADDRESS 0xc0000
+[   36.024943] 
+[   36.024943]  Selecting  OTP binary for CHIP Version -1610612717
+[   36.032389] ath10k_ahb a000000.wifi: Firmware loaded from user helper succesfully
+[   36.039809] ol_transfer_bin_file 3518: downloading file 0, Download data len 4680
+[   36.063661] 
+[   36.063661]  First OTP send param 10
+[   36.068862] ol_ath_download_firmware :First OTP download and Execute is good address:0x1 return param 4660
+[   36.077528] ol_ath_download_firmware:##Board Id 0 , CHIP Id 0
+[   36.083320] ol_ath_download_firmware: BOARDDATA DOWNLOAD TO address 0xc0000
+[   36.090156] Warning : No board id matched. Selecting default boarddata file
+[   36.097115] 
+[   36.097115]  wifi0: Selecting board data file name boarddata_0.bin
+[   36.104752] ol_transfer_bin_file: Board Data File download to address=0xc0000 file name=IPQ4019/hw.1/boarddata_0.bin
+[   36.115362] ath10k_ahb a000000.wifi: Firmware loaded from user helper succesfully
+[   36.122741] ol_transfer_bin_file 3518: downloading file 3, Download data len 12064
+[   36.130612] Board extended Data download address: 0x0
+[   36.155087] ol_ath_download_firmware: Using 0x1234 for the remainder of init
+[   36.161103] 
+[   36.161103]  Selecting  OTP binary for CHIP Version -1610612717
+[   36.168619] ath10k_ahb a000000.wifi: Firmware loaded from user helper succesfully
+[   36.175982] ol_transfer_bin_file 3518: downloading file 0, Download data len 4680
+[   36.199828] 
+[   36.199828]  [Non-Flash] : Ignore Module param
+[   36.204736] 
+[   36.204736]  Second otp download Param 700 
+[   36.220423] ol_ath_download_firmware : Second OTP download and Execute is good, param=0x0 
+[   36.227667] 
+[   36.227667]  Mission mode: Firmware CHIP Version -1610612717
+[   36.235267] ath10k_ahb a000000.wifi: Firmware loaded from user helper succesfully
+[   36.242282] ol_swap_seg_alloc: Successfully allocated memory for SWAP size=262144 
+[   36.250250] ath10k_ahb a000000.wifi: Firmware loaded from user helper succesfully
+[   36.257459] Swap: bytes_left to copy: fw:16; dma_page:100553
+[   36.262914] Swap: wrong length read:0
+[   36.266542] ol_swap_wlan_memory_expansion: Swap total_bytes copied: 161591 Target address 417990 
+[   36.275557] scn=dc0004c0  target_write_addr=417990 seg_info=dd7e8a10 
+[   36.281818] ol_transfer_swap_struct:Code swap structure successfully downloaded for bin type =2 
+[   36.290605] bin_filename=IPQ4019/hw.1/athwlan.bin swap_filename=/lib/firmware/IPQ4019/hw.1/athwlan.codeswap.bin 
+[   36.300786] ol_transfer_bin_file: Downloading firmware file: IPQ4019/hw.1/athwlan.bin
+[   36.309501] ath10k_ahb a000000.wifi: Firmware loaded from user helper succesfully
+[   36.316075] ol_transfer_bin_file 3518: downloading file 1, Download data len 368700
+[   37.554398] ol_target_init() Download FW done. 
+[   37.558111] ol_ath_attach() WMI attached. wmi_handle dac32000 
+[   37.563749] wmi_unified_register_event_handler: Event id 62 is unavailable
+[   37.570580] +htc_create ..  HIF :dc870000-htc_create: (0xda978800)
+[   37.576568] htc_wmi_init() HT Create . da978800
+[   37.581344] htc_wmi_init 7542 host_enable 0 nss_nwifi_offload 0
+[   37.587176] ol_ath_set_default_tgt_config : AC Minfree buffer allocation through module param (umac.ko)
+[   37.596543]  OL_ACBKMinfree : 0
+[   37.599653]  OL_ACBEMinfree : 0
+[   37.602793]  OL_ACVIMinfree : 0
+[   37.605906]  OL_ACVOMinfree : 0
+[   37.609034] hif_enable_fastpath, Enabling fastpath mode
+[   37.614078] +HWT
+[   37.616070] hif_completion_thread_startup: pipe_num:0 pipe_info:0xdc874578hif_completion_thread_startup: pipe_num:3 pipe_info:0xdc874650hif_completion_thread_startup: pipe_num:4 pipe_info:0xdc874698
+[   37.637721] -HWT
+[   37.638767] Startup Mode-0 set
+[   37.641733] pdev attach   (null) -1 
+[   37.645323] 
+[   37.645323] <=== cfg max peer id 1056 ====>
+[   37.651347] htt_peer_map_timer_init Enter pdev dcbe0000 hrtimer dcbe4888
+[   37.657702] 
+[   37.657702]  htt_alloc_peer_map_mem : Alloc Success : host q vaddr dc90a000 paddr 9c90a000
+[   37.667360] 
+[   37.667360]  htt_alloc_peer_map_mem : Flush Interval Configured to 256 pkts
+[   37.678470] ol_txrx_pdev_attach: 2500 tx desc's allocated ; range starts from dc940000
+[   37.687521] Firmware_Build_Number:79 
+[   37.690168] FW wireless modes: 0x680c
+[   37.693824] num_rf_chain:0x00000002  ht_cap_info:0x0000085b  vht_cap_info:0x339959b2  vht_supp_mcs:0x0000fffa
+[   37.703723] btcoex_support 1, wlan_prio_gpio 52, coex_gpio_pin 0 0 0
+[   37.710038] wmi_service_coex_gpio 1, wmi_service_4_wire_coex_support 1, coex_version 2
+[   37.717968] 
+[   37.717968] Sending Ext resource cfg: HOST PLATFORM as 0
+[   37.717968] fw_feature_bitmap as 52 to TGT
+[   37.728857] ol_ath_service_ready_event: tt_support: 1
+[   37.733835] ol_ath_service_ready_event: periodic_chan_stats: 1
+[   37.739637] ol_ath_service_ready_event: sw_cal_support_check_flag: 1
+[   37.745986] Peer Caching Enabled ; num_peers = 530, num_active_peers = 52 num_tids = 104, num_vdevs = 17
+[   37.755509] idx 1 req 2  num_units 1 num_unit_info 12 unit size 256 actual units 53 
+[   37.763179] ol_ath_alloc_host_mem_chunk req_id 2 idx 0 num_units 53 unit_len 256,
+[   37.770630] idx 2 req 3  num_units 1 num_unit_info 12 unit size 1024 actual units 53 
+[   37.778451] ol_ath_alloc_host_mem_chunk req_id 3 idx 1 num_units 53 unit_len 1024,
+[   37.786000] idx 3 req 4  num_units 1 num_unit_info 12 unit size 4096 actual units 53 
+[   37.793812] ol_ath_alloc_host_mem_chunk req_id 4 idx 2 num_units 53 unit_len 4096,
+[   37.801360] idx 0 req 1  num_units 0 num_unit_info 2 unit size 744 actual units 531 
+[   37.809091] ol_ath_alloc_host_mem_chunk req_id 1 idx 3 num_units 531 unit_len 744,
+[   37.816653] idx 4 req 6  num_units 35 num_unit_info 0 unit size 3072 actual units 35 
+[   37.824458] ol_ath_alloc_host_mem_chunk req_id 6 idx 4 num_units 35 unit_len 3072,
+[   37.831999] idx 5 req 7  num_units 1 num_unit_info 0 unit size 6144 actual units 1 
+[   37.839644] ol_ath_alloc_host_mem_chunk req_id 7 idx 5 num_units 1 unit_len 6144,
+[   37.847112] idx 6 req 5  num_units 0 num_unit_info 2 unit size 2044 actual units 531 
+[   37.854924] ol_ath_alloc_host_mem_chunk req_id 5 idx 6 num_units 531 unit_len 2044,
+[   37.862551] Support not added yet for Service 91
+[   37.867160] Support not added yet for Service 92
+[   37.871754] No EXT_MSG send INIT now
+[   37.875325] chunk 0 len 13568 requested , ptr  0x9bb40000
+[   37.880695] chunk 1 len 54272 requested , ptr  0x9bb50000
+[   37.886085] chunk 2 len 217088 requested , ptr  0x9bb80000
+[   37.891545] chunk 3 len 395064 requested , ptr  0x9b400000
+[   37.897022] chunk 4 len 107520 requested , ptr  0x9bb60000
+[   37.902484] chunk 5 len 6144 requested , ptr  0x9c9cc000
+[   37.907786] chunk 6 len 1085364 requested , ptr  0x9b600000
+[   37.913427] ol_ath_service_ready_event[4259] WAPI MBSSID 2 
+[   37.943894] Version = 16777216 3  status = 0
+[   37.947181] ol_ath_connect_htc() WMI is ready
+[   37.951525] htt_h2t_frag_desc_bank_cfg_msg - HTT_H2T_MSG_TYPE_FRAG_DESC_BANK_CFG sent to FW for radio ID = 0
+[   37.961323] target uses HTT version 2.2; host uses 2.2
+[   37.971458] ol_ath_attach() connect HTC. 
+[   37.974445] bypasswmi : 0
+[   37.977048] ol_regdmn_start: reg-domain param: regdmn=0, countryName=, wModeSelect=FFFFFFFF, netBand=FFFFFFFF, extendedChanMode=0.
+[   37.988786] ol_regdmn_init_channels: !avail mode 0x680c (0x2) flags 0x2150
+[   37.995628] ol_regdmn_init_channels: !avail mode 0x680c (0x1) flags 0x140
+[   38.002423] ol_regdmn_init_channels: !avail mode 0x680c (0x20) flags 0xd0
+[   38.009170] ol_regdmn_init_channels: !avail mode 0x680c (0x40) flags 0x150
+[   38.016094] ol_regdmn_init_channels: !avail mode 0x680c (0x1000) flags 0x10100
+[   38.023272] ol_regdmn_init_channels: !avail mode 0x680c (0x8000) flags 0x20100
+[   38.030429] ol_regdmn_init_channels: !avail mode 0x680c (0x10000) flags 0x40100
+[   38.037727] ol_regdmn_init_channels: !avail mode 0x680c (0x20000) flags 0x100100
+[   38.045127] ol_regdmn_init_channels: !avail mode 0x680c (0x40000) flags 0x200100
+[   38.052477] ol_regdmn_init_channels: !avail mode 0x680c (0x80000) flags 0x400100
+[   38.059861] ol_regdmn_init_channels: !avail mode 0x680c (0x100000) flags 0x800100
+[   38.067329] ol_regdmn_init_channels: !avail mode 0x680c (0x200000) flags 0x4000100
+[   38.074886] ol_regdmn_init_channels: !avail mode 0x680c (0x400000) flags 0x8000100
+[   38.082738] OL Resmgr Init-ed
+[   38.085506] ieee80211_bsteering_attach: Band steering initialized
+[   38.091475] acfg_attach: 2884: Netlink socket created:dd3d0400
+[   38.097316] SPECTRAL : get_capability not registered
+[   38.102214] HAL_CAP_PHYDIAG : Capable
+[   38.105868] SPECTRAL : Need to fix the capablity check for RADAR (spectral_attach : 237)
+[   38.113974] SPECTRAL : get_capability not registered
+[   38.118881] HAL_CAP_RADAR   : Capable
+[   38.122526] SPECTRAL : Need to fix the capablity check for SPECTRAL
+[   38.122526]  (spectral_attach : 242)
+[   38.132346] SPECTRAL : get_capability not registered
+[   38.137290] HAL_CAP_SPECTRAL_SCAN : Capable
+[   38.141451] SPECTRAL : get_tsf64 not registered
+[   38.145979] spectral_init_netlink 78 NULL SKB
+[   38.150309] Green-AP : Green-AP : Attached
+[   38.150309] 
+[   38.155867] Green-AP : Attached
+[   38.158985] rate power table override is only supported for AR98XX
+[   38.165293] ol_ath_smart_ant_attach: Hardware doest not support Smart Antenna.
+[   38.172404] ol_if_dfs_attach: called; ptr=dbb0998c, radar_info=dc0d9c20
+[   38.178963] dfs_attach: event log enabled by default
+[   38.184697] >>>> CB Set   (null)
+[   38.187513] ol_ath_attach() UMAC attach . 
+[   38.191195] 
+[   38.191195]  BURSTING enabled by default
+[   38.196781] ol_ath_attach: Set global_ic[1] ..ptr:bfd5e268
+[   38.202070] ath_lowi_if_netlink_init LOWI Netlink successfully created
+[   38.208592] osif_wrap_attach:441 osif wrap attached
+[   38.213510] osif_wrap_devt_init:402 osif wrap dev table init done
+[   38.219495]  Wrap Attached: Wrap_com =da9e3800 ic->ic_wrap_com=da9e3800 &wrap_com->wc_devt=da9e3800 
+[   38.228617] __ol_ath_attach: needed_headroom reservation 60
+[   38.235581] ol_ath_thermal_mitigation_attach: --
+[   38.239210] ol_ath_ahb_probe num_radios=0, wifi_radios[0].sc = dc0004c0 wifi_radio_type = 2
+[   38.247627] ath_sysfs_diag_init: diag_fsattr 
+[   38.252075]  *********** IPQ4019  *************Wifi1 CPU frequency 250000000
+[   38.268985] hif_target_sync_ahb: Got FW signal, retries = 1hif_ahb_enable_bus: X - hif_type = 0xd, target_type = 0xbhif_config_ce: ce_init donehif_config_ce: X, ret = 0hif_set_hia: Ehif_pci_bus_configu4
+[   38.308200] hif_napi_event: received evnt: CONF cmd; v = 1 (state=0x1)hif_napi_event: setting configuration to ON
+__ol_ath_attach() Allocated scn da8804c0
+[   38.322143] nss is not enabled on this platform
+[   38.326606] nss register id -1 offload mode enabled = 0 nss config 0 Target Type b 
+[   38.334270] __ol_ath_attach: dev name wifi1
+[   38.338399] ol_ath_attach interface_id 1
+[   38.342515] ol_target_init() BMI inited.
+[   38.346405] ol_target_init() BMI Get Target Info.
+[   38.350896] Chip id: 0xb, chip version: 0x1000000
+[   38.355592] 
+[   38.355592]  CE WAR Disabled
+[   38.360168] NUM_DEV=1 FWMODE=0x2 FWSUBMODE=0x0 FWBR_BUF 0
+[   38.365505] ol_target_init() configure Target .
+[   38.369912] 
+[   38.369912]  Target Version is 1000000
+[   38.375038] 
+[   38.375038]  Flash Download Address  c0000 
+[   38.380668] ol_transfer_bin_file: flash data file defined
+[   38.386059] ol_transfer_bin_file[3637] Get Caldata for wifi1.
+[   38.391830] qdf_fs_read[59], Open File /tmp/wifi1.caldata SUCCESS!!file system magic:16914836super blocksize:4096inode 1622file size:12064ol_transfer_bin_file: flash cal data len 38294 doesn't equal to4
+[   38.410196] ol_ath_download_firmware: Download OTP, flash download ADDRESS 0xc0000
+[   38.417782] 
+[   38.417782]  Selecting  OTP binary for CHIP Version -1610612717
+[   38.425251] ath10k_ahb a800000.wifi: Firmware loaded from user helper succesfully
+[   38.432589] ol_transfer_bin_file 3518: downloading file 0, Download data len 4680
+[   38.456495] 
+[   38.456495]  First OTP send param 10
+[   38.461709] ol_ath_download_firmware :First OTP download and Execute is good address:0x1 return param 4660
+[   38.470345] ol_ath_download_firmware:##Board Id 0 , CHIP Id 0
+[   38.476162] ol_ath_download_firmware: BOARDDATA DOWNLOAD TO address 0xc0000
+[   38.483020] Warning : No board id matched. Selecting default boarddata file
+[   38.489949] 
+[   38.489949]  wifi1: Selecting board data file name boarddata_1.bin
+[   38.497602] ol_transfer_bin_file: Board Data File download to address=0xc0000 file name=IPQ4019/hw.1/boarddata_1.bin
+[   38.508203] ath10k_ahb a800000.wifi: Firmware loaded from user helper succesfully
+[   38.515627] ol_transfer_bin_file 3518: downloading file 3, Download data len 12064
+[   38.523488] Board extended Data download address: 0x0
+[   38.547887] ol_ath_download_firmware: Using 0x1234 for the remainder of init
+[   38.553922] 
+[   38.553922]  Selecting  OTP binary for CHIP Version -1610612717
+[   38.561393] ath10k_ahb a800000.wifi: Firmware loaded from user helper succesfully
+[   38.568784] ol_transfer_bin_file 3518: downloading file 0, Download data len 4680
+[   38.586138] [wifi0] FWLOG: [2127] WAL_DBGID_TX_AC_BUFFER_SET ( 0x3, 0x1e, 0x94c, 0x94c, 0x0 )
+[   38.593624] [wifi0] FWLOG: [2127] WAL_DBGID_TX_AC_BUFFER_SET ( 0x12, 0x1e, 0x94c, 0x94c, 0x0 )
+[   38.602005] 
+[   38.602005]  [Non-Flash] : Ignore Module param
+[   38.602010] 
+[   38.602010]  Second otp download Param 700 
+[   38.613813] [wifi0] [   38.613823] ol_ath_download_firmware : Second OTP download and Execute is good, param=0x0 
+[   38.613830] 
+[   38.613830]  Mission mode: Firmware CHIP Version -1610612717
+[   38.614299] ath10k_ahb a800000.wifi: Firmware loaded from user helper succesfully
+[   38.614356] ol_swap_seg_alloc: Successfully allocated memory for SWAP size=262144 
+[   38.614767] ath10k_ahb a800000.wifi: Firmware loaded from user helper succesfully
+[   38.614955] Swap: bytes_left to copy: fw:16; dma_page:100553
+[   38.614958] Swap: wrong length read:0
+[   38.614965] ol_swap_wlan_memory_expansion: Swap total_bytes copied: 161591 Target address 417990 
+
+[   38.671818] scn=da8804c0  target_write_addr=417990 seg_info=deb34610 
+[   38.671824] FWLOG: [2127] WAL_DBGID_TX_AC_BUFFER_SET ( 0x45, 0x1e, 0x94c, 0x94c, 0x0 )
+[   38.671861] [wifi0] FWLOG: [2127] WAL_DBGID_TX_AC_BUFFER_SET ( 0x67, 0x1e, 0x94c, 0x94c, 0x0 )
+[   38.671882] [wifi0] FWLOG: [2273] UNKNOWN 22:55 ( 0x3a, 0xa10, 0x160, 0x0, 0x12 )
+[   38.702351] ol_transfer_swap_struct:Code swap structure successfully downloaded for bin type =2 
+[   38.711094] bin_filename=IPQ4019/hw.1/athwlan.bin swap_filename=/lib/firmware/IPQ4019/hw.1/athwlan.codeswap.bin 
+[   38.721269] ol_transfer_bin_file: Downloading firmware file: IPQ4019/hw.1/athwlan.bin
+[   38.729983] ath10k_ahb a800000.wifi: Firmware loaded from user helper succesfully
+[   38.736606] ol_transfer_bin_file 3518: downloading file 1, Download data len 368700
+[   39.975017] ol_target_init() Download FW done. 
+[   39.978771] ol_ath_attach() WMI attached. wmi_handle dc90e000 
+[   39.984369] wmi_unified_register_event_handler: Event id 62 is unavailable
+[   39.991204] +htc_create ..  HIF :dc058000-htc_create: (0xda97b000)
+[   39.997193] htc_wmi_init() HT Create . da97b000
+[   40.001989] htc_wmi_init 7542 host_enable 0 nss_nwifi_offload 0
+[   40.007795] ol_ath_set_default_tgt_config : AC Minfree buffer allocation through module param (umac.ko)
+[   40.017163]  OL_ACBKMinfree : 0
+[   40.020277]  OL_ACBEMinfree : 0
+[   40.023454]  OL_ACVIMinfree : 0
+[   40.026528]  OL_ACVOMinfree : 0
+[   40.029655] hif_enable_fastpath, Enabling fastpath mode
+[   40.034697] +HWT
+[   40.036690] hif_completion_thread_startup: pipe_num:0 pipe_info:0xdc05c578hif_completion_thread_startup: pipe_num:3 pipe_info:0xdc05c650hif_completion_thread_startup: pipe_num:4 pipe_info:0xdc05c698
+[   40.059879] -HWT
+[   40.060920] Startup Mode-0 set
+[   40.063972] pdev attach   (null) -1 
+[   40.067460] 
+[   40.067460] <=== cfg max peer id 1056 ====>
+[   40.073619] htt_peer_map_timer_init Enter pdev da530000 hrtimer da534888
+[   40.079794] 
+[   40.079794]  htt_alloc_peer_map_mem : Alloc Success : host q vaddr db7c2000 paddr 9b7c2000
+[   40.089521] 
+[   40.089521]  htt_alloc_peer_map_mem : Flush Interval Configured to 256 pkts
+[   40.101181] ol_txrx_pdev_attach: 2500 tx desc's allocated ; range starts from da760000
+[   40.110265] Firmware_Build_Number:79 
+[   40.112930] FW wireless modes: 0x1f9001
+[   40.116726] num_rf_chain:0x00000002  ht_cap_info:0x0000085b  vht_cap_info:0x339959b2  vht_supp_mcs:0x0000fffa
+[   40.126622] wmi_service_coex_gpio 0, wmi_service_4_wire_coex_support 0, coex_version 0
+[   40.134551] 
+[   40.134551] Sending Ext resource cfg: HOST PLATFORM as 0
+[   40.134551] fw_feature_bitmap as 50 to TGT
+[   40.145440] ol_ath_service_ready_event: tt_support: 1
+[   40.150405] ol_ath_service_ready_event: periodic_chan_stats: 1
+[   40.156229] ol_ath_service_ready_event: sw_cal_support_check_flag: 1
+[   40.162561] Peer Caching Enabled ; num_peers = 530, num_active_peers = 52 num_tids = 104, num_vdevs = 17
+[   40.172096] idx 1 req 2  num_units 1 num_unit_info 12 unit size 256 actual units 53 
+[   40.179762] ol_ath_alloc_host_mem_chunk req_id 2 idx 0 num_units 53 unit_len 256,
+[   40.187222] idx 2 req 3  num_units 1 num_unit_info 12 unit size 1024 actual units 53 
+[   40.195031] ol_ath_alloc_host_mem_chunk req_id 3 idx 1 num_units 53 unit_len 1024,
+[   40.202578] idx 3 req 4  num_units 1 num_unit_info 12 unit size 4096 actual units 53 
+[   40.210396] ol_ath_alloc_host_mem_chunk req_id 4 idx 2 num_units 53 unit_len 4096,
+[   40.217950] idx 0 req 1  num_units 0 num_unit_info 2 unit size 744 actual units 531 
+[   40.225684] ol_ath_alloc_host_mem_chunk req_id 1 idx 3 num_units 531 unit_len 744,
+[   40.233229] idx 4 req 6  num_units 35 num_unit_info 0 unit size 3072 actual units 35 
+[   40.241073] ol_ath_alloc_host_mem_chunk req_id 6 idx 4 num_units 35 unit_len 3072,
+[   40.248596] idx 5 req 7  num_units 1 num_unit_info 0 unit size 6144 actual units 1 
+[   40.256229] ol_ath_alloc_host_mem_chunk req_id 7 idx 5 num_units 1 unit_len 6144,
+[   40.263695] idx 6 req 5  num_units 0 num_unit_info 2 unit size 2044 actual units 531 
+[   40.271498] ol_ath_alloc_host_mem_chunk req_id 5 idx 6 num_units 531 unit_len 2044,
+[   40.279143] Support not added yet for Service 91
+[   40.283742] Support not added yet for Service 92
+[   40.288336] No EXT_MSG send INIT now
+[   40.291902] chunk 0 len 13568 requested , ptr  0x9b7e8000
+[   40.297286] chunk 1 len 54272 requested , ptr  0x9a8c0000
+[   40.302668] chunk 2 len 217088 requested , ptr  0x9a900000
+[   40.308131] chunk 3 len 395064 requested , ptr  0x9a980000
+[   40.313613] chunk 4 len 107520 requested , ptr  0x9a8e0000
+[   40.319065] chunk 5 len 6144 requested , ptr  0x9bbb6000
+[   40.324370] chunk 6 len 1085364 requested , ptr  0x9aa00000
+[   40.329934] ol_ath_service_ready_event[4259] WAPI MBSSID 2 
+[   40.361025] Version = 16777216 3  status = 0
+[   40.364306] ol_ath_connect_htc() WMI is ready
+[   40.368652] target uses HTT version 2.2; host uses 2.2
+[   40.373759] htt_h2t_frag_desc_bank_cfg_msg - HTT_H2T_MSG_TYPE_FRAG_DESC_BANK_CFG sent to FW for radio ID = 1
+[   40.388592] ol_ath_attach() connect HTC. 
+[   40.391570] bypasswmi : 0
+[   40.394193] ol_regdmn_start: reg-domain param: regdmn=0, countryName=, wModeSelect=FFFFFFFF, netBand=FFFFFFFF, extendedChanMode=0.
+[   40.405925] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x2) flags 0x2150
+[   40.412976] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x4) flags 0xa0
+[   40.419788] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x8) flags 0xc0
+[   40.426652] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x20) flags 0xd0
+[   40.433628] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x40) flags 0x150
+[   40.440620] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x800) flags 0x10080
+[   40.447921] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x2000) flags 0x20080
+[   40.455299] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x4000) flags 0x40080
+[   40.462795] Add VHT80 channel: 5210
+[   40.466140] Add VHT80 channel: 5290
+[   40.469609] Add VHT80 channel: 5530
+[   40.473089] Add VHT80 channel: 5610
+[   40.476552] Add VHT80 channel: 5690
+[   40.480025] Add VHT80 channel: 5775
+[   40.483541] Skipping VHT80 channel 5825
+[   40.487325] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x200000) flags 0x4000100
+[   40.495058] ol_regdmn_init_channels: !avail mode 0x1f9001 (0x400000) flags 0x8000100
+[   40.503872] freq=58 
+[   40.505018] freq=106 
+[   40.507285] freq=122 
+[   40.509537] freq=138 
+[   40.511830] OL Resmgr Init-ed
+[   40.514902] ieee80211_bsteering_attach: Band steering initialized
+[   40.520835] acfg_attach: Offload using existing sock dd3d0400
+[   40.526601] SPECTRAL : get_capability not registered
+[   40.531502] HAL_CAP_PHYDIAG : Capable
+[   40.535195] SPECTRAL : Need to fix the capablity check for RADAR (spectral_attach : 237)
+[   40.543236] SPECTRAL : get_capability not registered
+[   40.548169] HAL_CAP_RADAR   : Capable
+[   40.551816] SPECTRAL : Need to fix the capablity check for SPECTRAL
+[   40.551816]  (spectral_attach : 242)
+[   40.561632] SPECTRAL : get_capability not registered
+[   40.566578] HAL_CAP_SPECTRAL_SCAN : Capable
+[   40.570739] SPECTRAL : get_tsf64 not registered
+[   40.575262] spectral_init_netlink 78 NULL SKB
+[   40.579600] Green-AP : Green-AP : Attached
+[   40.579600] 
+[   40.585157] Green-AP : Attached
+[   40.588275] rate power table override is only supported for AR98XX
+[   40.594584] ol_ath_smart_ant_attach: Hardware doest not support Smart Antenna.
+[   40.601694] ol_if_dfs_attach: called; ptr=da75998c, radar_info=dc0d9c20
+[   40.608252] dfs_attach: event log enabled by default
+[   40.614075] >>>> CB Set   (null)
+[   40.617245] ol_ath_attach() UMAC attach . 
+[   40.620486] 
+[   40.620486]  BURSTING enabled by default
+[   40.626049] ol_ath_attach: Set global_ic[2] ..ptr:bfd5e268
+[   40.631342] ath_lowi_if_netlink_init Incremented LOWI netlink ref count: 2
+[   40.638271] osif_wrap_attach:441 osif wrap attached
+[   40.643093] osif_wrap_devt_init:402 osif wrap dev table init done
+[   40.649132]  Wrap Attached: Wrap_com =dcae6000 ic->ic_wrap_com=dcae6000 &wrap_com->wc_devt=dcae6000 
+[   40.658252] __ol_ath_attach: needed_headroom reservation 60
+[   40.665172] ol_ath_thermal_mitigation_attach: --
+[   40.668801] ol_ath_ahb_probe num_radios=1, wifi_radios[1].sc = da8804c0 wifi_radio_type = 2
+[   40.677186] ath_sysfs_diag_init: diag_fsattr 
+[   40.681756] ath_ol_pci:  (Atheros/multi-bss)
+[   40.685909] hif_pci_enable_bus: con_mode = 0x0, device_id = 0x46hif_pci_enable_bus: hif_enable_pci done *********** QCA9984 *************hif_pci_enable_bus: hif_type = 0xc, target_type = 0xahif_pci_enaE
+[   40.729620] chip_id 0xa chip_revision 0x0
+[   40.733859] 
+[   40.733859]  CLOCK PLL skipped
+[   40.738311] hif_set_hia_extnd: setting the target pll frac ffffffff intval ffffffff
+[   40.745961] hif_set_hia_extnd: no frac provided, skipping pre-configuring PLL
+[   40.753070] hif_set_hia_extnd: targ_clk is not provided, skipping pre-configuring PLL
+[   40.762954] hif_pci_bus_configure: hif_set_hia donehif_configure_irq: Ehif_pci_configure_legacy_irq: Ehif_pci_configure_legacy_irq: X, ret = 0hif_enable: X OKhif_napi_create: NAPI structures initialize4
+[   40.788245] hif_napi_event: received evnt: CONF cmd; v = 1 (state=0x1)hif_napi_event: setting configuration to ON
+__ol_ath_attach() Allocated scn da0c04c0
+[   40.802200] nss is not enabled on this platform
+[   40.806664] nss register id -1 offload mode enabled = 0 nss config 0 Target Type a 
+[   40.814324] __ol_ath_attach: dev name wifi2
+[   40.818457] ol_ath_attach interface_id 2
+[   40.822589] ol_target_init() BMI inited.
+[   40.826385] ol_target_init() BMI Get Target Info.
+[   40.830954] Chip id: 0xa, chip version: 0x1000000
+[   40.835681] 
+[   40.835681]  CE WAR Disabled
+[   40.840126] NUM_DEV=1 FWMODE=0x2 FWSUBMODE=0x0 FWBR_BUF 0
+[   40.845571] ol_target_init() configure Target .
+[   40.849968] 
+[   40.849968]  Target Version is 1000000
+[   40.855094] 
+[   40.855094]  Flash Download Address  c0000 
+[   40.860723] ol_transfer_bin_file: flash data file defined
+[   40.866115] ol_transfer_bin_file[3637] Get Caldata for wifi2.
+[   40.871888] qdf_fs_read[54]: Fail to Open File /tmp/wifi2.caldataol_transfer_bin_file: flash cal data len 8656 doesn't equal to 12064
+[   40.883838] ol_ath_download_firmware: Download OTP, flash download ADDRESS 0xc0000
+[   40.891369] 
+[   40.891369]  Selecting  OTP binary for CHIP Version 0
+[   40.898024] ath_ol_pci 0000:01:00.0: Firmware loaded from user helper succesfully
+[   40.905383] ol_transfer_bin_file 3518: downloading file 0, Download data len 9024
+[   40.938838] Switching to Tx Mode-1 Threshold 280
+[   40.944649] 
+[   40.944649]  First OTP send param 10
+[   41.006773] [wifi1] FWLOG: [2153] WAL_DBGID_TX_AC_BUFFER_SET ( 0x3, 0x1e, 0x94c, 0x94c, 0x0 )
+[   41.014258] [wifi1] FWLOG: [2153] WAL_DBGID_TX_AC_BUFFER_SET ( 0x12, 0x1e, 0x94c, 0x94c, 0x0 )
+[   41.022885] [wifi1] FWLOG: [2153] WAL_DBGID_TX_AC_BUFFER_SET ( 0x45, 0x1e, 0x94c, 0x94c, 0x0 )
+[   41.031441] [wifi1] FWLOG: [2153] WAL_DBGID_TX_AC_BUFFER_SET ( 0x67, 0x1e, 0x94c, 0x94c, 0x0 )
+[   41.040045] [wifi1] FWLOG: [2303] UNKNOWN 22:55 ( 0x3a, 0xa10, 0x160, 0x10, 0x0 )
+[   43.158622] ol_ath_download_firmware :First OTP download and Execute is good address:0x0 return param 4660
+[   43.167263] ol_ath_download_firmware:##Board Id 0 , CHIP Id 0
+[   43.173085] ol_ath_download_firmware: BOARDDATA DOWNLOAD TO address 0xc0000
+[   43.179989] 
+[   43.179989]  wifi2: Selecting board data file name boarddata_2.bin
+[   43.187579] ol_transfer_bin_file: Board Data File download to address=0xc0000 file name=QCA9984/hw.1/boarddata_2.bin
+[   43.198125] ath_ol_pci 0000:01:00.0: Direct firmware load failed with error -2
+[   43.205298] ath_ol_pci 0000:01:00.0: Falling back to user helper
+[   43.245280] ath_ol_pci 0000:01:00.0: Firmware loaded from user helper succesfully
+[   43.251768] ol_transfer_bin_file: Failed to get QCA9984/hw.1/boarddata_2.bin
+[   43.258825] ol_ath_download_firmware : ol_transfer_bin_file failed. phase:1 
+[   43.265824]  ol_ath_attach error status -1
+[   43.270031] 
+[   43.270031] __ol_ath_attach() scn da0c04c0 Detaching Codeswap
+[   43.277292] hif_pci_device_reset: Reset Devicehif_pci_disable_bus: Xhif_disable: X
+[   43.285533] ath_ol_pci: probe of 0000:01:00.0 failed with error -5
+[   43.301391]  pktlog_init: Initializing Pktlog for AR900B, pktlog_hdr_size = 16
+[   43.307625] +hif_update_pipe_callback pipeid 8
+[   43.312017] -hif_update_pipe_callback
+[   43.315727]  pktlog_init: Initializing Pktlog for AR900B, pktlog_hdr_size = 16
+[   43.322897] +hif_update_pipe_callback pipeid 8
+[   43.327292] -hif_update_pipe_callback
+[   43.340214] __sa_init_module 
+[   43.355875] Switching to Tx Mode-1 Threshold 280
+[   48.813278] Not a bridge device, or device not found: br-lan
+[   48.918560] device eth1 entered promiscuous mode
+[   48.926376] IPv6: ADDRCONF(NETDEV_UP): br-lan: link is not ready
+qcawifi disable radio wifi0
+qcawifi disable radio wifi1
+qcawifi disable radio wifi0
+qcawifi disable radio wifi1
+[   49.912758] br-lan: port 1(eth1) entered forwarding state
+[   49.917193] br-lan: port 1(eth1) entered forwarding state
+[   49.923442] IPv6: ADDRCONF(NETDEV_CHANGE): br-lan: link becomes ready
+[   51.121251] __mc_netlink_receive: Disable bridge snooping!
+[   51.625208] __mc_netlink_receive: Enable bridge snooping!
+[   51.912654] br-lan: port 1(eth1) entered forwarding state

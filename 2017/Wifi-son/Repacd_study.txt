@@ -17,7 +17,7 @@ restart_in_re_mode() {
 {repacd-run.sh} /bin/sh /usr/sbin/repacd-run.sh NonCAP 		auto son star autoconf
 							         $0			  $1    	$2   $3  $4     $5
 							        start_role=$1 - NonCAP
-							        config_re_mode=$2
+							        config_re_mode=$2 auto
 							        current_re_mode=$3 son 
 							        current_re_submode=$4  star
 

@@ -1,49 +1,123 @@
-## WIFI-SON Configuration ##
 
 
-!!! Another reference for wifi-son @ PR's page 160 !!!
-!!! Traffice separation and guest netowrk
-
-# CAP #	
-
-
-uci set repacd.repacd.Enable=1
-uci commit repacd
-
-#uci set repacd.repacd.TrafficSeparationEnabled=1
-/etc/init.d/repacd start
-
-
-========================= # RE #=============================
-
-
-# Configure DHCP to not respond
-uci set dhcp.lan.ignore=1; uci commit dhcp; 
-
-
-
-#### Disable NAT - Dynamic IP address
-###uci set network.lan.ifname='eth0 eth1'; uci set network.lan.proto=dhcp; 
-###uci delete network.wan; uci commit network
-###/etc/init.d/network restart
-#disable mcsd.
-
-
-# Disable NAT - Static IP address (update the IP addresses as appropriate)
-uci set network.lan.ifname='eth0 eth1'; 
-uci set network.lan.proto=static; uci set network.lan.ipaddr=192.168.1.3;
-uci set network.lan.gateway=192.168.1.1; 
-uci set network.lan.dns=192.168.1.1;
-uci delete network.wan; uci commit network
-
-uci set mcsd.config.Enable=0
-
+# CAP
+uci set network.lan.ipaddr=192.168.1.3;
+uci set network.Guest=interface
+uci set network.Guest.type='bridge'
+uci set network.Guest.proto='static'
+uci set network.Guest.netmask='255.255.255.0'
+uci set network.Guest.ipaddr='192.168.2.1'
 uci commit network
+uci set dhcp.Guest=dhcp
+uci set dhcp.Guest.interface='Guest'
+uci set dhcp.Guest.start='100'
+
+uci set dhcp.Guest.limit='150'
+uci set dhcp.Guest.leasetime='12h'
+uci set dhcp.Guest.dhcpv6='server'
+uci set dhcp.Guest.ra='server'
+uci commit dhcp
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+uci set repacd.repacd.Enable=1
+uci set mcsd.config.Enable=0
+uci set repacd.repacd.TrafficSeparationEnabled=1
+uci set repacd.repacd.NetworkGuest=Guest
+uci commit
+/etc/init.d/repacd restart
+
+
+### RE ###
+
+uci set network.lan.ipaddr=192.168.1.8;
+uci set network.lan.gateway=192.168.1.3;
+uci delete network.wan;
+uci set network.Guest=interface
+uci set network.Guest.type='bridge'
+uci set network.Guest.proto='static'
+uci set network.Guest.netmask='255.255.255.0'
+uci set network.Guest.ipaddr='192.168.2.2'
+uci commit network
+uci set dhcp.Guest=dhcp
+uci set dhcp.Guest.interface='Guest'
+uci set dhcp.Guest.start='100'
+uci set dhcp.Guest.limit='150'
+uci set dhcp.Guest.leasetime='12h'
+uci set dhcp.Guest.dhcpv6='server'
+uci set dhcp.Guest.ra='server'
+uci commit dhcp
 /etc/init.d/network restart
 /etc/init.d/dnsmasq restart
 
+### !!! if 5 G is not good, use the extap
+#uci set repacd.repacd.DefaultREMode='extap'
+
+### !!!
+#uci set repacd.repacd.ConfigREMode='son'
+
+uci set repacd.repacd.TrafficSeparationEnabled=1
+uci set repacd.repacd.NetworkGuest=Guest
 uci set repacd.repacd.Enable=1
 uci commit repacd
+uci set wsplcd.config.DeepClone='0'
+uci commit wsplcd
 /etc/init.d/repacd start
+
+
+
+## CAP and RE
+# trigger the WPS button
+env -i ACTION="pressed" BUTTON="wps" /sbin/hotplug-call button
+
+
+================ 3rd daisy?
+
+
+
+
+
+uci set network.lan.ipaddr=192.168.1.11;
+uci set network.lan.gateway=192.168.1.3;
+uci delete network.wan;
+uci set network.Guest=interface
+uci set network.Guest.type='bridge'
+uci set network.Guest.proto='static'
+uci set network.Guest.netmask='255.255.255.0'
+uci set network.Guest.ipaddr='192.168.2.2'
+uci commit network
+uci set dhcp.Guest=dhcp
+uci set dhcp.Guest.interface='Guest'
+uci set dhcp.Guest.start='100'
+uci set dhcp.Guest.limit='150'
+uci set dhcp.Guest.leasetime='12h'
+uci set dhcp.Guest.dhcpv6='server'
+uci set dhcp.Guest.ra='server'
+uci commit dhcp
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+### !!! if 5 G is not good, use the extap
+uci set repacd.repacd.DefaultREMode='extap'
+
+# enable daisychain
+uci set repacd.WiFiLink.DaisyChain='1'
+
+uci set repacd.repacd.ConfigREMode='son'
+uci set repacd.repacd.TrafficSeparationEnabled=1
+uci set repacd.repacd.NetworkGuest=Guest
+uci set repacd.repacd.Enable=1
+
+uci commit repacd
+uci set wsplcd.config.DeepClone='0'
+uci commit wsplcd
+
+
+
+
+
+## Before start, change the 24G_sta_disable in repacd_init
+## __repacd_config_noncap_mode disable_24g_sta=1 -->0
+/etc/init.d/repacd start
+
 
 

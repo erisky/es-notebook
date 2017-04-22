@@ -63,6 +63,12 @@ ls
 Mesh max client: 30
 
 
+band steering :    lbd/hyd
+4 HD /ATF	  :	   driver/wsplcd
+Daisy chain   :    repacd/wsplcd
+WPS 		  :    wpa_supplicat/wps_enhc/repacd
+
+
 
 
 
