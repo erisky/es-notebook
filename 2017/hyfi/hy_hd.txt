@@ -1,0 +1,7 @@
+@hy hd
+H-Default table contains 3 entries
+	index     MAC                 ID                  UDPPort       OtherPort     Static
+	    0:    82:87:FE:01:8D:92   82:87:FE:01:8D:92   (60) ath11     (60) ath11     0
+	    1:    84:16:F9:06:F2:2F   82:87:FE:01:8D:92   (60) ath11     (60) ath11     0
+	    2:    2C:4D:54:C4:3F:47   82:87:FE:01:8D:92   (60) ath11     (60) ath11     0
+

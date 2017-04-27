@@ -1,0 +1,124 @@
+-- ME:
+        QCA IEEE 1905.1 device: 82:87:FE:01:8D:92, IPv4 address: 192.168.1.1 
+           ConnectionMap: 0xf
+
+        Local interfaces:
+
+        Interface name   Medium Type  MAC Address       Contention      PHY Capabilities
+        ath0             WLAN2G       00:03:7F:12:BA:BA 11              20MHz,2,HT,7,23
+        ath1             WLAN5G       00:34:56:78:57:57 36              80MHz,2,VHT,9,20
+        ath2             WLAN5G       00:34:56:78:E8:E8 120             160MHz,4,VHT,9,18
+        eth1             ETHER        82:87:FE:01:8D:92 255       
+
+        Legacy Devices:
+        Interface ath2:
+        2C:4D:54:C4:3F:47
+        9C:35:EB:42:B1:AE
+
+        Interface eth1:
+        84:16:F9:06:F2:2F
+
+-- DB (1 entries):
+
+        #1: QCA IEEE 1905.1 device: 8E:21:FA:0E:65:5F, IPv4 address: 192.168.1.8 (message ID: 09270; ts: 84799) 
+           Relation: Direct Neighbor
+
+
+        Remote connections (Directly connected to self):
+
+        Interface name   Medium Type  MAC Address       MID     Direct  Legacy Bridge   TS              Contention      PHY Capabilities
+        ath0             WLAN2G       BA:EE:B4:E9:89:06 09264   Yes     No              84758   11        
+        ath2             WLAN5G       06:34:56:78:01:01 09264   Yes     No              84758   120       
+
+        Remote connections (Not directly connected to self):
+
+        Index    Medium Type  MAC Address       Contention      PHY Capabilities
+           0            WLAN2G       B4:EE:B4:E9:89:06  11              20MHz,2,HT,7,26
+           1            WLAN5G       00:34:56:78:01:01  120             80MHz,2,VHT,9,20
+           2            ETHER        8E:21:FA:0E:65:5F  255       
+           3            ETHER        32:24:8C:EA:AC:20  255       
+
+        0 Bridged addresses:
+        message ID: 00000, time stamp: 84799
+
+        Address                 Interface       Interface Type
+
+
+
+*******************   STAR  *********************************
+
+
+Topology Discovery Service module status:
+Mode of operation: Relaying device
+IEEE 1905.1 mode: QCA Enhanced
+Hy-Fi 1.0 compatibility: Supported
+
+-- ME:
+        QCA IEEE 1905.1 device: 86:E7:A4:FC:26:6F, IPv4 address: 192.168.1.1 
+           ConnectionMap: 0xd
+
+        Local interfaces:
+
+        Interface name   Medium Type  MAC Address       Contention      PHY Capabilities
+        ath0             WLAN2G       00:03:7F:12:BA:BA 6               20MHz,2,HT,7,23
+        ath2             WLAN5G       00:34:56:78:E8:E8 100             160MHz,4,VHT,9,18
+        eth1             ETHER        86:E7:A4:FC:26:6F 255       
+
+        Legacy Devices:
+        Interface ath2:
+        06:34:56:78:9D:9D
+
+-- DB (2 entries):
+
+        #1: QCA IEEE 1905.1 device: 8E:21:FA:0E:65:5F, IPv4 address: 192.168.1.8 (message ID: 26260; ts: 16684) 
+           Relation: Direct Neighbor
+
+
+        Remote connections (Directly connected to self):
+
+        Interface name   Medium Type  MAC Address       MID     Direct  Legacy Bridge   TS              Contention      PHY Capabilities
+        ath0             WLAN2G       BA:EE:B4:E9:89:06 26260   Yes     No              16670   6         
+        ath2             WLAN5G       06:34:56:78:01:01 26260   Yes     No              16670   100       
+
+        Remote connections (Not directly connected to self):
+
+        Index    Medium Type  MAC Address       Contention      PHY Capabilities
+           0            WLAN2G       B4:EE:B4:E9:89:06  6               20MHz,2,HT,7,26
+           1            WLAN5G       00:34:56:78:01:01  100             80MHz,2,VHT,9,20
+           3            ETHER        8E:21:FA:0E:65:5F  255       
+           4            ETHER        32:24:8C:EA:AC:20  255       
+
+        1 Bridged addresses:
+        message ID: 00000, time stamp: 16684
+
+        Address                 Interface       Interface Type
+        84:16:F9:06:F2:2F       4               Remote
+
+        #2: QCA IEEE 1905.1 device: B4:EE:B4:E9:96:07, IPv4 address: 192.168.1.11 (message ID: 05893; ts: 16714) 
+           Relation: Direct Neighbor
+
+
+        Remote connections (Directly connected to self):
+
+        Interface name   Medium Type  MAC Address       MID     Direct  Legacy Bridge   TS              Contention      PHY Capabilities
+        ath0             WLAN2G       BA:EE:B4:E9:96:09 05833   Yes     No              16667   6         
+        ath2             WLAN5G       BA:EE:B4:E9:96:08 05890   Yes     No              16713   100       
+
+        Remote connections (Not directly connected to self):
+
+        Index    Medium Type  MAC Address       Contention      PHY Capabilities
+           0            WLAN2G       B4:EE:B4:E9:96:09  6               20MHz,2,HT,7,26
+           1            WLAN5G       00:34:56:78:9D:9D  100             80MHz,2,VHT,9,20
+           2            WLAN5G       B4:EE:B4:E9:96:08  100             160MHz,4,VHT,9,24
+           5            ETHER        B4:EE:B4:E9:96:07  255       
+           6            ETHER        B4:EE:B4:E9:96:06  255       
+           15           WLAN5G       06:34:56:78:9D:9D  100       
+
+        1 Bridged addresses:
+        message ID: 00000, time stamp: 16714
+
+        Address                 Interface       Interface Type
+        2C:4D:54:C4:3F:47       0               Remote
+
+
+

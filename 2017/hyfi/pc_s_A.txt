@@ -1,0 +1,21 @@
+@pc s A
+pcService module status:
+Status for Wi-Fi interface ath0, 2GHz:
+        Medium Utilization = 77%
+        TCP Link Capacity to DA BA:EE:B4:E9:89:06 = 0 Mbps
+        UDP Link Capacity to DA BA:EE:B4:E9:89:06 = 0 Mbps
+Status for Wi-Fi interface ath1, 5GHz:
+        Medium Utilization = 0%
+        NO STATIONS ASSOCIATED
+Status for Wi-Fi interface ath2, 5GHz:
+        Medium Utilization = 3%
+        TCP Link Capacity to DA 9C:35:EB:42:B1:AE = 312 Mbps
+        UDP Link Capacity to DA 9C:35:EB:42:B1:AE = 347 Mbps
+        TCP Link Capacity to DA 2C:4D:54:C4:3F:47 = 221 Mbps
+        UDP Link Capacity to DA 2C:4D:54:C4:3F:47 = 246 Mbps
+        TCP Link Capacity to DA 06:34:56:78:01:01 = 22 Mbps
+        UDP Link Capacity to DA 06:34:56:78:01:01 = 25 Mbps
+Status for Ethernet interface eth1:
+        Medium utilization = 0%
+        Link capacity = 1000Mbps
+

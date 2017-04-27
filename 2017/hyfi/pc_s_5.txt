@@ -1,0 +1,64 @@
+@pc s 5
+pcService module status:
+Status for Wi-Fi interface ath1, 5GHz:
+        Debug mode: off
+        Timer: Remaining time 0.982514 sec
+        AP medium information: Medium characterized/measured at 1493187781 (0 seconds ago)
+        Medium utilization = 0%
+        Reported medium utilization = 0%
+        RAW DATA: Tx Queue Buffer Usage = 0
+        RAW DATA: Current Load by node itself = 0
+        Number of links = 0
+
+Remote STA medium information (1 BSSIDs known):
+
+        STAs associated with B4:EE:B4:E9:89:06 :
+        Received at 1493094712 (93069 seconds ago) (LastMessageID = 9092, LastFragmentID = 0)
+        AP medium utilization = 83%
+        AP number of links = 1
+                AP link #0: DA = 2C:4D:54:C4:3F:47 --> Available/Full TCP Link capacity = 0/36 Mbps, Available/Full UDP Link capacity = 0/40 Mbps
+Status for Wi-Fi interface ath2, 5GHz:
+        Debug mode: off
+        Timer: Remaining time 0.982514 sec
+        AP medium information: Medium characterized/measured at 1493187781 (0 seconds ago)
+        Medium utilization = 8%
+        Reported medium utilization = 8%
+        RAW DATA: Tx Queue Buffer Usage = 0
+        RAW DATA: Current Load by node itself = 0
+        Number of links = 3
+                Link #0: DA = 9C:35:EB:42:B1:AE --> Available/Full TCP Link capacity = 261/421 Mbps, Available/Full UDP Link capacity = 290/468 Mbps
+                        RAW link data:
+                                 --> raw phy rate = 780
+                                 --> average aggregation = 96
+                                 --> PHY Error Rate = 12
+                                 --> Last PER = 0
+                                 --> MSDU Size = 1300
+                                 --> Derived raw TCP Estimated Throughput = 421 Mbps
+                                 --> Derived raw UDP Estimated Throughput = 468 Mbps
+                Link #1: DA = 2C:4D:54:C4:3F:47 --> Available/Full TCP Link capacity = 205/331 Mbps, Available/Full UDP Link capacity = 228/368 Mbps
+                        RAW link data:
+                                 --> raw phy rate = 433
+                                 --> average aggregation = 96
+                                 --> PHY Error Rate = 12
+                                 --> Last PER = 0
+                                 --> MSDU Size = 1300
+                                 --> Derived raw TCP Estimated Throughput = 331 Mbps
+                                 --> Derived raw UDP Estimated Throughput = 368 Mbps
+                Link #2: DA = 06:34:56:78:01:01 --> Available/Full TCP Link capacity = 19/32 Mbps, Available/Full UDP Link capacity = 22/36 Mbps
+                        RAW link data:
+                                 --> raw phy rate = 43
+                                 --> average aggregation = 96
+                                 --> PHY Error Rate = 12
+                                 --> Last PER = 0
+                                 --> MSDU Size = 1300
+                                 --> Derived raw TCP Estimated Throughput = 32 Mbps
+                                 --> Derived raw UDP Estimated Throughput = 36 Mbps
+
+Remote STA medium information (1 BSSIDs known):
+
+        STAs associated with B4:EE:B4:E9:89:06 :
+        Received at 1493094712 (93069 seconds ago) (LastMessageID = 9092, LastFragmentID = 0)
+        AP medium utilization = 83%
+        AP number of links = 1
+                AP link #0: DA = 2C:4D:54:C4:3F:47 --> Available/Full TCP Link capacity = 0/36 Mbps, Available/Full UDP Link capacity = 0/40 Mbps
+

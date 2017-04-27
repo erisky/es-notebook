@@ -36,6 +36,11 @@ only found @ spf30
 ./qualcomm_sdk/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/root-ipq806x/lib/firmware/QCA9984/hw.1/boarddata_2.bin
 ./qualcomm_sdk/qsdk/build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/qca-wifi-fw-QCA9984_hw_1-WLAN.BL.3.3-00092-S-1/ipkg-all/qca-wifi-fw-hw4-10.4-asic/lib/firmware/QCA9984/hw.1/boarddata_2.bin
 
+
+###
+scp ~/work/spf30/boarddata_2.bin root@192.168.1.1:/lib/firmware/QCA9984/hw.1/
+##
+
 temp:
 
 ./skysoft/product/pu9-fuji_sw_for_rt4230w-d187/code/qsdk/qca/src/qca-wifi-10.4/offload/wlan/lmac_offload_if/ol_if_ath.c:                adf_os_str_ncopy(destptr, "boarddata_2.bin", 15);
@@ -46,6 +51,16 @@ temp:
 ./skysoft/base/software/common_pu9_IPQ4019/qsdk/qca/feeds/qca_10_4/net/qca-wifi-fw-10.4/Makefile: $(INSTALL_BIN) $$(1)/lib/firmware/$(3)/boardData_QCA9984_CUS239_5G_v1_001.bin $$(1)/lib/firmware/$(3)/boarddata_2.bin
 
 
+cp ~/work/spf30/
+
+
 
 5. with ap5400w repacd always enable all wifi 5G
    so there will be problem if wifi1 is on
+
+
+6. SON mode: repacd will disable wps_enhc even previous it's being manully enabled.
+  wps_pbc_extender_enhance : disabled in repacd.init
+
+7
+
