@@ -1,0 +1,22 @@
+
+$$ tip #1
+
+'ciw'
+'diw'
+change internal a word
+delete
+
+
+$$ tip #2
+
+:vimgrep /pattern/ ../**/*.c
+to find the patterns in files
+:cnext
+:cprevious
+to move between search results
+
+short: can't not have list of rearch results
+to speedup:
+:noautocmd vimgrep /pattern/ ../**/*.c
+
+
