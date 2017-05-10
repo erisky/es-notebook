@@ -1,0 +1,86 @@
+
+## Tier 1 CAP Settings #####	[192.168.1.1]
+
+# Disable wifi1
+uci set wireless.@wifi-iface[1].ssid='NoOpenWrt'
+uci set wireless.@wifi-iface[1].disabled=1
+uci set wireless.wifi1.repacd_auto_create_vaps=0
+uci commit
+
+
+# Multuple AP steering will be atomatically enabled
+
+uci set repacd.repacd.Enable=1
+uci commit repacd
+/etc/init.d/repacd start
+
+
+
+
+========================= # RE 1#=============================
+
+
+uci set wireless.wifi1.repacd_auto_create_vaps=0
+
+# Configure DHCP to not respond  [192.168.1.8]
+uci set dhcp.lan.ignore=1; uci commit dhcp; 
+
+
+uci set wireless.@wifi-iface[1].ssid='NoOpenWrt'
+uci set wireless.@wifi-iface[1].disabled=1
+uci set wireless.wifi1.repacd_auto_create_vaps=0
+
+# Static IP address (update the IP addresses as appropriate)
+uci set network.lan.ifname='eth0 eth1'; 
+uci set network.lan.proto=static; 
+uci set network.lan.ipaddr=192.168.1.8;
+uci set network.lan.gateway=192.168.1.1; 
+uci set network.lan.dns=192.168.1.1;
+uci delete network.wan; uci commit network
+uci set mcsd.config.Enable=0
+
+
+uci commit network
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+uci set repacd.repacd.ConfigREMode='son'
+uci set repacd.repacd.Enable=1
+uci commit repacd
+/etc/init.d/repacd start
+
+
+========================= # RE 2#=============================
+
+
+# Configure DHCP to not respond
+#uci set dhcp.lan.ignore=1; uci commit dhcp; 
+
+
+
+#### Disable NAT - Dynamic IP address
+###uci set network.lan.ifname='eth0 eth1'; uci set network.lan.proto=dhcp; 
+###uci delete network.wan; uci commit network
+###/etc/init.d/network restart
+#disable mcsd.
+
+
+# Disable NAT - Static IP address (update the IP addresses as appropriate)
+uci set dhcp.lan.ignore=1; uci commit dhcp; 
+
+uci set network.lan.ifname='eth0 eth1'; 
+uci set network.lan.proto=static; uci set network.lan.ipaddr=192.168.1.11;
+uci set network.lan.gateway=192.168.1.1; 
+uci set network.lan.dns=192.168.1.1;
+uci delete network.wan; uci commit network
+
+uci set mcsd.config.Enable=0
+
+uci commit network
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+uci set repacd.repacd.Enable=1
+uci commit repacd
+/etc/init.d/repacd start
+

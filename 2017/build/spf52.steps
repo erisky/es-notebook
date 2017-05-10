@@ -1,0 +1,27 @@
+$ repo init -u git://codeaurora.org/quic/qsdk/releases/manifest/qstak -b release -m caf_AU_LINUX_QSDK_RELEASE_ENDIVE_PREVIEW_CC_TARGET_ALL.3.0.308.00.332.024.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
+$ repo sync
+$ mkdir -p qsdk/dl
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Wifi/qsdk-qca-wifi/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Wifi/qsdk-qca-wlan/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Wifi/qsdk-ieee1905-security/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Wifi/qsdk-qca-athdiag/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/QSDK-Base/qca-lib/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/QSDK-Base/qca-mcs-apps/* qsdk
+
+$ tar -xzvf WLAN.BL.3.5/cnss_proc/src/components/qca-wifi-fw-src-component-cmn-WLAN.BL.3.5-00007-S-1.tgz
+$ mv include qsdk/qca/src/qca-wifi-10.4/fwcommon
+$ tar -xzvf WLAN.BL.3.5/cnss_proc/src/components/qca-wifi-fw-src-component-halphy_tools-WLAN.BL.3.5-00007-S-1.tgz
+$ mv wlan/halphy_tools qsdk/qca/src/qca-wifi-10.4
+$ tar xjvf NHSS.QSDK.5.2/apss_proc/out/proprietary/BLUETOPIA/qca-bluetopia.tar.bz2 -C qsdk
+
+$ cp WLAN.BL.3.5/cnss_proc/bin/IPQ4019/hw.1/* qsdk/dl
+$ cp WLAN.BL.3.5/cnss_proc/bin/QCA9888/hw.2/* qsdk/dl
+$ cp WLAN.BL.3.5/cnss_proc/bin/QCA9984/hw.1/* qsdk/dl
+$ cp -rf WLAN.BL.3.5/cnss_proc/src/components/* qsdk/dl
+$ cp CNSS.PS.2.5/* qsdk/dl
+
+
+
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Hyfi/hyfi-ipq/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Wifi/qsdk-whc/* qsdk
+$ cp -rf NHSS.QSDK.5.2/apss_proc/out/proprietary/Wifi/qsdk-whcpy/* qsdk

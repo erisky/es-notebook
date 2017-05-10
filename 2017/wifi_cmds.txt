@@ -1,0 +1,59 @@
+
+# Get all interface MACs
+ifconfig |grep Ethernet | awk '{printf("%-10s %s\n", $1, $5)}'
+
+# Get LAN IP
+ifconfig br-lan |grep "inet addr:" | awk   '{print $2}' | sed -e
+ s/addr://g
+
+# GET WAN IP
+ifconfig eth0 |grep "inet addr:" | awk   '{print $2}' | sed -e s
+/addr://g
+
+
+
+# Get connected STAs
+wlanconfig ath0 list
+
+# Check DeepClone not be enabled for Daisychain
+uci show wsplcd | grep Deep
+
+# Role check
+repacd.repacd.Role='NonCAP'
+
+# WAN check for Mode
+uci show network | grep wan=
+root@OpenWrt:~# uci show | grep SON
+repacd.repacd.EnableSON='1'
+root@OpenWrt:~# uci show | grep son
+lldpd.config.enable_sonmp='1'
+repacd.repacd.ConfigREMode='son'
+
+# To enable for wps_enhc, this configuration must be set
+uci show | grep enh
+wireless.qcawifi.wps_pbc_extender_enhance='0'
+
+# commands for checking sta status
+wpa_cli -p /var/run/wpa_supplicant-ath11 status
+wpa_cli -p /var/run/wpa_supplicant-ath21 mib
+wpa_cli -p /var/run/wpa_supplicant-ath01 interface ath21
+wpa_cli -p /var/run/wpa_supplicant-ath01 level
+wpa_cli -p /var/run/wpa_supplicant-ath21 reassociate
+wpa_cli -p /var/run/wpa_supplicant-ath21 list_networks
+# repacd will disable netowrk by using disable_network-- but AP(ath2) still can't work
+wpa_cli -p /var/run/wpa_supplicant-ath21 enable_network 0
+
+
+# Backhaul for inteface 0 !!!
+# wps only enabled on the non-backhaul interfaces
+uci set wireless.@wifi-iface[0].backhaul=1
+
+# if the wireless interface is not enabled with push button, no wps will run
+iwpriv ath1 get_nopbn
+
+
+# if repacd.manage_vap_ind set to 1
+# --> AP start even the sta on same radio is on
+ iwpriv athN athnewind 1
+
+

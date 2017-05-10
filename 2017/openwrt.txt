@@ -1,0 +1,16 @@
+
+initial scripts
+
+procd.sh
+
+related to ubox
+
+
+# to debug using wireshrk
+ssh root@192.168.1.1 "tcpdump -i ath0 -s 0 -K -n -w -" | wireshark -k -i -
+
+debug wsplcd
+
+ssh root@192.168.1.11 "tcpdump -i ath21 -s 0 -K -n -w -" | wireshark -k -i -
+ieee_1905.1 && eth.addr == B4:EE:B4:E9:96:07
+

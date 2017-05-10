@@ -9,3 +9,16 @@ git push --tags origin master
 git pull --tags 
 git push --delete origin Label_0.0.1 
 
+# To archive a git repo
+git archive --format=tar.gz --prefix=git-1.4.0/ v1.4.0 >git-1.4.0.tar.gz
+git archive --prefix=git-1.4.0/ -o git-1.4.0.tar.gz v1.4.0
+
+# Note, it's not able to use git arhchieve for repo dirs since it contain many gits
+
+example 
+git rebase -i   <version 1>
+
+ pick    <vesion 2>
+ squash  <vesion 3>
+
+--> <version 2> and <version 3> will be merged 

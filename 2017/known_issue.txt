@@ -62,5 +62,33 @@ cp ~/work/spf30/
 6. SON mode: repacd will disable wps_enhc even previous it's being manully enabled.
   wps_pbc_extender_enhance : disabled in repacd.init
 
-7
+7. Repacd.init:
+   -> restart_in_noncap_mode
+     --> __repacd_config_re_mode 
+   DeepClone and DeepcloneBssid is enabled which will cause wspld always clone 
+   bssid from parent AP and then make the linke disconnected if it's daisychained
+
+8. When AP / STA are both configured on the same radio, the AP will not work
+   if the STA failed to connect to the Parent AP.
+    --> iwpriv athnewind
+
+9. son mode action frmae: iface_mgr???
+
+
+10. backhaul_ap is a only a parameter used in repacd.init for setting 
+    otherband_bssid using iwpriv --> 
+    iwpriv $backhaul_ap_iface_5g otherband_bssid 0x$otherband_bssid1 0x$otherband_bssid2
+           need to check otherband_bssid
+           ====> In driver, this information is bringed in the frame(IE) 
+           --> seems to indications the alternative ssid 
+
+11. backhaul --> ACTION is sent, but receive?
+
+
+
+
+
+
+
+
 

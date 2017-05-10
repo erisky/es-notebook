@@ -1,5 +1,5 @@
-@pc s A
 pcService module status:
+@pc s A
 Status for Wi-Fi interface ath0, 2GHz:
         Medium Utilization = 77%
         TCP Link Capacity to DA BA:EE:B4:E9:89:06 = 0 Mbps
