@@ -2,7 +2,11 @@
 http://192.168.1.1:8086/index.html 
 Default Username / password:
 root / MmvGB^RY3#
-    
+
+-- charter new --    
+operator R3MOT3ACC3$$
+technician R3MOT3ACC3$$
+admin admin
 
 
 [ D900 Server (10.194.20.21) ]

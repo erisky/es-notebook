@@ -4,6 +4,18 @@ initial scripts
 procd.sh
 
 related to ubox
+-----------------
+
+package installation  related:
+
+check files @ 
+~/work/spf_50/repo/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/pkginfo/
+Related scripts
+--> scripts/gen-dependencies.sh
+--> include/package-ipkg.mk
+
+
+
 
 
 # to debug using wireshrk

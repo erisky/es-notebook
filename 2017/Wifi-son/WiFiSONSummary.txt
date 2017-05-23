@@ -45,8 +45,8 @@ uci commit network
 /etc/init.d/dnsmasq restart
 
 uci set repacd.repacd.ConfigREMode='son'
-uci set repacd.repacd.Enable=1
 uci commit repacd
+uci set repacd.repacd.Enable=1
 /etc/init.d/repacd start
 
 

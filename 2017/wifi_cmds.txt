@@ -42,6 +42,7 @@ wpa_cli -p /var/run/wpa_supplicant-ath21 reassociate
 wpa_cli -p /var/run/wpa_supplicant-ath21 list_networks
 # repacd will disable netowrk by using disable_network-- but AP(ath2) still can't work
 wpa_cli -p /var/run/wpa_supplicant-ath21 enable_network 0
+wpa_cli -p /var/run/wpa_supplicant-ath21 disable_network 0
 
 
 # Backhaul for inteface 0 !!!

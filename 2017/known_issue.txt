@@ -85,6 +85,8 @@ cp ~/work/spf30/
 11. backhaul --> ACTION is sent, but receive?
 
 
+12. need to check why wsplcd set uci wireless with correct ssid/passpharse
+    but bssid =0:0:0:0:0:0
 
 
 
