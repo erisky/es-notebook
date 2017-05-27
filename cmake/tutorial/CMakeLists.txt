@@ -6,6 +6,13 @@
 cmake_minimum_required(VERSION 2.6)
 project(Tutorial)
 
+option(USE_MYSQRT
+        "Use our own SQRT?" on )
+
+
+
+set (CMAKE_INSTALL_PREFIX /home/eric/testcmke)
+
 # Add version number
 set (Tutorial_VERSION_MAJOR 1)
 set (Tutorial_VERSION_MINOR 2)
@@ -25,8 +32,9 @@ if (USE_MYSQRT)
     set (EXTRA_LIBS ${EXTRA_LIBS} my_sqrt)
 endif (USE_MYSQRT)
 
-option(USE_MYSQRT
-        "Use our own SQRT?" )
-
 add_executable(Tutorial tutorial.c)
 target_link_libraries(Tutorial ${EXTRA_LIBS})
+
+
+install (TARGETS Tutorial DESTINATION bin)
+#install (FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h" DESTINATION include)
