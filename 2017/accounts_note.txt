@@ -8,6 +8,9 @@ operator R3MOT3ACC3$$
 technician R3MOT3ACC3$$
 admin admin
 
+---- Hidden Page -----
+charter hidden page: N@74U1fUD0n7H@v1P$d
+
 
 [ D900 Server (10.194.20.21) ]
 -	Administrator: d900/gitd900

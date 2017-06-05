@@ -1,0 +1,167 @@
+
+Debug quick commands:
+
+$ rmmod ecm; rmmod shortcut_fe_drv; rmmod shortcut_fe; rmmod shortcut_fe_ipv6
+$ cp shortcut-fe.ko  /lib/modules/3.14.77/ ; /etc/init.d/qca-nss-ecm start
+
+
+compile modules:
+--------------------
+make package/qca-nss-ecm/{clean,compile} V=s
+make package/shortcut-fe/{clean,compile} V=s
+
+enable example pcc build
+----------------------
+make menuconfig --> Kernel/net/qca-nss-ecm/example
+
+
+ecm_classifier_assign_classifier
+	->ecm_db_connection_classifier_assign
+		->ecm_classifier_pcc_instance_alloc
+			->ecm_classifier_pcc_process
+
+
+----
+NF_INET_POST_ROUTING HooK
+-->
+ecm_sfe_ipv4_ip_process
+	->ecm_sfe_ported_ipv4_process (:1759) ***
+		-> ecm_classifier_assign_classifier (:2248->:)(!!! not runn in sfe?)
+		-> ecm_sfe_ported_ipv4_connection_accelerate (:321)
+			-> sfe_drv_ipv4_tx (:1189)
+
+ecm_sfe_ported_ipv4_connection_accelerate
+	->sfe_drv_ipv4_tx -> sfe_drv_create_ipv4_rule_msg
+		-> sfe_ipv4_create_rule
+
+
+
+iptables -t filter -A FORWARD_CTRL -p tcp --dport 80 -m string --string revtechaccelerator --algo bm -j REJECT --reject-with tcp-reset -m mac --mac-source 84:16:f9:06:f2:2f
+iptables -t mangle -A FORWARD -p tcp --dport 80 -j CONNMARK --or-mark 0x80000000
+
+/lib/firewall/firewall_ctrl.sh
+
+
+
+ecm_pcc_test.ko  --- ?? reference count issue ==> try_module_get
+
+------------------------------
+Using debug file system:
+ /sys/kernel/debug/ecm_pcc_test
+
+Insert module:
+$ echo 1 > /sys/kernel/debug/ecm_pcc_test/unregister 
+Remove Module:
+$ echo 1 > /sys/kernel/debug/ecm_pcc_test/unregister 
+$ rmmod ecm_pcc_test
+
+
+
+###
+Per user mode_sel !!!
+number of rules ???
+enable/disable with module loading
+
+
+root@ap5400w:~# uci set firewall_ctrl.sel_mode='Allow'
+root@ap5400w:~# uci set firewall_ctrl.sel_mode='Forbid'
+root@ap5400w:~# uci set firewall_ctrl.sel_mode='Control'
+
+
+##################################################
+add default rules:
+################################################
+config parent_ctrl 'pc0'
+        option cli_name 'default'          
+        option cli_mac 'default'          
+        option sun '0'       
+        option mon '0'       
+        option tue '0'       
+        option wed '0'       
+        option thu '0'       
+        option fri '0'       
+        option sat '0'       
+        option time_format '0'
+        option mode_sel 'Deny'
+
+
+##################################################
+Testing configuration:
+##################################################
+
+root@ap5400w:~# cat /etc/config/firewall_ctrl 
+
+config switch 'parent_ctrl'
+        option keywords 'revtechaccelerator'
+        option enabled '1'
+
+config url_filter 'ufilter'
+        option enabled '0'
+
+config key_filter 'kfilter'
+        option enabled '0'
+
+config netserv_filter 'nsfilter'
+        option enabled '0'
+
+config switch 'cliACL'
+        option enabled '0'
+
+config parent_ctrl 'pc0'
+        option cli_name '84:16:f9:06:f2:2f'
+        option cli_mac '84:16:f9:06:f2:2f'
+        option sun '2088960'
+        option mon '2088960'
+        option tue '2088960'
+        option wed '2088960'
+        option thu '2088960'
+        option fri '2088960'
+        option sat '2088960'
+        option time_format '0'
+        option mode_sel 'Allow'
+
+config parent_ctrl 'pc1'
+        option cli_name '84:16:f9:06:f2:aa'
+        option cli_mac '84:16:f9:06:f2:aa'
+        option sun '1'
+        option mon '2'
+        option tue '4'
+        option wed '8'
+        option thu '16'
+        option fri '32'
+        option sat '64'
+        option time_format '0'
+        option mode_sel 'Deny'
+
+
+config parent_ctrl 'pc2'
+        option cli_name '84:16:f9:06:f2:bb'
+        option cli_mac '84:16:f9:06:f2:bb'
+        option sun '1'
+        option mon '2'
+        option tue '4'
+        option wed '8'
+        option thu '16'
+        option fri '32'
+        option sat '64'
+        option time_format '0'
+        option mode_sel 'Controlled'
+
+config parent_ctrl 'pc3'
+        option cli_name 'default'
+        option cli_mac 'default'
+        option sun '0'
+        option mon '0'
+        option tue '0'
+        option wed '0'
+        option thu '0'
+        option fri '0'
+        option sat '0'
+        option time_format '0'
+        option mode_sel 'Deny'
+
+
+To rebuild:
+make package/qca-nss-ecm/{clean,compile} V=s
+make package/firewall/{clean,compile} V=s
+make package/skysoft_web_admin/{clean,compile} V=s

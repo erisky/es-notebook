@@ -1,0 +1,52 @@
+files:
+/home/eric/spf5/skysoft/qsdk/package/skysoft/skysoft_web_admin/cgi
+
+
+	{"SetClassification", "setclassification"},
+	{"GetClassification", "getclassification"},
+	{"SetShaper","setshaper"},
+	{"GetShaper","getshaper"},
+	{"SetQueue","setqueue"},
+	{"GetQueue","getqueue"},
+
+
+shaper:
+    do_cmd("sh /lib/shaper.sh &");     
+    do_cmd("sh /lib/queue.sh &");   
+
+
+queue:
+      do_cmd("sh /lib/shaper.sh &");    
+      do_cmd("sh /lib/queue.sh &");  
+
+classification:
+
+	do_cmd("sh /lib/classification.sh &");
+
+
+
+Using HTB to try line rate
+
+$ tc qdisc add dev br-lan root handle 1: htb default 30
+$ tc class add dev br-lan parent 1: classid 1:1 htb rate 1000mbit burst 150k
+
+$ tc class add dev br-lan parent 1:1 classid 1:10 htb rate 800mbit burst 15k
+$ tc class add dev br-lan parent 1:1 classid 1:20 htb rate 300mbit ceil 100mbit burst 15k
+$ tc class add dev br-lan parent 1:1 classid 1:30 htb rate 100kbit ceil 100mbit burst 15k
+
+
+
+# $U32 match ip dport 80 0xffff flowid 1:10
+# U32="tc filter add dev br-lan protocol ip parent 1:0 prio 1 u32"
+# $U32 match ip sport 25 0xffff flowid 1:20
+$U32 match ip sport 5201 0xffff flowid 1:20
+
+
+
+tc class change dev br-lan parent 1:1 classid 1:20 htb rate 30mbit ceil 100mbit burst 15k
+
+
+# tc class add dev br-lan parent 1:1 classid 1:10 htb rate 5mbit burst 15k
+# tc class add dev br-lan parent 1:1 classid 1:20 htb rate 3mbit ceil 6mbit burst 15k
+# tc class add dev br-lan parent 1:1 classid 1:30 htb rate 1kbit ceil 6mbit burst 15k
+

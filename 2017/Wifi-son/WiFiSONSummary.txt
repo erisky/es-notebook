@@ -25,6 +25,7 @@ uci set wireless.wifi1.repacd_auto_create_vaps=0
 # Configure DHCP to not respond  [192.168.1.8]
 uci set dhcp.lan.ignore=1; uci commit dhcp; 
 
+# If wifi1 is not used 
 
 uci set wireless.@wifi-iface[1].ssid='NoOpenWrt'
 uci set wireless.@wifi-iface[1].disabled=1
