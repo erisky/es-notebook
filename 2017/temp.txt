@@ -1,0 +1,2 @@
+wlan.bssid ==b4:ee:b4:e9:96:09 ||  wlan.sa == 78:92:9c:eb:b9:c8 || wlan.da ==78:92:9c:eb:b9:c8
+

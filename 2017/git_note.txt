@@ -22,3 +22,7 @@ git rebase -i   <version 1>
  squash  <vesion 3>
 
 --> <version 2> and <version 3> will be merged 
+
+
+revise most recent commit message
+git commit --amend

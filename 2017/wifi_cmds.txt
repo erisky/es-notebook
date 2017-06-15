@@ -1,3 +1,8 @@
+# Get txpower
+iwconfig ath0 txpower 12
+
+
+
 
 # Get all interface MACs
 ifconfig |grep Ethernet | awk '{printf("%-10s %s\n", $1, $5)}'
@@ -56,5 +61,19 @@ iwpriv ath1 get_nopbn
 # if repacd.manage_vap_ind set to 1
 # --> AP start even the sta on same radio is on
  iwpriv athN athnewind 1
+
+
+
+#set sta
+wlanconfig ath4 create wlandev wifi0 wlanmode sta nosbeacon
+wpa_supplicant -b br-lan -B -P /var/run/wifi-ath4.pid -D athr -i ath4 -c /var/run/wpa_supplicant.conf
+wpa_cli -p /var/run/wpa_supplicant-ath4 status
+
+#define WIFI0_ATH_MODE			"wireless.wla.mode"
+
+uci show wireless.wla.mode
+
+conf file: "/var/run/wpa_supplicant.conf"                      
+
 
 

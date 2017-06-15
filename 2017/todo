@@ -1,3 +1,77 @@
+[System Testing]
+Parental control
+reset feature? (button trigger?})
+pptp vpn  --> firewall need to be disabled
+	  --> chap secret file bug?
+
+
+merge difference from 
+/home/eric/work/test_spf30/spf30/.product/code/qsdk/package/system/	
+
+
+
+Capitcal portal User requirements
+
+
+Capital portion
+[Phase I]
+1. The Wifi users can access the bus-stop wifi for pre-defined time after one of the action:
+   1.1 Open browser and click on the redirect ad.
+   1.2 Open browser and enter user name/password and/or click on ad.
+   1.3 Open browser and finished the redirect 3rd part social auth and/or clicking on ad.
+
+2. The Wifi users will be not be able to access internet before clicking the 'start auth' button on portal page.
+3. The Wifi users will could access some auth related sites for some time after clicking 'start auth' button.
+   The time interval is different according to WiFi-plans.
+
+4. The Wifi users will see the ads in image or video format.
+5. The WiFi users need to wait a pre-defined video playing time before internet is accessible.
+6. The WiFi users will be able to access internet if the backend cloud server is down due to maintaince of other reasons.
+
+7. The Wifi users could select different SSIDs to associate and result in different AUTH methods.
+8. The system admin(cloud user) could add WiFi-plan for a group of APs.
+9. The system admin(cloud user) should be able to access AP information through Web-based GUI.
+	Information: AP link status, servicing clients, corresponding wifi-plan, MAC, Up Time, AP Groups.
+10. The system admin(cloud user) is able to create a wifi-plan and assign it to an AP group.
+11. The system admin(cloud user) is able to create a account for auth.
+12. The system admin(cloud user) is able to access the client history information.
+	Information Field: 
+	MAC, AP, SSID, IP, start time, end time, target URL, ad title, click time, ad view time, auth ID, 
+	
+12. The system admin(cloud user) is able to access the client Action information.
+	Information Field: 
+	MAC, AP, SSID, IP, start time, end time, target URL, ad title, click time, ad view time, auth ID, traffice statistic?
+
+
+
+
+AC/AP Portion
+1. The AP WAN is default DHCP so if the WAN is connected to DHCP then no configuration is needed in deployment phrase.
+2. The AP has a LED blinking to indicate its connectivity to AC server.
+3. The AP will send periodically keepalive packets to AC server so AC server could determine it's  connection status.
+
+
+
+
+
+
+[Phase II]
+1. The wifi users can access the bus-stop wifi after one of the action:
+   1.4 Open browser and enter Email address and then authenticate with the password in Email.
+   1.5 Open browser and enter phone number and then authenticate with the password in SMS.
+
+2. The wifi users directly access internet if they already done authentication in other AP.
+   Only need to re-authenticate after the time expires.
+
+
+3. The account owner could push their own account database to Web Server.
+
+
+
+
+
+
+[Wifi-Son]
 1. wifison_ext lib
 2. stabv
 3. apstats

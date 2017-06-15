@@ -28,7 +28,9 @@ ecm_sfe_ipv4_ip_process
 	->ecm_sfe_ported_ipv4_process (:1759) ***
 		-> ecm_classifier_assign_classifier (:2248->:)(!!! not runn in sfe?)
 		-> ecm_sfe_ported_ipv4_connection_accelerate (:321)
-			-> sfe_drv_ipv4_tx (:1189)
+			-> sfe_drv_ipv4_tx (:1189) (call to driver with callback: ecm_sfe_ported_ipv4_connection_callback
+																		by sfe_ipv4_msg_init())
+
 
 ecm_sfe_ported_ipv4_connection_accelerate
 	->sfe_drv_ipv4_tx -> sfe_drv_create_ipv4_rule_msg
@@ -50,10 +52,9 @@ Using debug file system:
  /sys/kernel/debug/ecm_pcc_test
 
 Insert module:
-$ echo 1 > /sys/kernel/debug/ecm_pcc_test/unregister 
+$ insmod ecm_pcc_test
 Remove Module:
-$ echo 1 > /sys/kernel/debug/ecm_pcc_test/unregister 
-$ rmmod ecm_pcc_test
+echo 1 > /sys/kernel/debug/ecm_pcc_test/unregister  && rmmod ecm_pcc_test
 
 
 
