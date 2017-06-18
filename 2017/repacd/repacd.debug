@@ -1,0 +1,5 @@
+restart_in_noncap_mode
+  --> __repacd_config_re_mode
+  		-->  deep_clone=1
+  		     deep_clone_no_bssid=0  
+			 deep_clone_no_bssid=1 (daisychain)

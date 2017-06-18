@@ -1,3 +1,7 @@
+[5.0 porting path]
+/home/eric/work/spf_50/git_spf5/spf5
+
+
 [rebuild from spf40]
 
 repo init -u git://codeaurora.org/quic/qsdk/releases/manifest/qstak -b release -m caf_AU_LINUX_QSDK_RELEASE_DANDELION_TARGET_ALL.0.1.453.297.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
@@ -95,12 +99,19 @@ AP.DK07.1-C1
 >>>> U-boot Commands <<<<
 
 setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-spf40.img && imgaddr=0x84000000 && source $imgaddr:script
-
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-spf50.img && imgaddr=0x84000000 && source $imgaddr:script
 
 setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-git-build.img
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-sp50_porting.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
 setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 FUJITSU_AP5400W-D50_SWP_V1.0.13.SPF3.0-CSU2-3_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
+>>>> OLD <<<<<
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 PU9-IPQ4019_V1.0.15.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
+
+setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU9-IPQ4019_V1.0.15.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
 

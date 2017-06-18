@@ -1,0 +1,72 @@
+
+
+dtsi file:
+./base/hardware/common_IPQ8064/qsdk/qca/src/linux-3.14/arch/arm/boot/dts/askey-rt4230w-d156-rev2.dtsi
+in :
+	qsdk/qca/src/linux-3.14/arch/arm/boot/dts/
+
+charter adds:
+
+   aliases {                                                                                                                                                                
+~                              |        /*
+~                              |        mdio-gpio0 = &mdio0;
+~                              |         * U-Boot searches for these entries and patches
+~                              |         * 'local-mac-address'
+~                              |         */
+~                              |        ethernet0 = &gmac0;
+~                              |        ethernet1 = &gmac1;
+~                              |    };
+
+
+!!!???
+
+
+check:
+        gmac0: ethernet@37000000 {                                                                                                                                           
+~                              |                        device_type = "network";                                                                                                                             
+~                              |                        compatible = "qcom,nss-gmac";
+~                              |                        reg = <0x37000000 0x200000>;                                                                                                                         
+~                              |                        interrupts = <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH>;                                                                                                      
+~                              |                        phy-mode = "rgmii";                                                                                                                                  
+~                              |                        qcom,id = <0>;                                                                                                                                       
+~                              |                        qcom,pcs-chanid = <0>;                                                                                                                               
+~                              |                        qcom,phy-mdio-addr = <0>;                                                                                                                            
+~                              |                        qcom,poll-required = <1>;                                                                                                                            
+~                              |                        qcom,rgmii-delay = <1>;                                                                                                                              
+~                              |                        qcom,emulation = <0>;                                                                                                                                
+~                              |                        qcom,forced-speed = <1000>;                                                                                                                          
+~                              |                        qcom,forced-duplex = <1>;                                                                                                                            
+~                              |                        qcom,socver = <0>;                                                                                                                                   
+~                              |                        local-mac-address = [000000000000];                                                                                                                  
+~                              |                        mdiobus = <&mdio0>;                                                                                                                                  
+~                              |                };     
+
+./base/hardware/common_IPQ8064/qsdk/qca/src/linux-3.14/arch/arm/boot/dts/askey-rt4230w-d156-rev2.dtsi
+
+
+
+{where the board definitions commes from}
+
+
+check file: 
+	ipq806x.sh 
+
+ machine=$(cat /proc/device-tree/model)
+
+name 
+ *"AP-DK07.1-C2")      
+   name="ap-dk07.1-c2" 
+
+echo "$IPQ806X_BOARD_NAME" > /tmp/sysinfo/board_name                                                                                                                     
+echo "$IPQ806X_MODEL" > /tmp/sysinfo/model  
+
+
+study file:
+	/home/eric/spf5/qualcomm_sdk/qsdk/target/linux/ipq806x/base-files/lib
+
+
+
+
+
+
+

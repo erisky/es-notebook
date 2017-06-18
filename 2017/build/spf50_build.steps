@@ -1,0 +1,50 @@
+cp -rf NHSS.QSDK.5.0/apss_proc/out/proprietary/Wifi/qsdk-qca-wifi/* qsdk
+cp -rf NHSS.QSDK.5.0/apss_proc/out/proprietary/Wifi/qsdk-qca-wlan/* qsdk
+cp -rf NHSS.QSDK.5.0/apss_proc/out/proprietary/Wifi/qsdk-ieee1905-security/* qsdk
+cp -rf NHSS.QSDK.5.0/apss_proc/out/proprietary/Wifi/qsdk-qca-athdiag/* qsdk
+cp -rf NHSS.QSDK.5.0/apss_proc/out/proprietary/QSDK-Base/qca-lib/* qsdk
+cp -rf NHSS.QSDK.5.0/apss_proc/out/proprietary/QSDK-Base/qca-mcs-apps/* qsdk
+tar -xzvf WLAN.BL.3.5/cnss_proc/src/components/qca-wifi-fw-src-component-cmn-WLAN.BL.3.5-00007-S-1.tgz 
+mv include qsdk/qca/src/qca-wifi-10.4/fwcommon
+tar -xzvf WLAN.BL.3.5/cnss_proc/src/components/qca-wifi-fw-src-component-
+tar -xzvf WLAN.BL.3.5/cnss_proc/src/components/qca-wifi-fw-src-component-halphy_tools-WLAN.BL.3.5-00007-S-1.tgz 
+mv wlan/halphy_tools qsdk/qca/src/qca-wifi-10.4/
+tar xjvf NHSS.QSDK.5.0/apss_proc/out/proprietary/BLUETOPIA/qca-bluetopia.tar.bz2 -C qsdk/
+cp WLAN.BL.3.5/cnss_proc/bin/IPQ4019/hw.1/* qsdk/dl
+cp WLAN.BL.3.5/cnss_proc/bin/QCA9888/hw.2/* qsdk/dl
+cp WLAN.BL.3.5/cnss_proc/bin/QCA9984/hw.1/* qsdk/dl 
+cp -rf WLAN.BL.3.5/cnss_proc/src/components/* qsdk/
+
+
+$ for pkg_num in 2 9;do sed 's/CONFIG_PACKAGE_qca-wifi-fw-hw'${pkg_num}'-10.4-asic=y/# CONFIG_PACKAGE_qca-wifi-fw-hw'${pkg_num}'-10.4-asic is not set/g' -i .config;done
+$ sed 's/CONFIG_PACKAGE_kmod-wil6210=m/# CONFIG_PACKAGE_kmod-wil6210 is not set/g' -i .config
+$ sed 's/CONFIG_PACKAGE_wigig-firmware=m/# CONFIG_PACKAGE_wigig-firmware is not set/g' -i .config
+
+
+echo "CONFIG_TOOLCHAINOPTS=y" >> .config
+echo '# CONFIG_GCC_USE_VERSION_4_8_LINARO is not set' >> .config
+echo "CONFIG_GCC_USE_VERSION_5=y" >> .config
+echo 'CONFIG_GCC_VERSION="5.2.0"' >> .config
+echo "CONFIG_GCC_VERSION_5=y" >> .config
+
+
+
+
+cp meta-scripts/ipq40xx_premium/* IPQ4019.ILQ.5.0/common/build/ipq
+cp -rf qsdk/qca/src/uboot-1.0/tools/pack.py NHSS.QSDK.5.0/apss_proc/out/
+
+cp -rf TZ.BF.2.7/trustzone_images/build/ms/bin/MAZAANAA/* IPQ4019.ILQ.5.0/common/build/ipq
+
+cp -rf qsdk/bin/ipq806x/openwrt* IPQ4019.ILQ.5.0/common/build/ipq
+
+cp BOOT.BF.3.1.1/boot_images/build/ms/bin/40xx/misc/tools/config/boardconfig_premium IPQ4019.ILQ.5.0/common/build/ipq
+cp BOOT.BF.3.1.1/boot_images/build/ms/bin/40xx/misc/tools/config/appsboardconfig_premium IPQ4019.ILQ.5.0/common/build/ipq
+
+sed -i 's#</linux_root_path>#/</linux_root_path>#' IPQ4019.ILQ.5.0/contents.xml
+
+sed -i 's#</windows_root_path>#\\</windows_root_path>#' IPQ4019.ILQ.5.0/contents.xml
+
+cd IPQ4019.ILQ.5.0/common/build
+
+sed '/debug/d' -i update_common_info.py
+python update_common_info.py

@@ -1,0 +1,232 @@
+
+
+
+l2tp server:  billion(192.168.1.254), user/pass: eric/12345678
+
+sudo apt-get install xl2tpd
+
+
+## L2TP requires this rule for forward ing to  L2TP interface
+iptables -I FORWARD -o l2tp-cfg176d96 -j ACCEPT
+
+iptables -I FORWARD -o l2tp-wan0 -j ACCEPT
+iptables -I FORWARD -o  l2tp-vpnc134159 -j ACCEPT
+
+iptables -I FORWARD -o  l2tp-vpnc+ -j ACCEPT
+iptables -I FORWARD -o  pptp-vpnc+ -j ACCEPT
+
+
+# add VPNCTRL chain to forward and 
+root@ap5400w:~# 
+root@ap5400w:~# 
+root@ap5400w:~# 
+root@ap5400w:~# 
+root@ap5400w:~# 
+
+iptables -t filter -N VPNC_FORWARD
+iptables -t filter -I FORWARD -j VPNC_FORWARD
+iptables -I VPNC_FORWARD -o  pptp-vpnc+ -j ACCEPT
+iptables -I VPNC_FORWARD -o  l2tp-vpnc+ -j ACCEPT
+
+iptables -t filter -N VPNC_INPUT
+iptables -t filter -I INPUT -j VPNC_INPUT
+iptables -I VPNC_INPUT -i pptp-vpnc+ -j ACCEPT
+iptables -I VPNC_INPUT -i l2tp-vpnc+ -j ACCEPT
+
+file: 
+/lib/firewall/firewall_vpnc.include
+
+
+
+[openvpn]
+# Run on ubuntu:
+
+/etc/init.d/openvpn restart
+access web gui:
+https://127.0.0.1:943/?src=connect
+
+user:openvpn
+pass:openvpn
+# passwd openvpn to channge password
+
+reconf:
+/usr/local/openvpn_as/bin/ovpn-init --force
+
+https://192.168.1.2:943/admin/status_overview
+
+To get cert:
+https://192.168.1.2:943/?src=connect
+
+Files to check for openvpn:
+/var
+
+
+-------------------------------------------------------------------------------------------------
+|Mode	     	|     Interface name   	| L2L  |	   After                        |  related Files	                  |
+-----------------------------------------------------------------------------------------------------
+|pptp-wan    	|	pptp-wan0		    |  OK  |			                        | /etc/config/network
+        			       	    		|      |		   	                        | /usr/sbin/pptpd -c /var/etc/pptpd.conf
+															                        | cgi: setwanInfo(wan.c)
+															                        | /etc/init.d/network restart
+															                        | /etc/init.d/firewall restart
+															                        | ubus network reload  ( ubus call network reload)
+----------------------------------------------------------------------------------------------------
+|l2tp-wan    	|  l2tp-wan0	    	|  OK  |    		                        | /etc/config/network
+-------------------------------------------------------------------------------------------------
+|pptp-cli    	|  pptp-vpncXXXX       	|	   | 			                        | /etc/config/network
+|  				| ex: pptp-vpnc775716   |  No  |  iptables -I FORWARD               | cgi: addvpncli/actvpncli(vpn.c)
+				|	     				|      |    -o  pptp-vpnc+ -j ACCEPT        | /etc/init.d/network restart
+				| 	     				|                 	                        | /etc/init.d/firewall restart
+				|	     				|                                           | /usr/sbin/pppd noauth refuse-eap nodetach \
+		        |   										                        | ipparam vpnc775716 ifname pptp-vpnc775716 +ipv6 set AUTOIPV6=1
+				|		                					                        | * ubus call network reload  --> should be sufficient
+-------------------------------------------------------------------------------------------------
+|l2tp-cli    	|  l2tp-vpnc           |  No   |  iptables -I FORWARD               |  same as pptp-cli
+                                                    -o  l2tp-vpnc+ -j ACCEPT        |                                                     
+-------------------------------------------------------------------------------------------------
+|open-cli    	|                                                                   | vpn.c (addvpncli/actvpncli)
+																					| add firewall when adding open vpn client profile
+-------------------------------------------------------------------------------------------------
+|pptp-srv    	|                                                                
+-------------------------------------------------------------------------------------------------
+|open-vpnsrv 	|                                                                
+-------------------------------------------------------------------------------------------------
+|	     		|                      |      |                                     |
+|	     		|                      |      |                                     |
+|	     		|                      |      |                                     |
+                                                                                 
+
+config zone
+        option name 'wan up http_redirect stop
+        option network 'vpn_client l2tp-vpnc+ pptp-vpnc+'
+        option forward 'ACCEPT'
+
+config zone 'zone_wan'
+        option name 'wan'
+        option input 'DROP'
+        option output 'ACCEPT'
+        option forward 'REJECT'
+        option masq '1'
+        option mtu_fix '1'
+        option network 'vpn_client wan wan6 '
+
+config forwarding
+        option src 'lan'
+        option dest 'wan'
+
+------------------------------------------------
+
+config defaults
+        option syn_flood '1'
+        option input 'ACCEPT'
+        option output 'ACCEPT'
+        option forward 'REJECT'
+        option disable_ipv6 '0'
+        option drop_invalid '1'
+        option _enabled '1'
+
+config zone
+        option name 'lan'
+        option network 'lan'
+        option input 'ACCEPT'
+        option output 'ACCEPT'
+        option forward 'ACCEPT'
+
+config zone
+        option name 'vpn_client'
+        option network 'vpn_client'
+        option forward 'ACCEPT'
+
+config zone 'zone_wan'
+        option name 'wan'
+        option input 'DROP'
+        option output 'ACCEPT'
+        option forward 'REJECT'
+        option masq '1'
+        option mtu_fix '1'
+        option network 'vpn_client wan wan6'
+
+config forwarding
+        option src 'lan'
+        option dest 'wan'
+
+config rule
+        option name 'Allow-DHCP-Renew'
+        option src 'wan'
+        option proto 'udp'
+        option dest_port '68'
+        option target 'ACCEPT'
+        option family 'ipv4'
+
+config rule
+        option name 'Allow-Ping'
+        option src 'wan'
+        option proto 'icmp'
+        option icmp_type 'echo-request'
+        option family 'ipv4'
+        option target 'ACCEPT'
+        option enabled '0'
+
+
+                                                                                 
+                                                                                 
+root@ap5400w:~# cat /proc/sys/net/ipv4/conf/l2tp-vpnc134159/*********************
+0
+1
+1
+0
+0
+0
+1
+0
+0
+0
+0
+0
+1
+10000
+1000
+0
+0
+0
+0
+0
+0
+0
+0
+1
+1
+1
+0
+0
+
+
+root@ap5400w:~# iptables -L delegate_forward -nv
+Chain delegate_forward (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+  504  246K forwarding_rule  all  --  *      *       0.0.0.0/0            0.0.0.0/0            /* user chain for forwarding */
+  492  245K ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+   12   720 zone_lan_forward  all  --  br-lan *       0.0.0.0/0            0.0.0.0/0           
+    0     0 zone_wan_forward  all  --  eth0   *       0.0.0.0/0            0.0.0.0/0           
+    0     0 zone_lan1_forward  all  --  br-lan1 *       0.0.0.0/0            0.0.0.0/0           
+    0     0 zone_lan2_forward  all  --  br-lan2 *       0.0.0.0/0            0.0.0.0/0           
+    0     0 zone_lan3_forward  all  --  br-lan3 *       0.0.0.0/0            0.0.0.0/0           
+   12   720 reject     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+
+initial scripts
+
+procd.sh
+
+related to ubox
+-----------------
+
+package installation  related:
+
+check files @ 
+~/work/spf_50/repo/qsdk/staging_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/pkginfo/
+Related scripts
+--> scripts/gen-dependencies.sh
+--> include/package-ipkg.mk
+
+
+
+
+
+# to debug using wireshrk
+ssh root@192.168.1.1 "tcpdump -i ath0 -s 0 -K -n -w -" | wireshark -k -i -
+
+debug wsplcd
+
+ssh root@192.168.1.11 "tcpdump -i ath21 -s 0 -K -n -w -" | wireshark -k -i -
+ieee_1905.1 && eth.addr == B4:EE:B4:E9:96:07
+

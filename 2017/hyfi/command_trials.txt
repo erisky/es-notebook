@@ -1,0 +1,43 @@
+hy notes:
+
+
+*** List traffic over 1Mbps
+*** Only the traffic through CAP is captured !!
+*** Only caclulate the Devices that "using(TX only) the media"
+
+ex: If   A(iper -c )  ---->  B (iper -s)
+
+Only at the DUT console of Transmitter Size (A) will show  !!!!
+
+
+
+example 1: CAP <-- RE2  doing iperf
+
+** Capture on CAP
+@he s 1M
+Reporting all active flows with rate > 1000000 bps
+HSPEC Estimation Status: OK
+Current active flows:
+Index Hash  MAC                ID                 Rate      Port       Idx  Age     CreateTime NumPackets  NumBytes    Priority   Serial      Flags
+[009] 0xc1  8E:21:FA:0E:65:5F  8E:21:FA:0E:65:5F  29300027  ath0       (15) 0       5276       46          1380352     0x80000000 0           O----
+
+
+** Capture:    CAP  <--RE1
+@ he s 1M
+Reporting all active flows with rate > 1000000 bps
+HSPEC Estimation Status: OK
+Current active flows:
+Index Hash  MAC                ID                 Rate      Port       Idx  Age     CreateTime NumPackets  NumBytes    Priority   Serial      Flags
+[040] 0xcb  AE:17:1D:70:5F:BD  AE:17:1D:70:5F:BD  6800077   ath01      (62) 1       168849     0           0           0x80000000 0           O----
+
+Per interface flow rate summary:
+ath01: 6800077bps (6.80Mbps)
+
+Total: 6800077bps (6.80Mbps)
+
+
+
+
+
+-----------------------------------------------------------------
+
