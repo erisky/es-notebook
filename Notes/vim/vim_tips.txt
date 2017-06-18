@@ -1,13 +1,18 @@
+##Topic: VIM Tips
+##Date:  2016-11
+##Field: vim, tips, notes
 
-$$ tip #1
-
-'ciw'
-'diw'
-change internal a word
-delete
+#########################
 
 
-$$ tip #2
+
+
+# [change/delete internal a word] 
+
+'ciw' -> change internal a word
+'diw' -> delete 
+
+# [use grep like function in vim]
 
 :vimgrep /pattern/ ../**/*.c
 to find the patterns in files
@@ -19,4 +24,7 @@ short: can't not have list of rearch results
 to speedup:
 :noautocmd vimgrep /pattern/ ../**/*.c
 
+# [replace a word ]
+%s/old/new/icg  -> confirm by user
+%s/old/new/g  -> replace globally
 
