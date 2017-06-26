@@ -1,0 +1,128 @@
+
+Json to Blob
+> blobmsg_add_json_from_string
+
+Blob to Json 
+> blobmsg_format_json() 
+
+
+#related libraries for acp clients ( from netifd)
++libuci +libnl-tiny +libubus +ubus +ubusd +jshn +libubox
+
+
+package:
+system/uci
+system/ubus
+system/ubox
+
+libs/libnl-tiny
+libs/libubox/  
+	---> 
+define Package/libubox
+define Package/libblobmsg-json
+define Package/jshn
+define Package/libjson-script
+define Package/libubox-lua
+
+
+sqlite3?
+mbedtls?
+curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","password":"xyz"}' http://192.168.1.1/test/123
+
+{"List":[{"wlan.5g":"value", 
+  "test":"value",
+  "test1":"value"}]}
+
+
+
+1.0 AP ---------------------> AC (Discovery)
+{
+	"Type": "1",
+	"AP_ID" : "0004edaabbcc",
+	"HW_VER" : "ap5400w-rev2",
+	"PRODUCT_VER" : "ACP_AP001",
+	"AP_LOC" : "Taipei Station A123",
+	"AP_ALIAS" : "Taipei Station 1F 7-11"
+}
+
+
+1.1 AC ---------------------> AP (Discovery response)
+{
+	"Type": "2",
+	"AC_ID" : "00010200AACC",
+	"SESSION_ID" : "12312312",
+	"REDIRECT" : ["141.1.2.4:17001", "141.1.2.5:17001"],
+	"STATUS" : "OK"
+}
+
+
+
+2.0 AP ---------------------> AC (Join)
+{
+	"Type": 3,
+	"AP_ID" : "0004edaabbcc",
+	"HW_VER" : "ap5400w-rev2",
+	"PRODUCT_VER" : "ACP_AP001",
+	"FW_VER": "ap5400w-1.0.15",
+	"CFG_PROF": ["Default_all.cfg", "Default_ssid.cfg"],
+	"AP_LOC" : "Taipei Station A123",
+	"AP_ALIAS" : "Taipei Station 1F 7-11"
+
+}
+
+2.1 AP --------------------- AC (Join response)
+
+{ "Type": 4,
+  "GROUP_ID": "0004edaabbcc",
+  "STATUS": "OK",
+  "FW_STATUS" : "UPGRADE",
+  "FW_VER": "ap5400w-1.0.16",
+  "CFG_STATUS": "UPGRADE",
+  "CFG_PROF": ["Default_all.cfg", "New_ssid.cfg"]}
+
+
+3.0 AP ---------------------> AC (FW Update)
+{ "Type": 7,
+  "AP_ID": "0004edaabbcc",
+  "GROUP_ID": "APGROUP_0001",
+  "FW_VER": "ap5400w-1.0.16"}
+
+3.1 AC ---------------------> AP (FW Update response)
+{ "Type": 8,
+  "AC_ID": "0004edaabbcc",
+  "FW_URL": "https://askey.com.tw/acp_fw/ap5400w-1.0.16.bin",
+  "FW_INFO": {"Name":"ap5400w-1.0.16.bin", 
+			  "Size":"3802156",
+              "Checksum": "0x123abcde"},
+  "STATUS": "OK" }
+
+
+
+4.0 AP ---------------------> AC (Configuration Request
+)
+{ "Type": 5,
+  "AP_ID": "0004edaabbcc",
+  "GROUP_ID": "APGROUP_0001",	
+  "CFG_PROF": ["Default_all.cfg", "Default_ssid.cfg"]}
+
+4.1 AC ---------------------> AP (Configuration response)
+{ "Type": 6,
+  "AC_ID": "0004edaabbcc",
+  "STATUS": "Redirect",
+  "CFG_URL": "https://askey.com.tw/cfg_gropup_0001/allcfg.tgz"}
+
+
+
+5.0 AP ---------------------> AC (Echo Request)
+{ "Type": 9,
+  "AP_ID": "0004edaabbcc",
+  "GROUP_ID": "APGROUP_0001"}
+
+5.1 AC ---------------------> AP (Echo response)
+{ "Type": 10,
+  "AC_ID": "0004edaabbcc",
+  "FW_VER": "ap5400w-1.0.16",
+  "CFG_PROF": ["Defalut_all.cfg", "Default_ssid.cfg"]}
+
+
+
