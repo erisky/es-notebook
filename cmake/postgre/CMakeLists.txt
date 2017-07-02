@@ -30,7 +30,9 @@ link_directories(/usr/lib/ /usr/lib/x86_64-linux-gnu/ )
 
 set (EXTRA_LIBS ${EXTRA_LIBS} pthread pq)
 add_executable(postgre postgre.c)
+add_executable(sample sample.c)
 
+target_link_libraries(sample ${EXTRA_LIBS})
 target_link_libraries(postgre  ${EXTRA_LIBS})
 
 
