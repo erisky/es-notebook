@@ -1,0 +1,9 @@
+// toturial example 
+//
+
+#define postgre_VERSION_MAJOR @postgre_VERSION_MAJOR@
+#define postgre_VERSION_MINOR @postgre_VERSION_MINOR@
+
+#cmakedefine HAVE_LOG
+#cmakedefine HAVE_EXP
+#cmakedefine HAVE_PRINTF
