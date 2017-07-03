@@ -23,6 +23,8 @@ root@ap5400w:~#
 root@ap5400w:~# 
 root@ap5400w:~# 
 
+---- spf5.0 -----
+
 iptables -t filter -N VPNC_FORWARD
 iptables -t filter -I FORWARD -j VPNC_FORWARD
 iptables -I VPNC_FORWARD -o  pptp-vpnc+ -j ACCEPT
@@ -32,6 +34,20 @@ iptables -t filter -N VPNC_INPUT
 iptables -t filter -I INPUT -j VPNC_INPUT
 iptables -I VPNC_INPUT -i pptp-vpnc+ -j ACCEPT
 iptables -I VPNC_INPUT -i l2tp-vpnc+ -j ACCEPT
+
+---- spf3.0 -----
+iptables -t filter -N VPNC_FORWARD
+iptables -t filter -I FORWARD -j VPNC_FORWARD
+iptables -I VPNC_FORWARD -o  pptp-cfg+ -j ACCEPT
+iptables -I VPNC_FORWARD -o  l2tp-cfg+ -j ACCEPT
+
+iptables -t filter -N VPNC_INPUT
+iptables -t filter -I INPUT -j VPNC_INPUT
+iptables -I VPNC_INPUT -i pptp-cfg+ -j ACCEPT
+iptables -I VPNC_INPUT -i l2tp-cfg+ -j ACCEPT
+
+
+
 
 file: 
 /lib/firewall/firewall_vpnc.include

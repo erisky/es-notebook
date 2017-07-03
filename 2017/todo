@@ -49,7 +49,12 @@ AC/AP Portion
 1. The AP WAN is default DHCP so if the WAN is connected to DHCP then no configuration is needed in deployment phrase.
 2. The AP has a LED blinking to indicate its connectivity to AC server.
 3. The AP will send periodically keepalive packets to AC server so AC server could determine it's  connection status.
-
+4. The AP report its config profile/firmware version to AC so AC could automatically update firware and config.
+5. The Daily-maintenace interval is configured in AC to make sure AP is not done in daytime.
+6. AC admin could access AP information through command lines/Web GUI.
+	 Information: Neighbor APs, authenticated uses, unauthenticated users, wifi channel, avg uplink rate(loading).
+				  
+	     
 
 
 
