@@ -126,3 +126,96 @@ curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","password
 
 
 
+{"CFG_PROF": ["PROF_MAPPING":"my_map", "UPDATED":24351321},
+			{"PROF_RADIO": "default_radio", "UPDATED":243513232},
+			{"PROF_SSID": "default_ssid", "UPDATED":243513254},
+			{"PROF_SSID": "my_ssid", "UPDATED":243513299},
+			{"PROF_WIFI_TYPE": "default_wifi_type", "UPDATED":243513978}]}
+
+
+
+# enable rpcd
+ubus list -v uci
+uci' @3906d535
+        "configs":{}
+        "get":{"config":"String","section":"String","option":"String","type":"String","match":"Table","ubus_rpc_session":"String"}
+        "state":{"config":"String","section":"String","option":"String","type":"String","match":"Table","ubus_rpc_session":"String"}
+        "add":{"config":"String","type":"String","name":"String","values":"Table","ubus_rpc_session":"String"}
+        "set":{"config":"String","section":"String","type":"String","match":"Table","values":"Table","ubus_rpc_session":"String"}
+        "delete":{"config":"String","section":"String","type":"String","match":"Table","option":"String","options":"Array","ubus_rpc_session":"String"}
+        "rename":{"config":"String","section":"String","option":"String","name":"String","ubus_rpc_session":"String"}
+        "order":{"config":"String","sections":"Array","ubus_rpc_session":"String"}
+        "changes":{"config":"String","ubus_rpc_session":"String"}
+        "revert":{"config":"String","ubus_rpc_session":"String"}
+        "commit":{"config":"String","ubus_rpc_session":"String"}
+        "apply":{"rollback":"Boolean","timeout":"Integer","ubus_rpc_session":"String"}
+        "confirm":{"ubus_rpc_session":"String"}
+        "rollback":{"ubus_rpc_session":"String"}
+        "reload_config":{}
+
+
+{  "CFG_CONTENT": [
+	 {  
+         "PROF_RADIO":"Taipei_bus_radio_001",
+         "Updated":243513232, 
+         "values": {
+                ".type": "wifi-device",
+                ".name": "wifi0",
+                "channel": "auto",
+                "hwmode": "11ng",
+                "country": "4015",
+                "htmode": "HT40",
+                "tpscale": "2",
+                "atfstrictsched": "0",
+                "wkdystart": "00:00",
+                "wkdyend": "23:59",
+                "wkenstart": "00:00",
+                "wkenend": "23:59"
+         }
+     },
+
+     {
+         "PROF_SSID":"Taipei_bus_ssid_askey",
+         "Updated":243513232, 
+       	 "values": {
+                ".anonymous": false,
+                ".type": "wifi-iface",
+                ".name": "wlg",
+                "device": "wifi0",
+                "mode": "ap",
+				"ssid": "askey",
+				"encryption": "none",
+				"key": "12345678",
+				"hidden":"0",
+				"isolate": "0",
+                "mcast_rate": "54000",
+				"maxsta": "100",
+				"ieee80211w": "0"
+		 }
+     }]
+}
+
+
+example:
+> List all uci configs
+ubus call uci configs
+> List config
+ubus call uci get '{"config":"firewall_ctrl", "section":"parent_ctrl"}' 
+
+> uci set !!!
+ubus call uci set '{"config":"firewall", "section":"vpnc_ctrl", "option":"reload", "values":{"reload":"1"}}'
+
+!!! example:
+## GET ##
+ubus call uci get '{"config":"firewall_ctrl", "section":"parent_ctrl"}' 
+## SET ##
+ubus call uci set '{"config":"firewall_ctrl", "section":"parent_ctrl", "values":{"enabled":"1"}}'
+## COMMIT ##
+ubus call uci commit '{"config":"firewall_ctrl"}'
+
+
+
+
+
+
+

@@ -59,6 +59,61 @@ done
 
 
 
+=== string stuff ===
+# 1. string length
+test="TEST Length"
+echo ${#test}
+
+# 2. extract a string from positon
+$ test="ABCD-1234"
+$ echo ${test:5}
+1234
+# with length
+$ echo ${test:5:2}
+12
+
+# 3. matching the string
+# 3.1 delete the match from start
+$ test="Jordan-NBA-Kobe-James"
+$ echo ${test#"Jordan-"}
+NBA-Kobe-James
+
+# 3.2 delte the match from back
+$ echo ${test%"James"}
+Jordan-NBA-Kobe-
+
+# 3.3 Delete the shortest match
+$ test="Jordan-NBA-Kobe-James"
+# delete the short match
+$ echo ${test#*-}
+NBA-Kobe-James
+# delete the longest match from start 
+$ echo ${test##*-}
+James
+
+$ echo ${test%%-*}
+Jordan 
+
+# 4. match and replacement
+${string/pattern/replacement}  --> single match
+${string//pattern/replacement} --> all match and replacement
+
+ex. 
+$ test="Lebron James is James, James Hardem is Harden"
+$ echo ${test/James/Jordan}
+Lebron Jordan is James, James Hardem is Harden
+$ echo ${test//James/Jordan}
+Lebron Jordan is Jordan, Jordan Hardem is Harden
+
+# 4.1 match and replace from start/end
+ex:
+$ test="Jordan-NBA-Kobe-James"
+$ echo ${test/%-*/Curry}
+JordanCurry
+$ echo ${test/#*-/Curry}
+CurryJames
+
+
 
 # Add auto complete:
 complete  -W "$WORDS" note

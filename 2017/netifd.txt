@@ -1,0 +1,70 @@
+
+
+
+netif scan the scripts at /lib/netifd/proto
+
+example:ppp.sh
+
+run on target:
+
+/lib/netifd/proto# ppp.sh '' dump
+
+{ "name": "ppp", "config": [ [ "device", 3 ], [ "username", 3 ], [ "password", 3 ], [ "keepalive", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_options", 3 ], [ "connect:file", 3 ], [ "disco}
+{ "name": "pppoe", "config": [ [ "username", 3 ], [ "password", 3 ], [ "keepalive", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_options", 3 ], [ "connect:file", 3 ], [ "disconnect:file", 3 }
+{ "name": "pptp", "config": [ [ "username", 3 ], [ "password", 3 ], [ "keepalive", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_options", 3 ], [ "connect:file", 3 ], [ "disconnect:file", 3 ]}
+
+
+root@ap5400w:/lib/netifd/proto# ./l2tp.sh '' dump
+{ "name": "l2tp", "config": [ [ "username", 3 ], [ "password", 3 ], [ "keepalive", 3 ], [ "pppd_options", 3 ], [ "ipv6", 7 ], [ "mtu", 5 ], [ "checkup_interval", 5 ], [ "server", 3 ] ], "no-device": true,}
+
+{ "name": "ppp", "config": [ [ "device", 3 ], [ "username", 3 ], [ "password", 3
+ ], [ "keepalive", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_op
+tions", 3 ], [ "connect:file", 3 ], [ "disconnect:file", 3 ], [ "ipv6", 3 ], [ "
+authfail", 7 ], [ "pppoemtu", 5 ], [ "pppname", 3 ], [ "unnumbered", 3 ] ], "no-
+device": true, "no-proto-task": false, "available": true, "renew-handler": false
+, "lasterror": true }
+{ "name": "pppoe", "config": [ [ "username", 3 ], [ "password", 3 ], [ "keepaliv
+e", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_options", 3 ], [ 
+"connect:file", 3 ], [ "disconnect:file", 3 ], [ "ipv6", 3 ], [ "authfail", 7 ],
+ [ "pppoemtu", 5 ], [ "pppname", 3 ], [ "unnumbered", 3 ], [ "ac", 3 ], [ "servi
+ce", 3 ], [ "host_uniq", 3 ] ], "no-device": false, "no-proto-task": false, "ava
+ilable": false, "renew-handler": false, "lasterror": true }
+{ "name": "pptp", "config": [ [ "username", 3 ], [ "password", 3 ], [ "keepalive
+", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_options", 3 ], [ "
+connect:file", 3 ], [ "disconnect:file", 3 ], [ "ipv6", 3 ], [ "authfail", 7 ], 
+[ "pppoemtu", 5 ], [ "pppname", 3 ], [ "unnumbered", 3 ], [ "server", 3 ], [ "in
+terface", 3 ] ], "no-device": true, "no-proto-task": false, "available": true, "
+renew-handler": false, "lasterror": true }
+
+>>> Load the shells in /lib/netifd/proto
+netifd_init_script_handlers(proto_fd, proto_shell_add_handler);
+
+
+interface_do_reload  --> proto_init_interface --> proto->attach  -->  proto_shell_attach
+
+--> 
+
+
+IFPEV_DOWN:
+interface_handle_config_change -- > interface_do_reload(iface) 
+		--> interface_event
+		--> proto_init_interface
+
+
+=== >>
+When interface status changed, netifd calls the corresponding script @  /lib/netifd/proto
+
+==> script @ /lib/netifd/proto need to be written is special format
+
+
+
+
+
+
+
+
+
+
+
+
+
