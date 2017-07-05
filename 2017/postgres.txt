@@ -108,5 +108,24 @@ SELECT * FROM myview;
 
 
 #### Foreign Key ####
+
+
+create table ap_info ( 
+      ap_id  varchar(12),
+      ap_group varchar(80) references ap_group(group_id),
+      uptime date,
+      state int,
+      down_time date);
+
+
+create table ap_group (
+       group_id  varchar(80) primary key,
+       mapping   json
+		);
+
+## Insert 
+insert into ap_info values('010203040506', 'fall');
+>> failed because of foriegh key check failed.
+ERROR:  insert or update on table "ap_info" violates foreign key constraint "ap_info_ap_group_fkey"
 	
 
