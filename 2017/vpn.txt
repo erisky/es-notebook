@@ -96,6 +96,7 @@ Files to check for openvpn:
 				|	     				|                                           | /usr/sbin/pppd noauth refuse-eap nodetach \
 		        |   										                        | ipparam vpnc775716 ifname pptp-vpnc775716 +ipv6 set AUTOIPV6=1
 				|		                					                        | * ubus call network reload  --> should be sufficient
+																					| /ppp/lib/netifd/proto/ppp.sh --> setup pppd parameters
 -------------------------------------------------------------------------------------------------
 |l2tp-cli    	|  l2tp-vpnc           |  No   |  iptables -I FORWARD               |  same as pptp-cli
                                                     -o  l2tp-vpnc+ -j ACCEPT        |                                                     

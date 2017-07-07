@@ -216,6 +216,9 @@ ubus call uci commit '{"config":"firewall_ctrl"}'
 
 
 
+# libwebsocket 
+openssl s_client -debug -connect git.xxx.xxx.com:443 
+
 
 
 
