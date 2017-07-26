@@ -1,0 +1,39 @@
+openssl req -key /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.key.pem -new -out client.csr
+
+
+https://stackoverflow.com/questions/21297139/how-do-you-sign-certificate-signing-request-with-your-certification-authority
+
+
+awk -v cmd='openssl x509 -noout -subject' '
+    /BEGIN/{close(cmd)};{print | cmd}' < /etc/ssl/certs/ca-certificates.crt
+
+
+openssl genrsa -out ca.key 4096
+openssl req -new -x509 -days 1826 -key ca.key -out ca.crt
+openssl genrsa -out ia.key 4096
+openssl req -new -key ia.key -out ia.csr
+openssl x509 -req -days 730 -in ia.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out ia.crt
+
+
+
+
+2877  openssl genrsa -out client.key 2048
+ 2879  openssl req -new -key client.key -out client.csr
+ 2881  openssl x509 -req -days 730 -in client.csr -CA /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -CAkey /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.key.pem -set_serial 01 -out client.pem
+
+
+
+
+openssl genrsa -out server1.key 2048
+openssl req -new -key server1.key -out server1.csr
+
+openssl x509 -req -days 730 -in server1.csr -CA /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -CAkey /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.key.pem -set_serial 01 -out server1.pem
+
+
+# run server 
+$ cd ~/openssl
+$ libwebsockets-test-server --ssl -A /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -C server1.pem -K server1.key -v
+
+# run client
+$ cd ~/openssl
+$ libwebsockets-test-client --ssl -A /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -C client.pem -K client.key localhos

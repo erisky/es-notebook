@@ -1,0 +1,22 @@
+
+#use the client and dont verify the certificate
+libwebsockets-test-ping localhost --ssl -s
+
+#make install 
+
+
+<< use lwsws + plugin >>
+$ sudo apt-get install libuv-dev
+$ cmake .. -DLWS_WITH_LWSWS=1
+
+!! default libuv is too old !!
+
+get libuv 1.11
+
+
+~/git/libuv-1.11.0$ sudo make install
+
+
+## RAW ## 
+./bin/libwebsockets-test-client raw://localhost
+

@@ -32,12 +32,12 @@ ilable": false, "renew-handler": false, "lasterror": true }
 { "name": "pptp", "config": [ [ "username", 3 ], [ "password", 3 ], [ "keepalive
 ", 3 ], [ "keepalive_adaptive", 7 ], [ "demand", 5 ], [ "pppd_options", 3 ], [ "
 connect:file", 3 ], [ "disconnect:file", 3 ], [ "ipv6", 3 ], [ "authfail", 7 ], 
-[ "pppoemtu", 5 ], [ "pppname", 3 ], [ "unnumbered", 3 ], [ "server", 3 ], [ "in
 terface", 3 ] ], "no-device": true, "no-proto-task": false, "available": true, "
+[ "pppoemtu", 5 ], [ "pppname", 3 ], [ "unnumbered", 3 ], [ "server", 3 ], [ "in
 renew-handler": false, "lasterror": true }
 
 >>> Load the shells in /lib/netifd/proto
-netifd_init_script_handlers(proto_fd, proto_shell_add_handler);
+(proto_fd, proto_shell_add_handler);
 
 
 interface_do_reload  --> proto_init_interface --> proto->attach  -->  proto_shell_attach
@@ -57,7 +57,18 @@ When interface status changed, netifd calls the corresponding script @  /lib/net
 ==> script @ /lib/netifd/proto need to be written is special format
 
 
+!!! network reload !!!
+to make sure the netifd knows which configurations it should check:
 
+use proto_config_add_string in the /lib/netifd/proto
+ex: 
+  ppp.sh:
+	proto_pptp_init_config() {
+        proto_config_add_string "server"
+        proto_config_add_string "interface"
+        proto_config_add_string "pptpopt"  
+    }
+  ==> so that if these configuration chaged in the /etc/config/network --> netifd will restart the ppp
 
 
 

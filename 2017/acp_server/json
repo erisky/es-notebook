@@ -1,0 +1,51 @@
+
+
+'{"config":"wireless","section":"wlg"}'
+
+
+'{"config":"wireless","section":"wlg"}'
+
+
+'{"config":"wireless","section":"wlg"}'
+
+
+{  "CFG_CONTENT": [
+	 {  
+         "PROF_RADIO":"Taipei_bus_radio_001",
+         "Updated":243513232, 
+         "values": {
+                ".type": "wifi-device",
+                ".name": "wifi0",
+                "channel": "auto",
+                "hwmode": "11ng",
+                "country": "4015",
+                "htmode": "HT40",
+                "tpscale": "2",
+                "atfstrictsched": "0",
+                "wkdystart": "00:00",
+                "wkdyend": "23:59",
+                "wkenstart": "00:00",
+                "wkenend": "23:59"
+         }
+     },
+
+     {
+         "PROF_SSID":"Taipei_bus_ssid_askey",
+         "Updated":243513232, 
+       	 "values": {
+                ".anonymous": false,
+                ".type": "wifi-iface",
+                ".name": "wlg",
+                "device": "wifi0",
+                "mode": "ap",
+				"ssid": "askey",
+				"encryption": "none",
+				"key": "12345678",
+				"hidden":"0",
+				"isolate": "0",
+                "mcast_rate": "54000",
+				"maxsta": "100",
+				"ieee80211w": "0"
+		 }
+     }]
+}
