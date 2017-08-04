@@ -28,7 +28,7 @@ or
 -	MySQL: root/gitd900, 已寫進外速登入檔.my.cnf, 直接打mysql即可登入
 -	GIT: d900/gitd900, 內有兩個repo. 一個是qsdk, 一個是xldk
 
-SW server (浮動IP)
+SW server (浮動IP)  -- 10.194.22.88 
 -	Administrator: swtest/sw123
 -	Radius: Secret=d900123
 -	Mysql: root/sw123, 未有快速登入檔, 打mysql –u root –p 即可登入.
