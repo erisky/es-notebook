@@ -214,11 +214,11 @@ ubus call uci set '{"config":"firewall_ctrl", "section":"parent_ctrl", "values":
 ubus call uci commit '{"config":"firewall_ctrl"}'
 
 
-
-
 # libwebsocket 
 openssl s_client -debug -connect git.xxx.xxx.com:443 
 
+## Server's public server 
+DB login : psql -U wifidog -h 10.194.22.88 -d test -W // wd1234  
 
 
 

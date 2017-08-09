@@ -1,3 +1,13 @@
+
+ # Install postgre on ubuntu
+ sudo apt-get install postgresql 
+
+# create user
+
+sudo -u postgres createuser owning_user
+# use the postgre user to create db for eric
+sudo -u postgres createdb -O eric mydb
+
 sample1:
 	gcc  -I/usr/include/postgresql/ -o sample1  sample1.c -lpq
 
@@ -130,15 +140,18 @@ ERROR:  insert or update on table "ap_info" violates foreign key constraint "ap_
 
 
 
-
-
-
-
 STORE FILES on DATABASES??
 ==> https://stackoverflow.com/questions/154707/what-is-the-best-way-to-store-media-files-on-a-database
 
 ==> https://stackoverflow.com/questions/13420305/storing-files-in-sql-server
 
+
+# list all tables 
+test=> SELECT table_name  FROM information_schema.tables 
+WHERE table_type = 'BASE TABLE' 
+AND table_schema = 'public' 
+ORDER BY table_type, table_name;
+  table_name  
 
 
 
