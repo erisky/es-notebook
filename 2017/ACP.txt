@@ -222,6 +222,22 @@ DB login : psql -U wifidog -h 10.194.22.88 -d test -W // wd1234
 
 
 
+## Memory leak ##
+Valgrind
+
+## Usage ##
+valgrind --leak-check=yes ./acp_core
+
+
+### Server ###
+/home/eric/work/server_git/server
+
+
+## NOTEs about logger ###
+to enable the reboot reason check the code @ driver/soc/qcom
+
+### 
+./acp_sample_client localhost --ssl -C certificate/acp_client1.crt -K certificate/acp_client1.key -A certificate/acp_ca.crt
 
 
 

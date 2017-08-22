@@ -154,11 +154,114 @@ ORDER BY table_type, table_name;
   table_name  
 
 
+## Start pgadmin ##
+python ~/.local/lib/python2.7/site-packages/pgadmin4/pgAdmin4.py
 
 
+## LEO Login server/account
+# 
+DB login : psql -U wifidog -h 10.194.22.88 -d test -W // wd1234  
 
+# Insert json is OK !! 
+->
+insert into ap_group values('group_id1', '{
+    "AP_RUNTIME_CFG":"010203_CFG",
+    "Updated":243513232, 
+    "change": [{
+        "PROFILE": "PROF_RADIO",
+        "INTF": "wifi0",
+        "values": {
+                "channel": "1",
+                "tpscale": "2"
+        }
+ },
+ {
+        "PROFILE": "PROF_RADIO",
+        "INTF": "wifi1",
+        "values": {
+                "channel": "36",
+                "tpscale": "3"
+        }
+ }]
+}');
 
+## change password:
+eric@eric-n809996:~/spf5$ psql
+sql (9.5.7)
+Type "help" for help.
 
+eric=> \password
+Enter new password: 
+Enter it again: 
+eric=> \q
 
 	
+[CAPIs]
+PQexec
+conninfo = "host=10.194.22.88 dbname=test user=wifidog password=wd1234";
+conn = PQconnectdb(conninfo);
+
+PGconn *PQconnectdb(const char *conninfo);
+
+#### main api, sychronized ####
+PGresult *PQexec(PGconn *conn, const char *command);
+PQclear(res);   
+
+int PQntuples(const PGresult *res); // number of rows/tuples
+int PQnfields(const PGresult *res); // number of fields
+char *PQgetvalue(const PGresult *res,
+                 int row_number,
+                 int column_number);
+############################################################
+
+
+int PQsendQuery(PGconn *conn, const char *command);
+PGresult *PQgetResult(PGconn *conn);
+int PQconsumeInput(PGconn *conn);
+
+############################################################
+
+
+
+-- Table: ap_list.ap5400w
+
+-- DROP TABLE ap_list.ap5400w;
+
+CREATE TABLE ap_list.ap5400w_d50
+(
+    name character(32) COLLATE pg_catalog."default" NOT NULL,
+    mac character(18) COLLATE pg_catalog."default" NOT NULL,
+    ssid character(1)[] COLLATE pg_catalog."default",
+    ip character(32) COLLATE pg_catalog."default" NOT NULL,
+    location character(32) COLLATE pg_catalog."default",
+    loading character(16) COLLATE pg_catalog."default",
+    memfree integer,
+    up_time integer,
+    product character(64) COLLATE pg_catalog."default" NOT NULL,
+    fw_version character(16) COLLATE pg_catalog."default" NOT NULL,
+    online boolean NOT NULL,
+    ap_group character(32) COLLATE pg_catalog."default",
+    config jsonb NOT NULL,
+    update_time timestamp without time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    CONSTRAINT ap5400w_d50_pkey PRIMARY KEY (mac),
+    CONSTRAINT ap5400w_d50_name_key UNIQUE (name)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE ap_list.ap5400w_d50
+    OWNER to wifidog;
+
+
+#>> Insert AP group <<<
+INSERT INTO public.ap_group(
+	group_name, model, product, fw_version, country, config, update_time)
+	VALUES ('group1', 'ap5400w', 'ap5400w-d50', 'ap5400w-d50-1.1.2', 'TW', '{"CONFIG":"NONE"}', '2017-08-09 10:23:54');
+
+
+
+
+
 

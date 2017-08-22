@@ -29,10 +29,13 @@ main(int argc, char **argv)
      * conninfo string; otherwise default to setting dbname=postgres and using
      * environment variables or defaults for all other connection parameters.
      */
-    if (argc > 1)
-        conninfo = argv[1];
-    else
-        conninfo = "dbname = postgres";
+//    if (argc > 1)
+//        conninfo = argv[1];
+//    else
+    if (argc <= 1)
+        return 0;
+
+    conninfo = "host=10.194.22.88 dbname=test user=wifidog password=wd1234";
 
     /* Make a connection to the database */
     conn = PQconnectdb(conninfo);
@@ -70,7 +73,11 @@ main(int argc, char **argv)
     /*
      * Fetch rows from pg_database, the system catalog of databases
      */
-    res = PQexec(conn, "DECLARE myportal CURSOR FOR select * from pg_database");
+    //res = PQexec(conn, "DECLARE myportal CURSOR FOR select * from pg_database");
+    //res = PQexec(conn, "DECLARE myportal CURSOR FOR select * from ap_group");
+    char cmdbuf[512];
+    sprintf(cmdbuf, "DECLARE myportal CURSOR FOR select * from %s", argv[1]);
+    res = PQexec(conn, cmdbuf);
     if (PQresultStatus(res) != PGRES_COMMAND_OK)
     {
         fprintf(stderr, "DECLARE CURSOR failed: %s", PQerrorMessage(conn));
