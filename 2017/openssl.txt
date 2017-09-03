@@ -8,6 +8,9 @@ awk -v cmd='openssl x509 -noout -subject' '
     /BEGIN/{close(cmd)};{print | cmd}' < /etc/ssl/certs/ca-certificates.crt
 
 
+
+
+#### Create CA's Key
 openssl genrsa -out ca.key 4096
 openssl req -new -x509 -days 1826 -key ca.key -out ca.crt
 openssl genrsa -out ia.key 4096
@@ -15,12 +18,17 @@ openssl req -new -key ia.key -out ia.csr
 openssl x509 -req -days 730 -in ia.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out ia.crt
 
 
+### Original Libwebsocket CA/Server Key ###
+##  Country Name |State or Province Name |Locality Name| company|org name |common name | email 
+$ printf "GB\\nErewhon\\nAll around\\nlibwebsockets-test\\n\\nlocalhost\\nnone@invalid.org\\n" |
+	openssl req -new -newkey rsa:1024 -days 10000 -nodes -x509 -keyout "test_server.key" -out "test_server.crt"
 
 
-2877  openssl genrsa -out client.key 2048
- 2879  openssl req -new -key client.key -out client.csr
- 2881  openssl x509 -req -days 730 -in client.csr -CA /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -CAkey /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.key.pem -set_serial 01 -out client.pem
 
+--------------------------------------------------------------------------------------------------------------------------------
+openssl genrsa -out client.key 2048
+openssl req -new -key client.key -out client.csr
+openssl x509 -req -days 730 -in client.csr -CA /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -CAkey /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.key.pem -set_serial 01 -out client.pem
 
 
 
@@ -37,3 +45,26 @@ $ libwebsockets-test-server --ssl -A /usr/local/share/libwebsockets-test-server/
 # run client
 $ cd ~/openssl
 $ libwebsockets-test-client --ssl -A /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -C client.pem -K client.key localhos
+
+
+www.openssl.org/docs/man1.1.0/crypto/X509_get_pubkey.html
+
+### Sample code to output certicate information ####
+  if(!PEM_write_bio_PUBKEY(outbio, pkey))
+    BIO_printf(outbio, "Error writing public key data in PEM format");
+
+    char buf[2048];
+    X509_NAME_oneline(X509_get_subject_name(cert), buf, sizeof buf);
+    printf("%s\n", buf);
+
+    X509_NAME_oneline(X509_get_issuer_name(cert), buf, sizeof buf);
+    printf("%s\n", buf);
+//X509_get_issuer_name(x)
+
+
+    BIO *STDout = NULL;
+    STDout = BIO_new_fp(stdout, BIO_NOCLOSE);
+    BIO_printf(STDout, "serial=");
+    i2a_ASN1_INTEGER(STDout, X509_get_serialNumber(cert));
+
+

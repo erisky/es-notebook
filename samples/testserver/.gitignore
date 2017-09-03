@@ -1,0 +1,9 @@
+build
+*.o
+1
+tags
+cscope.out
+*~
+a.out
+
+

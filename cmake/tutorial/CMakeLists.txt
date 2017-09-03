@@ -30,6 +30,9 @@ configure_file(
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
+include_directories("${PROJECT_SOURCE_DIR}/lib")
+set(EXTRA_LIBS json-c)
+
 if (USE_MYSQRT)
     include_directories("${PROJECT_SOURCE_DIR}/my_sqrt")
     add_subdirectory(my_sqrt)
