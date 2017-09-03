@@ -9,4 +9,29 @@ sudo -u postgres createdb -O eric mydb
 
 
 
+>> install pgadmin 4.1.5 python
+>> run
+cd ~/.local/lib/python2.7/site-packages && python pgadmin4/pgAdmin4.py
+
+>> change password of postgrel users
+
+sudo -u postgres psql postgres
+postgres=# \password
+
+# install pqweb for browsing 
+sudo apt install linuxbrew-wrapper
+brew cask install pgweb
+
+
+
+
+
+[SQL]
+list all tables
+
+
+ FROM information_schema.tables where table_schema='public'
+ ORDER BY table_schema,table_name;
+
+
 
