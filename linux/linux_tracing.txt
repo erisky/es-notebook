@@ -1,0 +1,11 @@
+# Related tools
+ftrace 
+functrace 
+perf_event
+
+# Check from github
+https://github.com/brendangregg/perf-tools/blob/master/images/perf-tools_2016.png
+
+# install some tools
+$ sudo apt-get install  linux-tools-common
+$ sudo apt-get install linux-tools-generic linux-cloud-tools-generic

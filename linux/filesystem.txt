@@ -1,0 +1,6 @@
+
+1. mtd is for flash so it's filesystem is jffs2 or ubifs
+
+2. mmc is for emmc which encapuslate NAND flash using MCP
+         so emmc is actually a block device..
+         so ext4 could run on it.

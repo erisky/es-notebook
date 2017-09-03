@@ -1,0 +1,52 @@
+
+reference:
+
+http://elinux.org/Device_Tree_Usage
+
+/ -> 1st layer child ...
+ex:
+/ -> cpu -> ...
+
+
+
+
+node
+<name>[@<unit-address>]
+name : what kind of device it represents:  ex. cpu/ethernet
+
+
+* Every device node has a compatible property.
+
+
+
+
+The flash node has 2 strings in the compatible property. Read on to the next section to learn why.
+ As mentioned earlier, node names reflect the type of device, not the particular model. See section 2.2.2 of the ePAPR spec for a list of defined generic node names that should be used wherever possible.
+
+ex:
+
+        flash@2,0 {
+                        compatible = "samsung,k8f1315ebm", "cfi-flash";
+                                };
+        }
+
+
+ The first string in the list specifies the exact device that the node represents in the form "<manufacturer>,<model>". The following strings represent other devices that the device is compatible with.
+
+Devices that are addressable use the following properties to encode address information into the device tree:
+reg
+#address-cells   -> how many address fields
+#size-cells      -> how many length fields 
+
+reg = <address1 length1 [address2 length2] [address3 length3] ... >
+      --> Each tuple represents an address range used by the device 
+
+
+cpus {
+    #address-cells = <1>;
+    #size-cells = <0>;
+    cpu@0 {                                     # unit-address here must match the reg below
+        compatible = "arm, cortex-a9"
+        reg = <0>;                              # no length field since size-cell =0 
+    }
+}
