@@ -26,3 +26,57 @@ debug wsplcd
 ssh root@192.168.1.11 "tcpdump -i ath21 -s 0 -K -n -w -" | wireshark -k -i -
 ieee_1905.1 && eth.addr == B4:EE:B4:E9:96:07
 
+####################################################################
+OpenWrt build system – Build sequence
+
+tools – automake, autoconf, sed, cmake
+toolchain/binutils – as, ld, …
+toolchain/gcc – gcc, g++, cpp, …
+target/linux – kernel modules
+package – core and feed packages
+target/linux – kernel image
+target/linux/image – firmware image file generation
+
+
+[single package]
+make package/cups/{clean,compile,install} V=s
+
+[spot the build error]
+make V=s 2>&1 | tee build.log | grep -i error
+
+[skipping failed packages]
+IGNORE_ERRORS=1 make <make options>
+
+[Cleans]
+make clean  --> remove all in build_dir and bin ,  ** Keep the toolchain
+
+make distclean --> remove everything
+
+make package/luci/clean --> remove specific pacakge
+
+
+################## image location :
+
+.../build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/root-ap5400w.ubi
+
+
+last steps: ... 
+make[3] package/preconfig
+ make[2] target/install
+ make[3] -C target/linux install
+ make[2] package/index
+
+##### Create Image only #####
+ make target/install
+>>> but still takes long time
+
+# UBIFS #
+mount -t ubifs ubi0:rootfs_config /mnt/config/
+
+
+mkdir /mnt/log
+mkdir /mnt/config
+mount -t ubifs  ubi0:rootfs_config /mnt/config
+mount -t ubifs  ubi0:rootfs_log /mnt/log
+
+

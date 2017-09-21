@@ -1,0 +1,42 @@
+
+
+dev0@qca>	
+
+
+
+
+
+
+
+operation done.
+
+dev0@qca>vlan entry show
+
+[vid]:1     [fid]:1      [member]:0x1   
+[tagged_member]:0x1     [untagged_member]:0x0     [unmodify_member]:0x0     [learn_dis]:disable  [pri_en]:disable [pri]:0x0   
+
+[vid]:2     [fid]:2      [member]:0x21  
+[tagged_member]:0x1     [untagged_member]:0x20    [unmodify_member]:0x0     [learn_dis]:disable  [pri_en]:disable [pri]:0x0   
+
+total 2 entries
+
+
+>> vlan entry del 1
+>> vlan entry show
+>> vlan member add 2 4 untagged
+
+
+/proc/sys/net/edma/default_group2_bmp
+
+--> lan got packet from wan but cant got ip
+  --> lan --> wan packet are lost
+
+
+
+
+
+
+
+ip intfentry show
+
+

@@ -1,0 +1,180 @@
+syntax on
+
+set nocompatible
+set smartindent
+set shiftwidth=4
+set backspace=indent,eol,start
+set ruler
+set number
+set showcmd
+set incsearch
+set hlsearch
+set expandtab
+set tabstop=4
+
+"set autochdir
+set cursorline
+set scrolloff=3
+
+"hi CursorLine cterm=none ctermbg=DarkMagenta ctermfg=White
+"hi CursorLine cterm=none ctermbg=DarkCyan ctermfg=White
+hi CursorLine cterm=none ctermbg=DarkBlue ctermfg=White
+
+" Use shift to back to normal mouse behavior
+set mouse=a
+map m :set mouse=a<cr> 
+map <leader>m :set mouse=<cr>
+
+
+nmap <c-k>a :tabnew <CR>
+nmap <c-k>p :tabprevious <CR>
+nmap <C-k>n :tabnext <CR>
+"map m :set mouse=<cr> 
+"map <leader>m :set mouse=a<cr>
+
+
+
+filetype off 
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+
+
+"-------------- PLUGINS STARTS -----------------
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/syntastic'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'vim-scripts/a.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Raimondi/delimitMate'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'jez/vim-c0'
+Plugin 'jez/vim-ispc'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'Valloric/YouCompleteMe'
+
+
+call vundle#end()  
+"-------------- PLUGINS END --------------------
+filetype plugin indent on
+
+
+"--------------- suppoer PEP8
+"au BufNewFile,BufRead *.py
+""            \ set tabstop=4
+""            \ set softtabstop=4
+""            \ set shiftwidth=4
+""            \ set textwidth=79
+""            \ set expandtab
+""            \ set autoindent
+""            \ set fileformat=unix
+""
+
+"let g:ycm_autoclose_preview_window_after_completion=1
+"map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+""默认配置文件路径"
+""let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+""打开vim时不再询问是否加载ycm_extra_conf.py配置"
+"let g:ycm_confirm_extra_conf=0
+"set completeopt=longest,menu
+""python解释器路径"
+"let g:ycm_path_to_python_interpreter='/usr/local/bin/python'
+""是否开启语义补全"
+"let g:ycm_seed_identifiers_with_syntax=1
+""是否在注释中也开启补全"
+"let g:ycm_complete_in_comments=1
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0
+""开始补全的字符数"
+"let g:ycm_min_num_of_chars_for_completion=2
+""补全后自动关机预览窗口"
+"let g:ycm_autoclose_preview_window_after_completion=1
+"" 禁止缓存匹配项,每次都重新生成匹配项"
+"let g:ycm_cache_omnifunc=0
+""字符串中也开启补全"
+"let g:ycm_complete_in_strings = 1
+""离开插入模式后自动关闭预览窗口"
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+""回车即选中当前项"
+"inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'     
+""上下左右键行为"
+"inoremap <expr> <Down>     pumvisible() ? '\<C-n>' : '\<Down>'
+"inoremap <expr> <Up>       pumvisible() ? '\<C-p>' : '\<Up>'
+"inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
+"inoremap <expr> <PageUp>   pumvisible() ? '\<PageUp>\<C-p>\<C-n>' : '\<PageUp>'i
+"
+
+
+
+"----- GENERAL SETTINGS-------
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_detect_paste=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='solarized'
+set background=dark
+let g:solarized_termcolors=256
+"colorscheme solarized
+
+
+"---------NERD-TREE SETTINGS----------
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+
+"-------- SYNTASTIC SETTINGS---------
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+
+augroup mySyntastic
+    au!
+    au FileType tex let b:syntastic_mode = "passive"
+augroup END
+
+
+"-------- TAGS SETTINGS --------------------------------
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_resolve_links = 1
+let g:easytags_suppress_ctags_warning = 1
+let g:tagbar_autoclose=2
+
+nmap <silent> <leader>b :TagbarToggle<CR>
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
+
+"---------GIT SETTINGS--------------
+hi clear SignColumn
+let g:airline#extensions#hunks#non_zero_only = 1
+
+
+"----------DELIMITEMATE SETTINGS-----------------
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+    au!
+    au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+    au FileType tex let b:delimitMate_quotes = ""
+    au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+    au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
+
+"-----------TMUX SETTINGS--------------
+let g:tmux_navigator_save_on_switch = 2
+
+
+
+
+

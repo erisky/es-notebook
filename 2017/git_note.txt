@@ -35,3 +35,7 @@ sh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
 ssh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
 git pull
 --> 
+
+# discard local commits
+git reset --hard 27ad6b04c635e80ffb96ef0daa3a555670e00ab2
+

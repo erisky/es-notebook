@@ -1,0 +1,22 @@
+python /home/eric/spf5_test/spf5/qualcomm_sdk/IPQ4019.ILQ.5.0/../NHSS.QSDK.5.0/////apss_proc/out/pack.py -t nand -B -F boardconfig_premium -o ./bin/nand-ipq40xx-single.img ./ipq
+ ython /home/eric/spf5_test/spf5/qualcomm_sdk/IPQ4019.ILQ.5.0/../NHSS.QSDK.5.0/////apss_proc/out/pack.py -t nand -B -F appsboardconfig_premium -o ./bin/ipq40xx-nand-apps.img ./ipq
+
+cd /home/eric/spf5_test/spf5/qualcomm_sdk/IPQ4019.ILQ.5.0/common/build
+
+#final execute: 
+['mkimage', '-f', './ipq/flash.its', '././bin/nand-ipq40xx-single.img']
+
+
+run_ramfs '. /lib/functions.sh; include /lib/upgrade; do_upgrade'
+
+>>> qsdk/package/base-files/files/lib/functions.sh 
+>>> qsdk/package/base-files/files/lib/functions/system.sh
+
+!!!!
+dumpimage usage in new version:
+
+dumpimage -T flat_dt -p 1  -i /home/eric/spf5_test/spf5/qualcomm_sdk/IPQ4019.ILQ.5.0/common/build/bin/nand-ipq40xx-single.img -o header.bin XXX
+
+pack.py
+PATH:
+exec in ~/spf5_test/spf5/qualcomm_sdk/NHSS.QSDK.5.0/apss_proc/out

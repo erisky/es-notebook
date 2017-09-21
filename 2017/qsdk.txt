@@ -116,7 +116,8 @@ setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 PU
 >>>> NEW <<<<<
 setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU9-IPQ4019_V1.0.15.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
-
+>>>> SPF5
+setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU9-IPQ4019_V1.1.1.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 [lbd]:
 
@@ -173,6 +174,94 @@ init:
 ./core/lb_common.c
 ./core/module.c
 ./src/lbdMain.c
+
+
+========== [partition table] =============
+check file @ /home/eric/spf5_test/spf5_0907/spf5/qualcomm_sdk/BOOT.BF.3.1.1/boot_images/build/ms/bin/40xx/misc/tools/readme.txt
+
+current partiotion:
+mtd0: 00100000 00020000 "0:SBL1"
+mtd1: 00100000 00020000 "0:MIBIB"
+mtd2: 00100000 00020000 "0:BOOTCONFIG"
+mtd3: 00100000 00020000 "0:QSEE"
+mtd4: 00100000 00020000 "0:QSEE_1"
+mtd5: 00080000 00020000 "0:CDT"
+mtd6: 00080000 00020000 "0:CDT_1"
+mtd7: 00080000 00020000 "0:BOOTCONFIG1"
+mtd8: 00080000 00020000 "0:APPSBLENV"
+mtd9: 00200000 00020000 "0:APPSBL"
+mtd10: 00200000 00020000 "0:APPSBL_1"
+mtd11: 00080000 00020000 "0:ART"
+mtd12: 04100000 00020000 "rootfs"
+mtd13: 03300000 00020000 "rootfs_1"
+<---- not found in nand-partition.xml
+mtd14: 00200000 00010000 "spi0.0"
+mtd15: 00345000 0001f000 "kernel"
+mtd16: 017db000 0001f000 "ubi_rootfs"
+mtd17: 020f0000 0001f000 "rootfs_data"
+--->
+
+CDT:  Configuration Data Table
+ : platform ID, DDR hardware parameters
+  
+CDB: Configuration Data Block
+SBL? --> 
+
+
+
+python ${DIR_NAME}/genimg.py 
+	--partition_tool=partition_tool 
+	--bootconfig_gen=bootconfig_tool 
+	--mbn_gen=nand_mbn_generator.py 
+	--cdt_mod=cdt_mod.py 
+	--smem_gen=smem-tool.py 
+	--configdir=${DIR_NAME}/ 
+	--skip_export --cdt_bin=cb-cdt.mbn 
+				  --cdt_modxml=${DIR_NAME}/pcddr_${FULL_NAME}.xml 
+					--cdt_outbin=cdt-pcddr_${FULL_NAME}.bin --image_name=NAND_IMAGES
+
+python ${DIR_NAME}/genimg.py --partition_tool=partition_tool --bootconfig_gen=bootconfig_tool --mbn_gen=nand_mbn_generator.py --cdt_mod=cdt_mod.py --smem_gen=smem-tool.py --configdir=${DIR_NAME}/ --skip_export --cdt_bin=cb-cdt.mbn --cdt_modxml=${DIR_NAME}/pcddr_${FULL_NAME}.xml --cdt_outbin=cdt-pcddr_${FULL_NAME}.bin --image_name=NOR_PLUS_NAND_IMAGES
+
+python ${DIR_NAME}/genimg.py --partition_tool=partition_tool --bootconfig_gen=bootconfig_tool --mbn_gen=nand_mbn_generator.py --cdt_mod=cdt_mod.py --smem_gen=smem-tool.py --configdir=${DIR_NAME}/ --skip_export --cdt_bin=cb-cdt.mbn --cdt_modxml=${DIR_NAME}/pcddr_${FULL_NAME}.xml --cdt_outbin=cdt-pcddr_${FULL_NAME}.bin --image_name=SMEM_IMAGES
+
+python ${DIR_NAME}/genimg.py --partition_tool=partition_tool --bootconfig_gen=bootconfig_tool --mbn_gen=nand_mbn_generator.py --cdt_mod=cdt_mod.py --smem_gen=smem-tool.py --configdir=${DIR_NAME}/ --skip_export --cdt_bin=cb-cdt.mbn --cdt_modxml=${DIR_NAME}/pcddr_${FULL_NAME}.xml --cdt_outbin=cdt-pcddr_${FULL_NAME}.bin --image_name=CDT_IMAGES
+
+python ${DIR_NAME}/genimg.py --partition_tool=partition_tool --bootconfig_gen=bootconfig_tool --mbn_gen=nand_mbn_generator.py --cdt_mod=cdt_mod.py --smem_gen=smem-tool.py --configdir=${DIR_NAME}/ --skip_export --cdt_bin=cb-cdt.mbn --cdt_modxml=${DIR_NAME}/pcddr_${FULL_NAME}.xml --cdt_outbin=cdt-pcddr_${FULL_NAME}.bin --image_name=BOOTCONFIG_IMAGES
+
+
+/ipq/tools/askey-ap5400w/smem-AP5400W-REV1.xml
+./ipq/tools/askey-ap5400w/nand-partition.xml
+./ipq/tools/askey-ap5400w/pcddr_AP5400W-REV1.xml
+./ipq/tools/askey-ap5400w/bootconfig.xml
+./ipq/tools/askey-ap5400w/pcddr_AP5400W-REV1_128M16.xml
+./ipq/tools/askey-ap5400w/pcddr_AP5400W-REV1_64M16.xml
+./ipq/tools/askey-ap5400w/bootconfig1.xml
+
+
+~/spf5_test/spf5_0907/spf5/skysoft/product/hardware/ap5400w/qsdk/target/linux/ipq806x/image/ubinize-ap5400w.cfg
+
+
+ubiformat /dev/mtd12
+ubiattach -d 13 -p /dev/mtd12
+
+
+partitions:  [do not oversize it !]
+	sbl1: 1024
+    mibib: 1024
+    bootconfig: 1024
+    QSEE: 1024
+    QSEE_1: 1024
+    CDT: 512
+    CDT_1: 512
+    BOOTCONFIG1: 512
+    APPSBLENV: 512
+    APPSBL:2048
+    APPSBL_1:2048
+    ART: 512
+    CONFIG:3072
+    rootfs: 65536+1024
+    rootfs_1: 51200+1024
+    
 
 
 

@@ -153,47 +153,124 @@ uci' @3906d535
         "rollback":{"ubus_rpc_session":"String"}
         "reload_config":{}
 
+##############################################
+# Golden
+##############
 
-{  "CFG_CONTENT": [
-	 {  
-         "PROF_RADIO":"Taipei_bus_radio_001",
-         "Updated":243513232, 
-         "values": {
-                ".type": "wifi-device",
-                ".name": "wifi0",
-                "channel": "auto",
-                "hwmode": "11ng",
-                "country": "4015",
-                "htmode": "HT40",
-                "tpscale": "2",
-                "atfstrictsched": "0",
-                "wkdystart": "00:00",
-                "wkdyend": "23:59",
-                "wkenstart": "00:00",
-                "wkenend": "23:59"
+{  
+   "CFG_CONTENT":[  
+      {  
+         "PRODUCT_MAPPING":"ap5400w-d50",
+         "Updated":243513232,
+         "values":{  
+            "Product":"ap5400w-d50",
+            "radio_mapping":[  
+               [  
+                  "wifi0",
+                  "2G"
+               ],
+               [  
+                  "wifi1",
+                  "5G"
+               ]
+            ]
          }
-     },
-
-     {
+      },
+      {  
+         "PROF_MAPPING":"AP_group_001",
+         "Updated":243513232,
+         "values":{  
+            "Product":"ap5400w-d50",
+            "Model":"ap5400w",
+            "KEY":"4564564131213211",
+            "RADIO_PROFILES":[  
+               "Defaul_2G_Profile",
+               "Default_5G_Profile"
+            ],
+            "Mapping":[  
+               [  
+                  "my_prof_ssid1",
+                  [  
+                     "1,2"
+                  ],
+                  "wifi_types_1"
+               ],
+               [  
+                  "my_prof_ssid2",
+                  [  
+                     "1,2"
+                  ],
+                  "wifi_types_2"
+               ]
+            ]
+         }
+      },
+      {  
+         "PROF_RADIO":"Taipei_bus_radio_001",
+         "Updated":243513232,
+         "values":{  
+            ".type":"wifi-device",
+            ".name":"wifi0",
+            "channel":"auto",
+            "hwmode":"11ng",
+            "country":"4015",
+            "htmode":"HT40",
+            "tpscale":"2",
+            "atfstrictsched":"0",
+            "wkdystart":"00:00",
+            "wkdyend":"23:59",
+            "wkenstart":"00:00",
+            "wkenend":"23:59"
+         }
+      },
+      {  
          "PROF_SSID":"Taipei_bus_ssid_askey",
-         "Updated":243513232, 
-       	 "values": {
-                ".anonymous": false,
-                ".type": "wifi-iface",
-                ".name": "wlg",
-                "device": "wifi0",
-                "mode": "ap",
-				"ssid": "askey",
-				"encryption": "none",
-				"key": "12345678",
-				"hidden":"0",
-				"isolate": "0",
-                "mcast_rate": "54000",
-				"maxsta": "100",
-				"ieee80211w": "0"
-		 }
-     }]
+         "Updated":243513232,
+         "values":{  
+            ".anonymous":false,
+            ".type":"wifi-iface",
+            ".name":"wlg",
+            "device":"wifi0",
+            "mode":"ap",
+            "ssid":"askey",
+            "encryption":"none",
+            "key":"12345678",
+            "hidden":"0",
+            "isolate":"0",
+            "mcast_rate":"54000",
+            "maxsta":"100",
+            "ieee80211w":"0"
+         }
+      },
+      {  
+         "AP_RUNTIME_CFG":"010203_CFG",
+         "Updated":243513232,
+         "values":[  
+            {  
+               "PROFILE":"PROF_RADIO",
+               "INTF":"wifi0",
+               "values":{  
+                  "channel":"1",
+                  "tpscale":"2"
+               }
+            },
+            {  
+               "PROFILE":"PROF_RADIO",
+               "INTF":"wifi1",
+               "values":{  
+                  "channel":"36",
+                  "tpscale":"3"
+               }
+            }
+         ]
+      }
+   ]
 }
+
+
+FWINFO Sample :
+{"product":"ap5400w-d50","md5sum":"9c45aac85aa4be39a9cc8bca1f75c5ae","name":"PU9-IPQ4019_V1.1.1.SPF5.0-CS1_firmware_sysupgrade.tgz","fw_version":"1.1.4","size":28108594}
+
 
 
 example:
@@ -239,7 +316,27 @@ to enable the reboot reason check the code @ driver/soc/qcom
 ### 
 ./acp_sample_client localhost --ssl -C certificate/acp_client1.crt -K certificate/acp_client1.key -A certificate/acp_ca.crt
 
+123456789012
 
+
+#### damone ####
+lws_daemonize
+
+
+#### 
+####
+
+{"method":"GetUpdatedList", "update_type":"SSID", "updated_name": "ssid_test1"}
+
+## PM2 Usage:
+$ pm2 start ./fcgi.json
+
+
+####
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821 } 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"RADIO","PROF_NAME":"RADIO01","SEQ":822 } 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"00:00:00:11:11:11","SEQ":823 } 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"GROUP","PROF_NAME":"AC_test_group1","SEQ":824 } 
 
 
 

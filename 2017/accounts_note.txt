@@ -2,14 +2,20 @@
 http://192.168.1.1:8086/index.html 
 Default Username / password:
 root / MmvGB^RY3#
+#########
+-- charter / spf5 new --    
+operator R3MOT3ACC3$$
+technician R3MOT3ACC3$$
+admin admin
+#################
+
 
 wifi server
 80944e718a
 
--- charter new --    
-operator R3MOT3ACC3$$
-technician R3MOT3ACC3$$
-admin admin
+
+
+
 
 ---- Hidden Page -----
 charter hidden page: N@74U1fUD0n7H@v1P$d

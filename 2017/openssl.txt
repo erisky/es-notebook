@@ -44,7 +44,18 @@ $ libwebsockets-test-server --ssl -A /usr/local/share/libwebsockets-test-server/
 
 # run client
 $ cd ~/openssl
-$ libwebsockets-test-client --ssl -A /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -C client.pem -K client.key localhos
+$ libwebsockets-test-client --ssl -A /usr/local/share/libwebsockets-test-server/libwebsockets-test-server.pem -C client.pem -K client.key localhost
+
+
+
+# show certificate 
+
+$ openssl x509 -in acs.qacafe.com.pem -text
+
+
+
+
+
 
 
 www.openssl.org/docs/man1.1.0/crypto/X509_get_pubkey.html
@@ -66,5 +77,9 @@ www.openssl.org/docs/man1.1.0/crypto/X509_get_pubkey.html
     STDout = BIO_new_fp(stdout, BIO_NOCLOSE);
     BIO_printf(STDout, "serial=");
     i2a_ASN1_INTEGER(STDout, X509_get_serialNumber(cert));
+
+
+
+
 
 
