@@ -160,6 +160,7 @@ uci' @3906d535
 {  
    "CFG_CONTENT":[  
       {  
+		 "PROF_TYPE":"PRODUCT_MAPPING",
          "PRODUCT_MAPPING":"ap5400w-d50",
          "Updated":243513232,
          "values":{  
@@ -177,6 +178,7 @@ uci' @3906d535
          }
       },
       {  
+		 "PROF_TYPE":"PROF_MAPPING",
          "PROF_MAPPING":"AP_group_001",
          "Updated":243513232,
          "values":{  
@@ -206,6 +208,7 @@ uci' @3906d535
          }
       },
       {  
+		 "PROF_TYPE":"PROF_RADIO",
          "PROF_RADIO":"Taipei_bus_radio_001",
          "Updated":243513232,
          "values":{  
@@ -224,6 +227,7 @@ uci' @3906d535
          }
       },
       {  
+		 "PROF_TYPE":"PROF_SSID",
          "PROF_SSID":"Taipei_bus_ssid_askey",
          "Updated":243513232,
          "values":{  
@@ -243,6 +247,7 @@ uci' @3906d535
          }
       },
       {  
+		 "PROF_TYPE":"AP_RUNTIME_CFG",
          "AP_RUNTIME_CFG":"010203_CFG",
          "Updated":243513232,
          "values":[  
@@ -331,6 +336,10 @@ lws_daemonize
 ## PM2 Usage:
 $ pm2 start ./fcgi.json
 
+
+###tunn
+
+{"ACTION":"TUNN_OPEN", "MAC":"8E:21:FA:0E:65:99","PORT":"80","SEQ":8211 } 
 
 ####
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821 } 

@@ -1,0 +1,15 @@
+
+http://wiki.dreamrunner.org/public_html/Embedded-System/Qcom-ipq40xx/QualcommSecureChannelManager.html
+http://blog.csdn.net/hovan/article/details/42674055
+
+http://bits-please.blogspot.tw/2015/03/getting-arbitrary-code-execution-in.html
+
+
+
+The "Secure World" is also called TrustZone.
+
+called "qseecom" - short for Qualcomm Secure Execution Environment Communication
+
+
+
+
