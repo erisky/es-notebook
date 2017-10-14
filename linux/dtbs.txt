@@ -50,3 +50,43 @@ cpus {
         reg = <0>;                              # no length field since size-cell =0 
     }
 }
+
+
+
+### example from linux Document ####
+
+  / o device-tree
+      |- name = "device-tree"
+      |- model = "MyBoardName"
+      |- compatible = "MyBoardFamilyName"
+      |- #address-cells = <2>
+      |- #size-cells = <2>
+      |- linux,phandle = <0>
+      |
+      o cpus
+      | | - name = "cpus"
+      | | - linux,phandle = <1>
+      | | - #address-cells = <1>
+      | | - #size-cells = <0>
+      | |
+      | o PowerPC,970@0                                         --> unit name, format as name # unit-address for distinguish sibling
+      |   |- name = "PowerPC,970"
+      |   |- device_type = "cpu"
+      |   |- reg = <0>
+      |   |- clock-frequency = <0x5f5e1000>
+      |   |- 64-bit
+      |   |- linux,phandle = <2>                                --> unique for all syste,
+      |
+      o memory@0
+      | |- name = "memory"
+      | |- device_type = "memory"
+      | |- reg = <0x00000000 0x00000000 0x00000000 0x20000000>
+      | |- linux,phandle = <3>
+      |
+      o chosen
+        |- name = "chosen"
+        |- bootargs = "root=/dev/sda2"
+        |- linux,phandle = <4>
+
+
+

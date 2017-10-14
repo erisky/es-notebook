@@ -1,0 +1,23 @@
+
+apt-get install npm
+mkdir es6
+cd es6
+
+npm init -y
+
+# workaround for fsevent ...
+npm install --no-optional --save-dev webpack
+
+
+# webpack.config.js  
+# !! must use absolute path in output
+var path = require('path')
+module.exports =  {
+  entry: ['./app/index.js'],
+  output: {
+    path: path.join(__dirname, 'build'), 
+    filename: 'bundle.js'
+  }
+}
+
+
