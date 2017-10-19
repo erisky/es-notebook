@@ -153,7 +153,7 @@ operator@ap5400w:~# hexdump -C boot.bin
 
 
 
---> struct ipq_smem_bootconfig_v2_info
+--> struct ipq_smem_bootconfig_v2_info 8064
 
 
 ===> NAND ROOTFS has limitation of size 64MB?
@@ -163,6 +163,12 @@ operator@ap5400w:~# hexdump -C boot.bin
 ################## image location :
 
 .../build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/root-ap5400w.ubi
+
+#### To Simlate nandsim for UBIFS check ####
+$ sudo apt install mtd-utils
+$ sudo modprobe nandsim first_id_byte=0x2c second_id_byte=0xda third_id_byte=0x90 fourth_id_byte=0x95
+$ sudo flash_erase /dev/mtd0 0 0
+$ 
 
 
 
@@ -274,12 +280,12 @@ puma13 "Device power up"   // 0x77665513
 - from proc/cmdline 
 
 
-
+-- related files ---
 ./qsdk/package/base-files/files/etc/rc.button/reset:		reboot -s pumac
 ./qsdk/package/base-files/files/etc/rc.button/reset:		(sleep 10; sync; reboot -f) &
+./qsdk/package/base-files/files/lib/upgrade/common.sh:		reboot -f
 ./qsdk/package/base-files/files/lib/upgrade/common.sh:		/sbin/pivot_root /usr/bin/wget /sbin/reboot /bin/sync /bin/dd	\
 ./qsdk/package/base-files/files/lib/upgrade/common.sh:		echo "Failed to switch over to ramfs. Please reboot."
-./qsdk/package/base-files/files/lib/upgrade/common.sh:		reboot -f
 ./qsdk/package/base-files/files/sbin/sysupgrade:	-d <delay>   add a delay before rebooting
 ./qsdk/package/base-files/files/sbin/reset_button_pressed:trap 'echo "######## SYSTEM REBOOT!########" >> /dev/console ; sync; reboot -s pumac;' TERM INT USR1 USR2
 ./qsdk/package/skysoft/skysoft_detection/src/main.c:	system("cp /etc/config/rebootInfo /tmp/vendor/rebootInfo  -f");
@@ -287,6 +293,7 @@ puma13 "Device power up"   // 0x77665513
 ./qsdk/package/skysoft/skysoft_web_admin/cgi/function/wizard.c:		ret = do_cmd("(sleep 1; reboot; sleep 10; sync; reboot -f) &");
 ./qsdk/package/skysoft/skysoft_web_admin/cgi/function/wizard.c:	ret = do_cmd("(sleep 1; reboot; sleep 10; sync; reboot -f) &");
 ./qsdk/package/skysoft/skysoft_web_admin/cgi/function/wizard.c:	ret = do_cmd("(sleep 1; reboot; sleep 10; sync; reboot -f) &");
+>>>> treat as user reboot
 ./qsdk/package/skysoft/skysoft_web_admin/www/script/init.js://                var html = '<p style="line-height: 32px;font-size:20px;font-family: Arial,sans-serif;color:#f5f5f7;width:800px;margin:60px auto">'+RouterPage.langMap.err.tx_rebooterror+'</p>'
 ./qsdk/target/linux/ipq806x/base-files/lib/upgrade/platform.sh:		reboot
 ./qsdk/target/linux/ipq806x/base-files/lib/upgrade/platform.sh:			reboot
@@ -295,7 +302,9 @@ puma13 "Device power up"   // 0x77665513
 ./web/model/ap5400w/code/function/wizard.c:		ret = do_cmd("(sleep 1; reboot; sleep 10; sync; reboot -f) &");
 ./web/model/ap5400w/code/function/wizard.c:	ret = do_cmd("(sleep 1; reboot; sleep 10; sync; reboot -f) &");
 ./web/model/ap5400w/code/function/wizard.c:	ret = do_cmd("(sleep 1; reboot; sleep 10; sync; reboot -f) &");
+---> done, keep
 ./web/common/page/script/init.js://                var html = '<p style="line-height: 32px;font-size:20px;font-family: 'open_sansregular',sans-serif;color:#f5f5f7;width:800px;margin:60px auto">'+RouterPage.langMap.err.tx_rebooterror+'</p>'
+
 ./web/common/code/cgi_main.c:				do_cmd("(sleep 1 && reboot -f) &"); //ak9 sarah 20170523
 ./web/common/code/function/routerview.c:	ret = do_cmd("(sleep 1 && reboot -f) &");  //AK9 Casper, use reboot -f to avoid reboot fail
 

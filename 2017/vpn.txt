@@ -183,39 +183,9 @@ config rule
         option family 'ipv4'
         option target 'ACCEPT'
         option enabled '0'
-
-
                                                                                  
                                                                                  
 root@ap5400w:~# cat /proc/sys/net/ipv4/conf/l2tp-vpnc134159/*********************
-0
-1
-1
-0
-0
-0
-1
-0
-0
-0
-0
-0
-1
-10000
-1000
-0
-0
-0
-0
-0
-0
-0
-0
-1
-1
-1
-0
-0
 
 
 root@ap5400w:~# iptables -L delegate_forward -nv
@@ -234,7 +204,9 @@ Chain delegate_forward (1 references)
 
 
 
-
+### RUN OPEN CLIENT FROM Ubuntu ####
+# Setup the server and download the ovpn file
+$ sudo openvpn --config ~/client.ovpn
 
 
 

@@ -161,10 +161,10 @@ uci' @3906d535
    "CFG_CONTENT":[  
       {  
 		 "PROF_TYPE":"PRODUCT_MAPPING",
-         "PRODUCT_MAPPING":"ap5400w-d50",
+         "PRODUCT_MAPPING":"eai2204p",
          "Updated":243513232,
          "values":{  
-            "Product":"ap5400w-d50",
+            "Product":"eai2204p",
             "radio_mapping":[  
                [  
                   "wifi0",
@@ -182,7 +182,7 @@ uci' @3906d535
          "PROF_MAPPING":"AP_group_001",
          "Updated":243513232,
          "values":{  
-            "Product":"ap5400w-d50",
+            "Product":"eai2204p",
             "Model":"ap5400w",
             "KEY":"4564564131213211",
             "RADIO_PROFILES":[  
@@ -287,6 +287,20 @@ ubus call uci get '{"config":"firewall_ctrl", "section":"parent_ctrl"}'
 > uci set !!!
 ubus call uci set '{"config":"firewall", "section":"vpnc_ctrl", "option":"reload", "values":{"reload":"1"}}'
 
+wifi get !!:
+> ubus call uci get '{"config":"wireless", "section":"wifi0"}'
+> ubus call uci get '{"config":"wireless", "section":"wifi2"}'
+
+> Wifi uci set !!!
+ubus call uci set '{"config":"wireless", "section":"wifi2", "values":{"tpscale":"1", "disable":"1"}}'
+ubus call uci set '{"config":"wireless", "section":"wifi2", "values":{"tpscale":"1", "disable":"1", "dcs_enable":"1"}}'
+ubus call uci set '{"config":"wireless", "section":"wifi2", "values":{"tpscale":"1", "disable":"1", "dcs_enable":"0"}, "htmode":"HT80"}'
+
+interface (SSID) Set/get
+ubus call uci get '{"config":"wireless", "section":"wla"}'
+ubus call uci get '{"config":"wireless", "section":"wlg"}'
+
+
 !!! example:
 ## GET ##
 ubus call uci get '{"config":"firewall_ctrl", "section":"parent_ctrl"}' 
@@ -294,6 +308,10 @@ ubus call uci get '{"config":"firewall_ctrl", "section":"parent_ctrl"}'
 ubus call uci set '{"config":"firewall_ctrl", "section":"parent_ctrl", "values":{"enabled":"1"}}'
 ## COMMIT ##
 ubus call uci commit '{"config":"firewall_ctrl"}'
+
+## UBUS  execute file ###
+ubus call file exec '{"command":"ls", "params":["-al"]}'
+
 
 
 # libwebsocket 
@@ -339,13 +357,111 @@ $ pm2 start ./fcgi.json
 
 ###tunn
 
-{"ACTION":"TUNN_OPEN", "MAC":"8E:21:FA:0E:65:99","PORT":"80","SEQ":8211 } 
+{"ACTION":"TUNN_OPEN", "MAC":"35:04:70:50:E6:0C","PORT":"80","SEQ":8211 } 
 
 ####
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821 } 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"RADIO","PROF_NAME":"RADIO01","SEQ":822 } 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"0a:00:00:11:11:11","SEQ":823 } 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"GROUP","PROF_NAME":"waddfewfwefefwef","SEQ":824 } 
+
+
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"GROUP","PROF_NAME":"AC_test_group2","SEQ":9787 } 
+
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"A6:98:60:01:3A:88","SEQ":823 } 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"00:00:00:11:11:11","SEQ":823 } 
-{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"GROUP","PROF_NAME":"AC_test_group1","SEQ":824 } 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"B4:EE:B4:EA:1A:21","SEQ":823 } 
+
+#UPDATE LIST
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","LIST":["00:00:00:11:11:11", "00:00:00:11:11:12", "00:00:00:11:11:13"],"SEQ":8231 } 
+
+
+# UPDATE ALL
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"STRWE","PROF_NAME":"APALL","SEQ":9912} 
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"APALL","PROF_NAME":"","SEQ":9912} 
+
+
+{  "ACTION":"CMD_RESP","SEQ":1234, "RESULT": [{"MAC":"00:00:00:11:11:11", "STATUS":"OK", "RETURN":0, "OUTPUT": "/bin/ls", "STDERR":""},{"MAC":"11:22:33:44:55:66", "STATUS":"OK", "RETURN":0, "OUTPUT": "/bin/ls", "STDERR":""}]}
+
+
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["00:00:00:11:11:11", "00:00:00:11:11:12"], "CMD":"ls -al"} 
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"ps -w"} 
+
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"cat /tmp/lighttpd.conf"} 
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"logread -l 200"}
+
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"logread -l 300"} 
+ 
+{  
+   "ACTION":"CMD_RESP",
+   "SEQ":1234,
+   "RESULT":[  
+      {  
+         "MAC":"00:00:00:11:11:11",
+         "STATUS":"OK",
+         "RETURN":0,
+         "OUTPUT":"/bin/ls",
+         "STDERR":""
+      },
+      {  
+         "MAC":"11:22:33:44:55:66",
+         "STATUS":"OK",
+         "RETURN":0,
+         "OUTPUT":"/bin/ls",
+         "STDERR":""
+      }
+   ]
+}
+
+
+
+
+{   "ACTION":"UPDATE_NOTIFY",
+   "PROF_TYPE":"RADIO",
+   "LIST":["radio_basic_2G", “radioa2”],
+   "SEQ":823 } 
+
+
+### dev_pkt_history ###
+ubus call wifista_manage dev_pkt_history_info_get '{"dev_ifc":"ath2"}' -S
+
+###
+
+
+ubus call wifista_manage wifi_current_sta_info_get '{"wifi_ifc":"wifi0","start":0,"number":30}'
+
+
+
+ubus call wifista_manage wifi_history_sta_info_get
+return: {"wifista_manage":[["10:7b:44:3a:19:67",280],["30:5a:3a:60:52:a7",120]]}
+stamac, (tx_data_packets+rx_data_packets)
+
+
+
+ubus call wifista_manage wifi_current_sta_info_get  ‘{“wifi_ifc”:”wifi0”,”start”:0,”number”:30}’
+return: {"wifista_manage":[["10:7b:44:3a:19:67","ath0",21,63,108, 280],["30:5a:3a:60:52:a7","ath0",22,86,12 ,28]]}
+
+stamac, ath_ifc, rssi, assoctime(second), tx_data_packets rx_data_packets,
+
+ubus call wifista_manage wifi_current_sta_number_get  ‘{“wifi_ifc”:”wifi0” }’
+return: {"wifista_manage":[[280]]}
+
+
+
+
+
+https://drive.google.com/open?id=0B6yidZPAKtbweXNUcU9ic0ttNFk
+http://10.194.22.88/firmware_test/eai2204p-1.1.4.tgz
+
+
+# OK#
+
+
+## Update AP CFG using nc
+
+eric@eric-n809996:~/work/server_git/server/acp_server/build$ nc 10.194.22.88 1338
+
+{"method":"UpdateApGroup","account":"admin01","id":"f82366e0-aa63-11e7-8a6c-107b444e977a","name":"eai2204p_default","product":"eai2204p","fw_version":"eai2204p-1.1.5","country":840,"config":{"PROF_TYPE":"PROF_MAPPING","PROF_MAPPING":"eai2204p_default","Updated":2435813242,"Radio_profile":[["2.4GHz","Default_2G_Profile"],["5GHz_1","Default_5G_Profile"]],"Mappings":[["askey",["2.4GHz","5GHz_1"],"cap_plan1"],["pu9",["2.4GHz","5GHz_1"],"cap_plan_2"]],"Product":"eai2204p"}}
 
 
 
