@@ -1,0 +1,138 @@
+
+documentation : https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+# remove older version 
+
+$ sudo apt-get remove docker docker-engine docker.io
+
+# Install the community version
+
+$ sudo apt-get update
+$ sudo apt-get install     apt-transport-https     ca-certificates     curl     software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo apt-key fingerprint 0EBFCD88
+
+# list available versions
+$ apt-cache madison docker-ce 
+
+# Install the one:
+$ sudo apt-get install docker-ce=17.06.2~ce-0~ubuntu
+
+
+# run hello-world 
+$ sudo docker run hello-world
+
+
+# Docker images
+#
+sudo docker search postgre
+
+# Enable non-root users to run docker commands
+
+$ usermod -aG docker eric
+$ sudo usermod -aG docker eric
+$ service docker restart
+### !!! ####
+$ newgrp docker
+
+[Network]
+
+# list all the networks
+$ docker network ls
+
+# start a container for testing 
+$ docker run -itd --name=networktest ubuntu
+# run another :p
+$ docker run -itd --name=networktest2 ubuntu
+
+# some commands for checking this container
+$ docker ps
+$ docker exec ac219d01672c ls -al /home
+$ docker exec ac219d01672c uname -a
+$ docker exec ac219d01672c mount
+
+# inspect the network
+$ docker network inspect bridge 
+>> each container have it's own ip 172.17.0.2 / 172.17.0.3
+# try to ping
+$ ping 172.17.0.2
+
+# disconnect one of them and 
+$ docker network disconnect bridge networktest
+>>> now ping will fail 
+
+# Create our own bridge 
+$ docker network create -d bridge my_bridge
+$ docker network inspect my_bridge
+$ 
+
+
+#### Docker 101 ####
+# https://github.com/docker/labs/blob/master/beginner/chapters/alpine.md
+# The pull command fetches the alpine image from the Docker registry and saves it in our system
+$ docker pull alpine
+＃run interactive shell
+$ docker run -it alpine /bin/sh
+# show all ran dockers
+$ docker ps -a 
+# Inspect a image
+$ docker inspect alpine
+
+# https://github.com/docker/labs/blob/master/beginner/chapters/webapps.md
+
+
+# -d: detach
+# -P: publish the port to Docker host
+#
+$ docker run --name static-site -e AUTHOR="Your Name" -d -P dockersamples/static-site
+
+# run docker with assigned
+$ docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 8888:80 dockersamples/static-site
+
+$ docker stop static-site
+$ docker rm static-site
+
+
+$docker search
+
+Base images ---  are images that have no parent images, usually images with an OS like ubuntu, alpine or debian.
+Child images ---  are images that build on base images and add additional functionality.
+
+# practice home:
+# run the flask app
+/home/eric/git/my_practices/docker
+
+
+ Dockerfile is a text file that contains a list of commands that the Docker daemon calls while creating an image.
+  The Dockerfile contains all the information that Docker needs to know to run the app 
+  — a base Docker image to run from, 
+    location of your project code, 
+    any dependencies it has, and 
+    what commands to run at start-up. 
+    It is a simple way to automate the image creation process. 
+    The best part is that the commands you write in a Dockerfile are 
+    almost identical to their equivalent Linux commands. 
+    This means you don't really have to learn new syntax to create your own Dockerfiles.
+
+# build and run
+
+$ docker build -t erisky/myfirstapp .
+$ docker run -p 5000:5000 --name myfirstapp erisky/myfirstapp
+
+
+docker container restart myfirstapp
+docker  container ls
+
+docker stop myfirstapp1
+docker rm myfirstapp1
+
+##### Voting app example ####
+#using swarm
+#https://github.com/dockersamples/example-voting-app
+
+$ git clone https://github.com/docker/example-voting-app.git
+
+# start deply
+docker stack deploy --compose-file docker-stack.yml vote
+# check status
+docker stack services vote

@@ -1,0 +1,17 @@
+
+# query anything (man page)
+apprpos lxc
+
+
+sudo apt-get install lxc
+
+# linux distrubutions
+ls -al /usr/share/lxc/templates/
+
+
+sudo lxc-create -n ubu-veth-001 -t ubuntu
+
+
+sudo lxc-ls --fancy
+
+

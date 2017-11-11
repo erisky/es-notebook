@@ -1,0 +1,2 @@
+resource:
+https://kubernetes.io/https://kubernetes.io/

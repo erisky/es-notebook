@@ -1,0 +1,4 @@
+
+
+# install this for YCM
+sudo apt-get install  vim-python-jedi
