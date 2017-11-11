@@ -29,3 +29,151 @@ $ dumpimage -T flat_dt -p 1  -i /home/eric/spf5_test/spf5/qualcomm_sdk/IPQ4019.I
 
 
 
+
+===== ASKEY DUAL IMG =====
+
+Compilation flag:  CONFIG_DUAL_IMG_ASKEY
+
+related code: charter : /base/software/common_IPQ4019/qsdk/qca/src/uboot-1.0/
+
+./base/software/common_IPQ4019/qsdk/qca/src/uboot-1.0/arch/arm/include/asm/arch-ipq40xx/smem.h:#if defined CONFIG_DUAL_IMG_ASKEY
+./base/software/common_IPQ4019/qsdk/qca/src/uboot-1.0/arch/arm/cpu/armv7/qca/cmd_bootqca.c:#if defined CONFIG_DUAL_IMG_ASKEY
+./base/software/common_IPQ4019/qsdk/qca/src/uboot-1.0/arch/arm/cpu/armv7/qca/smem.c:#if defined(CONFIG_DUAL_IMG_ASKEY)
+./base/software/common_IPQ4019/qsdk/qca/src/uboot-1.0/common/cmd_bootm.c:#endif /* DUAL_IMG_ASKEY */
+./base/software/common_IPQ4019/qsdk/qca/src/uboot-1.0/board/qcom/ipq40xx_cdp/ipq40xx_cdp.c:#if defined(CONFIG_DUAL_IMG_ASKEY)
+
+###### QCOM SUGGEST #####
+If flash read write is a hassle, you can use the following CPU register. 
+
+0x87b00000 
+
+For example, 
+
+#devmem 0x87b00000 32 0x79CD6EC8 
+#devmem 0x87b00000 
+0x79CD6EC8 
+#reboot 
+In u-boot , you can do md 0x87b00000, you can see that its value is 0x79CD6EC8. 
+
+
+
+
+target/linux/ipq806x/Image/Makefile
+
+Image/UbiImage
+
+
+Image/Build/ubifs
+--> 
+ #UbiPrepare
+ --> call UbinizeImage
+    --> ex. UbinizeImage qcom-ipq8064-ap160_2xx  qcom-ipq8064-ap160_2xx-fit-uImage.itb, squashfs,"ubi_rootfs","rootfs_data"
+        --> call scripts/ubinize-image.sh  --kernel qcom-ipq8064-ap160_2xx-fit-uImage.itb root-squashfs qcom-ipq8064-ap160_2xx-ubi-root.img 
+	 				staging/bin "ubi_rootfs","rootfs_data"
+
+
+
+
+
+MultiDTBFIT  -->   mkits.sh   ---[xxx.its]-->  mkimage ----> [xxx.itb] 
+
+
+
+
+[image.mk]
+BuildImage
+ >call Build/compile to build kernel !?
+                  ---> TBC: dtb files should be compile here ?!
+  
+ > image_prepare -> create $(KDIR)/tmp
+ >mkfs_prepare -> Image/mkfs/prepare --> chmod file in tmp
+ >kernel_prepare
+   ->Image/BuildKernel [Makefile]
+      1. Image/BuildKernel/template FIT  :  cp vmlinux from kernel dir to bin dir
+                                         :  call Image/BuildKernel/FIT  for all dtb   ==> output :  XXXX-fit-uImage.itb
+      2. Image/BuildKernel/GenericFIT	 :  same as template?  ==>   finially all call to scripts/mkits.sh  --> fdt!?
+	  3. Image/BuildKernel/MultiDTBFIT:  :  finially all call to scripts/mkits.sh  --> output 
+ >Install
+   -> Image/Build $(fs)   --> Image/Build/ubifs ---> Image/UbiImage  --> 
+	#####!!!!!!
+XX	$(call Image/mkfs/ubifs_fit,-eai2204p)
+XX        $(call Image/UbiImage, -eai2204p) -->  for ubifs_128MB   ---> finiall call ubinize here !!!!
+	$(call Image/mkfs/ubifs)
+       -> $(call Image/ubifs_128MB,-$(CONFIG_ASKEY_PRODUCT))  
+			-> Image/mkfs/ubifs/generate    ---> cp ubinize$(1).cfg & call ubinize  => out: ubi$(1).ubi   ==> ex. build dir /linux-ipq806x/root-eai2204p.ubi
+																					 -------------------  --> not used !?
+			-> $(call Image/Build,ubi,$(1)) -> Image/Build/ubifs, ubifs?    --> no action !?
+
+       ->  Image/UbiPrepare--> call UbinizeImage -> ubinize-image.sh
+             $$$  ==>  Create ubi image with itb + kernel + Image/UbiImage
+           :  Output: $(BIN_DIR)/$(IMG_PREFIX)-$(1)-ubi-root.img   -->  in /qualcomm_sdk/qsdk/bin/ipq806x/*img  (ex. bin/ipq806x/openwrt-ipq806x-eai2204p-ubi-root.img)
+			
+
+
+
+	$(call Image/Checksum,md5sum --binary,md5sums)
+	$(call Image/Checksum,openssl dgst -sha256,sha256sums)
+
+
+
+
+
+ make target/install
+
+
+uboot package:
+package/boot/uboot-ipq40xx/
+
+$ make package/uboot-ipq40xx/clean
+$ make package/uboot-ipq40xx/compile  
+
+$ make target/linux install
+
+
+
+
+### CHARTER ###  ### BUILD ASKEY ####
+from image.mk --> 
+$(call Image/BuildAskey,rtl0060vw) 
+$(call Image/BuildAskey,rtl0040w-d50)
+
+
+mkimage -A arm 
+	    -O linux 
+        -C lzma 
+        -T kernel 
+        -a 0x40908000 			--> load address
+		-e 0x40908000           --> entry address
+        -n 'Linux-$(LINUX_VERSION)'  --> Set image name to 'image name'.
+		-d $(KDIR)/fit-askey-rtl0060vw.itb   --> Use image data from 'image data file'
+        $(KDIR)/uImage-$(1)_tmp.Askey        
+
+
+mkimage -A arm 
+		-O linux 
+		-C lzma 
+		-T firmware 
+		-a 0x40908000 
+		-e 0x40908000 
+		-n 'root.squashfs' 
+		-d $(KDIR)/root.squashfs $(KDIR)/root.squashfs.tmp
+
+Q: why load addresss is from 0x4090!!!??
+
+
+
+[[ pu8 Dual Image notes ]]
+1. Which Flash index is incorrect @@ why?
+2. Load address !!?
+
+
+
+
+
+
+
+
+
+
+
+

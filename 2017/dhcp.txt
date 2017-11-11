@@ -1,0 +1,38 @@
+# auto-generated config file from /etc/config/dhcp
+conf-file=/etc/dnsmasq.conf
+dhcp-authoritative
+localise-queries
+bogus-priv
+expand-hosts
+local-service
+# auto-generated config file from /etc/config/dhcp
+conf-file=/etc/dnsmasq.conf
+dhcp-authoritative
+localise-queries
+bogus-priv
+expand-hosts
+local-service
+domain=lan1
+server=/lan/
+dhcp-leasefile=/tmp/dhcp.leases
+resolv-file=/tmp/resolv.conf.auto
+addn-hosts=/tmp/hosts
+conf-dir=/tmp/dnsmasq.d
+dhcp-broadcast=tag:needs-broadcast
+
+
+address=/router.charter.net/192.168.1.1
+ptr-record=1.1.168.192.in-addr.arpa,router.charter.net
+address=/EAI2204P.lan1/192.168.1.1
+ptr-record=1.1.168.192.in-addr.arpa,EAI2204P.lan1
+
+
+dhcp-range=lan,192.168.1.2,192.168.1.254,255.255.255.0,168h
+dhcp-option-force=lan,3,192.168.1.1
+dhcp-option-force=lan,6,192.168.1.1
+no-dhcp-interface=eth0
+
+
+# Known issue 
+When local-service is enabled in /etc/config/dhcp
+the dnsmasq doesn't reply dns for non-local IP

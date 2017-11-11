@@ -43,4 +43,11 @@ git reset --hard 27ad6b04c635e80ffb96ef0daa3a555670e00ab2
 # a good way to get git version info
 git describe --dirty --long --always
 
+#
+git config --global  branch.autosetuprebase always
 
+# force push current (local) to server
+git push -f origin HEAD:master
+
+# allow repostoy update by push:
+git config receive.denyCurrentBranch ignore

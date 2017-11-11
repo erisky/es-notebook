@@ -114,14 +114,8 @@ $ echo ${test/#*-/Curry}
 CurryJames
 
 
+# int it hex
 
-# Add auto complete:
-complete  -W "$WORDS" note
+printf "%x%x" 123 23 
 
-iwpriv ath11 get_backhaul
-iwpriv ath1 get_backhaul
-iwpriv ath0 get_backhaul
-iwpriv ath1 get_backhaul
 
-wlanconfig ath0 nawds mode 
-value

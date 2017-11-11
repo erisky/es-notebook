@@ -1,0 +1,130 @@
+#/etc/init.d
+
+start() {
+    enable=`uci get `
+    /usr/sbin/remote_fw_upgrade.sh &
+}
+
+stop() {
+    killall remote_fw_upgrade.sh 2>/dev/null
+}
+
+restart() {
+    stop
+    sleep 1
+    start
+}
+
+
+
+/etc/config/acp
+
+
+config acp 'client'
+    option enable '1'            
+    option server '10.194.22.154'
+    option srvport '15246'
+    option ssl '0'
+                                  
+config remote_fwupg 'remote_fwupg'
+    option enable '0'                                                        
+    option remote_url 'https://10.194.22.88/firmware_test/'
+
+
+
+#/etc/inid.d/acp
+
+#!/bin/sh /etc/rc.common
+
+ACP_DIR=/etc/acp/
+
+
+start_acp() {
+    [ ! -d $ACP_DIR ] && mkdir -p $ACP_DIR
+
+    /usr/sbin/acp_client &
+}
+
+start_remote_fwupg() {
+   /usr/sbin/remote_fwupg.sh &
+}
+
+start() {
+    acp_enable=`uci get acp.client.enable`
+    [ $acp_enable -eq 1 ] && start_acp
+    fwup_enable=`uci get acp.remote_fwupg.enable`
+    [ $acp_enable -eq 0 -a $fwup_enable -eq 1 ] && start_remote_fwupg  
+     
+}
+
+stop() {
+    killall acp_client 2>/dev/null
+    killall remote_fwupg.sh 2>/dev/null
+}
+
+restart() {
+    stop
+    sleep 1
+    start
+}
+
+
+#/usr/sbin/remote_fwupg.sh
+                                                
+UPGRADE_STATE=0                                 
+UPGRADE_FW_PATH=""                              
+PRODUCT=`mf_tool READ_MOD_NAME | tr [A-Z] [a-z]`
+                                            
+check_version () {                                           
+    local i                                                  
+    . /etc/system_version.info                               
+    remote_line=`cat /tmp/remote_version.txt | grep $PRODUCT`
+    [ -z "$remote_line" ] && return 0
+                              
+    for vars in $remote_line                
+    do                                                                          
+        let i=i+1                                   
+        [ $i -eq 1 ] && remote_product=$vars           
+        [ $i -eq 2 ] && remote_version=$vars
+        [ $i -eq 3 ] && remote_path=$vars
+    done                                  
+                                                                                      
+    echo "current: $PRODUCT $FW_VERSION remote: $remote_product $remote_version"
+    [ "$remote_product" != "$PRODUCT" ] &&  return 0                          
+    [ "$remote_version" == "$FW_VERSION" ] &&  return 0
+                                                                                      
+    echo "Updating"                                                                   
+    logger "start remote firmware upgrade"                                            
+    logger "current: $PRODUCT $FW_VERSION upgrade to: $remote_product $remote_version"
+    UPGRADE_FW_PATH=$remote_path
+                         
+}                                                                                       
+                                                                                        
+do_fw_uprade () {                                                                       
+
+    mkdir -p /tmp/remote_fwupg                                 
+    curl -o /tmp/remote_fwupg/UPGRADE_FW_PATH $remote_url/UPGRADE_FW_PATH
+    if [ "${UPGRADE_FW_PATH:4}" == ".tgz" ]; then
+        tar zxvf /tmp/remote_fwupg/UPGRADE_FW_PATH -C /tmp/remote_fwupg
+        UPG_FW=`find /tmp/remote_fwupg -name *.bin`
+    else 
+        UPG_FW=/tmp/remote_fwupg/UPGRADE
+    fi
+    
+    echo UPGRADE:$UPG_FW                               
+}                                                   
+                                                                                        
+                                                                                        
+while [ 1 ];                                                                            
+do                                                                                      
+    remote_url=`uci get acp.remote_fwupg.remote_url`                                    
+    [ -z $remote_url ] || curl -o /tmp/remote_version.txt $remote_url/latest_version.txt
+                                                                                        
+    check_version                                                                       
+    if [ $UPGRADE_STATE -eq 1 ]; then                                            
+        do_fw_uprade                                                                              
+    fi                                                                            
+                                                                                 
+    sleep 120
+done
+

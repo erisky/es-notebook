@@ -312,6 +312,9 @@ ubus call uci commit '{"config":"firewall_ctrl"}'
 ## UBUS  execute file ###
 ubus call file exec '{"command":"ls", "params":["-al"]}'
 
+"add":{"config":"String","type":"String","name":"String","values":"Table","ubus_rpc_session":"String"}
+
+ubus call uci add '{"config":"firewall_ctrl", "type":"parent_ctrl2", "values":{"enabled":"1"}}'
 
 
 # libwebsocket 
@@ -357,9 +360,15 @@ $ pm2 start ./fcgi.json
 
 ###tunn
 
+{"ACTION":"TUNN_OPEN", "MAC":"","PORT":"80","SEQ":8211 } 
+
+
 {"ACTION":"TUNN_OPEN", "MAC":"35:04:70:50:E6:0C","PORT":"80","SEQ":8211 } 
 
 ####
+
+send { "ACTION": "UPDATE_NOTIFY", "PROF_TYPE": "GROUP", "PROF_NAME": "test_group_1101", "SEQ": 298  }
+
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821 } 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"RADIO","PROF_NAME":"RADIO01","SEQ":822 } 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"0a:00:00:11:11:11","SEQ":823 } 
@@ -462,6 +471,38 @@ http://10.194.22.88/firmware_test/eai2204p-1.1.4.tgz
 eric@eric-n809996:~/work/server_git/server/acp_server/build$ nc 10.194.22.88 1338
 
 {"method":"UpdateApGroup","account":"admin01","id":"f82366e0-aa63-11e7-8a6c-107b444e977a","name":"eai2204p_default","product":"eai2204p","fw_version":"eai2204p-1.1.5","country":840,"config":{"PROF_TYPE":"PROF_MAPPING","PROF_MAPPING":"eai2204p_default","Updated":2435813242,"Radio_profile":[["2.4GHz","Default_2G_Profile"],["5GHz_1","Default_5G_Profile"]],"Mappings":[["askey",["2.4GHz","5GHz_1"],"cap_plan1"],["pu9",["2.4GHz","5GHz_1"],"cap_plan_2"]],"Product":"eai2204p"}}
+
+
+
+ubus call upbrkr send '{"type":"ASSOC", "data":{"mac":"11:22:33:44:55:66"}}'
+ubus call upbrkr send '{"type":"ASSOC", "data":{"mac":"11:22:33:44:55:66"}}'
+
+
+ubus call upbrkr send '{"type":"REBOOT", "data":{"reason":"0x12345678"}}'
+
+
+
+"Default Product Config"
+{"values":{"Product":"EAI2204P","radio_mapping":[["wifi0","2G"],["wifi2","5G"]]},"Updated":243513232,"PROF_TYPE":"PRODUCT_MAPPING","PRODUCT_MAPPING":"EAI2204P"}
+{"values":{"Product":"EAI2202P","radio_mapping":[["wifi0","2G"],["wifi1","5G"]]},"Updated":243513232,"PROF_TYPE":"PRODUCT_MAPPING","PRODUCT_MAPPING":"EAI2202P"}
+{"values":{"Product":"AP5400W-D50","radio_mapping":[["wifi0","2G"],["wifi2","5G"]]},"Updated":243513232,"PROF_TYPE":"PRODUCT_MAPPING","PRODUCT_MAPPING":"EAI2202P"}
+
+
+2>	Product: eai2204p, ap5400w, eai2202p. 
+These are all with 2 radio. 
+2.4G (wifi0), 5G (wifi2)  eai2204p and ap5400w; 
+2.4G (wifi0), 5G(wifi1) -> eai2202p
+
+
+
+
+
+ubus call service event '{"type":"config.change", "data":{"package":"wireless"}}'
+
+
+
+
+
 
 
 

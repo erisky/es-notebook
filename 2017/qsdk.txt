@@ -122,6 +122,15 @@ setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU
 >>> machid=8304001
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
+
+
+setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.6.SPF5.0-CS1_norplusnand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
+
+setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.6.SPF5.0-CS1_norplusnand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
+
+CONFIG_ARCH_QCOM
+
 [lbd]:
 
 
@@ -266,5 +275,5 @@ partitions:  [do not oversize it !]
     rootfs_1: 51200+1024
     
 
-
+ipq40xx_board_param.h
 

@@ -1,0 +1,261 @@
+[  
+   {  
+      "values":{  
+         "Product":"eai2204p",
+         "radio_mapping":[  
+            [  
+               "wifi0",
+               "2G"
+            ],
+            [  
+               "wifi2",
+               "5G"
+            ]
+         ]
+      },
+      "Updated":243513232,
+      "PROF_TYPE":"PRODUCT_MAPPING",
+      "PRODUCT_MAPPING":"eai2204p"
+   },
+
+{  
+   "PROF_TYPE":"PROF_MAPPING",
+   "PROF_MAPPING":"eai2204p_default",
+   "Updated":243513232,
+   "values":{  
+      "Product":"eai2204p",
+      "KEY":"4564564131213211",
+      "RADIO_PROFILES":[  
+         "Default_2G_Profile",
+         "Default_5G_Profile"
+      ],
+      "Mapping":[  
+         [  
+            "askey",
+            [  
+               "1,2"
+            ],
+            "cap_plan1"
+         ],
+         [  
+            "pu9",
+            [  
+               "1,2"
+            ],
+            "cap_plan_2"
+         ]
+      ]
+   }
+},
+   {  
+      "values":{  
+         "htmode":"HT40",
+         "hwmode":"11ng",
+         "channel":"auto",
+         "tpscale":"2",
+         "wkdyend":"23:59",
+         "wkenend":"23:59",
+         "wkdystart":"00:00",
+         "wkenstart":"00:00",
+         "atfstrictsched":"0"
+      },
+      "Updated":243513232,
+      "PROF_TYPE":"PROF_RADIO",
+      "PROF_RADIO":"Default_2G_Profile"
+   },
+
+   {  
+      "values":{  
+         "htmode":"HT80",
+         "hwmode":"11ac",
+         "channel":"auto",
+         "tpscale":"2",
+         "wkdyend":"23:59",
+         "wkenend":"23:59",
+         "wkdystart":"00:00",
+         "wkenstart":"00:00",
+         "atfstrictsched":"0"
+      },
+      "Updated":243513232,
+      "PROF_TYPE":"PROF_RADIO",
+      "PROF_RADIO":"Default_5G_Profile"
+   },
+
+   {  
+      "values":{  
+         "key":"askey1234",
+         "ssid":"askey",
+         "hidden":"0",
+         "maxsta":"100",
+         "isolate":"0",         
+	     "encryption": "psk2+ccmp",
+         "ieee80211w":"0",
+         "mcast_rate":"54000"
+      },
+      "Updated":243513232,
+      "PROF_SSID":"askey",
+      "PROF_TYPE":"PROF_SSID"
+   },
+
+
+   {  
+      "values":{  
+         "key":"pu9123456",
+         "ssid":"pu9",
+         "hidden":"0",
+         "maxsta":"100",
+         "isolate":"0",         
+	     "encryption": "psk2+ccmp",
+         "ieee80211w":"0",
+         "mcast_rate":"54000"
+      },
+      "Updated":243513232,
+      "PROF_SSID":"pu9",
+      "PROF_TYPE":"PROF_SSID"
+   }
+
+
+]
+
+
+
+###############################################################################
+#   INDENTED VERSION
+###############################################################################
+[  
+   {  
+      "values":{  
+         "Product":"eai2204p",
+         "radio_mapping":[  
+            [  
+               "wifi0",
+               "2G"
+            ],
+            [  
+               "wifi2",
+               "5G"
+            ]
+         ]
+      },
+      "Updated":243513232,
+      "PROF_TYPE":"PRODUCT_MAPPING",
+      "PRODUCT_MAPPING":"eai2204p"
+   },
+   {  
+      "PROF_TYPE":"PROF_MAPPING",
+      "PROF_MAPPING":"eai2204p_default",
+      "Updated":243513232,
+      "values":{  
+         "Product":"eai2204p",
+         "KEY":"4564564131213211",
+         "RADIO_PROFILES":[  
+            "Default_2G_Profile",
+            "Default_5G_Profile"
+         ],
+         "Mapping":[  
+            [  
+               "askey",
+               [  
+                  "1,2"
+               ],
+               "cap_plan1"
+            ],
+            [  
+               "pu9",
+               [  
+                  "1,2"
+               ],
+               "cap_plan_2"
+            ]
+         ]
+      }
+   },
+   {  
+      "values":{  
+         "htmode":"HT40",
+         "hwmode":"11ng",
+         "channel":"auto",
+         "tpscale":"2",
+         "wkdyend":"23:59",
+         "wkenend":"23:59",
+         "wkdystart":"00:00",
+         "wkenstart":"00:00",
+         "atfstrictsched":"0"
+      },
+      "Updated":243513232,
+      "PROF_TYPE":"PROF_RADIO",
+      "PROF_RADIO":"Default_2G_Profile"
+   },
+   {  
+      "values":{  
+         "htmode":"HT80",
+         "hwmode":"11ac",
+         "channel":"auto",
+         "tpscale":"2",
+         "wkdyend":"23:59",
+         "wkenend":"23:59",
+         "wkdystart":"00:00",
+         "wkenstart":"00:00",
+         "atfstrictsched":"0"
+      },
+      "Updated":243513232,
+      "PROF_TYPE":"PROF_RADIO",
+      "PROF_RADIO":"Default_5G_Profile"
+   },
+   {  
+      "values":{  
+         "key":"askey1234",
+         "ssid":"askey",
+         "hidden":"0",
+         "maxsta":"100",
+         "isolate":"0",
+         "encryption":"psk2+ccmp",
+         "ieee80211w":"0",
+         "mcast_rate":"54000"
+      },
+      "Updated":243513232,
+      "PROF_SSID":"askey",
+      "PROF_TYPE":"PROF_SSID"
+   },
+   {  
+      "values":{  
+         "key":"pu9123456",
+         "ssid":"pu9",
+         "hidden":"0",
+         "maxsta":"100",
+         "isolate":"0",
+         "encryption":"psk2+ccmp",
+         "ieee80211w":"0",
+         "mcast_rate":"54000"
+      },
+      "Updated":243513232,
+      "PROF_SSID":"pu9",
+      "PROF_TYPE":"PROF_SSID"
+   }
+]
+
+###############################################################
+#    ACP_CFG RUN TIME
+###############################################################
+
+
+{  
+   "values":[  
+      {  
+         "values":{  
+            "channel":"1",
+            "tpscale":"2"
+         },
+         "PROF_RADIO":"Default_5G_Profile"
+      },
+      {  
+         "values":{  
+            "channel":"36",
+            "tpscale":"3"
+         },
+         "PROF_RADIO":"Default_2G_Profile"
+      }
+   ],
+   "Updated":243513232,
+   "PROF_TYPE":"AP_RUNTIME_CFG"
+}
