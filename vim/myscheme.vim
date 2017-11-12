@@ -11,7 +11,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name = 'blackboard'
+let g:colors_name = 'myscheme'
 
 if has('gui_running')
     "hi Normal guifg=#eeeeee guibg=#090B18
@@ -28,7 +28,7 @@ if has('gui_running')
     hi MoreMsg guifg=SeaGreen
     hi NonText guifg=RoyalBlue guibg=#151825 ctermfg=234
     hi Question guifg=springgreen
-    hi Search guibg=#0099ff guifg=White
+    hi Search guibg=#D4E157 guifg=black
     hi Visual gui=none guifg=khaki guibg=olivedrab
 
     hi SpecialKey guifg=#cbfe29 ctermfg=190
@@ -36,8 +36,8 @@ if has('gui_running')
     hi Statement guifg=#ff6600 ctermfg=202
     hi htmlStatement guifg=#61c3fe ctermfg=39
     hi String guifg=#99ec5c ctermfg=155
-    hi Comment guifg=grey50 ctermfg=240
-    hi CommentDoc guifg=grey50 ctermfg=244
+    hi Comment guifg=grey52 ctermfg=240
+    hi CommentDoc guifg=grey60 ctermfg=244
     hi Conditional guifg=#ffee14 ctermfg=226
     hi Constant guifg=#cbfe29 ctermfg=190
     hi Special guifg=#86A7D0 ctermfg=110
@@ -46,6 +46,18 @@ if has('gui_running')
     hi PreProc guifg=grey ctermfg=grey
     hi Operator gui=bold guifg=#ff9900 ctermfg=208 cterm=bold
     hi Define guifg=#ffde00 gui=bold ctermfg=220 cterm=bold
+    ""  From ir_black
+    hi PreProc guifg=#E64A19 guibg=NONE guisp=NONE gui=NONE ctermfg=68 ctermbg=NONE cterm=NONE
+    hi Macro guifg=#e53935 guibg=NONE guisp=NONE gui=bold ctermfg=68 ctermbg=NONE cterm=NONE
+
+    hi DefinedName  guifg=#4CAF50 guibg=NONE guisp=NONE gui=NONE ctermfg=68 ctermbg=NONE cterm=NONE
+
+    "hi Function guifg=#c8a000 guibg=NONE guisp=NONE gui=bold ctermfg=180 ctermbg=NONE cterm=NONE
+    hi Tag guifg=#e6c280 guibg=NONE guisp=NONE gui=NONE ctermfg=173 ctermbg=NONE cterm=NONE
+
+""    hi Typedef guifg=#fff000 guibg=NONE guisp=NONE gui=NONE ctermfg=186 ctermbg=NONE cterm=NONE
+
+
     hi Type guifg=#61c3fe ctermfg=39
     hi Function guifg=#ffde00 gui=NONE ctermfg=220
     hi Structure gui=bold guifg=#ff6600 ctermfg=202 cterm=bold
