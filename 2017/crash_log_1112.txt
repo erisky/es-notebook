@@ -1,0 +1,325 @@
+Nov 12 22:38:19 swtest-pc rtkit-daemon[2037]: The canary thread is apparently starving. Taking action.
+Nov 12 22:38:35 swtest-pc rtkit-daemon[2037]: Demoting known real-time threads.
+Nov 12 22:38:56 swtest-pc rtkit-daemon[2037]: Successfully demoted thread 2525 of process 2436 (n/a).
+Nov 12 22:39:10 swtest-pc kernel: [8437471.281471] node /home/swte invoked oom-killer: gfp_mask=0x201da, order=0, oom_score_adj=0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281474] node /home/swte cpuset=/ mems_allowed=0
+Nov 12 22:39:10 swtest-pc rtkit-daemon[2037]: Successfully demoted thread 2524 of process 2436 (n/a).
+Nov 12 22:39:10 swtest-pc rtkit-daemon[2037]: Successfully demoted thread 2436 of process 2436 (n/a).
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281477] CPU: 1 PID: 8171 Comm: node /home/swte Tainted: G        W  OE  3.19.0-25-generic #26~14.04.1-Ubuntu
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281478] Hardware name: System manufacturer System Product Name/B150M-A, BIOS 0312 09/24/2015
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281479]  0000000000000000 ffff88019f4a3888 ffffffff817aed00 0000000000000000
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281481]  ffff88013ea9bae0 ffff88019f4a3928 ffffffff817a9c3f 0000000000000000
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281482]  0000000000000000 0000000000000000 0000000000000000 0000000000000000
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281484] Call Trace:
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281489]  [<ffffffff817aed00>] dump_stack+0x45/0x57
+Nov 12 22:39:11 swtest-pc rtkit-daemon[2037]: Demoted 3 threads.
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281491]  [<ffffffff817a9c3f>] dump_header+0x7f/0x1f1
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281493]  [<ffffffff811796fb>] oom_kill_process+0x22b/0x390
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281496]  [<ffffffff8107dd2e>] ? has_capability_noaudit+0x1e/0x30
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281498]  [<ffffffff81179ef2>] out_of_memory+0x4d2/0x520
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281500]  [<ffffffff8117f320>] __alloc_pages_nodemask+0x940/0xa60
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281503]  [<ffffffff811c41e1>] alloc_pages_current+0x91/0x100
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281505]  [<ffffffff81176007>] __page_cache_alloc+0xa7/0xc0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281506]  [<ffffffff81178368>] filemap_fault+0x1a8/0x430
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281508]  [<ffffffff811a1119>] __do_fault+0x39/0x90
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281510]  [<ffffffff811a3aa7>] do_read_fault.isra.55+0x1d7/0x2f0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281511]  [<ffffffff811a5845>] handle_mm_fault+0x7e5/0x1100
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281513]  [<ffffffff81061e94>] __do_page_fault+0x1c4/0x5b0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281515]  [<ffffffff810622b1>] do_page_fault+0x31/0x70
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281517]  [<ffffffff817b87e8>] page_fault+0x28/0x30
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281518] Mem-Info:
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281519] Node 0 DMA per-cpu:
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281520] CPU    0: hi:    0, btch:   1 usd:   0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281521] CPU    1: hi:    0, btch:   1 usd:   0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281522] CPU    2: hi:    0, btch:   1 usd:   0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281522] CPU    3: hi:    0, btch:   1 usd:   0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281523] Node 0 DMA32 per-cpu:
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281524] CPU    0: hi:  186, btch:  31 usd: 178
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281524] CPU    1: hi:  186, btch:  31 usd:  61
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281525] CPU    2: hi:  186, btch:  31 usd: 120
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281526] CPU    3: hi:  186, btch:  31 usd:  66
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281526] Node 0 Normal per-cpu:
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281527] CPU    0: hi:  186, btch:  31 usd: 137
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281528] CPU    1: hi:  186, btch:  31 usd: 186
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281528] CPU    2: hi:  186, btch:  31 usd:  55
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281529] CPU    3: hi:  186, btch:  31 usd:  77
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281531] active_anon:1602396 inactive_anon:307998 isolated_anon:0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281531]  active_file:773 inactive_file:843 isolated_file:32
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281531]  unevictable:8 dirty:0 writeback:0 unstable:0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281531]  free:26106 slab_reclaimable:25068 slab_unreclaimable:10530
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281531]  mapped:6183 shmem:26756 pagetables:21511 bounce:0
+                                                                                                                                                                                           122,1         19%
+
+valgrind --leak-check=yes ./acp_core
+
+
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281533] Node 0 DMA free:15888kB min:132kB low:164kB high:196kB active_anon:0kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:15980kB managed:15896kB mlocked:0kB dirty:0kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:0kB slab_unreclaimable:8kB kernel_stack:0kB pagetables:0kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:0 all_unreclaimable? yes
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281535] lowmem_reserve[]: 0 2548 7843 7843
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281537] Node 0 DMA32 free:43076kB min:21916kB low:27392kB high:32872kB active_anon:1962988kB inactive_anon:490876kB active_file:676kB inactive_file:632kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:2691716kB managed:2611960kB mlocked:0kB dirty:0kB writeback:0kB mapped:6832kB shmem:39292kB slab_reclaimable:53352kB slab_unreclaimable:13480kB kernel_stack:3360kB pagetables:24388kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:37604 all_unreclaimable? yes
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281540] lowmem_reserve[]: 0 0 5294 5294
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281541] Node 0 Normal free:45460kB min:45532kB low:56912kB high:68296kB active_anon:4446596kB inactive_anon:741116kB active_file:2416kB inactive_file:2740kB unevictable:32kB isolated(anon):0kB isolated(file):128kB present:5554176kB managed:5421836kB mlocked:32kB dirty:0kB writeback:0kB mapped:17900kB shmem:67732kB slab_reclaimable:46920kB slab_unreclaimable:28632kB kernel_stack:5952kB pagetables:61656kB unstable:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:32980 all_unreclaimable? yes
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281543] lowmem_reserve[]: 0 0 0 0
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281545] Node 0 DMA: 0*4kB 2*8kB (U) 2*16kB (U) 1*32kB (U) 1*64kB (U) 1*128kB (U) 1*256kB (U) 0*512kB 1*1024kB (U) 1*2048kB (R) 3*4096kB (EM) = 15888kB
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281551] Node 0 DMA32: 407*4kB (UEM) 456*8kB (UEM) 491*16kB (UEM) 328*32kB (UEM) 168*64kB (UEM) 54*128kB (UEM) 7*256kB (UM) 0*512kB 0*1024kB 0*2048kB 0*4096kB = 43084kB
+Nov 12 22:39:11 swtest-pc kernel: [8437471.281557] Node 0 Normal: 11352*4kB (UE) 0*8kB 0*16kB 0*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 45408kB
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281561] Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281562] 30686 total pagecache pages
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281562] 2069 pages in swap cache
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281563] Swap cache stats: add 2105036, delete 2102967, find 36991723/37003195
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281564] Free swap  = 0kB
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281565] Total swap = 8261628kB
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281565] 2065468 pages RAM
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281566] 0 pages HighMem/MovableOnly
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281566] 53045 pages reserved
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281567] 0 pages cma reserved
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281567] 0 pages hwpoisoned
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281568] [ pid ]   uid  tgid total_vm      rss nr_ptes swapents oom_score_adj name
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281573] [  321]     0   321     4870        3      13       74             0 upstart-udev-br
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281574] [  327]     0   327    13041        1      29      278         -1000 systemd-udevd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281576] [  526]     0   526     3816       21      13       39             0 upstart-socket-
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281577] [  739]     0   739     3820        2      12       59             0 upstart-file-br
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281579] [  742]   101   742    64058     3379      35     1338             0 rsyslogd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281580] [  758]   102   758    10049      254      23      106             0 dbus-daemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281581] [  771]     0   771     4825        0      14       80             0 bluetoothd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281582] [  773]     0   773    82560        1      65      291             0 ModemManager
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281583] [  860]     0   860    10890       28      26       72             0 systemd-logind
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281584] [  965]     0   965     5005        1      13       39             0 getty
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281585] [  969]     0   969     5005        1      13       40             0 getty
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281586] [  971]     0   971    31404       36      30      114             0 thermald
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281587] [  979]     0   979     5005        1      12       40             0 getty
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281589] [  980]     0   980     5005        1      14       38             0 getty
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281590] [  984]     0   984     5005        1      13       40             0 getty
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281591] [ 1023]     0  1023    89186      120      70      311             0 NetworkManager
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281592] [ 1045]   118  1045    59084        1      75     5037             0 freeradius
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281593] [ 1048]     0  1048    15345        2      32      168         -1000 sshd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281595] [ 1077]     0  1077    18839        6      41      217             0 cups-browsed
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281596] [ 1078]     0  1078     1093        1       8       43             0 acpid
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281597] [ 1083]     0  1083     5914       22      17       41             0 cron
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281598] [ 1099]     0  1099     4799       21      15       37             0 irqbalance
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281599] [ 1104]     0  1104    74399      476      49     1058             0 polkitd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281600] [ 1131]   119  1131   203256     2847      67     9021             0 mysqld
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281602] [ 1160]   109  1160    90848        0      77      375             0 whoopsie
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281603] [ 1223]     0  1223     2558       32       8      543             0 dhclient
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281604] [ 1267] 65534  1267     8807        6      21       57             0 dnsmasq
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281605] [ 1595]     0  1595    44940      519      23      124             0 vmware-vmblock-
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281606] [ 1607]     0  1607     1744        0       9       53             0 vmnet-bridge
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281608] [ 1624]     0  1624    73164        0      47      250             0 lightdm
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281609] [ 1636]     0  1636   150461     2779     160     1183             0 Xorg
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281610] [ 1639]     0  1639    75588       48      51      241             0 accounts-daemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281611] [ 1652]     0  1652     1737        0       8       49             0 vmnet-netifup
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281612] [ 1661]     0  1661     4276        0      13     1408             0 vmnet-dhcpd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281613] [ 1664]     0  1664     2456        0      10      138             0 vmnet-natd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281614] [ 1666]     0  1666     1737        0       7       47             0 vmnet-netifup
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281615] [ 1676]     0  1676     4276        0      13     1407             0 vmnet-dhcpd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281616] [ 1693]     0  1693     5245       12      13      107             0 vmware-authdlau
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281618] [ 1698]   106  1698     9288       27      22       57             0 kerneloops
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281619] [ 1801]     0  1801     5592       11      13      118             0 vmware-usbarbit
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281620] [ 1955]     0  1955    42625        1      52      303             0 lightdm
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281621] [ 2004]     0  2004    76223       27      48      717             0 upowerd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281622] [ 2017]     0  2017     5005        1      13       41             0 getty
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281623] [ 2037]   107  2037    42229       23      19       37             0 rtkit-daemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281624] [ 2207]  1000  2207    80686       43      53      708             0 gnome-keyring-d
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281626] [ 2209]  1000  2209    10081      154      23      120             0 init
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281627] [ 2296]  1000  2296    10016      243      23       84             0 dbus-daemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281628] [ 2308]  1000  2308     5577        0      16       61             0 upstart-event-b
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281629] [ 2313]  1000  2313    19551        0      31      147             0 window-stack-br
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281630] [ 2326]  1000  2326    94088        0      51      405             0 ibus-daemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281631] [ 2344]  1000  2344     7697        0      17       80             0 upstart-file-br
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281632] [ 2345]  1000  2345     5579       21      13       31             0 upstart-dbus-br
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281633] [ 2347]  1000  2347     5579       28      12       26             0 upstart-dbus-br
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281634] [ 2363]  1000  2363   205731      704     169     1483             0 unity-settings-
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281636] [ 2367]  1000  2367   178423        0     164     1809             0 hud-service
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281637] [ 2369]  1000  2369    91921        1      47      211             0 at-spi-bus-laun
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281638] [ 2370]  1000  2370   146299       69     117      824             0 gnome-session
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281639] [ 2372]  1000  2372   129064     3620     129     2163             0 unity-panel-ser
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281640] [ 2376]  1000  2376     9845       55      23       79             0 dbus-daemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281641] [ 2379]  1000  2379    31229       19      30      125             0 at-spi2-registr
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281642] [ 2387]  1000  2387    49163        0      33      163             0 gvfsd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281644] [ 2392]  1000  2392    90108        0      45      230             0 gvfsd-fuse
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281645] [ 2408]  1000  2408   140611        0     114     1182             0 bamfdaemon
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281646] [ 2424]   113  2424    77752        1      55      399             0 colord
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281647] [ 2430]  1000  2430    73945        0      45      228             0 ibus-dconf
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281648] [ 2436]  1000  2436    93451        0      88      543             0 pulseaudio
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281649] [ 2437]  1000  2437   122954        0     116     1262             0 ibus-ui-gtk3
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281650] [ 2442]  1000  2442    99099        0      96      497             0 ibus-x11
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281651] [ 2450]  1000  2450    54981        0      42      250             0 ibus-engine-sim
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281652] [ 2452]  1000  2452   147877        0     125     1271             0 indicator-keybo
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281653] [ 2457]  1000  2457    91297        0      49      210             0 indicator-messa
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281654] [ 2458]  1000  2458    73440        0      45      212             0 indicator-bluet
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281655] [ 2461]  1000  2461    73914        0      48      221             0 indicator-power
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281657] [ 2465]  1000  2465   291186      157     109      509             0 indicator-datet
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281658] [ 2468]  1000  2468   142336        1      77      498             0 indicator-sound
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281659] [ 2469]  1000  2469   114012        0     122      877             0 indicator-print
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281660] [ 2486]  1000  2486   226600        0      58      340             0 indicator-sessi
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281661] [ 2517]  1000  2517   276762       77     148      739             0 evolution-sourc
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281662] [ 2518]  1000  2518    71689        0      70      308             0 indicator-appli
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281664] [ 2535]  1000  2535   108303        0     123     1237             0 notify-osd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281665] [ 2539]  1000  2539    44578       47      24      120             0 dconf-service
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281666] [ 2561]  1000  2561   304941     1617     253     7960             0 compiz
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281667] [ 2573]  1000  2573   274059        0     165     9345             0 evolution-calen
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281668] [ 2584]  1000  2584   152269       97     141     1358             0 nm-applet
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281669] [ 2585]  1000  2585    85303        0     103      743             0 polkit-gnome-au
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281670] [ 2593]  1000  2593    14540       28      31      369             0 gconfd-2
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281671] [ 2594]  1000  2594   102661        0     101      753             0 unity-fallback-
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281672] [ 2595]  1000  2595   250441        0     193     2213             0 nautilus
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281674] [ 2601]  1000  2601    77989      267      54      459             0 gvfs-udisks2-vo
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281675] [ 2610]     0  2610    96554      295      54      597             0 udisksd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281676] [ 2620]  1000  2620    71494        0      41      187             0 gvfs-afc-volume
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281677] [ 2625]  1000  2625    50072        0      33      152             0 gvfs-mtp-volume
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281678] [ 2633]  1000  2633    53113        0      39      188             0 gvfs-gphoto2-vo
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281679] [ 2651]  1000  2651    67597        0      34      163             0 gvfsd-burn
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281680] [ 2657]  1000  2657   111986        1      53      789             0 gvfsd-trash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281681] [ 2683]  1000  2683    31113        0      32      139             0 gvfsd-metadata
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281682] [ 2744]  1000  2744   165381       48     131     1541             0 gnome-terminal
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281683] [ 2751]  1000  2751     3706        1      13       39             0 gnome-pty-helpe
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281684] [ 2752]  1000  2752     7003        1      18      810             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281686] [ 2764]  1000  2764   114298        0     108      834             0 telepathy-indic
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281687] [ 2769]  1000  2769    84338       86      67     1016             0 mission-control
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281688] [ 2788]  1000  2788   107471        0      94      976             0 zeitgeist-datah
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281689] [ 2793]  1000  2793    82820        9      30      197             0 zeitgeist-daemo
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281690] [ 2799]  1000  2799    58297       15      37      241             0 zeitgeist-fts
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281691] [ 2815]  1000  2815     2855        0      12       25             0 cat
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281692] [ 2843]  1000  2843   129517      251     117     3844             0 update-notifier
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281694] [ 2871]  1000  2871    96321        0      56      782             0 deja-dup-monito
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281695] [ 4294]  1000  4294   168241     1586     209    11405             0 update-manager
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281696] [ 6583]   121  6583    63936     1772      61      260          -900 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281697] [ 6585]   121  6585    63967     3934      63      270             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281698] [ 6586]   121  6586    63936      283      53      272             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281699] [ 6587]   121  6587    63936     1189      52      274             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281700] [ 6588]   121  6588    64043      125      54      303             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281701] [ 6589]   121  6589    27818      132      49      337             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281703] [ 4609]   121  4609    64193     1022      57      457             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281704] [ 4610]   121  4610    66027     3021      69     1301             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281705] [ 4611]   121  4611    64193      989      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281706] [ 4612]   121  4612    64193      991      56      458             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281707] [ 4613]   121  4613    64193      991      56      458             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281708] [ 4614]   121  4614    64752     1084      65      994             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281709] [ 4615]   121  4615    64193      990      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281710] [ 4616]   121  4616    64194      990      56      458             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281711] [ 8269]   121  8269    64424     1575      62      609             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281712] [  387]   121   387    64410     1548      60      596             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281713] [28232]   121 28232    64465      903      59      632             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281714] [28233]   121 28233    64305     1336      61      574             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281716] [28625]   121 28625    64247     1594      63      558             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281717] [13852]   121 13852    64248     1691      63      548             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281718] [15846]   121 15846    64193      984      56      464             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281719] [15847]   121 15847    64193      983      56      467             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281720] [ 6512]   121  6512    64377     1662      63      573             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281721] [ 7575]   121  7575    64195     1171      60      477             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281722] [25976]   121 25976    64410     1632      63      595             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281723] [28072]   121 28072    64248     1638      63      541             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281724] [23225]     0 23225     9966       32      18      202             0 nginx
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281725] [23226]    33 23226    10096       71      18      291             0 nginx
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281726] [23227]    33 23227    10096       71      18      294             0 nginx
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281727] [23229]    33 23229    10096       74      18      288             0 nginx
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281729] [23230]    33 23230    10129       72      18      335             0 nginx
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281730] [23231]    33 23231    10006       48      18      240             0 nginx
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281731] [23768]     0 23768    27450       52      57      204             0 sshd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281732] [23854]  1000 23854    27535       71      56      279             0 sshd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281733] [23855]  1000 23855     7051        1      18      862             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281734] [  472]   122   472     8380       41      20      116             0 ntpd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281735] [ 6968]     0  6968   233018     5011      76      619             0 PM2 v2.6.1: God
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281736] [ 8108]   121  8108    64424     1757      63      616             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281737] [10616]   121 10616    64448     1623      61      626             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281739] [19556]   121 19556    64448     1585      61      616             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281739] [19703]   121 19703    64450     1678      62      628             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281740] [19993]   121 19993    64448     1578      61      623             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281741] [22650]   121 22650    64410     1685      62      595             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281743] [18942]     0 18942    27450        1      55      252             0 sshd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281744] [19171]  1000 19171    27484       25      54      245             0 sshd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281745] [19172]  1000 19172     7275        2      19     1083             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281746] [13971]   121 13971    64410     1663      61      593             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281747] [12116]   121 12116    64411     1720      63      594             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281748] [12263]   121 12263    64411     1698      61      593             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281749] [31782]   121 31782    64194     1022      57      461             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281750] [31783]   121 31783    64195      990      56      459             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281751] [31784]   121 31784    65024     2297      68     1070             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281752] [31785]   121 31785    64194      990      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281754] [31786]   121 31786    64194      985      56      465             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281755] [31787]   121 31787    64195      990      56      459             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281756] [31788]   121 31788    64194      991      56      457             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281757] [31789]   121 31789    64432      774      59      434             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281758] [31790]   121 31790    64193      990      56      458             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281759] [31791]   121 31791    64193      991      56      457             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281760] [31792]   121 31792    64193      991      56      457             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281761] [31793]   121 31793    64195      990      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281762] [31794]   121 31794    64193      990      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281763] [31795]   121 31795    64194      985      56      465             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281764] [31796]   121 31796    64195      989      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281765] [31797]   121 31797    64195      989      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281766] [31798]   121 31798    64195      985      56      464             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281767] [31799]   121 31799    64194      988      56      462             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281768] [31800]   121 31800    64195      988      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281769] [31801]   121 31801    64194      968      56      467             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281771] [31802]   121 31802    64194      988      56      462             0 postgres
+
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281772] [31803]   121 31803    64193      988      56      461             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281773] [31804]   121 31804    64193      983      56      465             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281774] [31805]   121 31805    64195      988      56      460             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281775] [32390]   121 32390    64411     1715      62      592             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281776] [31694]   121 31694    64424     1723      63      612             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281777] [23607]   121 23607    64424     1773      63      610             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281778] [ 9167]   121  9167    64377     1835      63      562             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281779] [21990]   121 21990    64424     1769      64      611             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281781] [12371]   121 12371    64449     1613      62      616             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281782] [12517]   121 12517    64451     1693      62      622             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281783] [12664]   121 12664    64425     1623      63      611             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281784] [14175]   121 14175    64424     1800      64      611             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281785] [15354]   121 15354    64448     1670      63      616             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281786] [19531]   121 19531    64448     1676      63      614             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281787] [19831]   121 19831    64452     1741      63      633             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281788] [20286]   121 20286    64428     1843      64      627             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281789] [27461]   121 27461    64378     1858      66      558             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281790] [32688]   121 32688    64426     1789      64      608             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281792] [ 2276]   121  2276    64412     1726      65      587             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281793] [ 3401]     0  3401     4158        0      13       58             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281794] [ 3402]     0  3402     3153        1      12      954             0 acmgnt.fcgi
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281795] [ 3403]     0  3403     4158        0      13       58             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281796] [ 3404]     0  3404     3021        1      12      811             0 acmgnt.fcgi
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281797] [ 3593]   121  3593    64448     1786      65      618             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281798] [ 6609]   121  6609    64424     1748      65      608             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281799] [13125]   121 13125    64424     1774      64      610             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281800] [16973]   121 16973    64449     1701      63      612             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281802] [19107]   121 19107    64425     1738      65      609             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281803] [28281]   121 28281    64451     1740      64      618             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281804] [29022]   121 29022    64425     1775      64      605             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281805] [ 4268]   121  4268    64452     1740      65      626             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281806] [ 4269]   121  4269    64449     1745      65      612             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281807] [ 8171]     0  8171   231646     4720      69      489             0 node /home/swte
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281808] [ 8177]     0  8177   266144     4593      74      605             0 node /home/swte
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281809] [ 9276]   121  9276    64449     1777      65      613             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281810] [18360]   121 18360    64451     1745      64      617             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281811] [32594]   121 32594    64449     1793      65      613             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281812] [16904]     0 16904    17811        0      39      125             0 sudo
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281813] [16905]     0 16905   236872     4443      63      745             0 node
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281814] [16407]     0 16407   239601    14574     352      506             0 node /home/swte
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281815] [16413]     0 16413   237959     5841     313      581             0 node /home/swte
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281816] [16461]     0 16461   237776     5678     317      531             0 node /home/swte
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281817] [31403]     0 31403     4157        0      13       58             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281819] [31404]     0 31404  3766451  1802884    7233  1891539             0 acp_core
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281820] [31431]     0 31431     4157        0      13       57             0 bash
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281821] [31432]     0 31432    12498     4043      29     1398             0 acp_server
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281822] [32072]     0 32072    17811        0      39      126             0 sudo
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281823] [32073]     0 32073     4458      254      13     1119             0 mgnt_sample_cli
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281824] [30721]     0 30721    19214       72      39      203             0 cupsd
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281825] [30726]     7 30726    15790        0      35      131             0 dbus
+
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281827] [30377]   121 30377    64390     3506      66      234             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281828] [30378]   121 30378    64374     3505      66      234             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281828] [30712]   121 30712    64168     2530      65      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281829] [30713]   121 30713    64168     2149      64      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281830] [30714]   121 30714    64168     2630      65      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281831] [30715]   121 30715    64168     2565      65      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281832] [30716]   121 30716    64168     2080      65      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281833] [30717]   121 30717    64136      585      57      233             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281834] [30718]   121 30718    64201      855      57      195             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281835] [30719]   121 30719    64168     1491      60      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281836] [30720]   121 30720    64136      472      56      236             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281837] [30722]   121 30722    64038      557      54      237             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281838] [30723]   121 30723    64038      556      54      237             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281839] [30724]   121 30724    64038      560      54      237             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281840] [30725]   121 30725    64038      463      54      239             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281841] [30727]   121 30727    64038      559      54      237             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281842] [30728]   121 30728    64005      149      49      243             0 postgres
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281843] Out of memory: Kill process 31404 (acp_core) score 880 or sacrifice child
+Nov 12 22:39:12 swtest-pc kernel: [8437471.281845] Killed process 31404 (acp_core) total-vm:15065804kB, anon-rss:7211536kB, file-rss:0kB

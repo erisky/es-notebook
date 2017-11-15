@@ -166,14 +166,179 @@ Q: why load addresss is from 0x4090!!!??
 1. Which Flash index is incorrect @@ why?
 2. Load address !!?
 
+Partition:
+[kernel]  	 4M
+[rootfs]  	32M
+[kernel_1] 	 4M
+[rootfs_1]  32M
+[ubifs]   	56M
+[ubifs]: 
+	<rootfs_data> - 
 
 
+setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 uboot_test.img  && imgaddr=0x84000000 && source $imgaddr:script
 
 
+[nand]
+operator@ap5400w:~# cat /proc/cmdline 
+ubi.mtd=rootfs root=mtd:ubi_rootfs rootfstype=squashfs rootwait clk_ignore_unused
 
 
+after 1st upgrade 
+mtd12: 03300000 00020000 "rootfs_1"
+mtd13: 04100000 00020000 "rootfs"
+[uboot]
+  0: 0:SBL1           0x0000ffff              0x0         0x100000
+  1: 0:MIBIB          0x0000ffff         0x100000         0x100000
+  2: 0:BOOTCONFIG     0x0000ffff         0x200000         0x100000
+  3: 0:QSEE           0x0000ffff         0x300000         0x100000
+  4: 0:QSEE_1         0x0000ffff         0x400000         0x100000
+  5: 0:CDT            0x0000ffff         0x500000          0x80000
+  6: 0:CDT_1          0x0000ffff         0x580000          0x80000
+  7: 0:BOOTCONFIG1    0x0000ffff         0x600000          0x80000
+  8: 0:APPSBLENV      0x0000ffff         0x680000          0x80000
+  9: 0:APPSBL         0x0000ffff         0x700000         0x200000
+ 10: 0:APPSBL_1       0x0000ffff         0x900000         0x200000
+ 11: 0:ART            0x0000ffff         0xb00000          0x80000
+ 12: rootfs           0x0000ffff        0x3e80000        0x4100000
+ 13: rootfs_1         0x0000ffff         0xb80000        0x3300000
 
 
+[original]
+ 12: rootfs           0x0000ffff         0xb80000        0x3300000
+ 13: rootfs_1         0x0000ffff        0x3e80000        0x4100000
+
+
+# boot run command .. before upgrade ..
+ECD:set mtdids nand0=nand0 && set mtdparts mtdparts=nand0:0x3300000@0xb80000(fs),${msmparts} && ubi part fs && ubi read 0x84000000 kernel && 
+
+/proc/mtd
+mtd12: 03300000 00020000 "rootfs"
+mtd13: 04100000 00020000 "rootfs_1"
+
+smem_info
+No.: Name             Attributes            Start             Size
+...ac
+ 12: rootfs           0x0000ffff         0xb80000        0x3300000
+ 13: rootfs_1         0x0000ffff        0x3e80000        0x4100000
+
+# Read the MIBIB to see if sbl change that..
+(IPQ40xx) # nand read 84000000 0x100000 1000
+(IPQ40xx) # md 84000000 1000
+
+84000800: 55ee73aa e35ebddb 00000004 0000000e    .s.U..^.........
+84000810: 42533a30 0000314c 00000000 00000000    0:SBL1..........
+84000820: 00000000 00000008 0000ffff 494d3a30    ............0:MI
+84000830: 00424942 00000000 00000000 00000008    BIB.............
+84000840: 00000008 0000ffff 4f423a30 4f43544f    ........0:BOOTCO
+84000850: 4749464e 00000000 00000010 00000008    NFIG............
+84000860: 0000ffff 53513a30 00004545 00000000    ....0:QSEE......
+84000870: 00000000 00000018 00000008 0000ffff    ................
+84000880: 53513a30 315f4545 00000000 00000000    0:QSEE_1........
+84000890: 00000020 00000008 0000ffff 44433a30     ...........0:CD
+840008a0: 00000054 00000000 00000000 00000028    T...........(...
+840008b0: 00000004 0000ffff 44433a30 00315f54    ........0:CDT_1.
+840008c0: 00000000 00000000 0000002c 00000004    ........,.......
+840008d0: 0000ffff 4f423a30 4f43544f 4749464e    ....0:BOOTCONFIG
+840008e0: 00000031 00000030 00000004 0000ffff    1...0...........
+840008f0: 50413a30 4c425350 00564e45 00000000    0:APPSBLENV.....
+84000900: 00000034 00000004 0000ffff 50413a30    4...........0:AP
+84000910: 4c425350 00000000 00000000 00000038    PSBL........8...
+84000920: 00000010 0000ffff 50413a30 4c425350    ........0:APPSBL
+84000930: 0000315f 00000000 00000048 00000010    _1......H.......
+84000940: 0000ffff 52413a30 00000054 00000000    ....0:ART.......
+84000950: 00000000 00000058 00000004 0000ffff    ....X...........
+84000960: 746f6f72 00007366 00000000 00000000    rootfs..........
+84000970: 0000005c 00000198 0000ffff 746f6f72    \...........root
+84000980: 315f7366 00000000 00000000 000001f4    fs_1............
+84000990: 00000208 0000ffff 00000000 00000000    ................
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+After upgrade:
+
+partition table offset  0x0
+No.: Name             Attributes            Start             Size
+ 12: rootfs           0x0000ffff        0x3e80000        0x4100000
+ 13: rootfs_1         0x0000ffff         0xb80000        0x3300000
+
+
+ECD:set mtdids nand0=nand0 && set mtdparts mtdparts=nand0:0x4100000@0x3e80000(fs),${msmparts} && ubi part fs && ubi read 0x84000000 kernel && 
+
+
+84000800: 55ee73aa e35ebddb 00000004 0000000e    .s.U..^.........
+84000810: 42533a30 0000314c 00000000 00000000    0:SBL1..........
+84000820: 00000000 00000008 0000ffff 494d3a30    ............0:MI
+84000830: 00424942 00000000 00000000 00000008    BIB.............
+84000840: 00000008 0000ffff 4f423a30 4f43544f    ........0:BOOTCO
+84000850: 4749464e 00000000 00000010 00000008    NFIG............
+84000860: 0000ffff 53513a30 00004545 00000000    ....0:QSEE......
+84000870: 00000000 00000018 00000008 0000ffff    ................
+84000880: 53513a30 315f4545 00000000 00000000    0:QSEE_1........
+84000890: 00000020 00000008 0000ffff 44433a30     ...........0:CD
+840008a0: 00000054 00000000 00000000 00000028    T...........(...
+840008b0: 00000004 0000ffff 44433a30 00315f54    ........0:CDT_1.
+840008c0: 00000000 00000000 0000002c 00000004    ........,.......
+840008d0: 0000ffff 4f423a30 4f43544f 4749464e    ....0:BOOTCONFIG
+840008e0: 00000031 00000030 00000004 0000ffff    1...0...........
+840008f0: 50413a30 4c425350 00564e45 00000000    0:APPSBLENV.....
+84000900: 00000034 00000004 0000ffff 50413a30    4...........0:AP
+84000910: 4c425350 00000000 00000000 00000038    PSBL........8...
+84000920: 00000010 0000ffff 50413a30 4c425350    ........0:APPSBL
+84000930: 0000315f 00000000 00000048 00000010    _1......H.......
+84000940: 0000ffff 52413a30 00000054 00000000    ....0:ART.......
+84000950: 00000000 00000058 00000004 0000ffff    ....X...........
+84000960: 746f6f72 00007366 00000000 00000000    rootfs..........
+84000970: 0000005c 00000198 0000ffff 746f6f72    \...........root
+84000980: 315f7366 00000000 00000000 000001f4    fs_1............
+84000990: 00000208 0000ffff 00000000 00000000    ................
+
+
+operator@ap5400w:~# cat /proc/mtd 
+dev:    size   erasesize  name
+mtd12: 03300000 00020000 "rootfs_1"
+mtd13: 04100000 00020000 "rootfs"
+
+bootipq debug
+ECD:boot unsigned image
+ECD: set_fs_bootargsECD: flash_type:2
+ECD: fs_on_nand == 1, fsbpptargs:ubi.mtd=rootfs root=mtd:ubi_rootfs rootfstype=squashfsbootargs=ubi.mtd=rootfs root=mtd:ubi_rootfs rootfstype=squashfs rootwait
+Booting from flash
+Using nand device 0
+ECD:set mtdids nand0=nand0 && set mtdparts mtdparts=nand0:0x4100000@0x3e80000(fs),${msmparts} && ubi part fs && ubi read 0x84000000 kernel && 
+
+
+[    1.437306] msm_nand_version_check: nand_major:1, nand_minor:4, qpic_major:1, qpic_minor:4
+[    1.445596] msm_nand_flash_onfi_probe: Found an ONFI compliant device MT29F1G08ABAEAWP    ,
+[    1.453648] msm_nand_scan: NAND Id: 0x9580f12c Buswidth: 8Bits Density: 128 MByte
+[    1.461091] msm_nand_scan: pagesize: 2048 Erasesize: 131072 oobsize: 64 (in Bytes)
+[    1.468657] msm_nand_scan: BCH ECC: 4 Bit
+[    1.472645] msm_nand_scan: CFG0: 0x2a0408c0,      CFG1: 0x0804745c
+[    1.472645]             RAWCFG0: 0x280420c0,   RAWCFG1: 0x0005045d
+[    1.472645]           ECCBUFCFG: 0x00000203, ECCBCHCFG: 0x42040700
+[    1.472645]      BAD BLOCK BYTE: 0x000001d1
+[    1.495390] 14 ofpart partitions found on MTD device 7980000.qcom,nand
+[    1.501803] Creating 14 MTD partitions on "7980000.qcom,nand":
+[    1.507640] 0x000000000000-0x000000100000 : "0:SBL1"
+[    1.514455] 0x000000100000-0x000000200000 : "0:MIBIB"
+[    1.520253] 0x000000200000-0x000000300000 : "0:BOOTCONFIG"
+[    1.526542] 0x000000300000-0x000000400000 : "0:QSEE"
+[    1.532145] 0x000000400000-0x000000500000 : "0:QSEE_1"
+[    1.537995] 0x000000500000-0x000000580000 : "0:CDT"
+[    1.543153] 0x000000580000-0x000000600000 : "0:CDT_1"
+[    1.548403] 0x000000600000-0x000000680000 : "0:BOOTCONFIG1"
+[    1.554236] 0x000000680000-0x000000700000 : "0:APPSBLENV"
+[    1.559847] 0x000000700000-0x000000900000 : "0:APPSBL"
+[    1.566355] 0x000000900000-0x000000b00000 : "0:APPSBL_1"
+[    1.573001] 0x000000b00000-0x000000b80000 : "0:ART"
+[    1.578128] 0x000000b80000-0x000003e80000 : "rootfs_1"
+[    1.619037] 0x000003e80000-0x000007f80000 : "rootfs"
+[    1.669662] mtd: device 13 (rootfs) set to be root filesystem
+[    1.674640] mtdsplit: no squashfs found in "rootfs"
+[    1.679453] mtdsplit: no squashfs found in "7980000.qcom,nand"
+[    1.685080] msm_nand_probe: NANDc phys addr 0x7980000, BAM phys addr 0x7984000, BAM IRQ 133
+[    1.693400] msm_nand_probe: Allocated DMA buffer at virt_addr 0xe0a7b000, phys_addr 0x9eca0000
+[    1.704160] sps:BAM 0x07884000 (va:0xe0bc0000) enabled: ver:0x19, number of pipes:12
 
 
 
