@@ -210,6 +210,11 @@ $ sudo openvpn --config ~/client.ovpn
 
 
 
+20171115
+mppe parameter must be in one line
+
+ex:
+mppe stateless,no40,required
 
 
 

@@ -119,6 +119,9 @@ setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU
 >>>> SPF5
 setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 AP5400W_V1.1.3.SPF5.0-CS1_nand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
 
+>>> ap5400w-rev2
+setenv serverip 192.168.1.199 && setenv machid 8540002 && tftpboot 0x84000000 AP5400W-REV2_V1.1.3.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
 >>> machid=8304001
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
@@ -279,4 +282,5 @@ partitions:  [do not oversize it !]
     
 
 ipq40xx_board_param.h
+54
 
