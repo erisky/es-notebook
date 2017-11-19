@@ -5,7 +5,13 @@ import sys
 
 '''use the sublime as editor '''
 editor_exec = "gedit"
-my_notes_path = """/home/eric/work/note/es-notebook/2017"""
+#my_notes_path = """/home/eric/work/note/es-notebook/2017"""
+my_notes_path=os.getenv("MYNOTE_PATH")
+
+if not os.path.isdir(my_notes_path):
+    print "$MYNOTE_PATH is not set correctly:", my_notes_path
+    exit (0)
+
 
 # get the path of the notes
 def list_my_note():
