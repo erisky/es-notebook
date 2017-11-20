@@ -52,4 +52,15 @@ ask question:
 	https://qualcomm-cdmatech-support.my.salesforce.com/apex/CaseRecordType
 	QCA Product Support Only
 	AP5400W-D50
+
+
+
+
+https://iwifi.iiot.io
+
+account1 : iiot
+account2 : meettaipei
+PWD        : 123456
+
+
 	

@@ -51,3 +51,18 @@ Reference:
 IPQ40xx CDT Definition and Memory Configuration 80-Y8950-19 Rev. K
 IPQ40x8 and IPQ40x9 Software Configuration Guidea 80-Y9571-4 Rev. L
 
+
+
+use the bootconfig from kernel
+struct sbl_if_dualboot_info_type_v2 {
+	uint32_t magic_start;
+	uint32_t age;
+	uint32_t numaltpart;
+	struct per_part_info per_part_entry[NUM_ALT_PARTITION];
+	uint32_t magic_end;
+} __packed;
+
+
+
+
+

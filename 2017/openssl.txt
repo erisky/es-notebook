@@ -53,8 +53,8 @@ $ libwebsockets-test-client --ssl -A /usr/local/share/libwebsockets-test-server/
 $ openssl x509 -in acs.qacafe.com.pem -text
 
 
-
-
+verify:
+openssl verify -CAfile scert.pem ccert.pem
 
 
 
