@@ -217,9 +217,15 @@ ex:
 mppe stateless,no40,required
 
 
+20171124
+openvpn known issue :
+(1) route faile
 
+Fri Nov 24 06:21:31 2017 /sbin/route add -net 192.168.23.1 netmask 255.255.255.0 gw 10.8.0.2
+route: netmask and route address conflict
+(2) failed to connect after delete 
 
-
+/etc/openvpn/ser_ccd/x  miss matched
 
 
 

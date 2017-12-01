@@ -14,6 +14,7 @@ my_notes_path = os.getenv("MYNOTE_PATH")
 TODO_FILE = my_notes_path + "/" + "todo.txt"
 
 def jdbg(string):
+    #print string
     return 0
 
 class job_obj:
@@ -51,8 +52,8 @@ joblist = {}
 #    f.close()
 
 
-def joblist_load():
-    with open(TODO_FILE) as f:
+def joblist_load(loadfile = TODO_FILE):
+    with open(loadfile) as f:
         for lines in f :
             lstrip=lines.strip()
             if not lstrip.startswith("#") :
@@ -66,13 +67,29 @@ def joblist_load():
 
 
 def joblist_save():
+    print("Are you sure to overwirte the current file? (y/n)")
+    yn = raw_input()
+    if yn is "Y" or yn is "y":
+        print "Saving ..."
     jdbg ("joblist save")
 
 def joblist_add():
     jdbg ("job adding ")
+    print "Due Date? "
+    test = raw_input()
+    print test
 
-def joblist_del():
+def joblist_del(index): 
     jdbg ("job deleting ")
+    print int(index)
+
+    if joblist[int(index)]:
+        print "YES", joblist[int(index)].job_name
+        joblist.pop(int(index))
+        joblist_display(7)
+        joblist_save()
+    else:
+        print "No"
 
 def joblist_display(days):
     now = time.time()
@@ -88,6 +105,11 @@ def joblist_display(days):
     print "####################################################"*2
     jdbg ("job display ")
 
+
+def bad_exit():
+    print "Bad arguments"
+    exit(-1)
+
 if __name__ == '__main__':
     joblist_load()
     if len(sys.argv) == 1:
@@ -99,7 +121,11 @@ if __name__ == '__main__':
         elif (sys.argv[1] == 'add'):
             joblist_add()
         elif (sys.argv[1] == 'fin'):
-            joblist_del()
+            if len(sys.argv) > 2:
+                joblist_del(sys.argv[2] )
+            else:
+                bad_exit
+
         else: 
             try: 
                 joblist_display(int(sys.argv[1]))

@@ -40,10 +40,62 @@ renew-handler": false, "lasterror": true }
 (proto_fd, proto_shell_add_handler);
 
 
-interface_do_reload  --> proto_init_interface --> proto->attach  -->  proto_shell_attach
+operator@EAI2204P:/lib/netifd/proto# ./dhcpv6.sh  '' dump | less
+{ "name": "dhcpv6", "config": [ [ "reqaddress:or(\"try\",\"force\",\"none\")", 3
+ ], [ "reqprefix:or(\"auto\",\"no\",range(0, 64))", 3 ], [ "clientid", 3 ], [ "r
+eqopts:list(uinteger)", 3 ], [ "noslaaconly:bool", 3 ], [ "forceprefix:bool", 3 
+], [ "extendprefix:bool", 3 ], [ "norelease:bool", 3 ], [ "ip6prefix:ip6addr", 3
+ ], [ "iface_dslite", 3 ], [ "zone_dslite", 3 ], [ "iface_map", 3 ], [ "zone_map
+", 3 ], [ "iface_464xlat", 3 ], [ "zone_464xlat", 3 ], [ "zone", 3 ], [ "ifaceid
+:ip6addr", 3 ], [ "userclass", 3 ], [ "vendorclass", 3 ], [ "delegate", 7 ], [ "
+soltimeout", 5 ], [ "fakeroutes", 7 ], [ "sourcefilter", 7 ] ], "no-device": fal
+se, "no-proto-task": false, "available": false, "renew-handler": true, "lasterro
+r": false }
 
---> 
+**
+ ==> this is the json object used in proto_shell_add_handler
+  initial the proto handler to avl_tree 
 
+ ==> attach to interface_proto_state->proto_shell_handler(handle)
+     by calling proto->attach:  proto_shell_attach
+
+
+
+
+
+interface_do_reload
+or
+interface_update
+    --> proto_init_interface --> proto->attach  ==> attach to interface_proto_state
+
+
+[script]
+/lib/netifd/netifd-proto.sh
+  -> proto_send_update ==> sends update to netifd by _proto_notify (  call network.interface notify_proto )
+        ### ./ppp-up:proto_send_update "$PPP_IPPARAM
+
+
+proto_send_update -- > call by ip address changers !?
+
+0. /usr/sbin/pppd calls the ppp-up somewhere with parameter: (check pppd cmdline, it's long)
+   with parameter: 
+   /lib/netifd/ppp-up pppoe-wan eth0 0 fe80::14fa:b5db:b603:b7e7 fe80::d2f0:dbff:fe66:5800 wan
+   $$$ No idea why charter added extra _ to wan6 when adding the interface information to netifd
+1. ppp-up  call  ubus call network add_dynamic to create interface information
+ppp-up.sh { "name": "wan6", "ifname": "@wan", "proto": "dhcpv6" }
+
+2. after ppp-up then dhcp.sh -->  proto_dhcpv6_setup is called to setup dhcpv6 protocol
+ --> dhcpv6.sh setup wan6 pppoe-wan
+                    (config) (interface)                     
+ --> proto_export "INTERFACE=$config"     ==> this parameter is transfer to dhcpv6.script
+3.
+ netifd --> odhcpc -> dhcpv6.script 
+ when ipv6 address is configrued (stateless or state full), dhcpv6 calls  proto_send_update to netifd
+ to be check: how the script parameter ($1 $2) set by odhcpc 
+4. Then the ip address is available by ubus call network.interface.wan6 status
+
+
+[Handle config change + reload]
 
 IFPEV_DOWN:
 interface_handle_config_change -- > interface_do_reload(iface) 
@@ -70,12 +122,16 @@ ex:
     }
   ==> so that if these configuration chaged in the /etc/config/network --> netifd will restart the ppp
 
+Notes:  netifd check 'interface's proto option to find the corresponding proto/xxx.sh
+
+	ex: option proto 'dhcp'  ==>  match the dhcp.sh
+       modifiy the option vendorid 'testme123' when wan is dhcp  and call
+       $ ubus call network reload   ==> dhcp is invoked !!
 
 
 
-
-
-
+> network resource 
+https://github.com/beacer/notes/blob/master/netifd/netifd-objects.md
 
 
 

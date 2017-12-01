@@ -21,9 +21,9 @@ wifi server
 charter hidden page: N@74U1fUD0n7H@v1P$d
 
 ---- Public PPPoE account -----
-76036834@hinet.net / anjtgqzd
-or
-76036834@ip.hinet.net / anjtgqzd
+
+76400446@hinet.net
+wnvueina
 
 
 [ D900 Server (10.194.20.21) ]

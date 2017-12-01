@@ -1,0 +1,62 @@
+
+ipv6 
+add route:
+
+
+$ sudo ip -6 ro add 2000:4321:abcd:91b:5e3:b91d:b3f1:1624/64 via 2000:5522:aabb:8888:b6ee:b4ff:feea:1a29
+
+ping command :
+ping6
+
+#related file
+ /lib/netifd/dhcpv6.script 
+ /lib/netifd/proto/dhcpv6.sh 
+ /lib/netifd/dhcpv6.script
+
+$$$$ LOG FILE $$$
+***  tail -f /tmp/test.txt
+*** /tmp/odhcp6c.log
+
+[/lib/netifd/dhcpv6.script ]
+ -> run by /usr/sbin/odhcp6c
+  /usr/sbin/odhcp6c -e -v -N try -s /lib/netifd/dhcpv6.script -P 0 -t 20 -r 17 -V 00000dE9000C64736C666F72756D2E6F7267 eth0
+
+/sbin/netifd
+ --> odhcp6c 
+   
+kill -1 {pid of radvd } cause radvd to reload it's config
+--> add reload when odhcpc received ra-update
+
+
+
+ /etc/config/radvd
+/proc/net/nf_conntrack
+ /lib/firewall/firewall_ipv6.sh
+ 
+ /lib/firewall/firewall_ctrl.sh 
+
+
+echo f > /de  
+
+pc
+2000:7788:7788:7788::ff01
+wan
+2000:7788:7788:7788::01o
+ inet6 addr: 2000:7788:7788:7788::1/64
+lan
+ inet6 addr: 2000:7788:7788:8877::1/64 Scope:Global
+
+[route]
+ sudo ip  -6 ro add 2000:7788:7788:8877::1/64 via 2000:7788:7788:7788::1
+
+lan pc:
+2000:7788:7788:8877::e33
+
+
+*** 
+refer to netifd.txt
+
+
+google ip:
+2001:4860:4860::8888
+

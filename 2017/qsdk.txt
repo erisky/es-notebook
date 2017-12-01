@@ -106,7 +106,7 @@ setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 na
 
 SPF 3.0
 setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 FUJITSU_AP5400W-D50_SWP_V1.0.13.SPF3.0-CSU2-3_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
-setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 FUJITSU_AP5400W-D50_SWP_V1.0.15.SPF3.0-CSU2-3_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 FUJITSU_AP5400W-D50_SWP_V1.0.22.SPF3.0-CSU2-3_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
 SPF 5.0
@@ -124,9 +124,9 @@ setenv serverip 192.168.1.199 && setenv machid 8540002 && tftpboot 0x84000000 AP
 
 >>> machid=8304001
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 dualaskey.img && imgaddr=0x84000000 && source $imgaddr:script
+
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
-
-
 
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.6.SPF5.0-CS1_norplusnand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
 
@@ -134,6 +134,9 @@ setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EA
 
 
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 uboottest.img && imgaddr=0x84000000 && source $imgaddr:script
+
+[EAI2202P]
+
 
 CONFIG_ARCH_QCOM
 
