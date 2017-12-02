@@ -1,0 +1,21 @@
+hacking
+
+to understand:
+1. Kali-Linux
+
+related certificate:
+
+CEH:
+ Certified Ethical Hacker
+OSCP:
+ Offensive security certified professional
+
+
+ NIDS:
+
+snort - open source
+   > sniffer
+   > preprocessor
+   > engine
+   > output
+

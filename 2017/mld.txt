@@ -1,0 +1,43 @@
+three types of MLDv2 query messages: 
+    General Queries,
+    Multicast Address Specific Queries,
+    Multicast Address and Source Specific Queries
+
+Current State Report messages
+
+Multicast Address Listening state
+
+
+reporting period
+    the Querier sends a 
+    Multicast Address Specific Query to verify whether there are nodes still listening to a
+   specified multicast 
+
+the Querier sends a
+   Multicast Address and Source Specific Query to verify whether, for a
+   specified multicast address, there are nodes still listening to a
+   specific set of sources, or not
+
+->  only sent in response to State Change Reports
+
+never in response to Current State Reports
+
+queries are re-transmitted for robustness
+
+
+
+S flag
+   (Suppress Router-Side Processing).
+"soft leave" mechanism
+"fast leave"
+
+EXCLUDE (X,Y), where X is called the "Requested List"
+   and Y is called the "Exclude List".
+   
+
+IPv6MulticastListen ( socket, interface, IPv6 multicast address,
+      filter mode, source list )
+
+
+
+

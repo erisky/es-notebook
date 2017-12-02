@@ -1,0 +1,36 @@
+- Echo Request Message - 129
+- Echo Reply Message -  129
+
+- Group Membership Messages:
+  > used to convey information about multicast group membership from nodes to their neighboring routers 
+  >  Group Membership Query - 130 / Group Membership Report - 131 / Group Membership Reduction - 132
+  > packets are exchanged only between adjacent nodes
+
+- Router Solicitation Message - 133:
+  > IPv6 nodes transmit Router Solicitation messages to ask for Router Advertisements immediately.
+  > source address of a Router Solicitation message is unicast or the unspecified address
+  > The destination address is typically the All-Router (FF02::2) multicast
+
+- Router Advertisement Message - 134:
+  > Routers send out Router Advertisement messages periodically or in response to Router Solicitation messages.
+  >  source address unicast address  
+  > destination address is equal either to the address of the node that solicited the message or to the All-Node multicast address (FF02::1).
+
+- Neighbor Solicitation Message - 135:
+  > IPv6 nodes transmit Neighbor Solicitation messages to request link layer addresses of Target nodes
+  > source is unicast or unspecified when duplicated
+  > dst to multicast addresses when a node needs to resolve an address (from IPv6 to link layer) or to unicast addresses when a node seeks to verify the reach ability of a neighbor
+- Neighbor Advertisement Message - 136: 
+  > a node forward Neighbor Advertisement message to propagate modifications quickly and in response to a Neighbor Solicitation message.
+  > source is unicast, 
+  > destination is the solicited message or all-Node (FF02::1)
+- Redirect Message - 137:
+  > Routers transmit Redirect messages to inform other nodes of a better first hop toward a destination.
+  >  source address field is equal to the link local address of the interface from which the message is sent, and the destination address is equal to the source address of the packet that caused the Redirect message.
+
+
+[Error messsages]
+- Destination Unreachable:
+- Packet Too Big:
+- Time Exceeded:
+
