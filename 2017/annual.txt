@@ -1,0 +1,17 @@
+Projects:
+  1> EAP SPF5 issues fixes including pptp,openvpn,firewall,ipv6
+  2> Parental control feature 
+  3> extra partition creation,reboot reason, syslog changes
+  4> Dual Image
+ACP discussion
+  1> ACP solution survey -Capwap/DTLS/libevent/libwebsocket/postgreSQL/openssl
+  2> ACP server architechure and protocol design
+  3> Libwebsocket/Libuv base transport implementation
+  4> ACP Core implementation for protocol 
+  5> sample client with fw uprade
+  6> databas interface definition and implementation
+  7> ACP Features: F/W upgrade,Tunneling, ACP IPC interface, remote command, Logger
+  8> ACP client/server uplink handling for reboot/assoc/disassoc
+  9> Integration/stress test and bug fixes
+
+

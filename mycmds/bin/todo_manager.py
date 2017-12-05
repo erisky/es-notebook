@@ -23,12 +23,14 @@ class job_obj:
         self.job_name =""
         self.due_date = None
         self.comments = ""
+        if linevalue is None:
+            return
         name_list = linevalue.strip().split(COLUMN_SEP)
         if len(name_list) < 3:
             return
         self.idx = int(name_list[FIELD_ID])
-        self.job_name = name_list[FIELD_JOBNAME]
-        self.comments = name_list[FIELD_COMMENT]
+        self.job_name = name_list[FIELD_JOBNAME].strip()
+        self.comments = name_list[FIELD_COMMENT].strip()
         self.datetime = time.strptime(name_list[FIELD_DATE].strip(), "%Y/%m/%d") 
         #print self.idx, self.job_name
 #def
@@ -36,9 +38,23 @@ class job_obj:
 #            _data_from_file = f.readlines()
 #            f.close()
 
-
+    def show(self, mode=0):
+        if mode is 0:
+            #print self.idx, time.strftime("%Y/%m/%d", self.datetime), self.job_name, self.comments
+            print "[{}] [{}] [{}] [{}]".format(self.idx, time.strftime("%Y/%m/%d", self.datetime),self.job_name, self.comments)
+        elif mode is 1:
+            print "{},, {},, {},, {}".format(self.idx, time.strftime("%Y/%m/%d", self.datetime),self.job_name, self.comments)
 
 joblist = {}
+
+
+def joblist_new_idx():
+    ret = 0
+    for x in joblist.keys():
+        if ret <= x:
+            ret = x+1
+    return ret
+
 
 #with open("todo.txt") as f:
 #    for lines in f :
@@ -54,7 +70,7 @@ joblist = {}
 
 def joblist_load(loadfile = TODO_FILE):
     with open(loadfile) as f:
-        for lines in f :
+        for lines in f:
             lstrip=lines.strip()
             if not lstrip.startswith("#") :
                 test1 = job_obj(lstrip)
@@ -66,18 +82,54 @@ def joblist_load(loadfile = TODO_FILE):
 
 
 
-def joblist_save():
-    print("Are you sure to overwirte the current file? (y/n)")
-    yn = raw_input()
-    if yn is "Y" or yn is "y":
-        print "Saving ..."
-    jdbg ("joblist save")
+def joblist_save(ask = 0):
+    if ask == 1:
+        print("Are you sure to overwirte the current file? (y/n)")
+        yn = raw_input()
+        if yn is "Y" or yn is "y":
+            print "Saving ..."
+        else:
+            return
+    with open(TODO_FILE, "w") as f:
+        tmp = sys.stdout
+        sys.stdout = f
+        joblist.keys().sort()
+        for j in joblist.keys():
+            joblist[j].show(1)
+        f.close()
+        sys.stdout = tmp
+    jdbg ("joblist save done")
+
 
 def joblist_add():
-    jdbg ("job adding ")
-    print "Due Date? "
+    jdbg("job adding ")
+    newjob = job_obj(None)
+    now = time.time()
+    print "Due Date? ",
     test = raw_input()
-    print test
+    datenew = time.strptime(test, "%Y/%m/%d")
+    jtime = calendar.timegm(datenew)
+    if (now > jtime):
+        print "can't add a job due in the past"
+        return -1
+
+    print "Job name:",
+    newjob.job_name = raw_input()
+    print "Job comment:",
+    newjob.comments = raw_input()
+    newjob.datetime = datenew
+    newjob.idx = joblist_new_idx()
+    newjob.show()
+    print "ok to add ?",
+    got=raw_input()
+    if got is 'y' or got is 'Y':
+        print "Add to List"
+        joblist[newjob.idx] = newjob
+        ttest = newjob.show()
+        print "haha", ttest
+        joblist_save(0)
+    #print test,datenew
+
 
 def joblist_del(index): 
     jdbg ("job deleting ")
@@ -90,6 +142,7 @@ def joblist_del(index):
         joblist_save()
     else:
         print "No"
+
 
 def joblist_display(days):
     now = time.time()
