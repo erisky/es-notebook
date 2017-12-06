@@ -13,14 +13,18 @@ FIELD_COMMENT = 3
 my_notes_path = os.getenv("MYNOTE_PATH")
 TODO_FILE = my_notes_path + "/" + "todo.txt"
 
+TODO_DONE_FILE = my_notes_path + "/" + "todo_done.txt"
+
+
 def jdbg(string):
-    #print string
+    # print string
     return 0
+
 
 class job_obj:
     def __init__(self, linevalue):
         self.idx = 0
-        self.job_name =""
+        self.job_name = ""
         self.due_date = None
         self.comments = ""
         if linevalue is None:
@@ -32,11 +36,6 @@ class job_obj:
         self.job_name = name_list[FIELD_JOBNAME].strip()
         self.comments = name_list[FIELD_COMMENT].strip()
         self.datetime = time.strptime(name_list[FIELD_DATE].strip(), "%Y/%m/%d") 
-        #print self.idx, self.job_name
-#def
-#        with open(filename, "r") as f:
-#            _data_from_file = f.readlines()
-#            f.close()
 
     def show(self, mode=0):
         if mode is 0:
@@ -44,6 +43,17 @@ class job_obj:
             print "[{}] [{}] [{}] [{}]".format(self.idx, time.strftime("%Y/%m/%d", self.datetime),self.job_name, self.comments)
         elif mode is 1:
             print "{},, {},, {},, {}".format(self.idx, time.strftime("%Y/%m/%d", self.datetime),self.job_name, self.comments)
+
+    def write2file(self, filename):
+        with open(filename, "a") as f:
+            tmp = sys.stdout
+            sys.stdout = f
+            print " {}, {}, ({}) -> {}".format(time.strftime("%Y/%m/%d", self.datetime),
+                self.job_name, self.comments, time.strftime("%Y/%m/%d", time.gmtime()))
+            f.close()
+            sys.stdout = tmp
+
+        return 0
 
 joblist = {}
 
@@ -56,7 +66,7 @@ def joblist_new_idx():
     return ret
 
 
-#with open("todo.txt") as f:
+# with open("todo.txt") as f:
 #    for lines in f :
 #        lstrip=lines.strip()
 #        if not lstrip.startswith("#") :
@@ -128,17 +138,17 @@ def joblist_add():
         ttest = newjob.show()
         print "haha", ttest
         joblist_save(0)
-    #print test,datenew
+    # print test,datenew
 
 
-def joblist_del(index): 
+def joblist_del(index):
     jdbg ("job deleting ")
-    print int(index)
-
+    
     if joblist[int(index)]:
         print "YES", joblist[int(index)].job_name
-        joblist.pop(int(index))
-        joblist_display(7)
+        deljob = joblist.pop(int(index))
+        # joblist_display(7)
+        deljob.write2file(TODO_DONE_FILE)
         joblist_save()
     else:
         print "No"
@@ -163,6 +173,15 @@ def bad_exit():
     print "Bad arguments"
     exit(-1)
 
+def todo_help():
+    print """
+    todo add
+        - interactive job adding
+    todo fin {id}
+        - finish a job by id
+    """
+
+
 if __name__ == '__main__':
     joblist_load()
     if len(sys.argv) == 1:
@@ -175,10 +194,11 @@ if __name__ == '__main__':
             joblist_add()
         elif (sys.argv[1] == 'fin'):
             if len(sys.argv) > 2:
-                joblist_del(sys.argv[2] )
+                joblist_del(sys.argv[2])
             else:
                 bad_exit
-
+        elif sys.argv[1] == '-h':
+            todo_help()
         else: 
             try: 
                 joblist_display(int(sys.argv[1]))
