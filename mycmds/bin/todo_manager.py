@@ -3,6 +3,15 @@
 import os
 import sys,time
 import calendar 
+# from colorama import init
+# init()
+
+from termcolor import  cprint
+
+print_alert = lambda x: cprint(x, 'red',  attrs=['bold'])
+print_notice = lambda x: cprint(x, 'yellow',  attrs=['bold'])
+
+
 
 COLUMN_SEP=""",,"""
 FIELD_ID = 0
@@ -90,8 +99,6 @@ def joblist_load(loadfile = TODO_FILE):
                 joblist[test1.idx] = test1
         f.close()
 
-
-
 def joblist_save(ask = 0):
     if ask == 1:
         print("Are you sure to overwirte the current file? (y/n)")
@@ -161,17 +168,27 @@ def joblist_display(days):
     for x in joblist.keys():
         jtime = calendar.timegm(joblist[x].datetime)
         # print "jobtime", jtime
-        if (jtime < now + days*24*3600):
-            print "#", joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name
+
+        if (jtime < now):
+            print_alert ("# {} {} {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name))
+        elif (jtime < now + 7*24*3600):
+            print_notice("# {} {} {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name))
+        elif (jtime < now + days*24*3600):
+            print ("# {} {} {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name))
+            # print "#", joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name
         #print x,joblist[x].job_name
 
     print "####################################################"*2
     jdbg ("job display ")
 
 
+
+
+
 def bad_exit():
-    print "Bad arguments"
+    print_alert("Bad arguments:{}".format(123))
     exit(-1)
+
 
 def todo_help():
     print """
@@ -186,7 +203,7 @@ if __name__ == '__main__':
     joblist_load()
     if len(sys.argv) == 1:
         # default display job due in one week
-        joblist_display(7)
+        joblist_display(31)
     else:
         if (sys.argv[1] == 'all'):
             joblist_display(365)
@@ -196,15 +213,14 @@ if __name__ == '__main__':
             if len(sys.argv) > 2:
                 joblist_del(sys.argv[2])
             else:
-                bad_exit
+                bad_exit()
         elif sys.argv[1] == '-h':
             todo_help()
         else: 
             try: 
                 joblist_display(int(sys.argv[1]))
             except:
-                print "bad params"
-                exit(0)
+                bad_exit()
 
 else:
     print __name__
