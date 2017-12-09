@@ -2,6 +2,7 @@
 
 import os
 import sys,time
+from datetime import datetime
 import calendar 
 # from colorama import init
 # init()
@@ -124,11 +125,17 @@ def joblist_add():
     now = time.time()
     print "Due Date? ",
     test = raw_input()
-    datenew = time.strptime(test, "%Y/%m/%d")
-    jtime = calendar.timegm(datenew)
-    if (now > jtime):
-        print "can't add a job due in the past"
-        return -1
+    if test == "":
+        print "no due, use due today"
+        print  time.strftime("%Y/%m/%d", time.gmtime())
+        jtime  = now
+        datenew = time.strptime(time.strftime("%Y/%m/%d", time.gmtime()),"%Y/%m/%d" )
+    else:
+        datenew = time.strptime(test, "%Y/%m/%d")
+        jtime = calendar.timegm(datenew)
+        if (now > jtime):
+            print "can't add a job due in the past"
+            return -1
 
     print "Job name:",
     newjob.job_name = raw_input()

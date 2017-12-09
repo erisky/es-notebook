@@ -133,5 +133,17 @@ Notes:  netifd check 'interface's proto option to find the corresponding proto/x
 > network resource 
 https://github.com/beacer/notes/blob/master/netifd/netifd-objects.md
 
+fixes mtu:
+ > /lib/netifd/proto/dhcp.sh
+	export IFACE
+ > /lib/netifd/dhcpv6
+
+  [ -n $IFACE -a "$IFACE" == "pppoe-wan" ] && skipmtu=1
+[ "$skipmtu" == "1" ] && echo ok
+
+[ -n $IFACE -a "$IFACE" == "pppoe-wan" ] && skipmtu=1
+[ "$skipmtu" == "1" ] && echo ok
+
+
 
 

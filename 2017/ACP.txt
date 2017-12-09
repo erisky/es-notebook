@@ -412,8 +412,10 @@ send { "ACTION": "UPDATE_NOTIFY", "PROF_TYPE": "GROUP", "PROF_NAME": "test_group
 {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"cat /tmp/lighttpd.conf"} 
 {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"logread -l 200"}
 
-{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["A6:98:60:01:3A:88"], "CMD":"logread -l 300"} 
- 
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1B:1A"], "CMD":"logread -l 200"} 
+
+{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1B:1A"], "CMD":"ls"}  
+
 {  
    "ACTION":"CMD_RESP",
    "SEQ":1234,
@@ -470,8 +472,6 @@ return: {"wifista_manage":[[280]]}
 
 
 
-
-
 https://drive.google.com/open?id=0B6yidZPAKtbweXNUcU9ic0ttNFk
 http://10.194.22.88/firmware_test/eai2204p-1.1.4.tgz
 
@@ -485,15 +485,33 @@ eric@eric-n809996:~/work/server_git/server/acp_server/build$ nc 10.194.22.88 133
 
 {"method":"UpdateApGroup","account":"admin01","id":"f82366e0-aa63-11e7-8a6c-107b444e977a","name":"eai2204p_default","product":"eai2204p","fw_version":"eai2204p-1.1.5","country":840,"config":{"PROF_TYPE":"PROF_MAPPING","PROF_MAPPING":"eai2204p_default","Updated":2435813242,"Radio_profile":[["2.4GHz","Default_2G_Profile"],["5GHz_1","Default_5G_Profile"]],"Mappings":[["askey",["2.4GHz","5GHz_1"],"cap_plan1"],["pu9",["2.4GHz","5GHz_1"],"cap_plan_2"]],"Product":"eai2204p"}}
 
-
-
 ubus call upbrkr send '{"type":"ASSOC", "data":{"mac":"11:22:33:44:55:66"}}'
-ubus call upbrkr send '{"type":"ASSOC", "data":{"mac":"11:22:33:44:55:66"}}'
+ubus call upbrkr send '{"type"G:"ASSOC", "data":{"mac":"11:22:33:44:55:66"}}'
 
 
 ubus call upbrkr send '{"type":"REBOOT", "data":{"reason":"0x12345678"}}'
 
 ubus call upbrkr send '{"type":"test", "data":{"reason":"0x12345678"}}'
+
+<<ASSOC>>
+ubus call upbrkr send '{"type":"assoc", "data":{"type":"assoc", "mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid"}}'
+
+<<DISASSC>>
+ubus call upbrkr send '{"type":"disassoc", "data":{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }}'
+
+<<STA_STAT>>
+ubus call upbrkr send '{"type":"sta_stat", "data":{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }}'
+
+< - table version >
+ubus call upbrkr send '{"type":"sta_stat", "data":{"table": [{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }, {"mac":"11:22:33:44:55:77", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }]}}'
+
+
+<<SSID_STAT>> **** note * 2 entirs will exceed the limitation of cosole input ####
+ubus call upbrkr send '{"type":"ssid_stat", "data":{"table":[{"mac":"11:22:33:44:55:66", "iface":"ath01", "ssid":"yourssid","stats":{"channel":1, "tx_rate":"200kbps", "rx_rate":"200kbps", "rssi":-59, "mode":12, "assoctime":1511831539,"tx_pkts":12345,"rx_pkts":23121, "tx_bytes":12312, "rx_bytes":12312, "tx_errs":12, "rx_errs":123} }]}}'
+
+
+
+
 
 "Default Product Config"
 {"values":{"Product":"EAI2204P","radio_mapping":[["wifi0","2G"],["wifi2","5G"]]},"Updated":243513232,"PROF_TYPE":"PRODUCT_MAPPING","PRODUCT_MAPPING":"EAI2204P"}
@@ -505,9 +523,6 @@ ubus call upbrkr send '{"type":"test", "data":{"reason":"0x12345678"}}'
 These are all with 2 radio. 
 2.4G (wifi0), 5G (wifi2)  eai2204p and ap5400w; 
 2.4G (wifi0), 5G(wifi1) -> eai2202p
-
-
-
 
 
 ubus call service event '{"type":"config.change", "data":{"package":"wireless"}}'

@@ -2,3 +2,5 @@
 2,, 2017/11/30,, Finish the AC server online deployment,, team job
 3,, 2017/12/25,, acp statistic,, 
 4,, 2017/12/10,, Participate the wedding,, 
+5,, 2017/12/20,, configuration parameters,, ACP support configuration from config file, or from
+6,, 2017/12/10,, json creation too using python,, 

@@ -15,3 +15,12 @@ ACP discussion
   9> Integration/stress test and bug fixes
 
 
+> He covered almost all kinds of issues, and is quite willing to help colleagues.
+> He actively solving db/capital server/web related issues and learn widely and quickly.
+> He helps a lot in manuafacturing/hw/wifi issues and handle issues quickly. 
+
+F> Already has greate efforts on issues but might need to consider issue deeper
+K> Do a lot on wifi testing but need time to impove skills. 
+E> Not presenting good enough skills on the networking issues. 
+   And not careful enough so sometimes make bugs/misleading infomation.
+
