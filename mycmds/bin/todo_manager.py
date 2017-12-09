@@ -9,7 +9,7 @@ import calendar
 from termcolor import  cprint
 
 print_alert = lambda x: cprint(x, 'red',  attrs=['bold'])
-print_notice = lambda x: cprint(x, 'yellow',  attrs=['bold'])
+print_notice = lambda x: cprint(x, 'green',  attrs=['bold'])
 
 
 
@@ -140,10 +140,9 @@ def joblist_add():
     print "ok to add ?",
     got=raw_input()
     if got is 'y' or got is 'Y':
-        print "Add to List"
+        print "Add to List:",
         joblist[newjob.idx] = newjob
         ttest = newjob.show()
-        print "haha", ttest
         joblist_save(0)
     # print test,datenew
 
@@ -152,7 +151,7 @@ def joblist_del(index):
     jdbg ("job deleting ")
     
     if joblist[int(index)]:
-        print "YES", joblist[int(index)].job_name
+        print "Done:", joblist[int(index)].job_name
         deljob = joblist.pop(int(index))
         # joblist_display(7)
         deljob.write2file(TODO_DONE_FILE)
@@ -209,11 +208,14 @@ if __name__ == '__main__':
             joblist_display(365)
         elif (sys.argv[1] == 'add'):
             joblist_add()
-        elif (sys.argv[1] == 'fin'):
+            joblist_display(31)
+        elif (sys.argv[1] == 'fin') or (sys.argv[1] == 'del'):
             if len(sys.argv) > 2:
                 joblist_del(sys.argv[2])
             else:
                 bad_exit()
+        elif sys.argv[1] == 'done':
+            os.system('cat '+ TODO_DONE_FILE)
         elif sys.argv[1] == '-h':
             todo_help()
         else: 
