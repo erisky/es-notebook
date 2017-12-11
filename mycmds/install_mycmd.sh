@@ -28,6 +28,9 @@ read yn
 
 
 echo "" > ~/.bash_aliases
+
+cat alias_base.txt >> ~/.bash_aliases 
+
 echo "alias note=\"$MYCMD_PATH/mynote.py\"" >> ~/.bash_aliases
 
 echo "alias e=gvim" >> ~/.bash_aliases
