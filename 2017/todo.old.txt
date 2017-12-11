@@ -1,0 +1,11 @@
+#index, due date, job description, status, comment
+
+1,, 2017/12/30,, mazda call-back,, reserve original factory to repair the car
+2,, 2017/11/30,, Finish the AC server online deployment,, team job
+#3,, 2017/11/24,, participate askey cloud meeting...,, slides information
+4,, 2017/11/22,, Fumi anually feast- need take 1 hour early,, comment information
+#5,, 2017/11/22,, uboot_version,, comment information
+
+
+
+

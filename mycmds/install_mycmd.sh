@@ -1,5 +1,14 @@
 #!/bin/bash
 
+WORKING_PATH=`pwd`
+if [ ! -f ${WORKING_PATH}/install_mycmd.sh ]; 
+then
+    echo "must execute in the script's path" 
+    exit 0
+
+fi
+
+ESNOTE_ROOT=`realpath ..`
 MYCMD_PATH=`realpath .`
 NOTE_PATH=`realpath "../2017"`
 
@@ -28,8 +37,7 @@ echo "complete  -W \"\$WORDS\" note" >> ~/.bash_aliases
 
 echo "export PATH=\$PATH:$MYCMD_PATH/bin" >> ~/.bash_aliases
 echo "export MYNOTE_PATH=$NOTE_PATH" >> ~/.bash_aliases
-
-
+echo "export ESNOTE_ROOT=${ESNOTE_ROOT}" >> ~/.bash_aliases
 
 echo OK
 
