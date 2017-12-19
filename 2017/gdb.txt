@@ -1,0 +1,5 @@
+# enabling core file generation 
+$ ulimit -c unlimited
+
+# debug a core file 
+$ gdb acp_core core

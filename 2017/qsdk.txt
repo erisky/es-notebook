@@ -136,6 +136,8 @@ setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EA
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 uboottest.img && imgaddr=0x84000000 && source $imgaddr:script
 
 [EAI2202P]
+setenv serverip 192.168.1.199 && setenv machid 8302001 && tftpboot 0x84000000 EAI2202P_V1.1.4.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
 
 
 CONFIG_ARCH_QCOM

@@ -4,3 +4,11 @@
  2017/12/07, plplplplpl, (fofofofo) -> 2017/12/06
  2017/11/30, Finish the AC server online deployment, (team job) -> 2017/12/10
  2017/12/10, Participate the wedding, () -> 2017/12/10
+ 2017/11/30, Finish the AC server online deployment, (team job) -> 2017/12/11
+ 2017/12/10, Participate the wedding, () -> 2017/12/11
+ 2017/12/11, dont limit logroate numbers per day, () -> 2017/12/12
+ 2017/12/10, json creation too using python, () -> 2017/12/12
+ 2017/12/13, firmware full path, () -> 2017/12/14
+ 2017/12/13, config port start/end, () -> 2017/12/14
+ 2017/12/12, update stat result to file for later debugging, () -> 2017/12/18
+ 2017/12/15, add dbapi busy handling, () -> 2017/12/18

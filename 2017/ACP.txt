@@ -373,7 +373,15 @@ send { "ACTION": "UPDATE_NOTIFY", "PROF_TYPE": "GROUP", "PROF_NAME": "test_group
 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821 } 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"RADIO","PROF_NAME":"RADIO01","SEQ":822 } 
+
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"0a:00:00:11:11:11","SEQ":823 }
+
+{"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","PROF_NAME":"B4:EE:B4:EA:1A:29","SEQ":823, "FORCE":1 }
+
+# force ==> CONFIG_SYNC
+send {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","LIST":["B4:EE:B4:EA:1A:29","00:00:00:00:00:01"] ,"SEQ":824 }
+send {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","LIST":["B4:EE:B4:EA:1A:29","00:00:00:00:00:01"] ,"SEQ":824, "FORCE":1}
+
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP_GROUP", "PROF_NAME":"0a:00:00:11:11:11","SEQ":823 } 
 
  
@@ -509,6 +517,12 @@ ubus call upbrkr send '{"type":"sta_stat", "data":{"table": [{"mac":"11:22:33:44
 <<SSID_STAT>> **** note * 2 entirs will exceed the limitation of cosole input ####
 ubus call upbrkr send '{"type":"ssid_stat", "data":{"table":[{"mac":"11:22:33:44:55:66", "iface":"ath01", "ssid":"yourssid","stats":{"channel":1, "tx_rate":"200kbps", "rx_rate":"200kbps", "rssi":-59, "mode":12, "assoctime":1511831539,"tx_pkts":12345,"rx_pkts":23121, "tx_bytes":12312, "rx_bytes":12312, "tx_errs":12, "rx_errs":123} }]}}'
 
+
+-----------------------
+Info:
+{ "ACTION": "ssid_stat", "table": [ { "mac": "11:22:33:44:55:66", "iface": "ath01", "ssid": "yourssid", "stats": { "channel": 1, "tx_rate": "200kbps", "rx_rate": "200kbps", "rssi": -59, "mode": 12, "assoctime": 1511831539, "tx_pkts": 12345, "rx_pkts": 23121, "tx_bytes": 12312, "rx_bytes": 12312, "tx_errs": 12, "rx_errs": 123 } } ] }
+
+<-- { "TYPE": 11, "SEQ": 1254813548, "AP_ID": "B4:EE:B4:EA:1A:29", "EVENT": { "ACTION": "sta_stat", "table": [ { "mac": "11:22:33:44:55:66", "iface": "ath2", "ssid": "yourssid", "reason": 1, "status": 2, "stats": { "tx_pkts": 12301, "rx_pkts": 1231, "tx_bytes": 99123, "rx_bytes": 1012121, "tx_errs": 12, "rx_errs": 19 } } ] } }
 
 
 
