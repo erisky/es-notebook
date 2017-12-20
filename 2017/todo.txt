@@ -12,3 +12,4 @@
 18,, 2017/12/18,, unregister AP removal,, 
 19,, 2017/12/18,, add customer id to event-log,, 
 20,, 2017/12/25,, ACP Core query/kick AP (to ACP Server),, 
+21,, 2017/12/19,, cpu loading+memory usage,, 
