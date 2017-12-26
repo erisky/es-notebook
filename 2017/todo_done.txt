@@ -12,3 +12,12 @@
  2017/12/13, config port start/end, () -> 2017/12/14
  2017/12/12, update stat result to file for later debugging, () -> 2017/12/18
  2017/12/15, add dbapi busy handling, () -> 2017/12/18
+ 2017/12/10, json creation tool using python, () -> 2017/12/20
+ 2017/12/14, config sync, () -> 2017/12/20
+ 2017/12/18, add customer id to event-log, () -> 2017/12/20
+ 2017/12/12, priorize the incoming requests, () -> 2017/12/20
+ 2017/12/18, unregister AP removal, () -> 2017/12/20
+ 2017/12/12, configuration parameters, (ACP support configuration from config file, or from) -> 2017/12/20
+ 2017/12/20, add tunnel debugging tools, () -> 2017/12/20
+ 2017/12/19, cpu loading+memory usage, () -> 2017/12/20
+ 2017/12/13, info repack multiple, () -> 2017/12/20

@@ -29,6 +29,9 @@ esnote_root = os.getenv("ESNOTE_ROOT")
 note_path = os.getenv("MYNOTE_PATH")
 
 
+TEMPLATE=os.path.join(esnote_root, "annual_template.tgz")
+
+
 def dirc_create_project(name):
     print "Mode: 1> directly in esnote or 2> softlink: ",
     mode = raw_input()
@@ -45,14 +48,14 @@ def dirc_create_project(name):
         yn = raw_input()
         if yn != 'y':
             exit (0)
-        os.system("tar zxvf /home/eric/git/es-notebook/annual_template.tgz -C /tmp/")
+        os.system("tar zxvf "+ TEMPLATE + " -C /tmp/")
         os.system("mkdir -p "+ prj_path + "/" + name)
         os.system("cp -rf /tmp/annual_template/projects/sample_project/* " + prj_path +"/"+ name)
         os.system("ln -s " + prj_path + "/" + name + " " + note_path + "/projects" )
         
     elif mode == '1':
         print_notice("Do not put confidential data to git hub!!")
-        os.system("tar zxvf /home/eric/git/es-notebook/annual_template.tgz -C /tmp/")
+        os.system("tar zxvf " + TEMPLATE + " -C /tmp/")
         os.system("mkdir -p "+ note_path + "/projects/" + name)
         os.system("cp -rf /tmp/annual_template/projects/sample_project/* " + note_path + "/projects/" + name)
 
@@ -70,7 +73,7 @@ def dirc_create_company(name):
     yn = raw_input()
     if yn != 'y':
         exit (0)
-    os.system("tar zxvf /home/eric/git/es-notebook/annual_template.tgz -C /tmp/")
+    os.system("tar zxvf " + TEMPLATE + " -C /tmp/")
     os.system("mkdir -p "+ prj_path + "/" + name)
     os.system("cp -rf /tmp/annual_template/company/* " + prj_path +"/"+ name)
     os.system("ln -s " + prj_path + "/" + name + " " + note_path )

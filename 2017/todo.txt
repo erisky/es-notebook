@@ -1,14 +1,9 @@
 1,, 2017/12/30,, mazda call-back,, reserve original factory to repair the car
 3,, 2017/12/25,, acp statistic,, 
-5,, 2017/12/10,, combine todo feature with google calendar,, read or write
-6,, 2017/12/12,, configuration parameters,, ACP support configuration from config file, or from
-4,, 2017/12/10,, json creation tool using python,, 
+5,, 2017/12/30,, combine todo feature with google calendar,, read or write
 7,, 2017/12/31,, Python Asynchronous IO study,, benchmarking is required
 9,, 2017/12/11,, lbd steering study,, 
-10,, 2017/12/12,, priorize the incoming requests,, 
-15,, 2017/12/13,, info repack multiple,, 
-16,, 2017/12/14,, config sync,, 
-17,, 2017/12/20,, add tunnel debugging tools,, 
-18,, 2017/12/18,, unregister AP removal,, 
-19,, 2017/12/18,, add customer id to event-log,, 
 20,, 2017/12/25,, ACP Core query/kick AP (to ACP Server),, 
+21,, 2018/01/11,, scheduled FW upgrade,, only upgrade FW @ midnight
+22,, 2017/12/25,, show internal ipaddress for client,, 
+23,, 2017/12/26,, per customer fw handling,, damn
