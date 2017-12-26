@@ -10,7 +10,15 @@ fi
 
 ESNOTE_ROOT=`realpath ..`
 MYCMD_PATH=`realpath .`
-NOTE_PATH=`realpath "../2017"`
+#NOTE_PATH=`realpath "../2017"`
+
+echo "input the year to setup, ex: 2018"
+read year
+
+NOTE_PATH=`realpath "../${year}/note"`
+
+[ -d "${NOTE_PATH}" ] || echo "folder not exist" 
+[ -d "${NOTE_PATH}" ] || exit
 
 echo $MYCMD_PATH
 echo $NOTE_PATH

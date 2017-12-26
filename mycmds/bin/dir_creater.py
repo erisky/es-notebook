@@ -76,10 +76,27 @@ def dirc_create_company(name):
     os.system("ln -s " + prj_path + "/" + name + " " + note_path )
 
 
+def add_gitignore(dirpath):
+    if not os.path.isdir(dirpath):
+        return 0
+
+    exactpath = os.path.realpath(os.path.expanduser(dirpath))
+    print "add file in ", exactpath
+    gitfile = os.path.join(exactpath, ".gitignore")
+    if not os.path.isfile(gitfile):
+        os.system("echo *.swp > " + gitfile)
+    subdirs = os.listdir(exactpath)
+    for sub in subdirs:
+        subfull = os.path.join(exactpath, sub)
+        if os.path.isdir(subfull):
+            add_gitignore(subfull)
+
+
 
 def usage():
     print "dirc project/company [name] or "
     print "dirc info - show the dirc readme"
+    print "dirc addgit [folder name] - add .gitignore in each folder for git control"
     exit()
 
 if __name__ == '__main__':
@@ -87,6 +104,11 @@ if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'info':
         os.system('cat '+ esnote_root + '/' + 'annual_template/readme.txt')
         exit(0)
+
+    if len(sys.argv) > 2 and sys.argv[1] == 'addgit':
+        add_gitignore(sys.argv[2])
+        exit()
+
     if len(sys.argv) < 3:
         usage()
     
