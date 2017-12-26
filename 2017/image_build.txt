@@ -28,6 +28,12 @@ $ python /home/eric/spf5_test/spf_0928/spf5/qualcomm_sdk/IPQ4019.ILQ.5.0/../NHSS
 $ dumpimage -T flat_dt -p 1  -i /home/eric/spf5_test/spf5/qualcomm_sdk/IPQ4019.ILQ.5.0/common/build/bin/nand-ipq40xx-single.img -o header.bin XXX
 
 
+### ON TARGET ####
+# get fwinfo image partition num
+dumpimage -l PU9_EAI2204P_V1.1.5.SPF5.0-CS1_norplusnand_single.img |grep \(fwinfo| awk '{print $2}'
+# dump image header 
+dumpimage -i PU9_EAI2204P_V1.1.5.SPF5.0-CS1_norplusnand_single.img  -p 10 fwinfo
+
 
 
 ===== ASKEY DUAL IMG =====

@@ -1,0 +1,12 @@
+1. [libuv] ,[multi-thread]
+    uv_write is not allowed to called from different threads, uses uv_async_send instread !!
+
+2. [buffer handling]
+    buffer handling is always an issue when sending frames through 
+    pipe/socket/stream...  length handling is critcal, see acp_core:proc_req: do it a right way !
+    a good library is worth of time spending
+
+3. [Network latency]
+    Service those are tested internally might not guranteed to work in cloud environment.
+    should try to add an emulator mode in server / client side to emulate the latency...
+    
