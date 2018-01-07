@@ -4,7 +4,7 @@ import os,time
 import sys
 
 '''use the sublime as editor '''
-editor_exec = "gedit"
+editor_exec = "gvim"
 #my_notes_path = """/home/eric/work/note/es-notebook/2017"""
 my_notes_path=os.getenv("MYNOTE_PATH")
 

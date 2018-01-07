@@ -55,6 +55,7 @@ $> *3
 武陵農場
 高美溼地
 南投　桃太郎村
+李棟山
 
 [family]
 $> 家庭旅遊x1
@@ -64,7 +65,7 @@ $> 親戚聚餐x1
 $> 高中同學聚會
 
 [personal enhancment]
-$> quit masturbation & xvideo -> frequency < 1/month
+$> quit masturbation & xvideo -> frequency < 1/month  1/5
 
 
 

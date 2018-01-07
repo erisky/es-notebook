@@ -50,6 +50,8 @@ echo "export PATH=\$PATH:$MYCMD_PATH/bin" >> ~/.bash_aliases
 echo "export MYNOTE_PATH=$NOTE_PATH" >> ~/.bash_aliases
 echo "export ESNOTE_ROOT=${ESNOTE_ROOT}" >> ~/.bash_aliases
 
+echo "alias np=\"cd ${ESNOTE_ROOT}\"" >> ~/.bash_aliases
+
 echo OK
 
 

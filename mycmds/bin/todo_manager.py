@@ -31,6 +31,18 @@ def jdbg(string):
     return 0
 
 
+def get_input():
+    try:
+        tests = raw_input()
+    except KeyboardInterrupt:
+        print "QUIT"
+        exit(0)
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        exit(0)
+    return tests
+
+
 class job_obj:
     def __init__(self, linevalue):
         self.idx = 0
@@ -103,7 +115,7 @@ def joblist_load(loadfile = TODO_FILE):
 def joblist_save(ask = 0):
     if ask == 1:
         print("Are you sure to overwirte the current file? (y/n)")
-        yn = raw_input()
+        yn = get_input()
         if yn is "Y" or yn is "y":
             print "Saving ..."
         else:
@@ -123,13 +135,19 @@ def joblist_add():
     jdbg("job adding ")
     newjob = job_obj(None)
     now = time.time()
-    print "Due Date? ",
-    test = raw_input()
+    print "Due Date? (date or days form today): ",
+    test = get_input()
     if test == "":
         print "no due, use due today"
         print  time.strftime("%Y/%m/%d", time.localtime())
         jtime  = now
+        print jtime
         datenew = time.strptime(time.strftime("%Y/%m/%d", time.localtime()),"%Y/%m/%d" )
+    elif test.isdigit():
+        days = int (test)
+        jtime  = now + days * 24 * 3600
+        #datenew = time.strptime(time.strftime("%Y/%m/%d", time.localtime(jtime)),"%Y/%m/%d" )
+        datenew = time.localtime(jtime)
     else:
         datenew = time.strptime(test, "%Y/%m/%d")
         jtime = calendar.timegm(datenew)
@@ -138,14 +156,14 @@ def joblist_add():
             return -1
 
     print "Job name:",
-    newjob.job_name = raw_input()
+    newjob.job_name = get_input()
     print "Job comment:",
-    newjob.comments = raw_input()
+    newjob.comments = get_input()
     newjob.datetime = datenew
     newjob.idx = joblist_new_idx()
     newjob.show()
     print "ok to add ?",
-    got=raw_input()
+    got=get_input()
     if got is 'y' or got is 'Y':
         print "Add to List:",
         joblist[newjob.idx] = newjob
@@ -193,7 +211,7 @@ def joblist_edit(index):
         print "Editing job:", joblist[int(index)].job_name
         editjob = joblist[(int(index))]
         print 'new due:',
-        duestr = raw_input()
+        duestr = get_input()
         if duestr == "":
             print "Due day not changed"
         else:
@@ -201,13 +219,13 @@ def joblist_edit(index):
             editjob.datetime = datenew
 
         print "Input the job name:",
-        new_jobname = raw_input()
+        new_jobname = get_input()
         if new_jobname != "":
             editjob.job_name = new_jobname
         else:
             print "not chaged"
         print "Input the job comment:",
-        new_cmmt = raw_input()
+        new_cmmt = get_input()
         if new_cmmt != "":
             editjob.comments = new_cmmt
         else:
