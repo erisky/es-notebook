@@ -77,11 +77,14 @@ class job_obj:
 
         return 0
 
-joblist = {}
+
+# TODO: Modulize joblist
+
+## joblist = {}
 
 
 def joblist_new_idx():
-    ret = 0
+    ret = 1
     for x in joblist.keys():
         if ret <= x:
             ret = x+1
@@ -101,6 +104,7 @@ def joblist_new_idx():
 
 
 def joblist_load(loadfile = TODO_FILE):
+    joblist = {}
     with open(loadfile) as f:
         for lines in f:
             lstrip=lines.strip()
@@ -111,8 +115,10 @@ def joblist_load(loadfile = TODO_FILE):
                 #print test1.job_name
                 joblist[test1.idx] = test1
         f.close()
+    return joblist
 
-def joblist_save(ask = 0):
+
+def joblist_save(joblist, ask = 0):
     if ask == 1:
         print("Are you sure to overwirte the current file? (y/n)")
         yn = get_input()
@@ -131,7 +137,7 @@ def joblist_save(ask = 0):
     jdbg ("joblist save done")
 
 
-def joblist_add():
+def joblist_add(joblist):
     jdbg("job adding ")
     newjob = job_obj(None)
     now = time.time()
@@ -168,11 +174,11 @@ def joblist_add():
         print "Add to List:",
         joblist[newjob.idx] = newjob
         ttest = newjob.show()
-        joblist_save(0)
+        joblist_save(joblist, 0)
     # print test,datenew
 
 
-def joblist_del(index):
+def joblist_del(joblist, index):
     jdbg ("job deleting ")
     
     if joblist[int(index)]:
@@ -185,7 +191,7 @@ def joblist_del(index):
         print "No"
 
 
-def joblist_display(days):
+def joblist_display(joblist, days):
     now = time.time()
     print "####################################################"*2
     print "Today:", time.strftime("%Y/%m/%d", time.localtime())
@@ -230,7 +236,7 @@ def joblist_edit(index):
             editjob.comments = new_cmmt
         else:
             print "not chaged"
-        joblist_save()
+        joblist_save(joblist)
     else:
         print "No job is found"
 
@@ -253,26 +259,26 @@ def todo_help():
 
 
 if __name__ == '__main__':
-    joblist_load()
+    joblist = joblist_load()
     if len(sys.argv) == 1:
         # default display job due in one week
-        joblist_display(31)
+        joblist_display(joblist, 31)
     else:
         if (sys.argv[1] == 'all'):
-            joblist_display(365)
+            joblist_display(joblist,365)
         elif (sys.argv[1] == 'add'):
-            joblist_add()
-            joblist_display(31)
+            joblist_add(joblist)
+            joblist_display(joblist, 31)
         elif (sys.argv[1] == 'fin') or (sys.argv[1] == 'del'):
             if len(sys.argv) > 2:
-                joblist_del(sys.argv[2])
+                joblist_del(joblist, sys.argv[2])
             else:
                 bad_exit()
         elif sys.argv[1] == 'done':
             os.system('cat '+ TODO_DONE_FILE)
         elif sys.argv[1] == 'edit':
             if len(sys.argv) > 2:
-                joblist_edit(sys.argv[2])
+                joblist_edit(joblist, sys.argv[2])
             else:
                 bad_exit()
 
@@ -280,7 +286,7 @@ if __name__ == '__main__':
             todo_help()
         else: 
             try: 
-                joblist_display(int(sys.argv[1]))
+                joblist_display(joblist, int(sys.argv[1]))
             except:
                 bad_exit()
 
