@@ -1,0 +1,123 @@
+
+
+ath_rx_tasklet[ath_recv.c]
+   ath_rx_process[ath_recv.c]
+       ath_rx_indicate [ath_osdep.c]
+           (*rx_indicate) [ath_dev.h]
+                  -->    ath_net80211_rx
+
+
+
+                  
+htt_attach(
+    htt_htc_attach(struct htt_pdev_t *pdev)
+        htt_t2h_msg_handler(void *context, HTC_PACKET *pkt)
+
+
+htt_rx_attach
+	--> ar_rx_attach  --- > $$$ NOT able to find _qca9984_rx_desc_check_desc_mgmt_type (-like) symbols
+
+	--> htt_rx_mpdu_desc_list_next
+        -->  htt_rx_desc(netbuf);           /// dequeue from ringbuffer...
+
+
+
+
+[possible place to change]
+static inline int unified_rx_desc_update_pkt_info(qdf_nbuf_t head_msdu,
+                                                  qdf_nbuf_t tail_msdu,
+                                                  uint32_t permsdu_flag)
+
+static inline void unified_rx_desc_parse_ppdu_start_status(void *rx_desc,
+        struct ieee80211_rx_status *rs)
+
+
+ath_rx_bf_process
+
+captured_implicit_sounding XXX
+
+
+qca9958:
+===== $$$$ ====
+>>>> ar9300_set_11n_tx_desc
+
+
+ar9300_attach-->
+
+ar9300_fill_capability_info !!?
+
+reg_map:
+opsprey_reg_map.h
+
+
+AR_LEG_PLCP_SPOOF
+
+//csi_debug 
+    	tmp = REG_READ(ah,0x8344);
+    	tmp |= (1 << 28);
+    	REG_WRITE(ah, 0x8344,tmp);
+
+
+[txBF] Send souding !?
+ar9300_set_11n_txbf_sounding
+
+
+
+[TX]
+ath_tx_start_dma
+    --> 
+
+
+
+[RX]
+hif_ce_fastpath_cb_register(pdev->osc ,htt_t2h_msg_handler_fast , pdev);
+
+ce_tasklet(unsigned long data)
+	-->ce_fastpath_rx_handle
+	   --> (ce_state->fastpath_handler)
+		   --> htt_t2h_msg_handler_fast
+				  -->
+					ol_rx_indication_handler
+
+
+
+
+
+RX path:
+ath_ar_ops
+   -> isr (ath_intr)
+	ath_rx_edma_intr ->
+	  ->lmac/ath_dev/ath_edma_recv.c
+    	--> ath_hal_rxprocdescfast
+           
+
+
+=============================================================
+
+
+wlanconfig ATH01 create wlandev wifi0 wlanmode sta
+
+iwconfig ATH01 essid "iNodeProA-9D8E 1"
+
+
+iwpriv ath0 amsdu 0
+
+iwpriv ath0 get_amsdu 
+
+recv_csi /tmp/csi_out
+
+
+
+===================
+IP4019 used modules:
+
+umac
+ath_dfs
+ath_pktlog
+asf
+ath_spectral
+
+qca_ol
+mem_manager
+qdf
+smart_antenna

@@ -10,3 +10,6 @@
     Service those are tested internally might not guranteed to work in cloud environment.
     should try to add an emulator mode in server / client side to emulate the latency...
     
+
+4. [Sync]
+   Do the sync to make sure
