@@ -130,7 +130,7 @@ setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EA
 
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.6.SPF5.0-CS1_norplusnand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
 
-setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.6.SPF5.0-CS1_norplusnand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
+setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 PU9_EAI2204P_V1.1.5.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 uboottest.img && imgaddr=0x84000000 && source $imgaddr:script
@@ -138,6 +138,18 @@ setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 ub
 [EAI2202P]
 setenv serverip 192.168.1.199 && setenv machid 8302001 && tftpboot 0x84000000 EAI2202P_V1.1.4.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
+
+[EAI2001]
+setenv ipaddr 192.168.1.1
+setenv serverip 192.168.1.199
+
+bootcode:
+
+tftp 0x80060000 openwrt-ar71xx-EAI2001P-qca-legacy-uboot.bin && erase 0x9f000000 +0x30000 && cp.b $fileaddr 0x9f000000 $filesize 
+
+Kernel and RootFS:
+tftp 0x80060000 EAI2001P-v1.0.3-kernel.bin&&nand erase 0x0 0x600000&&nand write $fileaddr 0x0 $filesize
+tftp 0x80060000 EAI2001P-v1.0.3-jffs2-rootfs.bin &&nand erase 0x600000 0x1e00000&&nand write $fileaddr 0x600000 $filesize
 
 
 CONFIG_ARCH_QCOM

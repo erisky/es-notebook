@@ -10,7 +10,7 @@ fi
 
 ESNOTE_ROOT=`realpath ..`
 MYCMD_PATH=`realpath .`
-#NOTE_PATH=`realpath "../2017"`
+#NOTE_PATH=`realpath "../2018"`
 
 echo "input the year to setup, ex: 2018"
 read year
@@ -25,7 +25,7 @@ echo $NOTE_PATH
 
 echo " This installation will do the following thins:"
 echo "1. Add e, note aliases"
-echo "2. export $$MYCMD_PATH/bin to PATH env"
+echo "2. export $MYCMD_PATH/bin to PATH env"
 echo "3. add complete for notes"
 
 

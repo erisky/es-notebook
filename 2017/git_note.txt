@@ -51,3 +51,14 @@ git push -f origin HEAD:master
 
 # allow repostoy update by push:
 git config receive.denyCurrentBranch ignore
+
+
+## switch to bitbucket ###
+git config --global user.email "eric9_chen@askey.com"
+
+cd existing-project
+git remote set-url origin https://eric9_chen@bitbucket.askey.com.tw:8443/scm/cmmiar/argus.git
+git push -u origin master
+git config --global http.sslverify false
+
+

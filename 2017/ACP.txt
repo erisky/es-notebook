@@ -330,7 +330,11 @@ Valgrind
 
 ## Usage ##
 valgrind --leak-check=yes ./acp_core
+>>> so far ./acp_core can't be terminated normal under valgrind
+----> so can't run tool=massif normally
 
+## Memory Usage/peak ##
+valgrind --tool=massif  ./acp_server
 
 ### Server ###
 /home/eric/work/server_git/server
@@ -363,9 +367,9 @@ $ pm2 start ./fcgi.json
 {"ACTION":"TUNN_OPEN", "MAC":"","PORT":"80","SEQ":8211 } 
 
 
-{"ACTION":"TUNN_OPEN", "MAC":"35:04:70:50:E6:0C","PORT":"80","SEQ":8211 } 
+{"ACTION":"TUNN_OPEN", "MAC":"B4:EE:B4:EA:1A:29","PORT":"80","SEQ":8211 } 
 
-#### 
+#### B4:EE:B4:EA:1A:29
 	
 
 
@@ -422,7 +426,18 @@ send {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"AP","LIST":["B4:EE:B4:EA:1A:29","00
 
 {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1B:1A"], "CMD":"logread -l 200"} 
 
-{"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1B:1A"], "CMD":"ls"}  
+send {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1A:29"], "CMD":"ls /root"}  
+
+send {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1A:29"], "CMD":"vi /tmp"}  
+
+
+send {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1A:29"], "CMD":"vi /tmp/ipv6.log"}
+send {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1A:29"], "CMD":"cat /tmp/ipv6.log"}    
+
+
+send {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1A:29"], "CMD":"cat /etc/config/trconf"}    
+
+send {"ACTION":"REMOTE_CMD", "SEQ":2123, "MAC":["B4:EE:B4:EA:1A:29"], "CMD":"ls -al /etc/config/trconf"}    
 
 {  
    "ACTION":"CMD_RESP",
@@ -540,6 +555,96 @@ These are all with 2 radio.
 
 
 ubus call service event '{"type":"config.change", "data":{"package":"wireless"}}'
+
+
+
+ubus
+
+
+{"method":"GetApGroupByName"
+,"account":"d900_eric"
+,"name":"stress_test_eric2"
+}
+
+
+{"method":"GetApGroupList"
+,"account":"d900_eric"
+,"page_size":10
+,"page_num":1
+}
+
+
+
+## FW Valid time = now
+{ "account": "d900_eric", "name": "stress_test_eric2", "product": "EAI2204P", "fw_version": "EAI2204P-1.1.4-7", "config": { "FW_VALID": "now", "Radio_profile": [ [ "2.4GHz", "stress_radio_2G" ], [ "5GHz", "stress_test_5G" ] ], "Mappings": [ [ "francis_test_none", [ "2.4GHz", "5GHz" ], "None" ] ], "Updated": 1514285919, "PROF_TYPE": "PROF_MAPPING", "PROF_MAPPING": "stress_test_eric2", "Product": "EAI2204P" }, "id": "9bfc1654-d5b1-11e7-8566-f832e48bdce7", "method": "UpdateApGroup" }
+
+
+{ "account": "d900_eric", "name": "stress_test_eric2", "product": "EAI2204P", "fw_version": "EAI2204P-1.1.4-7", "config": { "FW_VALID": "now", "Radio_profile": [ [ "2.4GHz", "stress_radio_2G" ], [ "5GHz", "stress_test_5G" ] ], "Mappings": [ [ "francis_test_none", [ "2.4GHz", "5GHz" ], "None" ] ], "Updated": 1514285919, "PROF_TYPE": "PROF_MAPPING", "PROF_MAPPING": "stress_test_eric2", "Product": "EAI2204P" }, "id": "9bfc1654-d5b1-11e7-8566-f832e48bdce7", "method": "UpdateApGroup" }
+
+
+
+
+
+## FW Valid time = next 23:00
+{ "account": "d900_eric", "name": "stress_test_eric2", "product": "EAI2204P", "fw_version": "EAI2204P-1.1.4-7", "config": { "FW_VALID": "23:00", "Radio_profile": [ [ "2.4GHz", "stress_radio_2G" ], [ "5GHz", "stress_test_5G" ] ], "Mappings": [ [ "francis_test_none", [ "2.4GHz", "5GHz" ], "None" ] ], "Updated": 1514285919, "PROF_TYPE": "PROF_MAPPING", "PROF_MAPPING": "stress_test_eric2", "Product": "EAI2204P" }, "id": "9bfc1654-d5b1-11e7-8566-f832e48bdce7", "method": "UpdateApGroup" }
+
+
+## FW Valid time = 2017/12/27 14:00
+{ "account": "d900_eric", "name": "stress_test_eric2", "product": "EAI2204P", "fw_version": "EAI2204P-1.1.4-7", "config": { "FW_VALID": "2017/12/27 14:00", "Radio_profile": [ [ "2.4GHz", "stress_radio_2G" ], [ "5GHz", "stress_test_5G" ] ], "Mappings": [ [ "francis_test_none", [ "2.4GHz", "5GHz" ], "None" ] ], "Updated": 1514285919, "PROF_TYPE": "PROF_MAPPING", "PROF_MAPPING": "stress_test_eric2", "Product": "EAI2204P" }, "id": "9bfc1654-d5b1-11e7-8566-f832e48bdce7", "method": "UpdateApGroup" }
+
+
+
+UpdateApGroup :
+{ "method": "UpdateApGroup" 
+, "account": "askeyadmin"
+, "id": "f82366e0-aa63-11e7-8a6c-107b444e977a"
+, "name": "ap1234567"
+, "product": "prod01"
+, "fw_version": "1.1.4"
+, "config": { "Radio_profile": [ 
+[ "2.4GHz_1", "RadioD01" ], 
+[ "5GHz", "RadioD02" ] ], 
+"Mappings": [ [ "SSID01", [ "2.4GHz_1", "5GHz" ], "plan01" ],
+ [ "SSID02", [  "2.4GHz_1" ], "plan01" ] ] }
+}
+
+######### Attribute
+
+{ "method": "UpdateGroupAttribute" 
+, "name": "ap1234567"
+, "config": { "Radio_profile": [ 
+[ "2.4GHz_1", "RadioD01" ], 
+[ "5GHz", "RadioD02" ] ], 
+"Mappings": [ [ "SSID01", [ "2.4GHz_1", "5GHz" ], "plan01" ],
+ [ "SSID02", [  "2.4GHz_1" ], "plan01" ] ] }
+}
+
+
+
+{ "method": "SetApGroupAttribute", 
+  "ap_group": "test_group",
+  "customer_id": "askey",
+  "attribute": {"FW_VALID":"2017/12/31 18:00"}}
+
+
+{ "method": "GetApGroupAttribute", 
+  "ap_group": "test_group",
+  "customer_id": "askey"}
+
+returns:
+
+{"status":"OK",
+ "value": {"attribute": 
+           {"FW_VALID":"2017/12/31 18:00"}
+          }
+}
+
+
+
+
+
+
+
 
 
 

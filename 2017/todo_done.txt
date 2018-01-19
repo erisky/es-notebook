@@ -21,3 +21,13 @@
  2017/12/20, add tunnel debugging tools, () -> 2017/12/20
  2017/12/19, cpu loading+memory usage, () -> 2017/12/20
  2017/12/13, info repack multiple, () -> 2017/12/20
+ 2018/01/10, remote command blocking, () -> 2017/12/29
+ 2017/12/25, show internal ipaddress for client, () -> 2017/12/29
+ 2017/12/26, per customer fw handling, (damn) -> 2018/01/02
+ 2018/01/04, askey dfmea training course, () -> 2018/01/05
+ 2018/01/10, AC oriniated AP uplink statistic data, () -> 2018/01/05
+ 2017/12/25, acp statistic, () -> 2018/01/08
+ 2017/12/11, lbd steering study, () -> 2018/01/08
+ 2018/01/11, scheduled FW upgrade, (only upgrade FW @ midnight) -> 2018/01/08
+ 2018/01/10, B&Q shower installation, () -> 2018/01/08
+ 2018/01/05, Participate Wifi Positioning in IIOT, () -> 2018/01/08

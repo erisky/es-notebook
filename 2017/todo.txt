@@ -1,9 +1,8 @@
+32,, 2018/01/11,, csi implement,, 
 1,, 2017/12/30,, mazda call-back,, reserve original factory to repair the car
-3,, 2017/12/25,, acp statistic,, 
 5,, 2017/12/30,, combine todo feature with google calendar,, read or write
 7,, 2017/12/31,, Python Asynchronous IO study,, benchmarking is required
-9,, 2017/12/11,, lbd steering study,, 
 20,, 2017/12/25,, ACP Core query/kick AP (to ACP Server),, 
-21,, 2018/01/11,, scheduled FW upgrade,, only upgrade FW @ midnight
-22,, 2017/12/25,, show internal ipaddress for client,, 
-23,, 2017/12/26,, per customer fw handling,, damn
+26,, 2018/01/10,, ac computing power/memory estimate per client,, 
+27,, 2018/01/10,, stadb handling the roaming sta summed statistic,, 
+31,, 2018/01/04,, ACP restart --> informs AP,, 
