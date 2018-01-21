@@ -80,7 +80,7 @@ if __name__ == '__main__':
         elif sys.argv[1] == 'done':
             # os.system('cat '+ TODO_DONE_FILE)
             joblist = joblist_load_done()
-            joblist_display(joblist, 365)
+            joblist_display(joblist, 14)
         elif sys.argv[1] == 'edit':
             if len(sys.argv) > 2:
                 joblist_edit(joblist, sys.argv[2])

@@ -90,10 +90,14 @@ def load_all_task(showDone = False):
                 continue
             item = {}
             item['jobname'] = task['title']
-            item['date'] = task['due']
+            if showDone is True :
+                item['date'] = task['completed']
+            else:
+                item['date'] = task['due']
             item['id'] = task['id']
-            if 'notes' in item.keys():
+            if 'notes' in task.keys():
                 item['description'] = task['notes']
+            
             #print (task['title'], task['due'])
             mytasks.append(item)
             #print(task)
@@ -120,7 +124,7 @@ def update_task(gid, title, note, due):
         if ti['id'] == gid:
             # print ("Found gid = {}".format(gid))
             ti['title'] = title
-            ti['note'] = note
+            ti['notes'] = note
             ti['due'] = due
             service.tasks().update(tasklist='@default', task=ti['id'], body=ti).execute()
             return True
@@ -145,6 +149,7 @@ def sync_to_tasklist(itemlist):
         elif item['actreq'] is 'del':
             compelte_task(item['id']) 
         elif item['actreq'] == 'edit':
+            print("!!!", item['description'])
             update_task(item['id'], item['jobname'], item['description'], item['date']) 
     return load_all_task()
 
