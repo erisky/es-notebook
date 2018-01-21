@@ -17,7 +17,8 @@ class job_obj:
         self.job_name = ""
         self.due_date = None
         self.comments = ""
-        self.gid = 'none'
+        self.gid = 'new'
+        self.actreq = 'none'
         if linevalue is None:
             return
         name_list = linevalue.strip().split(COLUMN_SEP)

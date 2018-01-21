@@ -1,9 +1,8 @@
-import os 
-import calendar 
+import os
+import calendar
 import time, sys
 from job_obj import job_obj
 import quick_task_list as ggtl 
-
 my_notes_path = os.getenv("MYNOTE_PATH")
 
 TODO_DONE_FILE = my_notes_path + "/" + "todo_done.txt"
@@ -46,49 +45,69 @@ def joblist_load_txt(loadfile):
     joblist = {}
     with open(loadfile) as f:
         for lines in f:
-            lstrip=lines.strip()
-            if not lstrip.startswith("#") :
+            lstrip = lines.strip()
+            if not lstrip.startswith("#"):
                 test1 = job_obj(lstrip)
                 if test1.idx is 0:
                     continue
-                #print test1.job_name
+                # print test1.job_name
                 joblist[test1.idx] = test1
         f.close()
     return joblist
 
-def joblist_load_google():
+
+def joblist_load_google(showDone = False):
     joblist = {}
-    tasks = ggtl.load_all_task()
+    tasks = ggtl.load_all_task(showDone=showDone)
     tasks.sort()
     ji = 0
     for ti in tasks:
         if 'jobname' in ti.keys():
             newj = job_obj(None)
-        else: 
+        else:
             continue
 
         newj.idx = ji
         newj.gid = ti['id']
-        ji +=1  
-        newj.job_name = ti['jobname'] 
+        ji += 1
+        newj.job_name = ti['jobname']
 
         if 'description' in ti.keys():
             newj.comments = ti['description']
-        newj.datetime = time.strptime(ti['date'][0:10], "%Y-%m-%d") 
+        newj.datetime = time.strptime(ti['date'][0:10], "%Y-%m-%d")
 
-        joblist[newj.idx] = newj 
+        joblist[newj.idx] = newj
 
-    print joblist[0].gid
+    #print joblist
     return joblist
 
 
+def joblist_sync_google(joblist):
+    itemlist = []
+    for x in joblist.keys():
+        job = joblist[x]
+        newitem = {}
+        newitem['jobname'] = job.job_name
+        newitem['id'] = job.gid
+        newitem['description'] = job.comments
+        newitem['date'] = time.strftime("%Y-%m-%dT00:00:00.000Z", job.datetime)
+        newitem['actreq'] = job.actreq
+        itemlist.append(newitem)
+    ggtl.sync_to_tasklist(itemlist)
+    return
 
 
 def joblist_load(loadfile = TODO_FILE):
     joblist = joblist_load_google()
-    if joblist is None :
+    if joblist is None:
         joblist = joblist_load_txt(loadfile)
     return joblist
+
+def joblist_load_done():
+    joblist = joblist_load_google(showDone = True)
+    print("done len:{}".format(len(joblist)))
+    return joblist
+
 
 
 def joblist_save(joblist, ask = 0):
@@ -99,14 +118,16 @@ def joblist_save(joblist, ask = 0):
             print "Saving ..."
         else:
             return
-    with open(TODO_FILE, "w") as f:
-        tmp = sys.stdout
-        sys.stdout = f
-        joblist.keys().sort()
-        for j in joblist.keys():
-            joblist[j].show(1)
-        f.close()
-        sys.stdout = tmp
+
+    joblist = joblist_sync_google(joblist)
+#    with open(TODO_FILE, "w") as f:
+#        tmp = sys.stdout
+#        sys.stdout = f
+#        joblist.keys().sort()
+#        for j in joblist.keys():
+#            joblist[j].show(1)
+#        f.close()
+#        sys.stdout = tmp
 
 
 def joblist_add(joblist):
@@ -153,17 +174,15 @@ def joblist_del(joblist, index):
     
     if joblist[int(index)]:
         print "Done:", joblist[int(index)].job_name
-        deljob = joblist.pop(int(index))
-        # joblist_display(7)
-        deljob.write2file(TODO_DONE_FILE)
-        joblist_save()
+        joblist[int(index)].actreq = 'del'
+        #deljob = joblist.pop(int(index))
+        #deljob.write2file(TODO_DONE_FILE)
+        joblist_save(joblist)
     else:
         print "No"
 
 
-
-
-def joblist_edit(index):
+def joblist_edit(joblist, index):
     if joblist[int(index)]:
         print "Editing job:", joblist[int(index)].job_name
         editjob = joblist[(int(index))]
@@ -187,6 +206,7 @@ def joblist_edit(index):
             editjob.comments = new_cmmt
         else:
             print "not chaged"
+        editjob.actreq = 'edit'
         joblist_save(joblist)
     else:
         print "No job is found"

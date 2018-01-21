@@ -1,11 +1,11 @@
 #!/usr/bin/python
-
 import os
 import sys,time
 from datetime import datetime
 import calendar 
+
 #import joblist
-from joblist import joblist_load,joblist_save, joblist_new_idx, joblist_add, joblist_del, joblist_edit
+from joblist import joblist_load,joblist_save, joblist_new_idx, joblist_add, joblist_del, joblist_edit, joblist_load_done
 
 # from colorama import init
 # init()
@@ -25,11 +25,11 @@ def joblist_display(joblist, days):
         # print "jobtime", jtime
 
         if (jtime < now):
-            print_alert ("# {} {} {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name))
+            print_alert ("# {} {} {}  <<{}>>".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
         elif (jtime < now + 7*24*3600):
-            print_notice("# {} {} {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name))
+            print_notice("# {} {} {}  <<{}>>".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
         elif (jtime < now + days*24*3600):
-            print ("# {} {} {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name))
+            print ("# {} {} {}  <<{}>>".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
             # print "#", joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name
         #print x,joblist[x].job_name
 
@@ -78,7 +78,9 @@ if __name__ == '__main__':
             else:
                 bad_exit()
         elif sys.argv[1] == 'done':
-            os.system('cat '+ TODO_DONE_FILE)
+            # os.system('cat '+ TODO_DONE_FILE)
+            joblist = joblist_load_done()
+            joblist_display(joblist, 365)
         elif sys.argv[1] == 'edit':
             if len(sys.argv) > 2:
                 joblist_edit(joblist, sys.argv[2])

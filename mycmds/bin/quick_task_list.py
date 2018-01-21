@@ -2,18 +2,18 @@
 from __future__ import print_function
 import httplib2
 import os
-
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 import time 
 
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
+#try:
+#    import argparse
+#    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+#except ImportError:
+#    flags = None
+flags = None
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/tasks-python-quickstart.json
@@ -67,18 +67,27 @@ def add_task(taskname,  description, timet):
     strt = time.strftime("%Y-%m-%dT00:00:00.000Z",timet)
     task['due'] = strt
     result = service.tasks().insert(tasklist='@default', body=task).execute()
-    print (result['id'])
+    # print (result['id'])
     return (result['id'])
 
-
-def load_all_task():
+# Note job items member : 'jobname', 'date', 'id', 'description'
+def load_all_task(showDone = False):
     mytasks = []
     task = {}
     service = setup_credentials()
-    tasks = service.tasks().list(tasklist='@default').execute()
+    # print ("Showdone:{}".format(showDone))
+    if showDone is True:
+        tasks = service.tasks().list(tasklist='@default').execute()
+    else:
+        tasks = service.tasks().list(tasklist='@default', showCompleted=False).execute()
     for task in tasks['items']:
-        #print(task)
+        ## print(task)
+
         if u'due' in task.keys():
+            
+            if showDone is True and ( task['status'] != u'completed') :
+                # print ("!!! >"+ task['status'])
+                continue
             item = {}
             item['jobname'] = task['title']
             item['date'] = task['due']
@@ -88,12 +97,56 @@ def load_all_task():
             #print (task['title'], task['due'])
             mytasks.append(item)
             #print(task)
-
+    mytasks.sort()
     return mytasks
 
-# only process update/
-def sync_to_tasklist():
-    return 
+
+def compelte_task(gid):
+    service = setup_credentials()
+    tasks = service.tasks().list(tasklist='@default', showCompleted=False).execute()
+    for ti in tasks['items']:
+        if ti['id'] == gid:
+            # print ("Found gid = {}".format(gid))
+            ti['status'] = "completed"
+            ti['completed'] = time.strftime("%Y-%m-%dT00:00:00.000Z", time.localtime())
+            service.tasks().update(tasklist='@default', task=ti['id'], body=ti).execute()
+            return True
+    return False
+
+def update_task(gid, title, note, due):
+    service = setup_credentials()
+    tasks = service.tasks().list(tasklist='@default', showCompleted=False).execute()
+    for ti in tasks['items']:
+        if ti['id'] == gid:
+            # print ("Found gid = {}".format(gid))
+            ti['title'] = title
+            ti['note'] = note
+            ti['due'] = due
+            service.tasks().update(tasklist='@default', task=ti['id'], body=ti).execute()
+            return True
+    return False
+
+
+# list of items
+def sync_to_tasklist(itemlist):
+    service = setup_credentials()
+    for item in itemlist:
+        # print ("adding ")
+        if item['id'] == 'new': 
+            addtask = {
+                'title': item['jobname'],
+                'notes': item['description'],
+                'due': item['date']}
+            
+            r = service.tasks().insert(tasklist='@default', body=addtask).execute()
+            if r:
+                print("INSERT OK")
+         # Update
+        elif item['actreq'] is 'del':
+            compelte_task(item['id']) 
+        elif item['actreq'] == 'edit':
+            update_task(item['id'], item['jobname'], item['description'], item['date']) 
+    return load_all_task()
 
 
 
@@ -107,17 +160,21 @@ def main():
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('tasks', 'v1', http=http)
 
-    tasks = service.tasks().list(tasklist='@default').execute()
+    tasks = service.tasks().list(tasklist='@default', showCompleted = True).execute()
     for task in tasks['items']:
         #print(task)
         if u'due' in task.keys():
-            print (task['title'], task['due'])
+            print (task['title'], task['due'], task['status'], task['completed'])
             # print(task)
+
+    # complete 1st job
+    ct = tasks['items'][0]
+    # compelte_task(ct['id'])
 
 
     # Task Lists
-    tasklists = service.tasklists().list().execute()
-    print (tasklists)
+#    tasklists = service.tasklists().list().execute()
+#    print (tasklists)
 
 
 #    task = {
