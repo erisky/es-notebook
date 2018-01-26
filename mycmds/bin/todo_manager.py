@@ -25,11 +25,11 @@ def joblist_display(joblist, days):
         # print "jobtime", jtime
 
         if (jtime < now):
-            print_alert ("# {} {} {}  <<{}>>".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
+            print_alert ("# {} {} {}  \n\t - {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
         elif (jtime < now + 7*24*3600):
-            print_notice("# {} {} {}  <<{}>>".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
+            print_notice("# {} {} {}  \n\t - {}".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
         elif (jtime < now + days*24*3600):
-            print ("# {} {} {}  <<{}>>".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
+            print ("# {} {} {}  \n\t - {} ".format(joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name, joblist[x].comments))
             # print "#", joblist[x].idx, time.strftime("%Y/%m/%d", joblist[x].datetime), joblist[x].job_name
         #print x,joblist[x].job_name
 

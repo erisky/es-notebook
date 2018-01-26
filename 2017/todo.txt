@@ -1,5 +1,6 @@
 32,, 2018/01/11,, csi implement,, 
 1,, 2017/12/30,, mazda call-back,, reserve original factory to repair the car
+33,, 2018/01/19,, system architecture draw,, by ben
 5,, 2017/12/30,, combine todo feature with google calendar,, read or write
 7,, 2017/12/31,, Python Asynchronous IO study,, benchmarking is required
 20,, 2017/12/25,, ACP Core query/kick AP (to ACP Server),, 
