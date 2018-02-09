@@ -1,0 +1,239 @@
+
+
+
+<<802.11 spec>>
+page:499
+	Opeating class: Appendex E
+		<1> : 36,40,44,48
+		<2> : 52,56,60,64
+		<12>: 1 ~ 11
+	Channel Number:
+		0: all supported 
+	Random Interval:
+		0:
+	Measurement Duration:
+		TU:  time unit: 1024 us
+	Measure Mode:
+		Passive:0
+		Active:1
+		Beacon Table:2
+
+
+
+<Beacon request> -subelement
+0: SSID - only reports the matching ssid
+1: Beacon Reporting Information - only for repeated measurement
+   == > setting some threshold/condition for sta to send report
+2: Reporting Detail 
+    "Request element" is optionally present in the optional subelements field. 
+    If included, the Request element lists the Element IDs of the elements requested to be
+    reported in the Reported Frame Body of the Beacon Report
+    <Table 8-54>
+
+3.
+
+<< 8.4.2.23.5 Channel Load Request >>
+
+
+
+
+p.1065
+Passive mode:
+> count down measurement duration timer
+> process all received Beacons or Probe Response management frames with the requested SSID and BSSID to compile the measurement report
+  STA shall use the Reporting Detail specified in the measurement request
+
+
+Active:
+>   If the channel is not the operating channel, wait for dot11RMMeasurementProbeDelay, or until a
+    PHY-RXSTART.indication primitive has been received.
+>   send a Probe Request The BSSID/SSID element in the Probe Request shall be set to the SSID element in
+    the measurement request.
+>   countdown mesurement duration timer
+>
+
+Table:
+> the measuring STA shall return a Beacon Report containing the current contents of
+  any stored beacon information for any supported channel with the requested SSID and BSSID without
+  performing additional measurements.
+
+
+
+command:
+
+### Send Beacon request ###
+
+
+### RRM Sta List## 
+wifitool  ath02  rrm_sta_list
+
+
+[5G]
+wifitool ath22 sendbcnrpt   2c:4d:54:c4:3f:47 1 0 0 200 1 0 0 0 0 0
+wifitool ath22 bcnrpt
+[2.4G]
+
+wifitool ath02 sendbcnrpt   2c:4d:54:c4:3f:47 12 0 0 600 1 0 0 0 0 0
+[active mode] 
+wifitool ath02 sendbcnrpt   2c:4d:54:c4:3f:47 12 0 0 600 2 0 0 0 0 0
+NOTE: note for iphone !?
+
+wifitool ath22 sendbcnrpt 98:ca:33:99:fc:0a  1 0 0 600 1 0 0
+
+
+wifitool ath02 bcnrpt
+#### [Example] ####
+operator@AP5400W:~# wifitool ath02 bcnrpt
+         BSSID                  CHNUM   RCPI 
+        30 b5 c2 9d 7e 01        1       213 
+        00 03 7f 12 e1 e1        1       206 
+        b4 ee b4 e9 f1 03        1       207 
+        06 78 cd 00 0f 76        1       205 
+        34 8f 27 18 18 c8        3       189 
+        0a 03 7f 12 cf cf        3       182 
+
+
+### 
+RCPI: received channel power of the Beacon - p.112 RCPI measurement
+    16.4.8.6 [DSSS]
+		RCPI = Int{(Power in dBm + 110) × 2} for 0 dBm > Power > – 110 dBm
+	18.3.10.7 [OFDM]
+	range from 0 to 220,
+		RCPI = Int{(Power in dBm +110) × 2} for 0 dBm > Power > – 110 dBm
+			 --> ex: rssi = -10 ==> 200
+
+	17.4.8.6 [HR/DSSS]
+		RCPI = Int{(Power in dBm +110) × 2} for 0 dbm > Power > – 110 dBm
+
+
+STA might regject Measurement request by setting the refused bit in Measurement Report.
+
+
+
+question:
+TU unit?
+TSF:
+
+Multiband Operation (MBO)
+
+    
+
+
+
+---- [Other] ----
+<< B4:EE:B4:EA:1A:2B  >> EAI2204P
+
+
+
+
+---- [802.11v - WNM] ----
+Wireless Network Management
+ focus parts
+> BSS Max idle period management  --> power saving
+> BSS transition management  -->
+> Channel usage  --> in beacon/probe response for sta's reference
+> WNM-Sleep mode
+
+
+wifitool athX setbssidpref mac_addr pref_val in include/ieee80211_wnm_proto.h
+
+IEEE SPEC
+
+BTSM
+8.4.2.39 Neighbor Report element
+
+- BSSID Information field:
+   AP Reachability:  3(reacheable) 1(not reachable !?)
+   Security: 1: the AP supports the same security provisioning as used by the STA in its current association
+   Key Scope: The Key Scope bit, when set, indicates the AP indicated by this BSSID has the same authenticator as the AP
+   Capabilities: capbilities(Qos, Radio Measurement ... etc)
+   Mobility Domain: 1 indicatesthat the contents of that MDE are identical to the MDE advertised by the AP sending the report.
+   High Throughput: is an HT AP including the HT Capabilities element in its Beacons
+- Operating Class
+  Annex E
+- Channel Number
+  
+- PHY Type
+    dot11PHYType.... Annex C
+    DSSS–2.4 (02)
+    IR - 03
+    High Rate–2.4 (X‘05’)
+    OFDM-5. (04)
+    ERP (X'06')
+    HT HT (X'07')
+    .............. so !?
+
+
+##BTM Request command
+
+wifitool athX sendbstmreq_target <mac_addr>\n[<candidate_bssid> <candidate channel> <candidate_preference> <operating class> <PHY type>...]
+wifitool ath22 sendbstmreq_target 2c:4d:54:c4:3f:47 B4:EE:B4:EA:1A:2B  153 250 1 7   <sometimes work, sometimes don't?
+wifitool ath22 sendbstmreq_target 2c:4d:54:c4:3f:47 B4:EE:B4:EA:1A:2B  153 250 1 15 (phymode == 15!?)
+
+wifitool ath22 sendbstmreq_target 2c:4d:54:c4:3f:47 B4:EE:B4:EA:1A:2B  153 250 125 7  (global class == 125?)
+
+wifitool ath22 sendbstmreq_target 9c:35:eb:42:b1:ae  B4:EE:B4:EA:1A:2B  153 250 1 7 
+9c:35:eb:42:b1:ae 
+125
+B4:EE:B4:EA:1A:2B
+wifitool athX sendbstmreq_target  2c:4d:54:c4:3f:47
+
+
+
+BA:EE:B4:EA:1A:2B  153 0 1 4
+------------------------------------------------------
+lbd steer:
+   steer   2c:4d:54:c4:3f:47 255 1 0
+   steer   2c:4d:54:c4:3f:47 255 1 1
+    APId 255 ChanId 116 ESSId 1
+------------------------------------------------------
+steerexec 
+steer F0:03:8C:07:64:57  255 1 1   -> ok uses kickmac
+
+
+####################################
+#802.11kv test script
+####################################
+function call_send_bcnreq()
+{
+    iface=$1
+    mac=${2%":"}
+
+    echo $iface $mac
+    if [ "$mac" == "00:00:00:00:00:00" ];
+    then
+        echo "Bad mac, skip !"
+        return
+    fi
+
+    ifdev=${iface:0:4}
+    if [ "$ifdev" == "ath2" ]; 
+    then
+        echo "THIS IS 5G"
+        # class = 1, mode = active
+        wifitool $iface sendbcnrpt $mac 1 0 0 600 2 0 0 0 0 0
+    else 
+        echo "THIS IS 2G"
+        wifitool $iface sendbcnrpt $mac 12 0 0 600 2 0 0 0 0 0
+    fi
+    sleep 5 
+    wifitool $iface bcnrpt
+}
+
+
+ifaces=`iwconfig 2>/dev/null  | grep ESSID | awk '{print $1}'`
+for if in $ifaces
+do 
+    # echo $if
+    stas=`wifitool  $if  rrm_sta_list | awk '{if ($1 != "RRM") print $1}'`
+    for sta in $stas 
+    do
+        echo do something for $sta on iface $if
+        call_send_bcnreq $if $sta
+    done
+done
+
+
+
+
+

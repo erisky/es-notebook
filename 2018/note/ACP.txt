@@ -653,7 +653,10 @@ returns:
 
 
 
-
+{  "ACTION":"STA_CTRL", "SEQ":1234, "CTRL":"restart_sta", "MAC":[  "2c:4d:54:c4:3f:47", "A1:BA:34:12:C2:42" ] }
+{  "ACTION":"STA_CTRL", "SEQ":1234, "CTRL":"remove_sta", "MAC":[  "2c:4d:54:c4:3f:47", "A1:BA:34:12:C2:42" ] }
+{  "ACTION":"STA_INFO", "SEQ":1234,  "MAC":[  "2c:4d:54:c4:3f:47", "A1:BA:34:12:C2:42" ] }
+{  "ACTION":"STA_INFO", "SEQ":1234,  "MAC": "2c:4d:54:c4:3f:47"}
 
 
 
