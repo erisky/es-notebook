@@ -70,7 +70,11 @@ wifitool  ath02  rrm_sta_list
 
 [5G]
 wifitool ath22 sendbcnrpt   2c:4d:54:c4:3f:47 1 0 0 200 1 0 0 0 0 0
+wifitool ath2 sendbcnrpt   2c:4d:54:c4:3f:47 1 0 0 200 1 0 0 0 0 0
 wifitool ath22 bcnrpt
+wifitool ath22 bcnrpt
+
+
 [2.4G]
 
 wifitool ath02 sendbcnrpt   2c:4d:54:c4:3f:47 12 0 0 600 1 0 0 0 0 0

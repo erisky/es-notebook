@@ -1,0 +1,66 @@
+:q[Default Charter Password]
+http://192.168.1.1:8086/index.html 
+Default Username / password:
+root / MmvGB^RY3#
+#########
+-- charter / spf5 new --    
+operator R3MOT3ACC3$$
+technician R3MOT3ACC3$$
+admin admin
+#################
+
+
+wifi server
+80944e718a
+
+
+
+
+
+---- Hidden Page -----
+charter hidden page: N@74U1fUD0n7H@v1P$d
+
+---- Public PPPoE account -----
+
+76400446@hinet.net
+wnvueina
+
+
+[ D900 Server (10.194.20.21) ]
+-	Administrator: d900/gitd900
+-	FTP: d900/gitd900
+-	Redmine: admin/jerrykuo, 這是root account
+-	Radius: Secret=d900123, 內有兩個radius database. 一個radius (已封存), 一個wss, wss內有一個帳號可以用來測802.1x. 適用於10.194.x.x/16的802.1x clients.
+-	MySQL: root/gitd900, 已寫進外速登入檔.my.cnf, 直接打mysql即可登入
+-	GIT: d900/gitd900, 內有兩個repo. 一個是qsdk, 一個是xldk
+
+SW server (浮動IP)  -- 10.194.22.88 
+-	Administrator: swtest/sw123
+-	Radius: Secret=d900123
+-	Mysql: root/sw123, 未有快速登入檔, 打mysql –u root –p 即可登入.
+
+
+
+
+[Ruckus Web]
+Ruckus web username/password: fre......... / 809996@askey
+
+[Qualcomm Web]
+cdma(qualcomm) username/passwor:eric9_chen... Ky**#***9
+
+ask question:
+	https://qualcomm-cdmatech-support.my.salesforce.com/apex/CaseRecordType
+	QCA Product Support Only
+	AP5400W-D50
+
+
+
+
+https://iwifi.iiot.io
+
+account1 : iiot
+account2 : meettaipei
+PWD        : 123456
+
+
+	

@@ -21,4 +21,26 @@ ATH_EVENT_BSTEERING_CLIENT_RSSI_MEASUREMENT
 
 
 
+----- lbd modules -----
+  [evloop] - facilities and timer for socket event handling
+  [module] - different modules in lbd to deliver asyn events to one another
+  [profile] - to retrieve parameters from a configuration file
+  
+
+  [driver]   ----- netlink --> [wlanif]
+
+  [stadb] - static lib
+  []
+
+
+
+
+
+
+
+
+
+
+
+
 netlink_unicast

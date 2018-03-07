@@ -1,3 +1,10 @@
+# list arguments
+for arg in $@ 
+do
+    echo $arg
+done
+
+
 [ string1 = string2 ]        string1 and string2 are equal
 [ string1 != string2 ]       string1 and string2 are not equal
 [ string1 \< string2 ]       string1 is lexically less than string2(e.g. 'a' is less than 'b')

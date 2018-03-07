@@ -1,11 +1,21 @@
 Askey wifi password: 80944e718a
 
-
+samba to mips
 sudo mount -t cifs -o username=eric,password=eric123 //10.194.20.47/eric /home/eric/mount-mips/
+
+Ubuntu 14 Server
+
+
+
 
 
 repos:
 d900@10.194.20.21:spf5-mips
+
+-----------
+Build Server 10.194.20.46
+Account:d900
+Password:gitd900
 
 
 

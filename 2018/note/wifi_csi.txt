@@ -100,6 +100,10 @@ wlanconfig ath02 create wlandev wifi0 wlanmode sta
 
 iwconfig ath02 essid "iNodeProA-9D8E 1"
 iwconfig ath02 essid "iNodeProA-F525 1"
+iwconfig ath27 essid "wds-test"
+
+
+
 ifconfig ath02 up
 ifconfig ath02 192.168.1.65
 

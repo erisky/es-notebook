@@ -31,7 +31,7 @@ git commit --amend
 ---- git config user/password ---
 # Actually need to configure the ssh
 ssh-keygen 
-sh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
+ssh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
 ssh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
 git pull
 --> 

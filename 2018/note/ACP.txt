@@ -374,6 +374,9 @@ $ pm2 start ./fcgi.json
 
 
 send { "ACTION": "UPDATE_NOTIFY", "PROF_TYPE": "GROUP", "PROF_NAME": "test_group_1101", "SEQ": 298  }
+send { "ACTION": "UPDATE_NOTIFY", "CUSTOMER_ID":"a7b9677c-beae-11e7-b8e1-f832e48bdce7", "PROF_TYPE": "GROUP", "PROF_NAME": "test_group_1101", "SEQ": 298  }
+
+send {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821, "CUSTOMER_ID":"a7b9677c-beae-11e7-b8e1-f832e48bdce7" } 
 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"SSID","PROF_NAME":"SSID01","SEQ":821 } 
 {"ACTION":"UPDATE_NOTIFY", "PROF_TYPE":"RADIO","PROF_NAME":"RADIO01","SEQ":822 } 
@@ -532,7 +535,9 @@ ubus call upbrkr send '{"type":"test", "data":{"reason":"0x12345678"}}'
 ubus call upbrkr send '{"type":"assoc", "data":{"type":"assoc", "mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid"}}'
 
 <<DISASSC>>
-ubus call upbrkr send '{"type":"disassoc", "data":{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }}'
+ubus call upbrkr send '{"type":"disassociation", "data":{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }}'
+
+ubus call upbrkr send '{"type":"disassociation", "data":{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2  }}'
 
 <<STA_STAT>>
 ubus call upbrkr send '{"type":"sta_stat", "data":{"mac":"11:22:33:44:55:66", "iface":"ath2", "ssid":"yourssid", "reason":1, "status":2, "stats":{"tx_pkts": 12301,"rx_pkts": 1231,"tx_bytes": 99123,"rx_bytes": 1012121,"tx_errs": 12,"rx_errs": 19} }}'
