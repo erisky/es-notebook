@@ -43,6 +43,13 @@ echo "alias note=\"$MYCMD_PATH/mynote.py\"" >> ~/.bash_aliases
 
 echo "alias e=gvim" >> ~/.bash_aliases
 
+#for 2017 only
+echo "alias note17=\"$MYCMD_PATH/mynote.py\"" >> ~/.bash_aliases
+NOTE_PATH_2017=`realpath "../2017"`
+echo "WORDS=\`ls $NOTE_PATH_2017\`" >> ~/.bash_aliases
+echo "complete  -W \"\$WORDS\" note17" >> ~/.bash_aliases
+
+
 echo "WORDS=\`ls $NOTE_PATH\`" >> ~/.bash_aliases
 echo "complete  -W \"\$WORDS\" note" >> ~/.bash_aliases
 

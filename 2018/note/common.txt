@@ -19,3 +19,12 @@ Password:gitd900
 
 
 
+CMMI Material
+\\10.1.7.135
+
+
+samba
+d900
+d900123
+
+

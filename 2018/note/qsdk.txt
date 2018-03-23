@@ -156,7 +156,7 @@ tftp 0x80060000 EAI2001P-v1.0.3-jffs2-rootfs.bin &&nand erase 0x600000 0x1e00000
 setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-v2.0.0-kernel.bin  && nand erase 0x0 0x600000&&nand write $fileaddr 0x0 $filesize
 setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-v2.0.0-jffs2-rootfs.bin && nand erase 0x600000 0x2a00000 &&nand write $fileaddr 0x600000 $filesize
 ## reset to default from bootcode
-
+nand erase 0x3000000 0xc00000
 
 
 CONFIG_ARCH_QCOM
