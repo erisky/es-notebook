@@ -1,0 +1,39 @@
+
+
+Start from:
+ ap_misc_evt_handler
+
+[RX TRACE ]
+ieee80211_recv_radio_measurement_rsp
+  -> ieee80211_rrm_handle_report
+     -> ieee80211_rrm_beacon_measurement_report
+  -> ieee80211_rrm_chload_report
+
+
+important structures:
+
+vap
+    wlan_if_t <umac/include/ieee80211_var.h>
+
+node
+    wlan_node_t <umac/include/ieee80211_node.h>
+
+ieee80211_wnm (vap's member)
+    
+
+
+<start from assiciation to know if sta support rrm>
+ieee80211_mlme_recv_assoc_request
+    --> ieee80211_set_node_rrm(ni,TRUE);
+
+
+
+
+
+
+---- [Driver Study] ----
+Event table:
+   ap_misc_evt_handler
+
+tools interface:
+

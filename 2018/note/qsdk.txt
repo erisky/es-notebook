@@ -114,7 +114,7 @@ SPF 5.0
 setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 PU9-IPQ4019_V1.0.15.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 >>>> NEW <<<<<
-setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU9-IPQ4019_V1.0.15.SPF5.0-CS1_nand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 PU9_AP5400W_V1.1.6-4.SPF5.0-CS1_nand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
 
 >>>> SPF5
 setenv serverip 192.168.1.199 && setenv machid 8540001 && tftpboot 0x84000000 AP5400W_V1.1.3.SPF5.0-CS1_nand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
@@ -144,12 +144,19 @@ setenv ipaddr 192.168.1.1
 setenv serverip 192.168.1.199
 
 bootcode:
-
+[IIOT]
 tftp 0x80060000 openwrt-ar71xx-EAI2001P-qca-legacy-uboot.bin && erase 0x9f000000 +0x30000 && cp.b $fileaddr 0x9f000000 $filesize 
 
 Kernel and RootFS:
 tftp 0x80060000 EAI2001P-v1.0.3-kernel.bin&&nand erase 0x0 0x600000&&nand write $fileaddr 0x0 $filesize
 tftp 0x80060000 EAI2001P-v1.0.3-jffs2-rootfs.bin &&nand erase 0x600000 0x1e00000&&nand write $fileaddr 0x600000 $filesize
+
+
+[AWOS on EAI2001P]
+setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-v2.0.0-kernel.bin  && nand erase 0x0 0x600000&&nand write $fileaddr 0x0 $filesize
+setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-v2.0.0-jffs2-rootfs.bin && nand erase 0x600000 0x2a00000 &&nand write $fileaddr 0x600000 $filesize
+## reset to default from bootcode
+nand erase 0x3000000 0xc00000
 
 
 CONFIG_ARCH_QCOM
@@ -300,4 +307,20 @@ partitions:  [do not oversize it !]
 
 ipq40xx_board_param.h
 54
+
+
+=== Install ===
+
+Build dependency: Please install the Objective Caml compiler (ocaml-nox) v3.12 or later
+Build dependency: Please install ncurses. (Missing libncurses.so or ncurses.h)
+Build dependency: Please install zlib. (Missing libz.so or zlib.h)
+Build dependency: Please install the openssl library (with development headers)
+Build dependency: Please install GNU 'awk'
+Build dependency: Please install the Subversion client
+
+
+sudo apt-get install gawk subversion libncurses-dev libz-dev libssl-dev ocaml-nox sharutils
+    libc-i386 --> must
+
+sudo apt install device-tree-compiler
 

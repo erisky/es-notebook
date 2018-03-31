@@ -10,6 +10,10 @@ ping6
 
 #related file
  /lib/netifd/dhcpv6.script 
+   call proto_add_ipv6_prefix
+   call proto_send_update
+    |->
+
  /lib/netifd/proto/dhcpv6.sh 
  /lib/netifd/dhcpv6.script
 
@@ -59,4 +63,35 @@ refer to netifd.txt
 
 google ip:
 2001:4860:4860::8888
+
+
+--------- debug
+tail -f /tmp/test
+
+dns_dib:  2001:b000:168::1 2001:b000:168::2
+dns:  2001:b000:168::1
+i: 2001:b000:168::1
+i: 2001:b000:168::2
+dns_diff_flag:  0
+dns:  2001:b000:168::2
+i: 2001:b000:168::1
+i: 2001:b000:168::2
+dns_diff_flag:  0
+dibbleroptrestartflag:  0
+
+=============DOMAIN==============
+RA_DOMAINS:  
+DOMAINS:  
+
+IFACE:  pppoe-wan
+==================NTP===================
+NTP_IP:  
+
+!!!!!test
+ifupdate wan6
+
+
+
+
+
 

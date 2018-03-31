@@ -1,0 +1,10 @@
+Doc:
+linux/Documentation/pinctrl.txt
+
+
+file :
+
+./drivers/pinctrl/qcom/pinctrl-ipq40xx.c
+./drivers/pinctrl/qcom/pinctrl-ipq8064.c
+
+

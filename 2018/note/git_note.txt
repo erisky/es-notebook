@@ -31,7 +31,7 @@ git commit --amend
 ---- git config user/password ---
 # Actually need to configure the ssh
 ssh-keygen 
-sh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
+ssh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
 ssh-copy-id -i ~/.ssh/id_rsa d900@10.194.20.21
 git pull
 --> 
@@ -60,5 +60,12 @@ cd existing-project
 git remote set-url origin https://eric9_chen@bitbucket.askey.com.tw:8443/scm/cmmiar/argus.git
 git push -u origin master
 git config --global http.sslverify false
+
+=== [auto commit d900 to jira] ===
+# checkout jira-awos
+git remote  add d900_spf5 d900@10.194.20.21:spf5
+# pull from d900
+git pull d900_spf5 master
+# push back
 
 

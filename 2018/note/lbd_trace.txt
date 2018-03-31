@@ -1,0 +1,46 @@
+
+<starting>
+qca-wifi-10.4/include/ieee80211_band_steering_api.h
+  --> ATH_BSTEERING_EVENT
+
+Important events:
+
+
+ATH_EVENT_BSTEERING_CHAN_UTIL
+<802.11k>
+ATH_EVENT_BSTEERING_RRM_REPORT
+<802.11v>
+ATH_EVENT_BSTEERING_WNM_EVENT
+
+ATH_EVENT_BSTEERING_CLIENT_TX_RATE_CROSSING
+
+ATH_EVENT_BSTEERING_OPMODE_UPDATE
+ATH_EVENT_BSTEERING_CLIENT_RSSI_CROSSING
+ATH_EVENT_BSTEERING_CLIENT_RSSI_MEASUREMENT
+
+
+
+
+----- lbd modules -----
+  [evloop] - facilities and timer for socket event handling
+  [module] - different modules in lbd to deliver asyn events to one another
+  [profile] - to retrieve parameters from a configuration file
+  
+
+  [driver]   ----- netlink --> [wlanif]
+
+  [stadb] - static lib
+  []
+
+
+
+
+
+
+
+
+
+
+
+
+netlink_unicast

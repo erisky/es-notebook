@@ -1,0 +1,18 @@
+
+
+To study:
+
+
+
+9.27 Sounding PPDUs
+
+MFB requester (see 9.28.2)
+
+
+Figure 9-35—Example PPDU exchange for unidirectional implicit transmit beamforming
+
+9.29 Transmit beamforming
+
+
+
+

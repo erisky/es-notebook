@@ -1,0 +1,65 @@
+lte notes:
+
+ifconfig usb0 up
+
+
+Model from 研11:
+   WWHC050
+
+cp the following files to targe and test
+atcmd.sh
+atlib.sh
+lock.sh
+
+[RSSI Related]
+./atcmd.sh AT+CSQ
+[Card Name]
+./atcmd.sh AT+GMI
+!!! /dev/ttyACM0
+AT+GMI
+ASKEY INCORPORATED
+
+OK
+operator@EAI2204P:~# ./atcmd.sh AT+GMC
+!!! /dev/ttyACM0
+AT+GMC
+ERROR
+operator@EAI2204P:~# ./atcmd.sh AT+CGMC
+!!! /dev/ttyACM0
+AT+CGMC
+ERROR
+operator@EAI2204P:~# ./atcmd.sh AT+CGMI
+!!! /dev/ttyACM0
+AT+CGMI
+ASKEY INCORPORATED
+operator@EAI2204P:~# ./atcmd.sh AT+CGMM
+!!! /dev/ttyACM0
+AT+CGMM
+WWHC050-D61
+operator@EAI2204P:~# ./atcmd.sh AT+CGMR
+!!! /dev/ttyACM0
+AT+CGMR
+WWHC050_TW.S001.L3.A01  1  [Sep 29 2016 23:00:00]
+operator@EAI2204P:~# ./atcmd.sh AT+CGSN
+!!! /dev/ttyACM0
+AT+CGSN
+359370070000629
+operator@EAI2204P:~# ./atcmd.sh AT+CMUX
+!!! /dev/ttyACM0
+AT+CMUX
+ERROR
+operator@EAI2204P:~# ./atcmd.sh AT+CMUX
+!!! /dev/ttyACM0
+AT+CMUX
+ERROR
+operator@EAI2204P:~# ./atcmd.sh AT+CIMI
+!!! /dev/ttyACM0
+AT+CIMI
+466011100759095
+
+OK
+operator@EAI2204P:~# ./atcmd.sh AT+CTXRXRATE
+!!! /dev/ttyACM0
+AT+CTXRXRATE
++CTXRXRATE:0,0
+

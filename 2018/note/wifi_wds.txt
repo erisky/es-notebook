@@ -1,0 +1,41 @@
+
+1. add config
+
+[root]
+
+wireless.wla_multi4.ssid='wds-test'
+wireless.wla_multi4.wds='1'
+
+[leaf]
+wireless.wla2.mode='sta'
+wireless.wla2.ssid='wds-test'
+wireless.wla2.ath_enable='1'
+wireless.wla2.wds='1'
+
+network.lan.ipaddr='192.168.1.2'
+
+2. trigger connection 
+iwconfig ath27 essid "wds-test"
+
+
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+[WDS scenarios]
+- Abreviation
+ [R-AP] - root AP
+ [L-AP] - leaf AP
+ [WD]   - Wifi Dog
+ [AG]   - ACP Agent
+
+Phase I requirements:
+1. AG on L-AP connects for keep
+   ==> LAN side requires IP address and routing to be added for L-AP LAN side
+     ==> uses dhcp is fine
+2. WDS link requires a extra interface on both R-AP and L-AP
+   ==> Maximun number of multiple-ssid will minus by 1 when wds is enabled.
+3. WDS function is enabled manually and must be disabled by 
+   ==> AG skipped any interface with option wds enabled
+4. User must enable/disable wds function on R-AP and L-AP (not on AC)
+   ==> 
+
+

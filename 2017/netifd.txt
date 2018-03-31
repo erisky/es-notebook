@@ -60,6 +60,10 @@ r": false }
      by calling proto->attach:  proto_shell_attach
 
 
+##
+kill -16 $odhcpv6's ip    ===> force the odhcpv6 reload 
+
+
 
 
 
