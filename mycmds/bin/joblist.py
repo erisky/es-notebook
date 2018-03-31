@@ -174,10 +174,17 @@ def joblist_del(joblist, index):
     
     if joblist[int(index)]:
         print "Done:", joblist[int(index)].job_name
-        joblist[int(index)].actreq = 'del'
-        #deljob = joblist.pop(int(index))
-        #deljob.write2file(TODO_DONE_FILE)
-        joblist_save(joblist)
+        print "correct? (y/n):",
+        yn=get_input()
+        if yn == 'y':
+            print "deleting... ", 
+            joblist[int(index)].actreq = 'del'
+            #deljob = joblist.pop(int(index))
+            #deljob.write2file(TODO_DONE_FILE)
+            joblist_save(joblist)
+            print "Done"
+        else:
+            print "Abort!"
     else:
         print "No"
 
