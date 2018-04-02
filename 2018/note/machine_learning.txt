@@ -1,0 +1,9 @@
+# start from installing scikit-learn
+sudo pip install -U scikit-learn
+sudo pip install -U scipy
+sudo apt-get install python-tk
+sudo pip install matplotlib
+
+
+
+
