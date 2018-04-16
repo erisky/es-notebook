@@ -1,0 +1,23 @@
+
+http://www.linux-usb.org/usbnet/#t-host
+
+
+1. usbnet 
+  --> a framework
+  we enabled cdc_subset also
+: cdc_ether requires or not ?
+
+
+usbnet device connected host , it normally issues a USB hotplug event
+  -> ensure usbnet driver is active ?
+  usually usb0 is the device name 
+
+  hotplug event after network is ready
+   http://linux-hotplug.sourceforge.net/?selected=net
+
+Linux has a fully featured IEEE 802.1 bridging module (CONFIG_BRIDGE) 
+
+
+
+ modify /etc/hotplug/net.agent 
+Zeroconf
