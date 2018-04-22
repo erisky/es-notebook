@@ -4,6 +4,9 @@ sudo pip install -U scipy
 sudo apt-get install python-tk
 sudo pip install matplotlib
 
+# path: /home/eric/git/my_practices/python/scikitlearn
+# lesson 1: decision tree
+# lesson 2: visualization
 
 
 
