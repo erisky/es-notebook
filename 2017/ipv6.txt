@@ -95,3 +95,36 @@ ifupdate wan6
 
 
 
+ipv6 basic:
+
+ipv6 address = network:host id  
+ex:
+2001:b021:1234:abc2:5678:abcd:1234:2314/64
+network ID         | host ID
+
+ipv6 網路最小64 bit
+
+2001:6012:0:aaaa:1234:5678:9abc:def0
+^^^^^^^^^^^
+ISP assign 
+            ^^^^ subnet 
+                 ^^^^^^^^^^^^^^^^^^^
+                 interface 
+                 
+Unicast Type
+
+Link Local Address
+  自我產生 區網內使用, not routablea, auto-assigned 
+  FE80::/10
+
+Unique Local Address
+  locally assigna, route yourown network
+  FC00::/7
+        ^^ -> network mask length        
+Global address
+200::/3
+  
+No auto default gateway
+   
+
+
