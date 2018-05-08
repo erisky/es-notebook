@@ -1,0 +1,42 @@
+Study of Linux hid
+
+1. from linux Documentation:
+
+ +-----------+  +-----------+            +-----------+  +-----------+
+ | Device #1 |  | Device #i |            | Device #j |  | Device #k |
+ +-----------+  +-----------+            +-----------+  +-----------+
+          \\      //                              \\      //
+        +------------+                          +------------+
+        | I/O Driver |                          | I/O Driver |             ==> USB/I2C/Bluetooth-l2cap 
+        +------------+                          +------------+
+              ||                                      ||
+     +------------------+                    +------------------+
+     | Transport Driver |                    | Transport Driver |          ==> USB-HID, I2C-HID, BT-HIDP, logi_dj_ll_driver, uhid_hid_driver
+     +------------------+                    +------------------+                                         (logitech)           (uhid)
+                       \___                ___/
+                           \              /
+                          +----------------+
+                          |    HID Core    |
+                          +----------------+
+                           /  |        |  \
+                          /   |        |   \
+             ____________/    |        |    \_________________
+            /                 |        |                      \
+           /                  |        |                       \
+ +----------------+  +-----------+  +------------------+  +------------------+
+ | Generic Driver |  | MT Driver |  | Custom Driver #1 |  | Custom Driver #2 |
+ +----------------+  +-----------+  +------------------+  +------------------+
+
+Example Drivers:
+  I/O: USB, I2C, Bluetooth-l2cap
+  Transport: USB-HID, I2C-HID, BT-HIDP, <<UHID>>
+
+
+"struct hid_ll_driver" - HID core透過這個object 與device communicate
+transport-driver is repsonsible for devices failure handling and unplug (unregister from hidcode)
+
+==> register device
+i2c_hid_probe / usb_hid_probe 中呼叫 hid_add_device 
+uhid 透過worker呼叫 hid_add_device 
+
+
