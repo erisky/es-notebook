@@ -369,6 +369,8 @@ $ pm2 start ./fcgi.json
 
 {"ACTION":"TUNN_OPEN", "MAC":"B4:EE:B4:EA:1A:29","PORT":"80","SEQ":8211 } 
 
+{"ACTION":"TUNN_OPEN", "MAC":"B4:EE:B4:EA:1A:29","PORT":"80","SEQ":8211 }
+
 #### B4:EE:B4:EA:1A:29
 	
 
@@ -664,6 +666,11 @@ returns:
 {  "ACTION":"STA_INFO", "SEQ":1234,  "MAC": "2c:4d:54:c4:3f:47"}
 
 
+send {  "ACTION":"STA_CTRL", "SEQ":1234, "CTRL":"add_radius_client", "MAC":["2C:4D:54:C4:3F:47" ] }
+{  "ACTION":"STA_CTRL", "SEQ":12345, "CTRL":"kickmac", "MAC":["2C:4D:54:C4:3F:47" ] }
+send {  "ACTION":"STA_CTRL", "SEQ":123145, "CTRL":"kicksta", "MAC":["2C:4D:54:C4:3F:47" ] }
+# mac  not found
+send {  "ACTION":"STA_CTRL", "SEQ":12345, "CTRL":"kicksta", "MAC":["2C:4D:54:C4:3F:99" ] }
 
 
 

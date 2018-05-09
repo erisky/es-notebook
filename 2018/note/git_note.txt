@@ -62,10 +62,15 @@ git push -u origin master
 git config --global http.sslverify false
 
 === [auto commit d900 to jira] ===
-# checkout jira-awos
+# checkout jira-awos (pwd= /home/eric/work/awos/spf5)
 git remote  add d900_spf5 d900@10.194.20.21:spf5
 # pull from d900
 git pull d900_spf5 master
 # push back
+git push
+
+git remote  add d900_spf5 d900@10.194.20.21:tmp_git/20180104
+git remote  add d900_spf5 d900@10.194.20.21:server
+git remote  add d900_spf5 d900@10.194.20.21:spf5-mips
 
 

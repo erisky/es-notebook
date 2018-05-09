@@ -94,6 +94,10 @@ tftpboot $imgaddr nand-ipq806x-single.img
 ipq
 
 AP.DK07.1-C1
+## original ###
+
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nand-ipq40xx-single-def.img && imgaddr=0x84000000 && source $imgaddr:script
+
 
 
 >>>> U-boot Commands <<<<
@@ -153,8 +157,8 @@ tftp 0x80060000 EAI2001P-v1.0.3-jffs2-rootfs.bin &&nand erase 0x600000 0x1e00000
 
 
 [AWOS on EAI2001P]
-setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-v2.0.0-kernel.bin  && nand erase 0x0 0x600000&&nand write $fileaddr 0x0 $filesize
-setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-v2.0.0-jffs2-rootfs.bin && nand erase 0x600000 0x2a00000 &&nand write $fileaddr 0x600000 $filesize
+setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-2.0.0-rc1-kernel.bin && nand erase 0x0 0x600000&&nand write $fileaddr 0x0 $filesize
+setenv serverip 192.168.1.199 && tftp 0x80060000 EAI2001P-2.0.0-rc1-jffs2-rootfs.bin && nand erase 0x600000 0x2a00000 &&nand write $fileaddr 0x600000 $filesize
 ## reset to default from bootcode
 nand erase 0x3000000 0xc00000
 
