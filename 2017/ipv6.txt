@@ -1,0 +1,139 @@
+
+ipv6 
+add route:
+
+
+$ sudo ip -6 ro add 2000:4321:abcd:91b:5e3:b91d:b3f1:1624/64 via 2000:5522:aabb:8888:b6ee:b4ff:feea:1a29
+
+ping command :
+ping6
+
+#related file
+ /lib/netifd/dhcpv6.script 
+   call proto_add_ipv6_prefix
+   call proto_send_update
+    |->
+
+ /lib/netifd/proto/dhcpv6.sh 
+ /lib/netifd/dhcpv6.script
+
+$$$$ LOG FILE $$$
+***  tail -f /tmp/test.txt
+*** /tmp/odhcp6c.log
+
+[/lib/netifd/dhcpv6.script ]
+ -> run by /usr/sbin/odhcp6c
+  /usr/sbin/odhcp6c -e -v -N try -s /lib/netifd/dhcpv6.script -P 0 -t 20 -r 17 -V 00000dE9000C64736C666F72756D2E6F7267 eth0
+
+/sbin/netifd
+ --> odhcp6c 
+   
+kill -1 {pid of radvd } cause radvd to reload it's config
+--> add reload when odhcpc received ra-update
+
+
+
+ /etc/config/radvd
+/proc/net/nf_conntrack
+ /lib/firewall/firewall_ipv6.sh
+ 
+ /lib/firewall/firewall_ctrl.sh 
+
+
+echo f > /de  
+
+pc
+2000:7788:7788:7788::ff01
+wan
+2000:7788:7788:7788::01o
+ inet6 addr: 2000:7788:7788:7788::1/64
+lan
+ inet6 addr: 2000:7788:7788:8877::1/64 Scope:Global
+
+[route]
+ sudo ip  -6 ro add 2000:7788:7788:8877::1/64 via 2000:7788:7788:7788::1
+
+lan pc:
+2000:7788:7788:8877::e33
+
+
+*** 
+refer to netifd.txt
+
+
+google ip:
+2001:4860:4860::8888
+
+
+--------- debug
+tail -f /tmp/test
+
+dns_dib:  2001:b000:168::1 2001:b000:168::2
+dns:  2001:b000:168::1
+i: 2001:b000:168::1
+i: 2001:b000:168::2
+dns_diff_flag:  0
+dns:  2001:b000:168::2
+i: 2001:b000:168::1
+i: 2001:b000:168::2
+dns_diff_flag:  0
+dibbleroptrestartflag:  0
+
+=============DOMAIN==============
+RA_DOMAINS:  
+DOMAINS:  
+
+IFACE:  pppoe-wan
+==================NTP===================
+NTP_IP:  
+
+!!!!!test
+ifupdate wan6
+
+
+
+
+
+
+ipv6 basic:
+
+ipv6 address = network:host id  
+ex:
+2001:b021:1234:abc2:5678:abcd:1234:2314/64
+network ID         | host ID
+
+ipv6 網路最小64 bit
+
+2001:6012:0:aaaa:1234:5678:9abc:def0
+^^^^^^^^^^^
+ISP assign 
+            ^^^^ subnet 
+                 ^^^^^^^^^^^^^^^^^^^
+                 interface 
+                 
+Unicast Type
+
+Link Local Address
+  自我產生 區網內使用, not routablea, auto-assigned 
+  FE80::/10
+
+Unique Local Address
+  locally assigna, route yourown network
+  FC00::/7
+        ^^ -> network mask length        
+Global address
+200::/3
+  
+No auto default gateway
+
+
+***
+Stateful dhcpv6
+ - Prefix and DNS all comes from dhcpv6
+stateless dhcpv6
+ - uses the prefix from RA but DNS comes from dhcpv6
+stateless autoconfiguration
+ -  Uses the prefix from RA and 
+   
+
+
