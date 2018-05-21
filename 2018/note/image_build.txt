@@ -122,6 +122,14 @@ XX        $(call Image/UbiImage, -eai2204p) -->  for ubifs_128MB   ---> finiall 
 
 
 
+[Kernel Build ]
+** To make qualcomm copy from qca/src/linux to targe:
+
+
+rm build_dir/target-arm_cortex-a7_uClibc-1.0.14_eabi/linux-ipq806x/linux-3.14.77/.prepared 
+
+
+
 
 
  make target/install
