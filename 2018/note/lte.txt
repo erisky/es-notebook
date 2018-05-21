@@ -61,6 +61,236 @@ config:
 reload:
   
 
+----
+refer to hauiwei's doc: 
+
+https://blog.hqcodeshop.fi/archives/259-Huawei-E5186-AJAX-API.html
+Actions catalg:
+> Radio hardware version?
+> basic information
+> device information :
+    *<DeviceName>
+    *<SerialNumber>
+    *<Imei>8643910
+    *<Imsi>2</Imsi>
+    <Iccid>8</Iccid>
+    <Msisdn>041</Msisdn>
+    *<HardwareVersion>CL1E5175HM</HardwareVersion>
+    *<SoftwareVersion>21.298.00.00.55</SoftwareVersion>
+    <WebUIVersion>16.100.02.00.03</WebUIVersion>
+    <MacAddress1>38:F8:89:38:F8:89</MacAddress1>
+    <MacAddress2></MacAddress2>
+    <ProductFamily>LTE</ProductFamily>
+    <Classify>cpe</Classify>
+    <supportmode></supportmode>
+    <workmode>LTE</workmode>
+
+> signal:
+    <pci>82</pci>
+    <sc></sc>
+    <cell_id>551</cell_id>
+    *<rsrq>-6dB</rsrq>
+    *<rsrp>-102dBm</rsrp>
+    *<rssi>-89dBm</rssi>
+    *<sinr>3dB</sinr>
+    <rscp></rscp>
+    <ecio></ecio>
+    <mode>7</mode>
+
+> status:
+
+ 	<ConnectionStatus>901</ConnectionStatus>
+    <WifiConnectionStatus></WifiConnectionStatus>
+    <SignalStrength></SignalStrength>
+    <SignalIcon>3</SignalIcon>
+    <CurrentNetworkType>101</CurrentNetworkType>
+    <CurrentServiceDomain>3</CurrentServiceDomain>
+    <RoamingStatus>0</RoamingStatus>
+    <BatteryStatus></BatteryStatus>
+    <BatteryLevel></BatteryLevel>
+    <BatteryPercent></BatteryPercent>
+    <simlockStatus>0</simlockStatus>
+    ##<WanIPAddress>37.33.207.127</WanIPAddress>
+    ##<WanIPv6Address></WanIPv6Address>
+    ##<PrimaryDns>62.241.198.245</PrimaryDns>
+    ##<SecondaryDns>62.241.198.246</SecondaryDns>
+    <PrimaryIPv6Dns></PrimaryIPv6Dns>
+    <SecondaryIPv6Dns></SecondaryIPv6Dns>
+    <CurrentWifiUser>0</CurrentWifiUser>
+    <TotalWifiUser>64</TotalWifiUser>
+    <currenttotalwifiuser>64</currenttotalwifiuser>
+    <ServiceStatus>2</ServiceStatus>
+    <SimStatus>1</SimStatus>
+    <WifiStatus>0</WifiStatus>
+    <CurrentNetworkTypeEx>101</CurrentNetworkTypeEx>
+    <maxsignal>5</maxsignal>
+    <wifiindooronly>0</wifiindooronly>
+    <wififrequence>0</wififrequence>
+    <classify>cpe</classify>
+    <flymode>0</flymode>
+    <cellroam>1</cellroam>
+    <ltecastatus>0</ltecastatus>
+
+> traffic-statistics
+    <CurrentConnectTime>243360</CurrentConnectTime>
+    <CurrentUpload>244020</CurrentUpload>
+    <CurrentDownload>1135754</CurrentDownload>
+    <CurrentDownloadRate>0</CurrentDownloadRate>
+    <CurrentUploadRate>0</CurrentUploadRate>
+    <TotalUpload>90688300183</TotalUpload>
+    <TotalDownload>250205129647</TotalDownload>
+    <TotalConnectTime>10613008</TotalConnectTime>
+    <showtraffic>1</showtraffic>
+
+> PLMN  (Public Land Mobile Network information)
+    <State>0</State>
+    <FullName>DNA</FullName>
+    <ShortName>DNA</ShortName>
+    <Numeric>24412</Numeric>
+    <Rat>7</Rat>
+
+
+
+ubus call uci get '{"config":"wireless", "section":"wlg"}'
+'ltm' @b881b105
+        "access":{"type":"String","data":"Table"}
+
+
+ubus call ltm access '{"type":"get","data":{"name":"version"}}'
+ubus call ltm access '{"type":"get","data":{"name":"basic"}}'
+
+
+ubus call ltm access '{"type":"get","data":{"name":"mode"}}'
+ubus call ltm access '{"type":"get","data":{"name":"imei"}}'
+ubus call ltm access '{"type":"get","data":{"name":"imsi"}}'
+
+-----------------------
+USB connection:
+
+every 4~5 seconds, kernel message:
+
+[  921.632348] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  926.142202] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  930.452191] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  934.142348] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  938.452191] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  942.742198] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  947.012197] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  951.332215] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  955.622342] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  959.932207] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  964.202167] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  968.512188] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+[  972.802196] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
+
+
+
+
+
+note : mdm
+
+-------------
+RD8:
+switch usb composite:
+
+mdm9635 password:
+user:root
+passwd:#*cRD8sw2
+
+# switch to cdc
+usb_composition 9064 n y y
+# 
+usb_composition 7588 n y y
+
+
+
+
+how to enable usb0
+-----------------------------------
+Before mode switch ... 
+
+## cat /sys/kernel/debug/usb/devices
+
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=480  MxCh= 0
+D:  Ver= 2.10 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+P:  Vendor=1690 ProdID=7588 Rev=ff.ff
+S:  Manufacturer=Android
+S:  Product=Android
+S:  SerialNumber=d8aae7641db0
+C:* #Ifs= 6 Cfg#= 1 Atr=80 MxPwr=500mA
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=ff Prot=ff Driver=(none)
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=01(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:* If#= 1 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=42 Prot=01 Driver=(none)
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=82(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:* If#= 2 Alt= 0 #EPs= 3 Cls=ff(vend.) Sub=00 Prot=00 Driver=(none)
+E:  Ad=84(I) Atr=03(Int.) MxPS=  10 Ivl=32ms
+E:  Ad=83(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=03(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:* If#= 3 Alt= 0 #EPs= 3 Cls=ff(vend.) Sub=00 Prot=00 Driver=(none)
+E:  Ad=86(I) Atr=03(Int.) MxPS=  10 Ivl=32ms
+E:  Ad=85(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=04(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:* If#= 4 Alt= 0 #EPs= 3 Cls=ff(vend.) Sub=ff Prot=ff Driver=(none)
+E:  Ad=88(I) Atr=03(Int.) MxPS=   8 Ivl=32ms
+E:  Ad=87(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=05(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:* If#= 5 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage
+E:  Ad=89(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=06(O) Atr=02(Bulk) MxPS= 512 Ivl=125us
+
+-----------------------
+run:
+usb_composition 9064 n y y
+and then :
+
+
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  3 Spd=480  MxCh= 0
+D:  Ver= 2.10 Cls=ef(misc ) Sub=02 Prot=01 MxPS=64 #Cfgs=  3
+P:  Vendor=05c6 ProdID=9064 Rev=ff.ff
+S:  Manufacturer=Android
+S:  Product=Android
+S:  SerialNumber=d8aae7641db0
+C:  #Ifs= 4 Cfg#= 1 Atr=a0 MxPwr=500mA
+I:  If#= 0 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=ff Prot=ff Driver=
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=01(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:  If#= 1 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=42 Prot=01 Driver=
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=82(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:  If#= 2 Alt= 0 #EPs= 3 Cls=ff(vend.) Sub=00 Prot=00 Driver=
+E:  Ad=84(I) Atr=03(Int.) MxPS=  10 Ivl=32ms
+E:  Ad=83(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=03(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+I:  If#= 3 Alt= 0 #EPs= 3 Cls=ff(vend.) Sub=ff Prot=ff Driver=
+E:  Ad=86(I) Atr=03(Int.) MxPS=   8 Ivl=32ms
+E:  Ad=85(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=04(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+C:* #Ifs= 2 Cfg#= 2 Atr=a0 MxPwr=500mA
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=02(comm.) Sub=06 Prot=00 Driver=cdc_ether
+E:  Ad=82(I) Atr=03(Int.) MxPS=  16 Ivl=32ms
+I:  If#= 1 Alt= 0 #EPs= 0 Cls=0a(data ) Sub=00 Prot=00 Driver=cdc_ether
+I:* If#= 1 Alt= 1 #EPs= 2 Cls=0a(data ) Sub=00 Prot=00 Driver=cdc_ether
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=01(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+C:  #Ifs= 2 Cfg#= 3 Atr=a0 MxPwr=500mA
+A:  FirstIf#= 0 IfCount= 2 Cls=02(comm.) Sub=0e Prot=00
+I:  If#= 0 Alt= 0 #EPs= 1 Cls=02(comm.) Sub=0e Prot=00 Driver=
+E:  Ad=82(I) Atr=03(Int.) MxPS=  64 Ivl=32ms
+I:  If#= 1 Alt= 0 #EPs= 0 Cls=0a(data ) Sub=00 Prot=02 Driver=
+I:  If#= 1 Alt= 1 #EPs= 2 Cls=0a(data ) Sub=00 Prot=02 Driver=
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+E:  Ad=01(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms
+
+
+# Use the command to telnet to default ip of 
+
+operator@EAI2202P:~# ifconfig usb0 192.168.248.99
+operator@EAI2202P:~# telnet 192.168.248.2
+
+
+
 
 
 

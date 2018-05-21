@@ -74,3 +74,9 @@ git remote  add d900_spf5 d900@10.194.20.21:server
 git remote  add d900_spf5 d900@10.194.20.21:spf5-mips
 
 
+## store https password
+add :
+[credential]
+        helper = store
+
+
