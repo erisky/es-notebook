@@ -1,0 +1,248 @@
+
+IGMP
+
+setfwbasic:
+
+<igmp>
+firewall.vpn_client_zone.enabled
+#define NET_FW_MULTICAST_UDP_CONTROL_TARGET "firewall.multicast_udp_control.target"
+<udp>
+"firewall.multicast_udp_control._enabled"
+
+NOTE !!!!!!
+*****
+It's all about DMZ enable !!!!1
+****
+
+### 
+uci get firewall.multicast_udp_control.target
+
+
+
+operator@EAI2204P:~# cat /var/firewall_nat.log 
+2018-05-01-22:45:18- do firewall_nat script: begin 
+2018-05-01-22:45:19- do firewall_nat script: finish 
+2018-05-01-22:45:21- do firewall_nat script: begin 
+2018-05-01-22:45:22- do firewall_nat script: finish 
+2018-05-01-22:45:52- do firewall_nat script: begin 
+2018-05-01-22:45:53- do firewall_nat script: finish 
+2018-05-01-22:45:58- do firewall_nat script: begin 
+2018-05-01-22:45:59- do firewall_nat script: finish 
+2018-05-01-22:46:11- do firewall_nat script: begin 
+2018-05-01-22:46:11- do firewall_nat script: finish 
+2018-05-01-23:31:06- do firewall_nat script: begin 
+2018-05-01-23:31:07- do firewall_nat script: finish 
+2018-05-01-23:33:22- do firewall_nat script: begin 
+2018-05-01-23:33:23- do firewall_nat script: finish 
+
+
+
+
+
+operator@EAI2204P:/etc/init.d# cat /proc/net/ip_mr_vif
+Interface      BytesIn  PktsIn  BytesOut PktsOut Flags Local    Remote
+ 0 br-lan         2424      12      3237      21 00008 00000013 00000000
+ 1 eth0       75449388   55961         0       0 00008 0000000A 00000000
+operator@EAI2204P:/etc/init.d# cat /proc/net/ip_mr_vif
+Interface      BytesIn  PktsIn  BytesOut PktsOut Flags Local    Remote
+ 0 br-lan         2424      12      3237      21 00008 00000013 00000000
+ 1 eth0       75834492   56245         0       0 00008 0000000A 00000000
+
+
+
+
+
+cat /proc/net/ip_mr_cache 
+cat /proc/net/ip_mr_vif
+
+
+TTL = 5
+
+
+mcproxy:
+
+
+igmp_receiver::analyse_packet(struct msghdr* msg, int)
+
+add -> group_record_msg ->
+
+analyse_packet(igmp_receiver.cpp)
+
+
+new_source_timer_msg
+
+simple_mc_proxy_routing::event_new_source
+
+->  routing::add_route(proxy/routing.cpp)
+-> mroute_socket::add_mroute (mroute_socket.cpp)
+
+# run 
+./mcproxy-bin -d  -f /var/etc/mcproxy_mcproxy.conf &
+
+
+1525319340934589            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525319340934921            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        kernel msg received
+1525319340935218            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 10.194.22.124
+1525319340935504            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 239.255.255.250
+1525319340935824            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             vif: 1
+1525319340936235            TRACE  unsigned int interfaces::get_if_index(int) const                                ENTER
+1525319340936469            TRACE  unsigned int interfaces::get_if_index(int) const                                LEAVE
+1525319340936787            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             if_index: 10
+1525319340937052            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         ENTER
+1525319340937265            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         LEAVE
+1525319340937561            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      ENTER
+1525319340937781            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      LEAVE
+1525319340938042            TRACE  new_source_msg::new_source_msg(unsigned int, const addr_storage&, const addr_storage&)ENTER
+1525319340938285            TRACE  new_source_msg::new_source_msg(unsigned int, const addr_storage&, const addr_storage&)LEAVE
+1525319340938546            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   ENTER
+1525319340938864            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   ENTER
+1525319340939081            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   LEAVE
+1525319340939543            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: NEW_SOURCE_MSG
+1525319340939961            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+1525319340940591            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]ENTER
+1525319340940898            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]LEAVE
+1525319340941162            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   LEAVE
+1525319340941394            TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        LEAVE
+
+
+
+
+
+>>>>>> No Packet !!! <<<<<<<< 
+
+  TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        ENTER
+1525319956660709            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525319956661015            TRACE  virtual int igmp_receiver::get_iov_min_size()                                   ENTER
+1525319956661237            TRACE  virtual int igmp_receiver::get_iov_min_size()                                   LEAVE
+1525319956661513            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        IGMP_V3_MEMBERSHIP_REPORT received
+1525319956661968            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             num of multicast records: 1
+1525319956662311            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 192.168.1.135
+1525319956662575            TRACE  unsigned int interfaces::get_if_index(const addr_storage&) const                ENTER
+1525319956662863            TRACE  const if_prop_map* if_prop::get_if_props() const                                ENTER
+1525319956663080            TRACE  const if_prop_map* if_prop::get_if_props() const                                LEAVE
+1525319956663347            TRACE  static unsigned int interfaces::get_if_index(const char*)                       ENTER
+1525319956663771            TRACE  static unsigned int interfaces::get_if_index(const char*)                       LEAVE
+1525319956664036            TRACE  unsigned int interfaces::get_if_index(const addr_storage&) const                LEAVE
+1525319956664382            TRACE  static std::__cxx11::string interfaces::get_if_name(unsigned int)               ENTER
+1525319956664714            TRACE  static std::__cxx11::string interfaces::get_if_name(unsigned int)               LEAVE
+1525319956665014            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             received on interface:br-lan
+1525319956665280            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         ENTER
+1525319956665500            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         LEAVE
+1525319956665916            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             record type: MODE_IS_EXCLUDE
+1525319956666248            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 224.5.5.5
+1525319956666538            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             number of sources: 0
+1525319956666844            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             source_list: 
+1525319956667107            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      ENTER
+1525319956667321            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      LEAVE
+1525319956667689            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   ENTER
+1525319956667992            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   ENTER
+1525319956668245            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   LEAVE
+1525319956668680            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: GROUP_RECORD_MSG
+1525319956669048            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+1525319956669310            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]ENTER
+1525319956669597            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]LEAVE
+1525319956669848            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   LEAVE
+1525319956670202            TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        LEAVE
+
+
+
+--- ok one ---
+1525320467782286            TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        ENTER
+1525320467782578            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525320467782884            TRACE  virtual int igmp_receiver::get_iov_min_size()                                   ENTER
+1525320467783111            TRACE  virtual int igmp_receiver::get_iov_min_size()                                   LEAVE
+1525320467783394            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        IGMP_V3_MEMBERSHIP_REPORT received
+1525320467783929            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             num of multicast records: 1
+1525320467784272            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 192.168.1.135
+1525320467784544            TRACE  unsigned int interfaces::get_if_index(const addr_storage&) const                ENTER
+1525320467784834            TRACE  const if_prop_map* if_prop::get_if_props() const                                ENTER
+1525320467785060            TRACE  const if_prop_map* if_prop::get_if_props() const                                LEAVE
+1525320467785335            TRACE  static unsigned int interfaces::get_if_index(const char*)                       ENTER
+1525320467785756            TRACE  static unsigned int interfaces::get_if_index(const char*)                       LEAVE
+1525320467786021            TRACE  unsigned int interfaces::get_if_index(const addr_storage&) const                LEAVE
+1525320467786366            TRACE  static std::__cxx11::string interfaces::get_if_name(unsigned int)               ENTER
+1525320467786696            TRACE  static std::__cxx11::string interfaces::get_if_name(unsigned int)               LEAVE
+1525320467786989            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             received on interface:br-lan
+1525320467787266            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         ENTER
+1525320467787486            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         LEAVE
+1525320467787920            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             record type: CHANGE_TO_EXCLUDE_MODE
+1525320467788263            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 224.5.5.5
+1525320467788558            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             number of sources: 0
+1525320467788872            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             source_list: 
+1525320467789215            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      ENTER
+1525320467789442            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      LEAVE
+1525320467789746            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   ENTER
+1525320467790237            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   ENTER
+1525320467790481            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   LEAVE
+1525320467790953            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: GROUP_RECORD_MSG
+1525320467791298            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+1525320467791597            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]ENTER
+1525320467791864            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]LEAVE
+1525320467792151            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   LEAVE
+1525320467792397            TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        LEAVE
+1525320467792670            TRACE  bool mc_socket::receive_msg(msghdr*, int&) const                                ENTER
+1525320467849089            TRACE  bool mc_socket::receive_msg(msghdr*, int&) const                                LEAVE
+1525320467849455            TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        ENTER
+1525320467849782            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525320467850286            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        kernel msg received
+1525320467850609            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 10.194.22.57
+1525320467850943            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 224.5.5.5
+1525320467851234            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             vif: 1
+1525320467851498            TRACE  unsigned int interfaces::get_if_index(int) const                                ENTER
+1525320467851753            TRACE  unsigned int interfaces::get_if_index(int) const                                LEAVE
+1525320467852040            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             if_index: 10
+1525320467852333            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         ENTER
+1525320467852554            TRACE  bool receiver::is_if_index_relevant(unsigned int) const                         LEAVE
+1525320467852855            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      ENTER
+1525320467853072            TRACE  proxy_msg::proxy_msg(proxy_msg::message_type, proxy_msg::message_priority)      LEAVE
+1525320467853339            TRACE  new_source_msg::new_source_msg(unsigned int, const addr_storage&, const addr_storage&)ENTER
+1525320467853581            TRACE  new_source_msg::new_source_msg(unsigned int, const addr_storage&, const addr_storage&)LEAVE
+1525320467853847            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   ENTER
+1525320467854173            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   ENTER
+1525320467854394            TRACE  proxy_msg::message_type proxy_msg::get_type()                                   LEAVE
+1525320467854980            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: NEW_SOURCE_MSG
+1525320467855337            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+1525320467855638            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]ENTER
+1525320467855908            TRACE  bool message_queue<T, Compare>::enqueue_loseable(const T&) [with T = std::shared_ptr<proxy_msg>; Compare = comp_proxy_msg]LEAVE
+1525320467856187            TRACE  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   LEAVE
+1525320467856445            TRACE  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        LEAVE
+1525320467856718            TRACE  bool mc_socket::receive_msg(msghdr*, int&) const                                ENTER
+
+
+
+ok - to play 
+
+1525322650871779            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525322650872252            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        IGMP_V3_MEMBERSHIP_REPORT received
+1525322650872567            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             num of multicast records: 1
+1525322650872899            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 192.168.1.135
+1525322650873817            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             received on interface:br-lan
+1525322650874332            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             record type: CHANGE_TO_EXCLUDE_MODE
+1525322650874648            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 224.5.5.5
+1525322650874981            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             number of sources: 0
+1525322650875261            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             source_list: 
+1525322650875886            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: GROUP_RECORD_MSG
+1525322650876264            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+1525322650907746            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525322650908139            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        kernel msg received
+1525322650908456            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 10.194.22.57
+1525322650908781            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 224.5.5.5
+1525322650909083            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             vif: 1
+1525322650909402            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             if_index: 10
+1525322650910312            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: NEW_SOURCE_MSG
+1525322650910694            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+1525322651173798            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        received packet XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+1525322651174240            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                        IGMP_V3_MEMBERSHIP_REPORT received
+1525322651174546            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             num of multicast records: 1
+1525322651174938            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             saddr: 192.168.1.135
+1525322651175690            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             received on interface:br-lan
+1525322651176167            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             record type: CHANGE_TO_EXCLUDE_MODE
+1525322651176483            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             gaddr: 224.5.5.5
+1525322651176783            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             number of sources: 0
+1525322651177191            DEBUG  virtual void igmp_receiver::analyse_packet(msghdr*, int)                             source_list: 
+1525322651177802            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message type: GROUP_RECORD_MSG
+1525322651178315            DEBUG  void worker::add_msg(const std::shared_ptr<proxy_msg>&) const                   message priority: LOSEABLE
+
+
+
+
