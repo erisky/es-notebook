@@ -169,20 +169,6 @@ USB connection:
 
 every 4~5 seconds, kernel message:
 
-[  921.632348] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  926.142202] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  930.452191] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  934.142348] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  938.452191] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  942.742198] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  947.012197] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  951.332215] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  955.622342] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  959.932207] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  964.202167] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  968.512188] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-[  972.802196] hub 2-0:1.0: Cannot enable port 1.  Maybe the USB cable is bad?
-
 
 
 
@@ -201,6 +187,7 @@ passwd:#*cRD8sw2
 usb_composition 9064 n y y
 # 
 usb_composition 7588 n y y
+usb_composition 7588_ecm n y y
 
 
 
