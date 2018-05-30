@@ -1,30 +1,35 @@
 Askey wifi password: 80944e718a
 
+Ubuntu 14 Server
+eric@10.194.20.47
+
 samba to mips
 sudo mount -t cifs -o username=eric,password=eric123 //10.194.20.47/eric /home/eric/mount-mips/
-
-Ubuntu 14 Server
-
-
-
 
 
 repos:
 d900@10.194.20.21:spf5-mips
 
------------
+--------------------------------------------
 Build Server 10.194.20.46
 Account:d900
 Password:gitd900
 
 
-
-CMMI Material
+CMMI Materials
 \\10.1.7.135
 
 
 samba
 d900
 d900123
+
+
+[IIOT Web]
+https://iwifi.iiot.io
+https://iwifi.iiot.io/login.html?v=1522489937249
+iiot
+meettaipei
+123456
 
 

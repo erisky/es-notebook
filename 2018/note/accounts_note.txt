@@ -15,8 +15,6 @@ wifi server
 
 
 
-
-
 ---- Hidden Page -----
 charter hidden page: N@74U1fUD0n7H@v1P$d
 
@@ -54,13 +52,18 @@ ask question:
 	AP5400W-D50
 
 
-
-
 https://iwifi.iiot.io
 
 account1 : iiot
 account2 : meettaipei
 PWD        : 123456
 
+--------
+* Broadcom
 
+pioneer_wang@askey.com.tw
+Pw:aksw16BRCM
 	
+
+
+
