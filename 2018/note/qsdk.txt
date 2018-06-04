@@ -149,6 +149,10 @@ setenv serverip 192.168.1.199
 
 [EAO3042]
 setenv serverip 192.168.1.199 && setenv machid 8302002 && tftpboot 0x84000000 ASKEY_EAO3402P_V1.1.9-8.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+[IIOT-EAO3402]
+
+setenv serverip 192.168.1.199 && setenv machid 8302002 && tftpboot 0x84000000 IIOT_EAO3402P_V1.1.9-10.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
 
 bootcode:
 [IIOT]
