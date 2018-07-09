@@ -38,3 +38,12 @@ List the frequent used wifi commands
 
     
 
+
+### Qualcomm (Atheros) Wifi commands
+```
+ 80211stats athstats athstatsclr apstats pktlogconf pktlogdump wifitool wlanconfig thermaltool wps_enhc exttool assocdenialnotify
+
+```
+
+
+

@@ -130,11 +130,15 @@ setenv serverip 192.168.1.199 && setenv machid 8540002 && tftpboot 0x84000000 AP
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 dualaskey.img && imgaddr=0x84000000 && source $imgaddr:script
 
+setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 ASKEY_EAI2204P_V1.1.9-40.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 ASKEY_EAI2204P_V1.1.9-5.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
-
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 EAI2204P_V1.1.6.SPF5.0-CS1_norplusnand_single.img  && imgaddr=0x84000000 && source $imgaddr:script
 
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 PU9_EAI2204P_V1.1.5.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
+iiot-2204:
+setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 IIOT_EAI2204P_V1.1.9-32.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+
 
 
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 uboottest.img && imgaddr=0x84000000 && source $imgaddr:script
