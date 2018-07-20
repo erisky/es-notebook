@@ -37,3 +37,44 @@ Event table:
 
 tools interface:
 
+
+
+
+
+
+directory structure
+## User space tools
+
+[wireless_tool.29]
+- iwpriv
+
+- iwconfig
+
+- iwlist
+
+- ./qca-wifi-10.4-spf50/os/linux/tools/wlanconfig
+
+
+
+## RX path
+
+
+
+
+
+
+
+/home/eric/spf5_test/eao3402p/spf5/qualcomm_sdk/qsdk/qca/src/qca-wifi-10.4
+
+
+
+
+11.0
+calbratoin loading:
+qsdk/target/linux/ipq806x/base-files/lib/read_caldata_to_fs.sh
+
+/tmp/sysinfo/board_name.
+
+
+
+
