@@ -74,7 +74,7 @@ wpa_driver_nl80211_init_nl_global
 - RFC 5176 - Dynamic Authorization Extensions to RADIUS
 - RFC 5247 - Extensible Authentication Protocol (EAP) Key Management Framework
 
-- RFC 6613 -  RADIUS over TCP 
+- RFC 6613 - RADIUS over TCP 
 - RFC 6614 - Transport Layer Security (TLS) Encryption for RADIUS
 - RFC 6911 - RADIUS Attributes for IPv6 Access Networks 
 
@@ -83,4 +83,76 @@ wpa_driver_nl80211_init_nl_global
 
 
 - RFC 7268 - RADIUS Attributes for IEEE 802 Networks
+
+
+
+## Macsec related files on EAX
+
+* /etc/init.d/macsec restart
+* /usr/sbin/wpa_supplicant -D macsec_qca -i "$ifname" -c /var/run/wpa_supplicant-macsec-$ifname.conf
+  - macsec_qca : driver name
+  - config name : 
+* config @ 
+
+
+
+## Related kernel message
+
+[235179.329039] nss_macsec_secy_en_set[266]: error parameter!
+[235179.333812] nss_macsec_secy_sc_sa_mapping_mode_set[155]: error parameter!
+[235179.340832] nss_macsec_secy_rx_ctl_filt_set[65]: error parameter!
+[235179.347008] nss_macsec_secy_tx_ctl_filt_set[204]: error parameter!
+[235179.353462] nss_macsec_secy_controlled_port_en_set[175]: error parameter!
+[235179.360268] nss_macsec_secy_controlled_port_en_set[175]: error parameter!
+[235179.367123] nss_macsec_secy_controlled_port_en_set[175]: error parameter!
+[235179.428835] nss_macsec_secy_en_set[266]: error parameter!
+[235179.433533] nss_macsec_secy_rx_sc_del_all[332]: error parameter!
+[235179.439712] nss_macsec_secy_tx_sc_del_all[550]: error parameter!
+[235179.498514] nss_macsec_secy_en_set[266]: error parameter!
+[235179.503279] nss_macsec_secy_sc_sa_mapping_mode_set[155]: error parameter!
+[235179.510425] nss_macsec_secy_rx_ctl_filt_set[65]: error parameter!
+[235179.516666] nss_macsec_secy_tx_ctl_filt_set[204]: error parameter!
+[235179.523257] nss_macsec_secy_controlled_port_en_set[175]: error parameter!
+[235179.531112] nss_macsec_secy_controlled_port_en_set[175]: error parameter!
+[235179.540699] nss_macsec_secy_controlled_port_en_set[175]: error parameter!
+
+* config file
+ file path:
+> /var/run/wpa_supplicant-macsec-eth0.conf
+
+```
+ctrl_interface=/var/run/wpa_supplicant-macsec-eth0
+eapol_version=3
+ap_scan=0
+network={
+        key_mgmt=IEEE8021X
+        eap=MD5
+        identity="eric"
+        password="12345678"
+        eapol_flags=0
+        macsec_policy=1
+}
+
+```
+
+## WPA supplicant notes
+
+* Linux is moving to nl80211 ( -Dnl80211 on wpa_supplicant command line )
+* Wired Ethernet drivers (with ap_scan=0)
+* information: http://w1.fi/wpa_supplicant/devel/
+* PDF: http://w1.fi/wpa_supplicant/wpa_supplicant-devel.pdf
+
+https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/identity-based-networking-services/deploy_guide_c17-663760.html
+
+
+
+## MACSEC Intro
+> https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/identity-based-networking-services/deploy_guide_c17-663760.html
+
+
+* MACsec was primarily designed to be used in conjunction with IEEE 802.1X-2010
+* switch performs source MAC address filtering and port state monitoring to help ensure that only the authenticated endpoint is allowed to send traffic
+* Before the 2010 revision of IEEE 802.1X,  rogue users with physical access to the authenticated port could monitor, modify, and send traffic
+ - source MAC address filtering could be circumvented by MAC address spoofing.
+
 
