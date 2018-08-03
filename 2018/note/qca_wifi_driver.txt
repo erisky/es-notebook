@@ -31,6 +31,19 @@ ieee80211_mlme_recv_assoc_request
 
 
 
+## Full RX Path
+
+
+
+ieee80211_input
+ -> IEEE80211_HANDLE_MGMT
+   -> ieee80211_recv_mgmt
+     -> 
+
+ieee80211_recv_mgmt
+        
+
+
 ---- [Driver Study] ----
 Event table:
    ap_misc_evt_handler
