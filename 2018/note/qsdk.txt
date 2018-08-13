@@ -185,6 +185,10 @@ nand erase 0x3000000 0xc00000
 
 
 [IPQ807x - RT5000W-187]
+setenv ipaddr 192.168.1.2 && setenv serverip 192.168.1.199 && tftpboot 0x44000000 RT5000W_Firmware_V0.0.1.SPF8.0_FCU2_norplusnand_single.img && setenv imgaddr 0x44000000 && source $imgaddr:script
+
+
+
 
 tftpboot 0x44000000 RT5000W_Firmware_V1.0.4.80801.2-r-772544--Dev_norplusnand_single.img
 imgaddr=0x44000000

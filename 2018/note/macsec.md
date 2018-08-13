@@ -156,3 +156,50 @@ https://www.cisco.com/c/en/us/products/collateral/ios-nx-os-software/identity-ba
  - source MAC address filtering could be circumvented by MAC address spoofing.
 
 
+
+## EAPol Flow
+
+* 4-way handshake
+
+   [Supplicate]                       [Autenticator]
+        |
+        | <---- [ EAPoL(Anounce...) ------- |  ....... wpa_receive ( src/ap/wpa_auth.c )
+        | ----- [EAPoL(Snounce...)] ------> |                --> refer to standard section 11.6.2 for format
+        | <---- [ EAPoL(Anounce,RSNE..)---- |
+        | ----- [EAPoL(Snounce...)] ------> |
+
+
+* 802.1x receive
+    - Entry: ieee802_1x_receive (ap/ieee802_1x.c)
+    - rules to drop packets: 
+        - not from associated sta
+        - too short
+        - incorrect version
+        - discard eapol if sta is psk ( goes to wpa_receive before this)
+
+    - allocate ieee 802.1x state machine by ieee802_1x_alloc_eapol_sm
+    - wps  (epa)
+        
+
+   [Supplicant]                                  [Autenticator]
+        |
+        | <-------- [ EAP Request (Indentity) ------------ |  
+        | --------- [ EAP Response(Indentity=WFA)] ------> | .............
+        | <-------- [ EAP Request (WPS WSC Start)]-------- |  
+        | --------- [ EAP Response(WPS WSC Msg(M1))] ----> | 
+        | <-------- [ EAP Request (WPS WSC Msg(M2))] ----- |  
+        | --------- [ EAP Response(WPS WSC Msg(M3))] ----> | 
+        | <-------- [ EAP Request (WPS WSC Msg(M4))] ----- |  
+        | --------- [ EAP Response(WPS WSC Msg(M5))] ----> | 
+        | <-------- [ EAP Request (WPS WSC Msg(M6))] ----- |  
+        | --------- [ EAP Response(WPS WSC Msg(M7))] ----> | 
+        | <-------- [ EAP Request (WPS WSC Msg(M8))] ----- |  
+        | --------- [ EAP Response(WPS WSC Done)] -------> | 
+
+
+code trace:
+SM_STATE(EAP, METHOD)
+eap_wsc_process
+
+
+
