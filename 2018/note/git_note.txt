@@ -80,3 +80,11 @@ add :
         helper = store
 
 
+### Delete remote branch ###
+$ git push <remote_name> --delete <branch_name>
+
+or 
+
+$ git push <remote_name> :<branch_name>
+
+

@@ -8,3 +8,14 @@ file :
 ./drivers/pinctrl/qcom/pinctrl-ipq8064.c
 
 
+## Some notes ##
+
+* No framework provided by kernel that supports changing pinmux at runtime
+* to change the gpio43 function does:
+
+* a example to refer to :
+qcom-ipq40xx-ap.dk04.1-c2.dts
+
+
+
+
