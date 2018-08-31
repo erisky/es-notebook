@@ -1,3 +1,12 @@
+Default 807x board password
+TMI 1.0.0
+root/$1#7j2T5TvD$
+
+web
+askeyte/$1#7j2T5TvD$
+
+
+
 [Default Charter Password]
 http://192.168.1.1:8086/index.html 
 Default Username / password:

@@ -18,4 +18,73 @@ qcom-ipq40xx-ap.dk04.1-c2.dts
 
 
 
+changs made:
+
+
+--- a/skysoft/product/hardware/eao3402p/qsdk/qca/src/linux-3.14/arch/arm/boot/dts/askey-eao3402p-rev1.dts
++++ b/skysoft/product/hardware/eao3402p/qsdk/qca/src/linux-3.14/arch/arm/boot/dts/askey-eao3402p-rev1.dts
+@@ -68,7 +68,8 @@
+                                };
+                                mux_2 {
+                                        pins = "gpio43";
+-                                       function="wifi_wci1";
++                                       /*function="wifi_wci1"; */
++                                       function="gpio";
+                                        bias-pull-down;
+                                        drive-cap = <DRV_CAP_QUARTER>;
+                                };
+@@ -95,6 +96,22 @@
+                                        output-high;
+                                };
+                        };
++                       sfp_pins: sfp_pinmux {
++                               mux {
++                    /* gpio 43 is left unchanged above*/
++                                       pins = "gpio42", "gpio44", "gpio45", "gpio46", "gpio47", "gpio48";
++                                       function="gpio";
++                                       bias-none;
++                               };
++                       };
++                       hwver_pins: hwver_pinmux {
++                               mux {
++                                       pins = "gpio49", "gpio50", "gpio68";
++                                       function="gpio";
++                                       bias-none;
++                               };
++                       };
++
+                };
+ /*
+                uart1:uart@78b0000 {
+@@ -124,7 +141,7 @@
+                wifi0: wifi@a000000 {
+                        pinctrl-0 = <&wifi_0_pins>;
+                        pinctrl-names = "default";
+-                       btcoex_support = <1>;
++                       btcoex_support = <0>;
+                        wlan_prio_gpio = <52>;
+                        dual_band_switch_gpio = <61>;
+                };
+@@ -170,5 +187,21 @@
+                                debounce-interval = <60>;
+                        };
+                };
++
++        sfp {
++               status = "ok";
++            pinctrl-0 = <&sfp_pins>;
++            pinctrl-names = "default";
++        };
++
++        hwver {
++               status = "ok";
++            pinctrl-0 = <&hwver_pins>;
++            pinctrl-names = "default";
++        };
++    
++
++
++
+        };
+ };
 
