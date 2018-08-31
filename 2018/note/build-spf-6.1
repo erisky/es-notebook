@@ -1,0 +1,148 @@
+git clone ~/git/chipcode/spf-6.1.0/qca-networking-2018-spf-6-1-0_qca_oem/
+
+
+
+cd qca-networking-2018-spf-6-1-0_qca_oem
+
+repo init -u git://codeaurora.org/quic/qsdk/releases/manifest/qstak -b release -m caf_AU_LINUX_QSDK_NHSS.QSDK.6.1.1.R1_TARGET_ALL.3.0.308.00.1591.020.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
+
+
+repo sync -j8 --no-tags -c
+
+
+
+mkdir -p qsdk/dl
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Wifi/qsdk-qca-wifi/* qsdk
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Wifi/qsdk-qca-wlan/* qsdk
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Wifi/qsdk-ieee1905-security/* qsdk
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Wifi/qsdk-qca-athdiag/* qsdk
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/QSDK-Base/qca-lib/* qsdk
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/QSDK-Base/qca-mcs-apps/* qsdk
+
+
+tar xjvf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/BLUETOPIA/qca-bluetopia.tar.bz2 -C qsdk
+
+
+cp WLAN.BL.3.6.1/cnss_proc/bin/IPQ4019/hw.1/* qsdk/dl
+
+cp WLAN.BL.3.6.1/cnss_proc/bin/QCA9888/hw.2/* qsdk/dl
+cp WLAN.BL.3.6.1/cnss_proc/bin/QCA9984/hw.1/* qsdk/dl
+
+cp -rf WLAN.BL.3.6.1/cnss_proc/src/components/* qsdk/dl
+
+cp CNSS.PS.2.6.1/* qsdk/dl
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Hyfi/hyfi-ipq/* qsdk
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Wifi/qsdk-whc/* qsdk
+
+cp -rf NHSS.QSDK.6.1.1/apss_proc/out/proprietary/Wifi/qsdk-whcpy/* qsdk
+
+
+
+cd qsdk
+
+
+-- todo
+./scripts/feeds update -a
+
+./scripts/feeds install -a -f
+
+
+cp qca/configs/qsdk/ipq806x_premium.config .config
+
+echo "CONFIG_TOOLCHAINOPTS=y" >> .config
+echo '# CONFIG_GCC_USE_VERSION_4_8_LINARO is not set' >> .config
+echo "CONFIG_GCC_USE_VERSION_5=y" >> .config
+echo 'CONFIG_GCC_VERSION="5.2.0"' >> .config
+echo "CONFIG_GCC_VERSION_5=y" >> .config
+
+
+ make defconfig
+for pkg_num in 2 9;
+do 
+    sed 's/CONFIG_PACKAGE_qca-wifi-fw-hw'${pkg_num}'-10.4-asic=y/# CONFIG_PACKAGE_qca-wifi-fw-hw'${pkg_num}'-10.4-asic is not set/g' -i .config;
+done
+
+
+for pkg_num in 2 9;
+do 
+    sed 's/CONFIG_PACKAGE_qca-wifi-fw-hw'${pkg_num}'-10.4-asic=y/# CONFIG_PACKAGE_qca-wifi-fw-hw'${pkg_num}'-10.4-asic is not set/g' -i .config;
+done
+
+
+
+ sed '/CONFIG_PACKAGE_kmod-wil6210=m/d' -i .config
+ sed '/CONFIG_PACKAGE_qca-fst-manager=m/d' -i .config
+ sed '/CONFIG_PACKAGE_wigig-firmware=m/d' -i .config
+ sed '/CONFIG_PACKAGE_qca-wigig-tools=m/d' -i .config
+ sed '/CONFIG_PACKAGE_qca-wigig-debug-tools=m/d' -i .config
+ sed '/CONFIG_PACKAGE_iwinfo/d' -i .config
+ sed '/CONFIG_PACKAGE_kmod-cfg80211/d' -i .config
+
+
+### ! change the dts ## 
+
+vi qca/src/linux-4.4/arch/arm/boot/dts/qcom-ipq4019-ap.dk07.1-c1.dts
+
+--- a/arch/arm/boot/dts/qcom-ipq4019-ap.dk07.1-c1.dts
++++ b/arch/arm/boot/dts/qcom-ipq4019-ap.dk07.1-c1.dts
+@@ -57,7 +57,8 @@
+ 				};
+ 				mux_2 {
+ 					pins = "gpio43";
+-					function="wifi_wci1";
++					/*function="wifi_wci1";*/
++					function="gpio";
+ 					bias-pull-down;
+ 					drive-cap = <DRV_CAP_QUARTER>;
+ 				};
+@@ -103,7 +104,7 @@
+ 		wifi0: wifi@a000000 {
+ 			pinctrl-0 = <&wifi_0_pins>;
+ 			pinctrl-names = "default";
+-			btcoex_support = <1>;
++			btcoex_support = <0>;
+ 			wlan_prio_gpio = <52>;
+ 			dual_band_switch_gpio = <61>;
+
+
+
+make V=s -j5
+# use -j1 is safer
+
+ cd .. 
+ cp -rf BOOT.BF.3.1.1/boot_images .
+ cp -rf TZ.BF.2.7/trustzone_images .
+ cp -rf NHSS.QSDK.6.1.1/apss_proc .
+
+ mkdir cnss_proc cnss_proc_ps
+cp -rf IPQ4019.ILQ.6.1.1/common .
+cp -rf IPQ4019.ILQ.6.1.1/contents.xml .
+
+cp meta-scripts/ipq40xx_premium/* common/build/ipq
+ cp -rf qsdk/qca/src/uboot-1.0/tools/pack.py apss_proc/out/
+
+
+ cp -rf trustzone_images/build/ms/bin/MAZAANAA/* common/build/ipq
+ cp -rf qsdk/bin/ipq806x/openwrt* common/build/ipq
+ cp boot_images/build/ms/bin/40xx/misc/tools/config/boardconfig_premium common/build/ipq
+ cp boot_images/build/ms/bin/40xx/misc/tools/config/appsboardconfig_premium common/build/ipq
+ cd common/build
+ sed '/debug/d' -i update_common_info.py
+ python update_common_info.py
+
+
+
+cp ./bin/nornand-ipq40xx-single.img /mnt/tftpboot/nornand-ipq40xx-single_spf6.1.img
+
+# upgrade using tftp
+
+
+setenv serverip 192.168.1.199 && setenv machid 8010006 && tftpboot 0x84000000 nornand-ipq40xx-single_spf6.1.img && imgaddr=0x84000000 && source $imgaddr:script
+

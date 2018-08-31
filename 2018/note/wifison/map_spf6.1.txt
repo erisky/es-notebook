@@ -1,0 +1,170 @@
+# from qca driver programming guide 10.4
+# 19.27.1
+
+
+### CAP ### 
+
+uci set wireless.wifi0.disabled=0
+uci set wireless.wifi1.disabled=0
+#uci set wireless.wifi2.disabled=0
+uci set wireless.wifi0.channel=6
+uci set wireless.wifi1.channel=36
+#uci set wireless.wifi2.channel=149
+uci set wireless.wifi1.htmode=HT20
+uci set wireless.wifi2.htmode=HT20
+
+
+uci set wireless.@wifi-iface[0].ssid=EasyMesh-tst-fbss-8x
+uci set wireless.@wifi-iface[0].encryption='psk2+ccmp'
+uci set wireless.@wifi-iface[0].key=EasyMesh-fbss
+uci set wireless.@wifi-iface[0].map=1
+uci set wireless.@wifi-iface[0].MapBSSType=32
+uci set wireless.@wifi-iface[0].wps_pbc=1
+uci set wireless.@wifi-iface[0].wps_pbc_enable=1
+uci set wireless.@wifi-iface[0].wps_pbc_start_time=0
+uci set wireless.@wifi-iface[0].wps_pbc_duration=120
+uci set wireless.@wifi-iface[0].multi_cred=1
+
+
+
+uci set wireless.@wifi-iface[1].ssid=EasyMesh-tst-fbss-11x
+uci set wireless.@wifi-iface[1].encryption='psk2+ccmp'
+uci set wireless.@wifi-iface[1].key=EasyMesh-fbss
+uci set wireless.@wifi-iface[1].map=1
+uci set wireless.@wifi-iface[1].MapBSSType=32
+uci set wireless.@wifi-iface[1].wps_pbc=1
+uci set wireless.@wifi-iface[1].wps_pbc_enable=1
+uci set wireless.@wifi-iface[1].wps_pbc_start_time=0
+uci set wireless.@wifi-iface[1].wps_pbc_duration=120
+uci set wireless.@wifi-iface[1].multi_cred=1
+
+
+
+uci add wireless wifi-iface
+uci set wireless.@wifi-iface[2].device=wifi0
+uci set wireless.@wifi-iface[2].network=lan
+uci set wireless.@wifi-iface[2].mode=ap
+uci set wireless.@wifi-iface[2].ssid=EasyMesh-tst-bbss-8x
+uci set wireless.@wifi-iface[2].encryption='psk2+ccmp'
+uci set wireless.@wifi-iface[2].key=EasyMesh-bbss
+uci set wireless.@wifi-iface[2].map=1
+uci set wireless.@wifi-iface[2].MapBSSType=64
+
+
+
+uci commit wireless
+
+
+uci set wsplcd.config.HyFiSecurity=1
+uci set wsplcd.config.RunMode=REGISTRAR
+uci set wsplcd.config.ConfigSta=0
+uci set wsplcd.config.DeepClone=0
+uci set wsplcd.config.MapEnable=1
+uci set wsplcd.config.MapMaxBss=2
+uci set wsplcd.config.ManageVAPInd=0
+uci set wsplcd.config.MapPFCompliant=1
+uci commit wsplcd
+
+
+
+uci set hyd.config.Mode='HYROUTER'
+uci set hyd.config.Enable='1'
+uci set hyd.MultiAP.EnableController=1
+uci set hyd.MultiAP.EnableAgent=1
+uci set hyd.MultiAP.EnableSigmaDUT='1'
+uci commit hyd
+
+
+uci set lbd.StaDB.TrackRemoteAssoc=1
+uci set lbd.Estimator_Adv.EnableContinuousThroughput=1
+uci commit lbd
+
+
+uci set mcsd.config.Enable='0'
+uci commit mcsd
+
+/etc/init.d/mcsd stop
+/etc/init.d/mcsd disable
+
+
+/etc/init.d/hyfi-bridging start
+
+
+# Place the following into /etc/config/map.conf
+8278C5913D82,8x,EasyMesh-fbss-2x,0x0020,0x0008,EasyMesh-fbss,0,1
+8278C5913D82,11x,EasyMesh-fbss-11x,0x0020,0x0008,EasyMesh-fbss,0,1
+8278C5913D82,12x,EasyMesh-bbss-12x,0x0020,0x0008,EasyMesh-bbss,1,0
+
+wifi
+
+
+### RE ###
+# Configure DHCP to not respond
+uci set dhcp.lan.ignore=1; uci commit dhcp;
+/etc/init.d/dnsmasq restart
+# Disable NAT and set a static IP
+uci set network.lan.ifname='eth0 eth1';
+uci set network.lan.proto=static; uci set network.lan.ipaddr=192.168.1.2;
+uci set network.lan.gateway=192.168.1.1; 
+uci set network.lan.dns=192.168.1.1;
+uci delete network.wan; uci commit network
+/etc/init.d/dnsmasq restart
+/etc/init.d/network restart
+wifi detect > /etc/config/wireless
+uci set wireless.wifi0.disabled=0
+uci set wireless.wifi1.disabled=0
+# uci set wireless.wifi2.disabled=0
+uci set wireless.wifi0.channel=6
+uci set wireless.wifi1.channel=36
+# uci set wireless.wifi2.channel=149
+uci set wireless.wifi1.htmode=HT20
+# uci set wireless.wifi2.htmode=HT20
+
+
+
+
+uci add wireless wifi-iface
+uci set wireless.@wifi-iface[2].device=wifi0
+uci set wireless.@wifi-iface[2].network=lan
+uci set wireless.@wifi-iface[2].encryption=none
+uci set wireless.@wifi-iface[2].ssid=OpenWrt
+uci set wireless.@wifi-iface[2].mode=sta
+uci set wireless.@wifi-iface[2].wds=1
+uci set wireless.@wifi-iface[2].map=1
+uci set wireless.@wifi-iface[2].MapBSSType=128
+uci set wireless.@wifi-iface[2].wps_pbc=1
+uci set wireless.@wifi-iface[2].wps_pbc_enable=0
+uci set wireless.@wifi-iface[2].wps_pbs_start_time=0
+uci set wireless.@wifi-iface[2].wps_pbs_duration=120
+uci set wireless.@wifi-iface[2].wps_state=1
+uci set wireless.@wifi-iface[2].athnewind=1
+uci set wireless.@wifi-iface[2].vap_ind=0
+
+
+
+uci commit wireless
+
+uci set wsplcd.config.HyFiSecurity=1
+uci set wsplcd.config.RunMode=ENROLLEE
+uci set wsplcd.config.ConfigSta=0
+uci set wsplcd.config.DeepClone=0
+uci set wsplcd.config.MapEnable=1
+uci set wsplcd.config.MapMaxBss=2
+uci set wsplcd.config.MapPFCompliant=1
+uci commit wsplcd
+
+
+uci set hyd.config.Mode='HYCLIENT'
+uci set hyd.config.Enable='1'
+uci set hyd.MultiAP.EnableController=0
+uci set hyd.MultiAP.EnableAgent=1
+uci commit hyd
+
+
+uci set mcsd.config.Enable='0'
+uci commit mcsd
+/etc/init.d/mcsd stop
+/etc/init.d/mcsd disable
+/etc/init.d/hyfi-bridging start
+wifi
+
