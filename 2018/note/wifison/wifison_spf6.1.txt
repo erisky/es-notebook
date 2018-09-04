@@ -1,0 +1,105 @@
+# wifi-son trial on spf 6.1
+
+########## CAP ##########
+
+uci set network.lan.ipaddr=192.168.1.1
+
+uci commit network
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+
+
+# Program a static IP
+uci set wireless.@wifi-iface[0].ssid=Wifison123
+uci set wireless.@wifi-iface[0].encryption=psk2+ccmp #Encryption
+uci set wireless.@wifi-iface[0].key=1234567890
+uci set wireless.@wifi-iface[0].backhaul=1
+uci set wireless.@wifi-iface[0].wnm=1
+
+
+uci set wireless.@wifi-iface[1].ssid=Wifison123
+uci set wireless.@wifi-iface[1].encryption=psk2+ccmp
+uci set wireless.@wifi-iface[1].key=1234567890
+uci set wireless.@wifi-iface[1].backhaul=1
+uci set wireless.@wifi-iface[1].wnm=1
+uci commit wireless
+
+uci set wsplcd.config.HyFiSecurity=1
+uci set wsplcd.config.WriteDebugLogToFile=NONE 
+
+
+uci set wsplcd.config.DebugLevel=DEBUG
+
+uci commit wsplcd;
+
+uci set hyd.Topology.ENABLE_NOTIFICATION_UNICAST=1 
+uci set hyd.Topology.PERIODIC_QUERY_INTERVAL=15
+
+# Optional topology query interval 15 sec (default 60 sec)
+uci commit hyd
+
+uci set repacd.repacd.Enable=1
+
+uci set repacd.repacd.ConfigREMode=son
+
+uci set repacd.WiFiLink.DaisyChain=1
+
+uci commit repacd
+/etc/init.d/repacd start
+
+
+########## RE ##########
+
+uci set network.lan.proto=dhcp
+
+uci delete network.wan
+
+uci commit network
+/etc/init.d/network restart
+
+/etc/init.d/dnsmasq restart
+
+
+
+
+uci set wireless.@wifi-iface[0].backhaul_ap=1
+uci set wireless.@wifi-iface[1].backhaul_ap=1
+
+
+uci set wireless.wifi1.ul_hyst=10
+
+uci commit wireless
+
+uci set hyd.Topology.ENABLE_NOTIFICATION_UNICAST=1
+
+uci set hyd.Topology.PERIODIC_QUERY_INTERVAL=15
+
+uci commit hyd
+
+
+uci set wsplcd.config.HyFiSecurity=1
+
+uci set wsplcd.config.WriteDebugLogToFile=NONE
+
+uci set wsplcd.config.DebugLevel=DEBUG
+
+uci commit wsplcd
+
+uci set repacd.repacd.Enable=1
+
+uci set repacd.WiFiLink.DaisyChain=1
+
+uci set repacd.repacd.ConfigREMode=son
+
+uci set repacd.repacd.DefaultREMode=son
+
+uci set repacd.WiFiLink.ManageVAPInd=1
+
+uci commit repacd
+
+/etc/init.d/repacd start
+
+
+
+
+
