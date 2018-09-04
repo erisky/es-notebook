@@ -2,61 +2,12 @@
 /home/eric/work/spf_50/git_spf5/spf5
 
 
-[rebuild from spf40]
+### Flash u-boot from linux 
 
-repo init -u git://codeaurora.org/quic/qsdk/releases/manifest/qstak -b release -m caf_AU_LINUX_QSDK_RELEASE_DANDELION_TARGET_ALL.0.1.453.297.xml --repo-url=git://codeaurora.org/tools/repo.git --repo-branch=caf-stable
+uboot some-build has ethernet issue at initial so might need rewrite u-boot
 
-repo sync
-
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-qca-wifi-10.4-0.1.453.297/* qsdk/
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-qca-wlan-10.4-0.1.453.297/* qsdk/
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-ieee1905-security-0.1.453.297/* qsdk/
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/QSDK-Base/qca-lib-0.1.453.297/* qsdk
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/QSDK-Base/qca-mcs-apps-0.1.453.297/* qsdk
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/QSDK-Base/qsdk-qca-nss-0.1.453.297/* qsdk
-tar xjvf NHSS.QSDK.4.0/apss_proc/out/proprietary/BLUETOPIA/qca-bluetopia-0.1.453.297.tar.bz2 -C qsdk
-cp -rf WLAN.BL.3.4/cnss_proc/bin/hw.1/* qsdk/dl
-cp -rf WLAN.BL.3.4/cnss_proc/bin/hw.2/* qsdk/dl
-cp -rf WLAN.BL.3.4/cnss_proc/src/components/* qsdk/dl
-cp -rf CNSS.PS.2.4/* qsdk/dl/
-
--
-premium:
-cp NHSS.QSDK.4.0/apss_proc/out/proprietary/RBIN-NSS-RETAIL/* qsdk/dl
-
-
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Hyfi/hyfi-ipq-0.1.453.297-template/* qsdk
-
-skipped streamBoost WAPid,WiGig,
-
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-whc-0.1.453.297/* qsdk
-cp -rf NHSS.QSDK.4.0/apss_proc/out/proprietary/Wifi/qsdk-whcpy-0.1.453.297/* qsdk
-
-echo "CONFIG_TOOLCHAINOPTS=y" >> .config
-echo '# CONFIG_GCC_USE_VERSION_4_8_LINARO is not set' >> .config
-echo "CONFIG_GCC_USE_VERSION_5=y" >> .config
-echo 'CONFIG_GCC_VERSION="5.2.0"' >> .config
-echo "CONFIG_GCC_VERSION_5=y" >> .config
-
-
-sed -i -e '/wigig-firmware/d' .config
-sed -i -e '/kmod-wil6210/d' .config
-sed -i -e "/CONFIG_PACKAGE_qca-wifi-fw-hw5-10.4-asic/d" .config
-
-======= Patch the rt4230w hardware ======
-cp -apfL ~/work/spf30/skysoft/base/hardware/rt4230w-d187-rev2/* ~/work/spf40/qca-networking-2016-spf-4-0_qca_oem.git/
-
-
-
-revert file: 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-./qsdk/target/linux/ipq806x/image/Makefile   --> Makefile revert...
-./qsdk/scripts/mkits.sh
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-dts 
-
-
+copy common/build/ipq/openwrt-ipq40xx-u-boot-stripped.elf to target
+mtd write openwrt-ipq40xx-u-boot-stripped.elf /dev/mtdxxx or 0:APPSBL
 
 
 ============== Build the image =============================
@@ -165,7 +116,7 @@ source $imgaddr:script
 setenv serverip 192.168.1.199 && setenv machid 8302002 && tftpboot 0x84000000 ASKEY_EAO3402P_V1.2.0.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
-setenv serverip 192.168.1.199 && setenv machid 8302002 && tftpboot 0x84000000 ASKEY_EAO3402P_V1.2.2-1.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+setenv serverip 192.168.1.199 && setenv machid 8302002 && tftpboot 0x84000000 ASKEY_EAO3402P_V1.2.2-8.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 setenv serverip 192.168.1.199 && setenv machid 8302002 && tftpboot 0x84000000 ASKEY_EAO3402P_V1.1.9-22.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 

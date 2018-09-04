@@ -73,15 +73,10 @@ wpa_driver_nl80211_init_nl_global
 - RFC 5090 - RADIUS Extension for Digest Authentication 
 - RFC 5176 - Dynamic Authorization Extensions to RADIUS
 - RFC 5247 - Extensible Authentication Protocol (EAP) Key Management Framework
-
 - RFC 6613 - RADIUS over TCP 
 - RFC 6614 - Transport Layer Security (TLS) Encryption for RADIUS
 - RFC 6911 - RADIUS Attributes for IPv6 Access Networks 
-
-- RFC 6929 -  Remote Authentication Dial-In User Service (RADIUS)
-                          Protocol Extensions
-
-
+- RFC 6929 - Remote Authentication Dial-In User Service (RADIUS) Protocol Extensions
 - RFC 7268 - RADIUS Attributes for IEEE 802 Networks
 
 
