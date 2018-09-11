@@ -17,6 +17,12 @@ file :
 qcom-ipq40xx-ap.dk04.1-c2.dts
 
 
+# reference data
+
+Documentation/devicetree/bindings/pinctrl/pinctrl-bindings.txt
+, qcom,ipq40xx-pinctrl.txt
+
+
 
 changs made:
 
@@ -71,12 +77,14 @@ changs made:
                 };
 +
 +        sfp {
++               compatible = "gpio-leds"; /* this is must to match at list one driver*/
 +               status = "ok";
 +            pinctrl-0 = <&sfp_pins>;
 +            pinctrl-names = "default";
 +        };
 +
 +        hwver {
++               compatible = "gpio-leds"; /* this is must to match at list one driver*/
 +               status = "ok";
 +            pinctrl-0 = <&hwver_pins>;
 +            pinctrl-names = "default";

@@ -41,7 +41,25 @@ ieee80211_input
      -> 
 
 ieee80211_recv_mgmt
-        
+ 
+ 
+ 
+ 
+## TX Path
+
+    ieee80211_send_mgmt (umac/mlme/ieee80211_mgmt.c)
+            |                   
+            V
+    wlan_mgmt_txrx_mgmt_frame_tx (cmn_dev/umac/cmn_services/mgmt_txrx/dispatcher/src/wlan_mgmt_txrx_utils_api.c)
+            |                       { txdone callback: ieee80211_mgmt_complete_wbuf }
+            |    * desc: mgng_txrx_desc fillup
+            |    * 
+            V
+    psoc->soc_cb.tx_ops.mgmt_txrx_tx_ops.mgmt_tx_send
+            |               {registered in olif_register_umac_tx_ops}
+            V
+    ol_if_mgmt_send 
+
 
 
 ---- [Driver Study] ----

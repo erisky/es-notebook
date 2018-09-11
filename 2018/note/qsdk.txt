@@ -2,7 +2,7 @@
 /home/eric/work/spf_50/git_spf5/spf5
 
 
-### Flash u-boot from linux 
+### Flash u-boot from linux  ####
 
 uboot some-build has ethernet issue at initial so might need rewrite u-boot
 
