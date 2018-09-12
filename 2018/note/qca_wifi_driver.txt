@@ -1,4 +1,12 @@
 
+#### Driver Inital #####
+
+ath_pci_probe
+ol_ath_pci_probe
+ -> 
+
+
+
 
 Start from:
  ap_misc_evt_handler
@@ -35,6 +43,7 @@ ieee80211_mlme_recv_assoc_request
 
 
 
+
 ieee80211_input
  -> IEEE80211_HANDLE_MGMT
    -> ieee80211_recv_mgmt
@@ -47,6 +56,31 @@ ieee80211_recv_mgmt
  
 ## TX Path
 
+linux drvier
+__netdev_start_xmit
+        |
+        V
+    osif_register_dev_ops_xmit  { register the xmit function}
+        |
+        V
+    osif_nss_ol_vap_hardstart
+        |
+        V
+    osif_nss_ol_vap_xmit
+        |   {IF extap & sta: dbdc_tx_process }
+        |
+        V
+    ic_osif_nss_vap_xmit    { register in osif_nss_ol_pdev_attach: }
+        |
+        V
+    osif_nss_ol_vap_xmit-> osif_nss_vdev_xmit
+                              |
+                              V
+
+
+---------------
+    <path: /home/eric/spf80/qca-networking-2017-spf-8-0_qca_oem/qualcomm_sdk/qsdk/qca/src/qca-wifi >
+
     ieee80211_send_mgmt (umac/mlme/ieee80211_mgmt.c)
             |                   
             V
@@ -58,7 +92,19 @@ ieee80211_recv_mgmt
     psoc->soc_cb.tx_ops.mgmt_txrx_tx_ops.mgmt_tx_send
             |               {registered in olif_register_umac_tx_ops}
             V
-    ol_if_mgmt_send 
+    ol_if_mgmt_send  (offload/wlan/umac_offload_if/ol_if_mgmt.c)
+            |
+            |    * save txrx desc
+            V
+    ol_ath_tx_mgmt_wmi_send
+        |           |
+        |           |
+        |           V
+        |          cdp_mgmt_send { register in ol_txrx_mgmt_send}         
+        |                         ol_txrx_mgmt_send             htt_h2t_mgmt_tx
+        |                                       
+        V
+    ol_mgmt_send
 
 
 
