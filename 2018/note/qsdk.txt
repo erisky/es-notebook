@@ -99,7 +99,7 @@ setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 II
 setenv serverip 192.168.1.199 && setenv machid 8304001 && tftpboot 0x84000000 uboottest.img && imgaddr=0x84000000 && source $imgaddr:script
 
 [EAI2202P]
-setenv serverip 192.168.1.199 && setenv machid 8302001 && tftpboot 0x84000000 ASKEY_EAI2202P_V1.1.9-5.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
+setenv serverip 192.168.1.199 && setenv machid 8302001 && tftpboot 0x84000000 ASKEY_EAI2202P_V1.2.2-18.SPF5.0-CS1_norplusnand_single.img && imgaddr=0x84000000 && source $imgaddr:script
 
 
 [EAI2001]
