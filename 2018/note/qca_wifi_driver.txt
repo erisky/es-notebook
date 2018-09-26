@@ -73,10 +73,10 @@ __netdev_start_xmit
     ic_osif_nss_vap_xmit    { register in osif_nss_ol_pdev_attach: }
         |
         V
-    osif_nss_ol_vap_xmit-> osif_nss_vdev_xmit
+    osif_nss_ol_vap_xmit-> osif_nss_vdev_xmit (os/linux/src/osif_nss_wifiol_vdev_if.c)
                               |
                               V
-
+        
 
 ---------------
     <path: /home/eric/spf80/qca-networking-2017-spf-8-0_qca_oem/qualcomm_sdk/qsdk/qca/src/qca-wifi >
